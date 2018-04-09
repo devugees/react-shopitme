@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for shpitto me",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "peer-to-peer-shopping",
+    "react",
+    "node",
+    "mongo"
+  ],
+  "author": "sabine gottfried, nacho merinio, laith massoud, tarek alkhatib, orwa houry",
+  "license": "ISC"
+}
