@@ -4,6 +4,7 @@
   "description": "backend for shpitto me",
   "main": "server/index.js",
   "scripts": {
+    "server": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,5 +14,24 @@
     "mongo"
   ],
   "author": "sabine gottfried, nacho merinio, laith massoud, tarek alkhatib, orwa houry",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "async-waterfall": "^0.1.5",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.0.3",
+    "mailgun-js": "^0.16.0",
+    "moment": "^2.21.0",
+    "mongodb": "^3.0.4",
+    "mongoose": "^5.0.11",
+    "nodemailer": "^4.6.3",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0"
+  }
 }
