@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div className="App">
         <Main />
-        <Footer className="footer" />
+        <Footer />
       </div>
     );
   }
