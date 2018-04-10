@@ -5,12 +5,14 @@ import './App.css';
 
 // import Components
 import Main from './components/Main';
+import Modals from './components/Modals';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Main />
+        <Modals />
       </div>
     );
   }
