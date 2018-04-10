@@ -5,6 +5,7 @@ import './App.css';
 
 // import Components
 import Main from './components/Main';
+import Footer from './components/Footer'
 import Modals from './components/Modals';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
       <div className="App">
         <Main />
         <Modals />
+        <Footer />
       </div>
     );
   }
