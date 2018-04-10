@@ -26,3 +26,55 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+/* SETUP */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+:root {
+  --dark: #262627;
+  --darker: #181818;
+  --light: #fff;
+  --yellow: #FED766;
+  /*80px is 24px from footer and 56px from navbar*/
+  --stickyFooter: calc(100vh - 80px);
+  --headerHeight: 200px;
+}
+
+
+/* Basic Setup*/
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--dark);
+  color: var(--dark);
+}
+
+
+.main {
+  width: 90%;
+  margin: 0 auto;
+  border: 0.1rem solid black;
+  padding: 2rem 1rem 2rem 1rem;
+  background-color: #ddd;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  box-shadow: 2px 5px #888888;
+}
+
+p {
+  text-align: justify; 
+}
+
+h1 {
+
+}
+
+a {
+  text-decoration: none;
+  color: var(--light);
+}
+a:hover{
+  color: var(--yellow);
+}
