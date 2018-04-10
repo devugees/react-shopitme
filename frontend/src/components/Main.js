@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 // import Components
-import LandingPage from './LandingPage';
-import Navbar from './Navbar';
+// import LandingPage from './LandingPage';
 import UserDetailsPage from './UserDetailsPage';
 
 
@@ -10,9 +9,8 @@ export default class Main extends Component {
 
   render() {
     return (
-        <Navbar />
       <div className="main">
-        <LandingPage />
+        {/*<LandingPage />*/}
         <UserDetailsPage />
       </div>
     )
