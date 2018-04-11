@@ -1,28 +1,97 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+:root {
+  /* BG Colors */
+  --primary-bg: #fff;
+  --secondary-bg: #54b9b6;
+  /* Text Colors */
+  --primary: #262627;
+  --secondary: #181818;
+  /* Text Sizes*/
+  --text: 1rem;
+  /* Link color */
+  --light: blue;
+  --dark: red;
+  /* Border */
+  --border: 3px solid black;
+  /* Padings*/
+  --global-padding: 2rem 1rem;
+  --text-padding: 0 1rem;
+  --padding-top: 1rem;
+  /* Special */
+}
+
+
+/* Basic Setup*/
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+.main {
+  width: calc(100vw - 2rem);
+  padding: var(--text-padding);
+  background-color: var(--primary-bg);
+}
+
+img {
+  padding-top: var(--padding-top);
+  width: 100%;
+  height: auto;
+}
+
+p {
+  text-align: justify;
+  padding: var(--text-padding);
+  font-size: var(--text);
+}
+
+h1 {
+
+}
+
+a {
+  text-decoration: none;
+  color: var(--light);
+}
+a:hover{
+  color: var(--dark);
+}
+
+.text{
+  border: var(--border);
+}
+.landing-circle {
+  margin:  0 auto;
+  transform: rotate(25deg);
+}
+
+.landing-order, .landing-deliver {
+  height: var(--landing-size);
+  width: calc(var(--landing-size)/2);
+  display: inline-block;
+  position: relative;
+}
+
+.landing-order {
+  border-bottom-left-radius: var(--landing-size);
+  border-top-left-radius: var(--landing-size);
+  background: linear-gradient(to right top, #29bf89, #00b3a3, #00a5b6, #0083b8);
+}
+
+.landing-deliver {
+  border-bottom-right-radius: var(--landing-size);
+  border-top-right-radius: var(--landing-size);
+  background: linear-gradient(to left bottom, #29bf89, #00b3a3, #00a5b6, #0083b8);
+}
+
+.landing-order > h1, .landing-deliver > h1 {
+  position: relative;
+  top: 50%;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  font-size: 3rem;
+  margin: -1.5rem 0 0 0;
+  transform: rotate(-25deg);
+  color:  white;
 }
