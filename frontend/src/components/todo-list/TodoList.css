@@ -1,0 +1,58 @@
+.form input{
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.box {
+  background-color: #fff;
+  border: 1px solid black;
+  width: 95%;
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+}
+
+.boxDone {
+  background-color: #54b9b6;
+  border: 1px solid black;
+  width: 95%;
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+}
+
+.boxEdit {
+  background-color: orange;
+  border: 1px solid black;
+  width: 95%;
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+}
+.todo-input {
+  padding: 0.1rem 0.3rem;
+  display: block;
+  margin: 15px 0;
+}
+
+.not-found {
+  background-color: red;
+  border: 1px solid black;
+  width: 95%;
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+}
+
+.complete,
+.cross,
+.back {
+  margin: 1rem 0.5rem 0 0.5rem;
+  float: right;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.wrap {
+  padding: 0.1rem 0.3rem;
+  word-wrap: break-word;
+}
