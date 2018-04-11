@@ -8,6 +8,11 @@ import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Footer from './components/Footer'
 import Modals from './components/Modals';
+import ImageCropper from './components/ImageCropper';
+import ResetRating from './components/Rating';
+
+
+
 
 class App extends Component {
   render() {
@@ -17,9 +22,11 @@ class App extends Component {
         <Main />
         <Modals />
         <Footer />
+        <ImageCropper />
+        <ResetRating />
       </div>
     );
   }
 }
-
+ 
 export default App;
