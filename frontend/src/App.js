@@ -18,7 +18,7 @@ class App extends Component {
         <Main />
         { /*<Modals />*/}
         <Footer />
-        <ImageCropper />
+        {/*<ImageCropper />*/}
       </div>
     );
   }
