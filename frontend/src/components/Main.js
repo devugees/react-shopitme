@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 // import Components
 // import LandingPage from './LandingPage';
-// import UserDetailsPage from './UserDetailsPage';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditUser from './edit-user/EditUser';
+import TodoList from './todo-list/TodoList';
+import Map from './map/Map';
 
 
 
@@ -12,9 +14,14 @@ export default class Main extends Component {
   render() {
     return (
       <div className="main">
+        {/*<Map />*/}
         {/*<LandingPage />*/}
         {/*<UserDetailsPage />*/}
+        <TodoList />
+        {/*<UserDetailsPage />*/}
+        {/*<MuiThemeProvider>
           <EditUser />
+        </MuiThemeProvider>*/}
       </div>
     )
   }
