@@ -15,12 +15,12 @@ export default class TodoList extends Component {
       todo:'',
       items:[],
       disabled: true,
-      alternate:true,
+      orderPerson:true,
     }
   }
 
-  alternate = () =>{
-      this.setState(prevState => { return {alternate: !prevState.alternate}})
+  orderPerson = () =>{
+      this.setState(prevState => { return {orderPerson: !prevState.orderPerson}})
   }
 
   changeText = event => {
@@ -33,8 +33,8 @@ export default class TodoList extends Component {
 
   editToDo = index => {
     const items = [...this.state.items];
-    items[index][1] = 'editMe';
-    this.setState({todo: items[index][0]})
+    items[index].status = 'editMe';
+    this.setState({todo: items[index].todo})
     if(this.state.todo = ''){
       return
     }
@@ -49,9 +49,9 @@ export default class TodoList extends Component {
 
   finishEditToDo = index => {
     const items = [...this.state.items];
-    items[index][1] = 'box';
+    items[index].status = 'box';
     if(this.state.editing !== ''){
-      items[index][0] = this.state.todo;
+      items[index].todo = this.state.todo;
     }
     this.setState({ items, todo:'' });
   }
@@ -64,42 +64,42 @@ export default class TodoList extends Component {
 
   productNotFound = index => {
     const items = [...this.state.items];
-    items[index][1] = 'notFound';
-    console.log(`Not found: ${items[index][0]}`);
+    items[index].status = 'notFound';
+    console.log(`Not found: ${items[index].todo}`);
     this.setState({ items });
   }
 
   productFound = index => {
     let items = [...this.state.items];
-    items[index][1] = 'done';
+    items[index].status = 'done';
     this.setState({ items });
   }
 
   backToDo = index => {
     let items = [...this.state.items];
-    items[index][1] = '';
+    items[index].status = '';
     this.setState({ items });
   }
 
   sendToDo = () => {
     this.setState( prevState => {return {
-      items: [...prevState.items, [prevState.todo,'box']],
+      items: [...prevState.items, {todo:prevState.todo,status:'box'}],
       todo: '',
       disabled: true,
     }})
   }
 
   render() {
-    let changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper todo={item[0]} key={index} changeMe={item[1]} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
+    let changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
     
-    if(this.state.alternate){
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered todo={item[0]} key={index} changeMe={item[1]} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo}/>))
+    if(this.state.orderPerson){
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo}/>))
     }
 
     return (
       <div className="todo-list">
         <h1>Shopping list</h1>
-        <button onClick={this.alternate}>Shopper/Order Switch</button>
+        <button onClick={this.orderPerson}>Shopper/Order Switch</button>
         <div className="todo-list-form">
           <input onChange={this.changeText} value={this.state.todo}/>
           <button disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write a Product' : 'Add Product'}</button>
