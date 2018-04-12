@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Button from 'material-ui/Button';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
 
 // import Components
 import TodoBoxShopper from './TodoBoxShopper';
@@ -8,7 +11,6 @@ import TodoBoxOrdered from './TodoBoxOrdered';
 import './TodoList.css';
 
 export default class TodoList extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -18,7 +20,6 @@ export default class TodoList extends Component {
       orderPerson:true,
     }
   }
-
   orderPerson = () =>{
       this.setState(prevState => { return {orderPerson: !prevState.orderPerson}})
   }
@@ -100,10 +101,12 @@ export default class TodoList extends Component {
       <div className="todo-list">
         <h1>Shopping list</h1>
         <button onClick={this.orderPerson}>Shopper/Order Switch</button>
-        <div className="todo-list-form">
-          <input onChange={this.changeText} value={this.state.todo}/>
-          <button disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write a Product' : 'Add Product'}</button>
-        </div>
+        <FormControl className="todo-list-form">
+          <InputLabel htmlFor="name-input">Add Item</InputLabel>
+          <Input className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo} />
+        </FormControl>
+        <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
+        </Button>
         {changingTodo}
       </div>
     )

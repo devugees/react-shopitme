@@ -14,14 +14,14 @@ export default class Main extends Component {
   render() {
     return (
       <div className="main">
-        <Map />
+        {/*<Map />*/}
         {/*<LandingPage />*/}
         {/*<UserDetailsPage />*/}
         <TodoList />
         {/*<UserDetailsPage />*/}
-        <MuiThemeProvider>
+        {/*<MuiThemeProvider>
           <EditUser />
-        </MuiThemeProvider>
+        </MuiThemeProvider>*/}
       </div>
     )
   }
