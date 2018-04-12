@@ -1,0 +1,23 @@
+.todo-input {
+  padding: 0.1rem 0.3rem;
+  display: block;
+  margin: 15px 0;
+}
+
+.complete,
+.cross,
+.back {
+  margin: 0rem 0.5rem;
+  float: right;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.wrap,
+input {
+  padding: 0.1rem 0.3rem;
+  word-wrap: break-word;
+}
