@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // import Components
-//import TodoBoxShopper from './TodoBoxShopper';
+import TodoBoxShopper from './TodoBoxShopper';
 import TodoBoxOrdered from './TodoBoxOrdered';
 
 // import CSS
@@ -13,10 +13,14 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       todo:'',
-      editing:'',
       items:[],
       disabled: true,
+      alternate:true,
     }
+  }
+
+  alternate = () =>{
+      this.setState(prevState => { return {alternate: !prevState.alternate}})
   }
 
   changeText = event => {
@@ -30,7 +34,8 @@ export default class TodoList extends Component {
   editToDo = index => {
     const items = [...this.state.items];
     items[index][1] = 'editMe';
-    if(this.state.editing = ''){
+    this.setState({todo: items[index][0]})
+    if(this.state.todo = ''){
       return
     }
     this.setState({ items });
@@ -38,7 +43,7 @@ export default class TodoList extends Component {
 
   editText = event => {
     this.setState({
-      editing:event.target.value
+      todo:event.target.value
     })
   }
 
@@ -46,29 +51,21 @@ export default class TodoList extends Component {
     const items = [...this.state.items];
     items[index][1] = 'box';
     if(this.state.editing !== ''){
-      items[index][0] = this.state.editing;
+      items[index][0] = this.state.todo;
     }
-    this.setState({ items, editing:'' });
+    this.setState({ items, todo:'' });
   }
-
-  /* editToDo = index => {
-    if(this.state.disabled){
-      return
-    }
-    const items = [...this.state.items];
-    items[index][0] = this.state.todo
-    this.setState({ items, todo: '', disabled: true });
-  } */
 
   removeToDo = index => {
     const items = [...this.state.items];
     items.splice(index, 1);
-    this.setState({ items });
+    this.setState({ items, todo:'' });
   }
 
   productNotFound = index => {
     const items = [...this.state.items];
     items[index][1] = 'notFound';
+    console.log(`Not found: ${items[index][0]}`);
     this.setState({ items });
   }
 
@@ -93,15 +90,21 @@ export default class TodoList extends Component {
   }
 
   render() {
+    let changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper todo={item[0]} key={index} changeMe={item[1]} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
+    
+    if(this.state.alternate){
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered todo={item[0]} key={index} changeMe={item[1]} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo}/>))
+    }
+
     return (
       <div className="todo-list">
-        <h1>Todo list</h1>
+        <h1>Shopping list</h1>
+        <button onClick={this.alternate}>Shopper/Order Switch</button>
         <div className="todo-list-form">
           <input onChange={this.changeText} value={this.state.todo}/>
           <button disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write a Product' : 'Add Product'}</button>
         </div>
-        {this.state.items.map((item, index) => <TodoBoxOrdered todo={item[0]} key={index} changeMe={item[1]} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} editing={this.state.editing}/>)}
-        {/*this.state.items.map((item, index) => <TodoBoxShopper todo={item[0]} key={index} changeMe={item[1]} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>)*/}
+        {changingTodo}
       </div>
     )
   }

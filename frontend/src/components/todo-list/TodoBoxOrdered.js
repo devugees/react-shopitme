@@ -1,33 +1,49 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+
+const styles = {
+  box:{
+    background: '#fff',
+    margin: '1rem auto',
+    padding: '.5rem 0',
+  }
+};
 
 const todoBoxOrdered = (props) => {
-  let boxColor = 'box';
+  const { classes } = props;
   let tick = 'hide';
   let edit = 'complete';
   let cross = 'cross';
-  let todoInput = 'hide';
   let wrap = 'wrap';
-
-  let editingText = props.todo + props.editing;
+  let whatToShow = props.todo;
 
   if(props.changeMe === 'editMe'){
-    boxColor = 'boxEdit';
     tick = 'complete';
     edit = 'hide';
     cross = 'cross';
-    todoInput = 'todo-input';
     wrap = 'hide';
+    whatToShow = (<input type="text" value={props.todoState} onChange={props.editText}/>)
   }
 
   return (
-    <div className={boxColor}>
-      <span className={edit} onClick={props.editToDo}>✎</span>
-      <span className={tick} onClick={props.finishEditToDo}>✔</span>
-      <span className={cross} onClick={props.removeToDo}>✖</span>
-      <p className={wrap}>{props.todo}</p>
-      <input className={todoInput} type="text" value={editingText} onChange={props.editText}/>
+    <div>
+      <Paper className={classes.box} elevation={4}>
+        <Typography className={wrap}>
+          {whatToShow}
+          <span className={edit} onClick={props.editToDo}>✎</span>
+          <span className={tick} onClick={props.finishEditToDo}>✔</span>
+          <span className={cross} onClick={props.removeToDo}>✖</span>
+        </Typography>
+      </Paper>
     </div>
-  )
+  );
 }
 
-export default todoBoxOrdered;
+todoBoxOrdered.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(todoBoxOrdered);
