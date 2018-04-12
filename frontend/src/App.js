@@ -7,7 +7,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Footer from './components/Footer'
-import Modals from './components/Modals';
+import Modals from './components/Modals/Modals';
 import ImageCropper from './components/ImageCropper';
 import ResetRating from './components/Rating';
 
