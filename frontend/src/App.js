@@ -7,8 +7,12 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Main from './components/Main';
 import Footer from './components/Footer'
+import Modals from './components/Modals/Modals';
 import ImageCropper from './components/ImageCropper';
-import Modals from './components/Modals/Modals.js';
+import RatingStars from './components/RatingStars';
+
+
+
 
 class App extends Component {
   render() {
@@ -18,7 +22,8 @@ class App extends Component {
         <Main />
         { /*<Modals />*/}
         <Footer />
-        {/*<ImageCropper />*/}
+        <ImageCropper />
+        <RatingStars />
       </div>
     );
   }
