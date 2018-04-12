@@ -16,8 +16,12 @@
   display: none;
 }
 
-.wrap,
-input {
-  padding: 0.1rem 0.3rem;
-  word-wrap: break-word;
+.todo-list-button {
+  width: 30%;
+
+}
+
+.todo-list-input {
+  width: 100%;
+  margin-right: 2.4rem;
 }
