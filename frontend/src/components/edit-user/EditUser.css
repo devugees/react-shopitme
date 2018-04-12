@@ -1,0 +1,7 @@
+.edit-user {
+    background-color: var(--form-background);
+    padding: var(--text-padding);
+    font-family: 'Roboto', sans-serif;
+    margin: 1rem;
+}
+
