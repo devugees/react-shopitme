@@ -20,8 +20,13 @@ const styles = theme => ({
   menu: {
     width: 200,
   },
-  button: {
+  buttonleft: {
     margin: theme.spacing.unit,
+    float: "left"
+  },
+  buttonright: {
+    margin: theme.spacing.unit,
+    float: "right"
   },
   input: {
     display: 'none',
@@ -35,7 +40,7 @@ const styles = theme => ({
     minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit,
   },
 });
 
@@ -275,10 +280,10 @@ class EditUser extends React.Component {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button variant="raised" color="secondary" className={classes.button}>
+              <Button variant="raised" color="secondary" className={classes.buttonleft}>
                 Cancel
               </Button>
-              <Button variant="raised" color="primary" onClick={this.handleSubmit} className={classes.button}>
+              <Button variant="raised" color="primary" onClick={this.handleSubmit} className={classes.buttonright}>
                 Create Account
               </Button>
             </Grid>
