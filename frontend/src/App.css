@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
 :root {
   /* BG Colors */
@@ -19,13 +19,13 @@
   --text-padding: 0 1rem;
   --padding-top: 1rem;
   /* Special */
+  --form-background: #e6e6e6;
 }
-
 
 /* Basic Setup*/
 
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 
