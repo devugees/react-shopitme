@@ -9,7 +9,7 @@ import Main from './components/Main';
 import Footer from './components/Footer'
 import Modals from './components/Modals/Modals';
 import ImageCropper from './components/ImageCropper';
-import ResetRating from './components/Rating';
+import RatingStars from './components/RatingStars';
 
 
 
@@ -23,7 +23,7 @@ class App extends Component {
         <Modals />
         <Footer />
         <ImageCropper />
-        <ResetRating />
+        <RatingStars />
       </div>
     );
   }
