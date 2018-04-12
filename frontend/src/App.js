@@ -6,7 +6,7 @@ import './App.css';
 // import Components
 import Navbar from './components/Navbar';
 import Main from './components/Main';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
 import ImageCropper from './components/ImageCropper';
 import Modals from './components/Modals/Modals.js';
 
