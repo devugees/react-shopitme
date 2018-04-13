@@ -20,6 +20,7 @@ export default class TodoList extends Component {
       orderPerson:true,
     }
   }
+  
   orderPerson = () =>{
       this.setState(prevState => { return {orderPerson: !prevState.orderPerson}})
   }
