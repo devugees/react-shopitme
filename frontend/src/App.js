@@ -17,6 +17,7 @@ import RatingStars from './components/RatingStars';
 class App extends Component {
   render() {
     return (
+      
       <div className="App">
         <Navbar />
         <Main />
@@ -28,5 +29,5 @@ class App extends Component {
     );
   }
 }
- 
+
 export default App;
