@@ -23,8 +23,6 @@ class App extends Component {
         <Main />
         { /*<Modals />*/}
         <Footer />
-        <ImageCropper />
-        <RatingStars />
       </div>
     );
   }
