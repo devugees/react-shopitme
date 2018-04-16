@@ -21,7 +21,7 @@ export default class RatingStars extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className="rating">
+        <div className="rating" style={{width:"12rem"}}>
           <p style={{fontSize:'3rem'}} >{this.state.userName} </p>
           <p style={{fontSize:'4rem' , margin:'0rem'}}>{this.state.ratingNo}/{this.state.max}</p>
           <Rating
