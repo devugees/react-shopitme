@@ -7,6 +7,8 @@ const month = date.getMonth();
 const year = date.getFullYear();
 const timeHours = date.getHours();
 let timeMin = date.getMinutes();
+const zeroMonth = (month > 9) ? (month) : ('0' + month);
+const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 
 export default class TodoList extends Component {
 
@@ -29,7 +31,7 @@ export default class TodoList extends Component {
       <div className="shopping-list-title" >
         <Paper>
           <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editListName}>✎</span></h1>
-          <p>Created: {day}/{month}/{year} {timeHours}:{(timeMin > 9) ? (timeMin) : ('0' + timeMin)}</p>
+          <p>Created: {day}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
         </Paper>
       </div>
       )
