@@ -65,57 +65,6 @@ const gender = [
 
 
 class EditUser extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-    firstname: '',
-    //firstname: props.globalProps.firstname,
-    firstnameError: '',
-    lastname: '',
-    lastnameError: '',
-    email: '',
-    emailError: '',
-    username: '',
-    usernameError: '',
-    password: '',
-    passwordError: '',
-    confirmpassword: '',
-    confirmpasswordError: '',
-    street: '',
-    streetError: '',
-    number: '',
-    numberError: '',
-    postcode: '',
-    postcodeError: '',
-    city: '',
-    cityError: '',
-    mobile: '',
-    mobileError: ''
-  };
-  }
-  
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
-
-  handleSubmit = (event) => {
-    console.log(this.state)
-    // Check for errors
-    // Clear form 
-    this.setState ({
-      
-    })
-    this.props.onChange({
-      firstname: "",
-      lastname: "",
-      username: "",
-      email: "",
-      password: ""
-    })
-  };
 
   render() {
     const { classes } = this.props;
@@ -129,11 +78,11 @@ class EditUser extends React.Component {
                 id="firstname"
                 label="First"
                 placeholder="First"
-                onChange={this.handleChange('firstname')}
+                onChange={this.props.handleChange('firstname')}
                 margin="normal"
                 required={true}
                 fullWidth
-                value={this.state.firstname}
+                value={this.props.userdetails.firstname}
               />
             </Grid>
             <Grid item xs={6}>
@@ -141,10 +90,11 @@ class EditUser extends React.Component {
                 id="lastname"
                 label="Last"
                 placeholder="Last"
-                onChange={this.handleChange('lastname')}
+                onChange={this.props.handleChange('lastname')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.lastname}
               />
             </Grid>
             <Grid item xs={12}>
@@ -152,10 +102,11 @@ class EditUser extends React.Component {
                 id="username"
                 label="Username"
                 placeholder="Username"
-                onChange={this.handleChange('username')}
+                onChange={this.props.handleChange('username')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.username}
               />
             </Grid>
             <Grid item xs={12}>
@@ -163,10 +114,11 @@ class EditUser extends React.Component {
                 id="email"
                 label="Email"
                 placeholder="Email"
-                onChange={this.handleChange('email')}
+                onChange={this.props.handleChange('email')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -174,7 +126,7 @@ class EditUser extends React.Component {
                 id="password-input"
                 label="Password"
                 placeholder="Password"
-                onChange={this.handleChange('password')}
+                onChange={this.props.handleChange('password')}
                 type="password"
                 margin="normal"
                 required
@@ -186,7 +138,7 @@ class EditUser extends React.Component {
                 id="confirm-password-input"
                 label="Confirm Password"
                 placeholder="Confirm Password"
-                onChange={this.handleChange('confirmpassword')}
+                onChange={this.props.handleChange('confirmpassword')}
                 type="password"
                 margin="normal"
                 required
@@ -198,32 +150,35 @@ class EditUser extends React.Component {
                 id="street"
                 label="Street"
                 placeholder="Street"
-                onChange={this.handleChange('street')}
+                onChange={this.props.handleChange('street')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.street}
               />
             </Grid>
             <Grid item xs={4}>
               <TextField
                 id="number"
                 label="Number"
-                onChange={this.handleChange('number')}
+                onChange={this.props.handleChange('number')}
                 type="number"
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.number}
               />
             </Grid>
             <Grid item xs={4}>
               <TextField
                 id="postcode"
                 label="Postcode"
-                onChange={this.handleChange('postcode')}
+                onChange={this.props.handleChange('postcode')}
                 type="number"
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.postcode}
               />
             </Grid>
             <Grid item xs={8}>
@@ -231,10 +186,11 @@ class EditUser extends React.Component {
                 id="full-width"
                 label="City"
                 placeholder="City"
-                onChange={this.handleChange('city')}
+                onChange={this.props.handleChange('city')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.city}
               />
             </Grid>
             <Grid item xs={12}>
@@ -242,10 +198,11 @@ class EditUser extends React.Component {
                 id="mobile"
                 label="Mobile"
                 placeholder="Mobile"
-                onChange={this.handleChange('mobile')}
+                onChange={this.props.handleChange('mobile')}
                 fullWidth
                 margin="normal"
                 required
+                value={this.props.userdetails.mobile}
               />
             </Grid>
             <Grid item xs={12}>
@@ -254,8 +211,8 @@ class EditUser extends React.Component {
                 select
                 label="Gender"
                 className={classes.textField}
-                value={this.state.gender}
-                onChange={this.handleChange('gender')}
+                value={this.props.userdetails.gender}
+                onChange={this.props.handleChange('gender')}
                 SelectProps={{
                   native: true,
                   MenuProps: {
@@ -278,17 +235,18 @@ class EditUser extends React.Component {
                 id="country"
                 label="Country"
                 placeholder="Country"
-                onChange={this.handleChange('country')}
+                onChange={this.props.handleChange('country')}
                 margin="normal"
                 required
                 fullWidth
+                value={this.props.userdetails.country}
               />
             </Grid>
             <Grid item xs={12}>
               <Button variant="raised" color="secondary" className={classes.buttonleft}>
                 Cancel
               </Button>
-              <Button variant="raised" color="primary" onClick={this.handleSubmit} className={classes.buttonright}>
+              <Button variant="raised" color="primary" onClick={this.props.handleSubmit} className={classes.buttonright}>
                 Create Account
               </Button>
             </Grid>

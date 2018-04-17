@@ -6,8 +6,8 @@ import EditUser from '../edit-user/EditUser';
 
 export default class UserDetails extends Component {
 
-    state = { 
-    firstname: 'alice',
+  state = { userdetails: {
+    firstname: 'Alice',
     lastname: 'Doe',
     email: 'alice.doe@mail.com',
     username: 'AliDoe',  
@@ -16,6 +16,30 @@ export default class UserDetails extends Component {
     postcode: '12345',
     city: 'Bernau',
     mobile: '644099344',
+    gender: 'Other'
+  }  
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    console.log(this.state)
+    // Check for errors
+    // Clear form 
+    this.setState ({
+      
+    })
+    this.props.onChange({
+      firstname: "",
+      lastname: "",
+      username: "",
+      email: "",
+      password: ""
+    })
   };
 
 
@@ -24,7 +48,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         <ImageCropper />
         <RatingStars />
-        <EditUser globalProps={this.state}/>
+        <EditUser userdetails={this.state.userdetails} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
   }
