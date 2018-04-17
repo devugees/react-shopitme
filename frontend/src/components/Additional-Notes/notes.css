@@ -1,4 +1,5 @@
-.notes{
-	border: var(--border);
-	background-color: blue;
+.textarea {
+	width:100%;
+  display: block;
+
 }
