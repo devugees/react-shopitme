@@ -9,6 +9,7 @@ import ShoppingListTitle from './shopping-list-title/ShoppingListTitle';
 import Map from './map/Map';
 import ImageCropper from './ImageCropper';
 import RatingStars from './RatingStars';
+import Notes from './Additional-Notes/Notes'
 
 
 
@@ -29,6 +30,7 @@ export default class Main extends Component {
         {/*<MuiThemeProvider>
           <EditUser />
         </MuiThemeProvider>*/}
+       <Notes />
       </div>
     )
   }
