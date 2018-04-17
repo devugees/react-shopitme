@@ -11,8 +11,8 @@ import TodoBoxOrdered from './TodoBoxOrdered';
 import './TodoList.css';
 
 export default class TodoList extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state = {
       todo:'',
       items:[],
@@ -104,7 +104,7 @@ export default class TodoList extends Component {
         <button onClick={this.orderPerson}>Shopper/Order Switch</button>
         <FormControl className="todo-list-form">
           <InputLabel htmlFor="name-input">Add Item</InputLabel>
-          <Input className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo} />
+          <Input autoFocus className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo}/>
         </FormControl>
         <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
         </Button>
