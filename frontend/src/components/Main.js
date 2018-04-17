@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // import Components
-// import LandingPage from './LandingPage';
+import LandingPage from './LandingPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditUser from './edit-user/EditUser';
 import TodoList from './todo-list/TodoList';
@@ -22,15 +22,11 @@ export default class Main extends Component {
         {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
         {/*<Map />*/}
-        {/*<LandingPage />*/}
-        {/*<UserDetailsPage />*/}        
-        <ShoppingListTitle />
+        {/*<LandingPage />*/}       
+        <ShoppingListTitle name="Alice Doe" accountPage="user323223" listId="3321"/>
         <TodoList />
-        {/*<UserDetailsPage />*/}
-        {/*<MuiThemeProvider>
-          <EditUser />
-        </MuiThemeProvider>*/}
-       <Notes />
+        {/*<EditUser />*/}
+        {/*<Notes />*/}
       </div>
     )
   }
