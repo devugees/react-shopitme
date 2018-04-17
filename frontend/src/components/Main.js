@@ -10,6 +10,7 @@ import Map from './map/Map';
 import ImageCropper from './ImageCropper';
 import RatingStars from './RatingStars';
 import Notes from './Additional-Notes/Notes'
+import Details from './Details/Details'
 
 
 
@@ -31,6 +32,7 @@ export default class Main extends Component {
           <EditUser />
         </MuiThemeProvider>*/}
        <Notes />
+       <Details />
       </div>
     )
   }
