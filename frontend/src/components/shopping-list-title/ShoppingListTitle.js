@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
+
 
 const date =new Date();
 const day = date.getDate();
@@ -16,22 +19,73 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       listName: 'Shopping List',
-      listId: '3321'
+      listId: props.listId,
+      editing: false,
+      isShopperAvailable: false,
+      shopper: {
+        noShopper: 'Pending...',
+        name: props.name,
+        accountPage: props.accountPage
+      }
     }
   }
+ 
   
-  editListName = event => {
+  editing = () =>{
+      this.setState(prevState => { return {editing: !prevState.editing}})
+  }
+
+  editText = event => {
     this.setState({
       listName:event.target.value
     })
   }
 
+  newShopper = () => {
+    this.setState({
+      isShopperAvailable: true,
+    })
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextState.shopper.name === ''){
+      return true
+    }else {
+      return false
+    }
+  }
+
   render() {
+    let whatToRender = (
+      <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editing}>✎</span></h1> 
+      )
+    if(this.state.editing){
+      whatToRender = (
+        <h1>
+          <FormControl className="todo-list-form">
+            <InputLabel htmlFor="name-input">New List Name</InputLabel>
+            <Input autoFocus className="todo-list-input" id="name-input" onChange={this.editText} value={this.state.listName} />
+          </FormControl>
+          <span onClick={this.editing}>✔</span>
+        </h1>
+        )
+    }
+
+    let shopper = this.state.shopper.noShopper;
+
+    if(this.state.shopper.name !== ''){
+      this.setState({
+        isShopperAvailable: false,
+      })
+      shopper = (<a href={this.state.shopper.accountPage}>{this.state.shopper.name}</a>)
+    }
+
     return (
       <div className="shopping-list-title" >
         <Paper>
-          <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editListName}>✎</span></h1>
+          {whatToRender}
           <p>Created: {day}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
+          <p>Shopper: {shopper}</p>
         </Paper>
       </div>
       )
