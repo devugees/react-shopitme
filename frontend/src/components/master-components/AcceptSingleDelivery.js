@@ -54,7 +54,7 @@ state = {
 
   render() {
     return (
-      <div className="accept-single-delivery">
+      <div className="accept-single-delivery main">
         <ShoppingListTitle checkingPerson={true} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
         <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
         <TodoList items={this.state.items} checkingPerson={true}/>

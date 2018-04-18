@@ -7,13 +7,13 @@ import { withStyles } from 'material-ui/styles';
 
 const styles = {
   deliver:{
-    width:'49vw',
+    width:'48%',
     display: 'inline-block',
     margin: '1rem auto',
     padding: '.5rem 0',
   },
   delivering:{
-    width:'49vw',
+    width:'48%',
     display: 'inline-block',
     margin: '1rem auto',
     padding: '.5rem 0',
