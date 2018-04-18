@@ -49,10 +49,10 @@ export default class CreateShoppingList extends Component {
             <Details location = {this.state.location}/>
             <Notes />
       <Button  variant="raised" color="secondary">
-        Delete
+        <a href="/sure">Delete </a>
       </Button>
       <Button  variant="raised" color="primary">
-        Send
+        <a href="/acceptsingledelivery">Send</a>
       </Button>
       
     </div>
