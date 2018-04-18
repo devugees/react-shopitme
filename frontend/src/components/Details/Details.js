@@ -30,7 +30,7 @@ export default class Details extends Component {
           [name]: event.target.value,
         });
       };
-    render() {  
+    render() { 
       return (
     <div className="details">
 <Paper>
@@ -62,7 +62,7 @@ export default class Details extends Component {
         </FormControl>
     </Grid>
     <Grid  item xs={12}>
-        <p>{this.state.location} <span onClick={this.editLocation}>✎</span></p>          
+        <p>{this.state.location} <span onClick={this.editLocation}>✎</span> </p>          
     </Grid>
     </Grid>
 </Paper>
