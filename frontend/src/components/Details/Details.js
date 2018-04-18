@@ -13,7 +13,8 @@ export default class Details extends Component {
         super();
         this.state = {
           location: `Sonnenalle 123
-           12054 Berlin`
+           12054 Berlin`,
+           editing: false,
 
         }
       }
@@ -22,6 +23,9 @@ export default class Details extends Component {
             location:event.target.value
         })
       }
+      editing = () =>{
+        this.setState(prevState => { return {editing: !prevState.editing}})
+    }
     
 
 
@@ -30,7 +34,22 @@ export default class Details extends Component {
           [name]: event.target.value,
         });
       };
-    render() { 
+    render() {
+      let whatToRender = (
+        <p>{this.state.location} <span onClick={this.editing}>✎</span> </p>          
+
+        )
+      if(this.state.editing){
+        whatToRender = (
+          <p>
+            <FormControl className="todo-list-form">
+              <InputLabel htmlFor="name-input">New location</InputLabel>
+              <Input autoFocus className="location-input"  onChange={this.editLocation} value={this.state.location} />
+            </FormControl>
+            <span onClick={this.editing}>✔</span>
+          </p>
+          )
+      }
       return (
     <div className="details">
 <Paper>
@@ -62,7 +81,7 @@ export default class Details extends Component {
         </FormControl>
     </Grid>
     <Grid  item xs={12}>
-        <p>{this.state.location} <span onClick={this.editLocation}>✎</span> </p>          
+    {whatToRender}         
     </Grid>
     </Grid>
 </Paper>
