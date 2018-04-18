@@ -8,6 +8,8 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/Menu';
 import '../css/Navbar.css';
+import DropMenu from './DropMenu'
+
 
 const styles = {
   root: {
@@ -22,31 +24,43 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
+
+ class ButtonAppBar extends React.Component {
+  constructor(props) {
+    super();
+ 
+    this.state = {
+      login: true
+    };
+  }
+  render() {
   return (
     <div className="navbar">
-      <div className={classes.root}>
+      <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton  color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            Title
+          <Typography variant="title" color="inherit" >
+              <a href="/">ShopMeIt</a>
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Logout</Button>
-
+          {this.state.login?
+                  (<React.Fragment>
+                     <i class="material-icons">notifications</i>
+                     <i class="material-icons">chat_bubble_outline</i>
+                     <i class="material-icons">perm_identity</i>
+                     <DropMenu/>
+                   </React.Fragment>) :
+                  (<React.Fragment>
+                            <Button color="inherit">Login</Button>
+          <Button color="inherit">Logout</Button></React.Fragment>) }
         </Toolbar>
       </AppBar>
     </div>
   </div>
   );
-}
+} }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(ButtonAppBar);
+export default ButtonAppBar;
