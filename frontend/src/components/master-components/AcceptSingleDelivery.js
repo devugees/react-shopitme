@@ -62,10 +62,10 @@ state = {
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
         <Button  variant="raised" color="secondary">
-        Cancel 
+        <a href="/">Cancel</a>
       </Button>
       <Button  variant="raised" color="primary">
-        Accept
+        <a href="">Accept</a>
       </Button>
       </div>
     )
