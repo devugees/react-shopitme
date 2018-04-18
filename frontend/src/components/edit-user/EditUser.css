@@ -1,13 +1,25 @@
 .edit-user {
-    background-color: var(--form-background);
     padding: var(--text-padding);
     font-family: 'Roboto', sans-serif;
     margin: 1rem;
 }
 
-.form1 {
-    background-color: var(--form-background);
-    padding: var(--text-padding);
-    font-family: 'Roboto', sans-serif;
-    margin: 1rem;
+
+
+.formBgr {
+    border-radius: 3px;
+    border: 2px solid var(--form-background);
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 8px;
+}
+
+.button-right{
+    float:  right;
+    background-color: var(--secondary-bg) ;
+}
+
+.margin{
+    margin-top: 16px;
+    margin-bottom: 16px;
 }

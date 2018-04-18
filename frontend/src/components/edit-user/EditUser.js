@@ -15,163 +15,74 @@ import Button from 'material-ui/Button';
 import './EditUser.css';
 import Textfield from './Textfield';
 import Submit from './Button';
-
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  menu: {
-    width: 200,
-  },
-  buttonright: {
-    margin: theme.spacing.unit,
-    float: "right"
-  },
-  input: {
-    display: 'none',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit,
-  },
-});
-
-const gender = [
-  {
-    value: 'Female',
-    label: 'Female',
-  },
-  {
-    value: 'Male',
-    label: 'Male',
-  },
-  {
-    value: 'Other',
-    label: 'Other',
-  },
-  {
-    value: 'Rather Not Say',
-    label: 'Rather Not Say',
-  },
-];
-
-
+import UserDetailsForm from './UserDetailsForm';
+import PasswordForm from './PasswordForm';
 
 
 class EditUser extends React.Component {
-
-  makeFields(userdetails, handleChange) {
-    console.log(userdetails, handleChange)
-    return Object.keys(userdetails).map(
-      key => {
-        console.log('key is ', key)
-        return <Textfield handleChange={handleChange} index={key} key={key} userdetails={userdetails}/>
-      }
-    )
-  }
-
   render() {
-
-    
-
     const { classes } = this.props;
-
     const isRegisterForm = this.props.formType.Register;
 
-    console.log(isRegisterForm);
     return (
       <div className="edit-user">
-        <form className={classes.container} noValidate autoComplete="off">
+        <form noValidate autoComplete="off">
           <Grid container spacing={16}>
-          {(isRegisterForm) ? <Typography variant="display1">Register</Typography> :  <Typography variant="display1">Change Account Detail</Typography>}
-            {/*Object.keys(this.props.userdetails).map(
-              key => {
-                console.log('key is ', key)
-                return <Textfield handleChange={this.props.handleChange} index={key} key={key} userdetails={this.props.userdetails}/>
-              }
-            )*/}
+            {/* If Register Form Render Heading Register else Render Change User Details */}
+            <Grid item xs={12}>
+              {(isRegisterForm) ? <Typography variant="display1">Register</Typography> :  <Typography variant="display1">Change Account Detail</Typography>}
+            </Grid>
+            <Grid item xs={12}>
+            {(isRegisterForm) ? <Typography variant="title">Your Details</Typography> :  null}
+            </Grid>
+            {/* Create the Form from Textfields & insert User Details */}
+            {/*this.makeFields(this.props.userdetails, this.props.handleChange)*/}
+            
+            {/* Render Form Part 1 with User Details */}
+            <Grid item container xs={12} className="formBgr">
+              <UserDetailsForm handleChange={this.props.handleChange} userdetails={this.props.userdetails} />
+            </Grid>
 
-            {this.makeFields(this.props.userdetails, this.props.handleChange)}
+            {/* Submit Button for Change User/Account Details */}
+            <Grid item xs={12}>
+              {(!isRegisterForm) ? <Button variant="flat" onClick={this.props.handleSubmit} className="button-right" size="large">
+                    Change Account Details
+                  </Button> :  null}
+            </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  id="select-gender"
-                  select
-                  label="Gender"
-                  className={classes.textField}
-                  value={this.props.userdetails.gender}
-                  onChange={this.props.handleChange('gender')}
-                  SelectProps={{
-                    native: true,
-                    MenuProps: {
-                      className: classes.menu,
-                    },
-                  }}
-                  helperText="Please select your gender"
-                  margin="normal"
-                  fullWidth
-                >
-                  {gender.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </TextField>
+            {/* If Change User Details Form Render Change User Details Heading */}
+            <Grid item xs={12}>
+              {(!isRegisterForm) ? <Typography variant="display1" className="margin">Change Password</Typography> :  <Typography variant="title" className="margin">Your Password</Typography>}
+            </Grid>
+
+   
+            {/* If Change User Details Form Render Additional Textfield Old Password */}
+            <Grid item container xs={12} className="formBgr">
+              {(!isRegisterForm) ? 
+                    <Grid item xs={12}>
+                        <TextField
+                          id="old-password"
+                          label="Old Password"
+                          placeholder="Old Password"
+                          onChange={this.props.handleChange('password')}
+                          type="password"
+                          margin="normal"
+                          required
+                          fullWidth
+                        />
+                      </Grid> :  null }
+                {/* Password / Confirm Password Fields */}
+                <PasswordForm handleChange={this.props.handleChange} />
               </Grid>
-
-              {(!isRegisterForm) ? <Typography variant="display1">Change Password</Typography> :  null}
-
+              
               
               <Grid item xs={12}>
-                <TextField
-                  id="old-password"
-                  label="Old Password"
-                  placeholder="Old Password"
-                  onChange={this.props.handleChange('password')}
-                  type="password"
-                  margin="normal"
-                  required
-                  fullWidth
-                />
+                <Button variant="flat" onClick={this.props.handleSubmit} className="button-right" size="large">
+                  {(!isRegisterForm) ? "Change Password" :  "Submit Registration"}
+                </Button>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="password"
-                  label="Password"
-                  placeholder="Password"
-                  onChange={this.props.handleChange('password')}
-                  type="password"
-                  margin="normal"
-                  required
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="confirm-password"
-                  label="Confirm Password"
-                  placeholder="Confirm Password"
-                  onChange={this.props.handleChange('confirmpassword')}
-                  type="password"
-                  margin="normal"
-                  required
-                  fullWidth
-                />
-              </Grid>
-            <Grid item xs={12}>
-              <Button variant="raised" color="secondary" className={classes.buttonleft}>
-                Cancel
-              </Button>
-              <Button variant="raised" color="primary" onClick={this.props.handleSubmit} className={classes.buttonright}>
-                Create Account
-              </Button>
+            
             </Grid>
-          </Grid>
         </form>
       </div>
     );
@@ -182,4 +93,4 @@ EditUser.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(EditUser);
+export default EditUser;

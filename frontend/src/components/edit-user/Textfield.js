@@ -6,9 +6,10 @@ import { withStyles } from 'material-ui/styles';
 
 export default class Textfield extends Component {
 render() {
+    console.log()
     return (
         <React.Fragment>
-            <Grid item xs={12}>
+            <Grid item xs={this.props.gridItemSize[this.props.index]}>
                 <TextField
                             id={this.props.index}
                             label={this.props.index.toUpperCase()}

@@ -7,10 +7,10 @@ import EditUser from '../edit-user/EditUser';
 export default class UserDetails extends Component {
 
   state = { userdetails: {
+    username: 'AliDoe',  
     firstname: 'Alice',
     lastname: 'Doe',
     email: 'alice.doe@mail.com',
-    username: 'AliDoe',  
     street: 'Munsterstrass',
     number: '56',
     postcode: '12345',
@@ -18,31 +18,21 @@ export default class UserDetails extends Component {
     mobile: '644099344',
     gender: 'Other'
   }, formType: {
-    Register: false,
-    UpdateAccountDetails: true
+    Register: true,
+    UpdateAccountDetails: false
   }  
   };
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
+    const userdetails = {...this.state.userdetails};
+    userdetails[name] = event.target.value;
+    this.setState({userdetails});
   };
 
   handleSubmit = (event) => {
-    console.log(this.state)
-    // Check for errors
-    // Clear form 
-    this.setState ({
-      
-    })
-    this.props.onChange({
-      firstname: "",
-      lastname: "",
-      username: "",
-      email: "",
-      password: ""
-    })
+    event.preventDefault();
+    const userdetails = {...this.state.userdetails}
+    console.log(userdetails)
   };
 
 
