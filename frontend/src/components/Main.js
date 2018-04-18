@@ -10,6 +10,8 @@ import Map from './map/Map';
 import ImageCropper from './ImageCropper';
 import RatingStars from './RatingStars';
 import Notes from './Additional-Notes/Notes'
+import Details from './Details/Details'
+import CreateShoppingList from './master-components/CreateShoppingList'
 
 
 
@@ -65,10 +67,12 @@ state = {
         {/*<RatingStars />*/}
         {/*<Map />*/}
         {/*<LandingPage />*/}       
-        <ShoppingListTitle checkingPerson={true} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
-        <TodoList orderPerson={false} checkingPerson={false} shopperPerson={true} items={this.state.items}/>
+        {/*<ShoppingListTitle checkingPerson={true} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
+        <TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/>
         {/*<EditUser />*/}
-        {<Notes />}
+       {/*<Notes />
+       <Details />*/}
+      <CreateShoppingList />
       </div>
     )
   }
