@@ -39,6 +39,7 @@ const todoBoxOrdered = (props) => {
     <div>
       <Paper className={classes.box} elevation={4}>
         <Typography className={wrap}>
+          {`#${props.index + 1}  `}
           {whatToShow}
           <span className={edit} onClick={props.editToDo}>✎</span>
           <span className={tick} onClick={props.finishEditToDo}>✔</span>

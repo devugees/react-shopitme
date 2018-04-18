@@ -11,18 +11,17 @@ import TodoBoxOrdered from './TodoBoxOrdered';
 import './TodoList.css';
 
 export default class TodoList extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       todo:'',
-      items:[],
+      items:props.items, //came from Store
       disabled: true,
-      orderPerson:true,
+      orderPerson:props.orderPerson,
+      checkingPerson: props.checkingPerson,
+      //orderPerson:true,
+      //checkingPerson: false
     }
-  }
-  
-  orderPerson = () =>{
-      this.setState(prevState => { return {orderPerson: !prevState.orderPerson}})
   }
 
   changeText = event => {
@@ -92,22 +91,29 @@ export default class TodoList extends Component {
   }
 
   render() {
-    let changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
+    let changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper index={index} todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
     
     if(this.state.orderPerson){
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
     }
 
-    return (
-      <div className="todo-list">
-        <h1>Shopping list</h1>
-        <button onClick={this.orderPerson}>Shopper/Order Switch</button>
+    let whatToShow;
+
+    if(this.state.checkingPerson === false){
+      whatToShow = (
+        <React.Fragment>
         <FormControl className="todo-list-form">
           <InputLabel htmlFor="name-input">Add Item</InputLabel>
           <Input autoFocus className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo}/>
         </FormControl>
         <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
         </Button>
+        </React.Fragment>)
+    }
+
+    return (
+      <div className="todo-list">
+        {whatToShow}
         {changingTodo}
       </div>
     )

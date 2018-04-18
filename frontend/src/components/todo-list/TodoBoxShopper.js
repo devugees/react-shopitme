@@ -28,6 +28,8 @@ const todoBoxShooper = (props) => {
   let back = 'hide';
   let cross = 'cross';
   let boxColor = classes.box;
+  let checking = props.checking
+  let  checkingBox;
 
   if(props.changeMe === 'done'){
     boxColor = classes.boxDone;
@@ -43,14 +45,23 @@ const todoBoxShooper = (props) => {
     cross = 'hide';
   }
 
+  if(checking){
+    checkingBox = (
+      <React.Fragment>
+        <span className={tick} onClick={props.productFound}>✔</span>
+        <span className={back} onClick={props.backToDo}>🔙</span>
+        <span className={cross} onClick={props.productNotFound}>✖</span>
+      </React.Fragment>
+    )
+  }
+
   return (
     <div>
       <Paper className={boxColor} elevation={4}>
         <Typography>
+          {`#${props.index + 1}  `}
           {props.todo}
-          <span className={tick} onClick={props.productFound}>✔</span>
-          <span className={back} onClick={props.backToDo}>🔙</span>
-          <span className={cross} onClick={props.productNotFound}>✖</span>
+          {checkingBox}
         </Typography>
       </Paper>
     </div>
