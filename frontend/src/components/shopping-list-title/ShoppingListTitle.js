@@ -22,15 +22,17 @@ export default class ShoppingListTitle extends Component {
       listId: props.listId,
       editing: false,
       isShopperAvailable: false,
+      orderPerson:props.orderPerson,
       checkingPerson: props.checkingPerson,
+      shopperPerson:props.shopperPerson,
       orderer: {
-        name: props.ordererName,
-        accountPage: props.ordererAccountPage
+        name: props.orderer.name,
+        accountPage: props.orderer.accountPage
       },
       shopper: {
         noShopper: 'Pending...',
-        name: props.shopperName,
-        accountPage: props.shopperAccountPage
+        name: props.shopper.name,
+        accountPage: props.shopper.accountPage
       }
     }
   }
@@ -77,7 +79,7 @@ export default class ShoppingListTitle extends Component {
         )
     }
 
-    if(this.state.checkingPerson){
+    if(this.state.checkingPerson || this.state.shopperPerson){
       whatToRender = (
       <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
       )
@@ -85,7 +87,7 @@ export default class ShoppingListTitle extends Component {
 
     let shopper = this.state.shopper.noShopper;
 
-    if(this.state.shopper.name === null){
+    if(this.state.shopper.name !== null){
       this.setState({
         isShopperAvailable: false,
       })
