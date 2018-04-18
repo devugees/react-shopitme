@@ -87,9 +87,6 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div className={classNames(classes.paper, classes.modalStyle)}>
-            <div>
-              ************************************
-            </div>
             <Button variant="raised" color="primary" className={classes.loginButtons}>
               <img src={Facebook} className={classes.iconwww} alt="facebook"/>
               Login with Facebook 
@@ -132,7 +129,7 @@ class SimpleModal extends React.Component {
                           onClick={this.handleClickShowPassword}
                           onMouseDown={this.handleMouseDownPassword}
                         >
-                          {this.state.showPassword ? <img src={Visibility} alt="Visibility"/> : <img src={VisibilityOff} alt="VisibilityOff"/>}
+                          {this.state.showPassword ? <img src={VisibilityOff} alt="VisibilityOff"/> : <img src={Visibility} alt="Visibility"/>}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -148,51 +145,6 @@ class SimpleModal extends React.Component {
               <Typography variant="subheading">
                 <a href="#">Don't have an Account? Register now</a>
               </Typography>
-            <div>
-              ************************************
-            </div>
-            <div className={classes.container}>
-              <FormControl className={classNames(classes.margin, classes.loginButtons)}>
-                <InputLabel
-                  FormLabelClasses={{
-                    focused: classes.inputLabelFocused,
-                  }}
-                  htmlFor="custom-color-input"
-                >
-                  E-mail
-              </InputLabel>
-                <Input
-                  classes={{
-                    underline: classes.inputUnderline,
-                  }}
-                  id="custom-color-input"
-                />
-              </FormControl>
-              </div>
-              <Button variant="raised" color="green" className={classes.loginButtons}>
-                Reset password 
-              </Button>
-              <Typography variant="subheading">
-                <a href="#">Login!</a>
-              </Typography>
-              <Typography variant="subheading">
-                <a href="#">Don't have an Account? Register now</a>
-              </Typography>
-            <div>
-              ************************************
-            </div>
-            <Typography variant="title" id="modal-title">
-              Are you sure ?
-            </Typography>
-            <Typography variant="subheading" id="simple-modal-description">
-              The shopping list will be deleted
-            </Typography>
-            <Button variant="raised" color="secondary" className={classes.button} onClick={this.handleClose}>
-              Cancel
-            </Button>
-            <Button variant="raised" color="primary" className={classes.button}>
-              Delete
-            </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
             </Button>
@@ -208,5 +160,5 @@ SimpleModal.propTypes = {
 };
 
 // We need an intermediary variable for handling the recursive nesting.
-const Modals = withStyles(styles)(SimpleModal);
-export default Modals ;
+const Login = withStyles(styles)(SimpleModal);
+export default Login ;

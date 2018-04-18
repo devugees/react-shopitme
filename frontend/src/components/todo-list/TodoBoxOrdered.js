@@ -1,5 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -25,13 +27,19 @@ const todoBoxOrdered = (props) => {
     edit = 'hide';
     cross = 'cross';
     wrap = 'hide';
-    whatToShow = (<input type="text" value={props.todoState} onChange={props.editText}/>)
+    whatToShow = (
+      <FormControl className="todo-list-form">
+        <InputLabel htmlFor="name-input">Edit Shopping List</InputLabel>
+        <Input autoFocus className="todo-list-input" id="name-input" onChange={props.editText} value={props.todoState} />
+      </FormControl>
+      )
   }
 
   return (
     <div>
       <Paper className={classes.box} elevation={4}>
         <Typography className={wrap}>
+          {`#${props.index + 1}  `}
           {whatToShow}
           <span className={edit} onClick={props.editToDo}>✎</span>
           <span className={tick} onClick={props.finishEditToDo}>✔</span>
