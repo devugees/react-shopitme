@@ -28,8 +28,8 @@ const todoBoxShooper = (props) => {
   let back = 'hide';
   let cross = 'cross';
   let boxColor = classes.box;
-  let checking = props.checking
-  let  checkingBox;
+  let shopper = props.shooper
+  let shopperUI;
 
   if(props.changeMe === 'done'){
     boxColor = classes.boxDone;
@@ -45,8 +45,8 @@ const todoBoxShooper = (props) => {
     cross = 'hide';
   }
 
-  if(checking){
-    checkingBox = (
+  if(shopper){
+    shopperUI = (
       <React.Fragment>
         <span className={tick} onClick={props.productFound}>✔</span>
         <span className={back} onClick={props.backToDo}>🔙</span>
@@ -61,7 +61,7 @@ const todoBoxShooper = (props) => {
         <Typography>
           {`#${props.index + 1}  `}
           {props.todo}
-          {checkingBox}
+          {shopperUI}
         </Typography>
       </Paper>
     </div>

@@ -8,18 +8,30 @@ const key = process.env.REACT_APP_MY_KEY
 const url = `https://maps.googleapis.com/maps/api/js?key=${key}`
 
 export default class Map extends Component {
- state = {
+  constructor(props){
+    super(props)
+    this.state = {
     coords: {
       latitude: null,
       longitude: null
     },
     error: null,
-  
-  markers: [{lat:52.524978,lng:13.480479},
-            {lat:52.522955,lng:13.477175},
-            {lat:52.521310,lng:13.487453},
-            {lat:52.526125,lng:13.482797}]
-}
+    markers: [
+      {lat:props.lat0,lng:props.lng0},
+      {lat:props.lat1,lng:props.lng1},
+      {lat:props.lat2,lng:props.lng2},
+      {lat:props.lat3,lng:props.lng3}
+      ]
+    }
+  }
+/*
+  markers: [
+      {lat:52.524978,lng:13.480479},
+      {lat:52.522955,lng:13.477175},
+      {lat:52.521310,lng:13.487453},
+      {lat:52.526125,lng:13.482797}
+      ]
+*/
   componentDidMount() {
     const geoPos = JSON.parse(localStorage.getItem('geoPos'))
     if(geoPos && geoPos.latitude !== null){
@@ -52,12 +64,12 @@ export default class Map extends Component {
   }
 
   render() {
-    let lat = this.state.coords.latitude ;
+    let lat = this.state.coords.latitude;
     let lng = this.state.coords.longitude;
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
   <GoogleMap
-   defaultZoom={15}
-   defaultCenter={{ lat:lat, lng:lng }}>
+   defaultZoom={14}
+   defaultCenter={{ lat:this.state.markers[0].lat, lng:this.state.markers[0].lng }}>
     <Marker position={{ lat: lat, lng: lng }}/>
   {this.state.markers.map(marker=> <Marker position={{ lat: marker.lat, lng: marker.lng}}/>)}
 
