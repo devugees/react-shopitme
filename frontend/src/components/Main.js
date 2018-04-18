@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditUser from './edit-user/EditUser';
 import TodoList from './todo-list/TodoList';
 import Map from './map/Map';
+import ImageCropper from './ImageCropper';
+import RatingStars from './RatingStars';
 
 
 
@@ -17,6 +19,8 @@ export default class Main extends Component {
         {/*<Map />*/}
         {/*<LandingPage />*/}
         {/*<UserDetailsPage />*/}
+        <ImageCropper />
+        <RatingStars />
         <TodoList />
         {/*<UserDetailsPage />*/}
         {/*<MuiThemeProvider>
