@@ -16,6 +16,24 @@ import Notes from './Additional-Notes/Notes'
 
 export default class Main extends Component {
 
+state = {
+    items:
+    [{
+      status:"box",
+      todo:"2x Corn Bread"
+    },{
+      status:"box",
+      todo:"Kellogs AllBran"
+    },{
+      status:"box",
+      todo:"4x Milk 3.8% Fet"
+    },{
+      status:"box",
+      todo:"2x Orange Juice low sugar"
+    }
+    ]
+  }
+
   render() {
     return (
       <div className="main">
@@ -24,7 +42,7 @@ export default class Main extends Component {
         {/*<Map />*/}
         {/*<LandingPage />*/}       
         <ShoppingListTitle name="Alice Doe" accountPage="user323223" listId="3321"/>
-        <TodoList />
+        <TodoList items={this.state.items}/>
         {/*<EditUser />*/}
         {/*<Notes />*/}
       </div>
