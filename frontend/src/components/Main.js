@@ -29,22 +29,33 @@ state = {
       lat: 52.522955,
       lng: 13.477175,
     },
+    deliverAdress:{
+      street: 'Sonnenallee',
+      number: '154',
+      postalCode: '12055',
+      city: 'Berlin'
+    },
+  },
+  deliveringTime:{
+    start: '14:00',
+    end:'16:00'
   },
   items:
   [{
-    status:"box",
+    status:'box',
     todo:"2x Corn Bread"
   },{
-    status:"box",
+    status:'box',
     todo:"Kellogs AllBran"
   },{
-    status:"box",
+    status:'box',
     todo:"4x Milk 3.8% Fet"
   },{
-    status:"box",
+    status:'box',
     todo:"2x Orange Juice low sugar"
   }
-  ]
+  ],
+  notes:'Bring me all in a box please. Thank you',
 }
 
   render() {
