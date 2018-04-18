@@ -26,7 +26,7 @@ class FadeMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          Alice Doe
+          <a href="/userdetails">Alice Doe </a>
         </Button>
         <Menu
           id="fade-menu"
