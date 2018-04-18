@@ -26,13 +26,13 @@ export default class ShoppingListTitle extends Component {
       checkingPerson: props.checkingPerson,
       shopperPerson:props.shopperPerson,
       orderer: {
-        name: props.orderer.name,
-        accountPage: props.orderer.accountPage
+        name: props.ordererName,
+        accountPage: props.ordererAccountPage
       },
       shopper: {
         noShopper: 'Pending...',
-        name: props.shopper.name,
-        accountPage: props.shopper.accountPage
+        name: props.shopperName,
+        accountPage: props.shopperAccountPage
       }
     }
   }
