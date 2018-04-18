@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Button from 'material-ui/Button'
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import ShowDeliveryDetails from '../show-delivery-details/ShowDeliveryDetails';
@@ -40,7 +41,7 @@ state = {
   },{
     status:'box',
     todo:"Kellogs AllBran"
-  },{
+  },{ 
     status:'box',
     todo:"4x Milk 3.8% Fet"
   },{
@@ -60,6 +61,12 @@ state = {
         <TodoList items={this.state.items} checkingPerson={true}/>
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
+        <Button  variant="raised" color="secondary">
+        Cancel 
+      </Button>
+      <Button  variant="raised" color="primary">
+        Accept
+      </Button>
       </div>
     )
   }
