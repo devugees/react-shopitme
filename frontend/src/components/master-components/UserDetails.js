@@ -17,6 +17,9 @@ export default class UserDetails extends Component {
     city: 'Bernau',
     mobile: '644099344',
     gender: 'Other'
+  }, formType: {
+    Register: false,
+    UpdateAccountDetails: true
   }  
   };
 
@@ -48,7 +51,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         <ImageCropper />
         <RatingStars />
-        <EditUser userdetails={this.state.userdetails} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <EditUser formType={this.state.formType} userdetails={this.state.userdetails} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
   }
