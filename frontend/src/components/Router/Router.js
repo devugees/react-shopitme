@@ -13,6 +13,7 @@ import Sure from '../Modals/Sure'
 const Router = () => (
  <BrowserRouter>
    <Switch>
+{/*notfound*/}
     <Route exact path='/' component={LandingPage} />
     <Route exact path='/login' component={Login} />
     <Route exact path='/resetpassword' component={ResetPassword} />
