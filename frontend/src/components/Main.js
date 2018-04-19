@@ -27,7 +27,7 @@ state = {...fakeStore}
     console.log(this.state)
     return (
       <div className="main">
-        <OrderDeliveryHistory test={this.state.listId}/>
+        <OrderDeliveryHistory />
         {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
         {/*<Map />*/}

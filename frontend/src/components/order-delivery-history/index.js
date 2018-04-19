@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+//import fake store
+import fakeStore from '../../fakeStore';
+// import children components
+import orderHistory from './orderHistory';
 
 export default class OrderDeliveryHistory extends Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      name: 'order delivery history'
-    }
-  }
-
+state = {...fakeStore}
 
   render() {
 
     return (
       <div className="order-delivery-history" >
-        <h1>{this.state.name}</h1>
-        <p>{this.props.test}</p>
+        <h1>Order History</h1>
+       {this.state.orderHistory.map(order => <orderHistory orderID={order.orderID}/>)}
       </div>
       )
   }

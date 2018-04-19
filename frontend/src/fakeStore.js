@@ -55,6 +55,51 @@ const fakeStore = {
     todo:"2x Orange Juice low sugar"
   }
   ],
+  orderHistory:
+    [{
+      orderID: 15675,
+      status:'Pending',
+      shop: 'Rewe',
+      delivered: '',
+      created: '23.03.2018',
+      delivered:{
+        date:'',
+        time: ''
+      }
+    },
+    {
+      orderID: 13466,
+      status:'In Progress',
+      shop: 'Rewe',
+      delivered: 'Alice Doe',
+      created: '21.03.2018',
+      delivered:{
+        date:'',
+        time:''
+      }
+    },
+    {
+      orderID: 11787,
+      status:'Delivered',
+      shop: 'Rewe',
+      delivered: 'Alice Doe',
+      created: '17.02.2018',
+      delivered:{
+        date:'18.02.2018',
+        time: '18:22'
+      }
+    },
+    {
+      orderID: 9907,
+      status:'Delivered',
+      shop: 'Rewe',
+      delivered: 'Alice Doe',
+      created: '11.02.2018',
+      delivered:{
+        date:'11.02.2018',
+        time: '19:37'
+      }
+    }],
   notes:'Bring me all in a box please. Thank you',
 }
 
