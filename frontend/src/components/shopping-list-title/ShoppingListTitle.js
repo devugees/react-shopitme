@@ -13,19 +13,26 @@ let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 
-export default class TodoList extends Component {
+export default class ShoppingListTitle extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      listName: 'Shopping List',
+      listName: props.listName,
       listId: props.listId,
       editing: false,
       isShopperAvailable: false,
+      orderPerson:props.orderPerson,
+      checkingPerson: props.checkingPerson,
+      shopperPerson:props.shopperPerson,
+      orderer: {
+        name: props.ordererName,
+        accountPage: props.ordererAccountPage
+      },
       shopper: {
         noShopper: 'Pending...',
-        name: props.name,
-        accountPage: props.accountPage
+        name: props.shopperName,
+        accountPage: props.shopperAccountPage
       }
     }
   }
@@ -59,6 +66,7 @@ export default class TodoList extends Component {
     let whatToRender = (
       <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editing}>✎</span></h1> 
       )
+
     if(this.state.editing){
       whatToRender = (
         <h1>
@@ -71,9 +79,15 @@ export default class TodoList extends Component {
         )
     }
 
+    if(this.state.checkingPerson || this.state.shopperPerson){
+      whatToRender = (
+      <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
+      )
+    }
+
     let shopper = this.state.shopper.noShopper;
 
-    if(this.state.shopper.name !== ''){
+    if(this.state.shopper.name !== null){
       this.setState({
         isShopperAvailable: false,
       })

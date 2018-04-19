@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 
-import Button from 'material-ui/Button'
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
-import ShowDeliveryDetails from '../show-delivery-details/ShowDeliveryDetails';
 import Notes from '../Additional-Notes/Notes';
-import Map from '../map/Map';
+import Button from 'material-ui/Button';
+import Details from '../Details/Details'
 
+export default class CreateShoppingList extends Component {
 
-export default class AcceptSingleDelivery extends Component {
-
-state = {
+    state = {
   listId: 3323,
   shopper:{
     name: 'Alice Doe',
@@ -51,23 +49,23 @@ state = {
   ],
   notes:'Bring me all in a box please. Thank you',
 }
-
-
-  render() {
-    return (
-      <div className="accept-single-delivery main">
-        <ShoppingListTitle checkingPerson={true} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
-        <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
-        <TodoList items={this.state.items} checkingPerson={true}/>
-        <Notes notes={this.state.notes}/>
-        <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
-        <Button  variant="raised" color="secondary">
-        <a href="/">Cancel</a>
+    
+    
+      render() {
+        return (
+          <div className="createShoppingList main">
+            <ShoppingListTitle  listName="Shopping List" listId={this.state.listId} checkingPerson={false} />
+            <TodoList orderPerson={true}  items={this.state.items}/>
+            <Details location = {this.state.location}/>
+            <Notes />
+      <Button  variant="raised" color="secondary">
+        <a href="/sure">Delete </a>
       </Button>
       <Button  variant="raised" color="primary">
-        <a href="/accepteddelivery">Accept</a>
+        <a href="/acceptsingledelivery">Send</a>
       </Button>
-      </div>
-    )
-  }
-};
+      
+    </div>
+        )
+      }
+    };
