@@ -4,6 +4,7 @@ const fakeStore = {
     firstname: 'Alice',
     lastname: 'Doe',
     username: 'AliDoe',
+    email: 'alice.doe@mail.com',
     accountPage: 'user323223',
     coords:{
       lat: 52.524055,
@@ -21,6 +22,7 @@ const fakeStore = {
     firstname: 'Bob',
     lastname: 'Doe',
     username: 'Bobby',
+    email: 'boobyy@gmail.com',
     accountPage: 'user324332',
     coords:{
       lat: 52.522955,
