@@ -9,11 +9,15 @@ import Modals from '../Modals/Modals'
 import Login from '../Modals/Login'
 import ResetPassword from '../Modals/ResetPassword'
 import Sure from '../Modals/Sure'
+// get main for testing
+import Main from  '../Main';
 
 const Router = () => (
  <BrowserRouter>
    <Switch>
+{/*notfound*/}
     <Route exact path='/' component={LandingPage} />
+    <Route exact path='/main' component={Main} />
     <Route exact path='/login' component={Login} />
     <Route exact path='/resetpassword' component={ResetPassword} />
     <Route exact path='/sure' component={Sure} />
