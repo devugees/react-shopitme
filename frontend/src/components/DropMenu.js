@@ -2,6 +2,10 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Fade from 'material-ui/transitions/Fade';
+import Avatars from './Avatars'
+
+
+
 
 class FadeMenu extends React.Component {
   state = {
@@ -16,6 +20,15 @@ class FadeMenu extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+   handleDeleteChip =() => {
+  alert('You clicked the delete icon.'); // eslint-disable-line no-alert
+  }
+
+   handleClickChip =() => {
+  alert('You clicked the Chip.'); // eslint-disable-line no-alert
+  }
+
+
   render() {
     const { anchorEl } = this.state;
 
@@ -26,7 +39,8 @@ class FadeMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <a href="/userdetails">Alice Doe </a>
+        <Avatars/>
+    
         </Button>
         <Menu
           id="fade-menu"
