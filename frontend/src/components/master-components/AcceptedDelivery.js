@@ -17,16 +17,16 @@ state = {...fakeStore}
   render() {
     return (
       <div className="accept-single-delivery main">
-        <ShoppingListTitle checkingPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
+        <ShoppingListTitle shopperPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId} shopperName={this.state.shopper.firstname} shopperAccountPage={this.state.shopper.accountPage}/>
         <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
-        <TodoList items={this.state.items} checkingPerson={true}/>
+        <TodoList items={this.state.items} shopperPerson={true}/>
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
         <Button  variant="raised" color="secondary">
-        <a href="/">Cancel</a>
+        <a href="">Report Issue</a>
       </Button>
       <Button  variant="raised" color="primary">
-        <a href="/accepteddelivery">Accept</a>
+        <a href="/">Delivered</a>
       </Button>
       </div>
     )

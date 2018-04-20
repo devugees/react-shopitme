@@ -21,7 +21,7 @@ export default class UserDetails extends Component {
 
   render() {
     return (
-      <div className="user-details">
+      <div className="user-details main">
         <ImageCropper />
         <RatingStars />
         <EditUser globalProps={this.state}/>
