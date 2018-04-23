@@ -8,45 +8,80 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/Menu';
 import '../css/Navbar.css';
+import DropMenu from './DropMenu';
+import Grid from 'material-ui/Grid';
+import Avatar from 'material-ui/Avatar';
+import avatar from '../pictures/BoB.jpg';
+
+
 
 const styles = {
-  root: {
-    flexGrow: 1,
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+
   },
-  flex: {
-    flex: 1,
+  avatar: {
+    margin: 2,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+  bigAvatar: {
+    width: 40,
+    height: 40,
   },
+  button: {
+    height:'88px'
+  }
+ 
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
+
+class ButtonAppBar extends React.Component {
+  constructor(props) {
+    super();
+ 
+    this.state = {
+      login: false
+    };
+  }
+
+  LoginClickHandler = () => {
+    this.setState({
+      login: true
+    })
+  }
+
+  LogoutClickHandler = () => {
+    this.setState({
+      login: false
+    })
+  }
+
+  render() {
   return (
     <div className="navbar">
-      <div className={classes.root}>
+      <div>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            Title
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Logout</Button>
-
+        <Toolbar style={{padding: "0"}}>
+          <div style={styles.row}>
+           <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar} />
+          </div>
+          
+          {this.state.login?
+              (<React.Fragment >
+                <Button style={styles.fonto} color="inherit" onClick={this.LogoutClickHandler}> Logout</Button>
+                <i  class="material-icons">notifications</i>
+                <i  class="material-icons">chat_bubble_outline</i>
+                <DropMenu style={styles.fonto} />
+              </React.Fragment>) :
+              (<React.Fragment>
+                <Button style={styles.fonto} color="inherit" onClick={this.LoginClickHandler}>Login</Button>
+              </React.Fragment>) }
         </Toolbar>
       </AppBar>
     </div>
   </div>
   );
-}
+} }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(ButtonAppBar);
+export default ButtonAppBar;

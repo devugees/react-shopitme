@@ -28,6 +28,8 @@ const todoBoxShooper = (props) => {
   let back = 'hide';
   let cross = 'cross';
   let boxColor = classes.box;
+  let shopper = props.shooper
+  let shopperUI;
 
   if(props.changeMe === 'done'){
     boxColor = classes.boxDone;
@@ -43,14 +45,23 @@ const todoBoxShooper = (props) => {
     cross = 'hide';
   }
 
+  if(shopper){
+    shopperUI = (
+      <React.Fragment>
+        <span className={tick} onClick={props.productFound}>✔</span>
+        <span className={back} onClick={props.backToDo}>🔙</span>
+        <span className={cross} onClick={props.productNotFound}>✖</span>
+      </React.Fragment>
+    )
+  }
+
   return (
     <div>
       <Paper className={boxColor} elevation={4}>
         <Typography>
+          {`#${props.index + 1}  `}
           {props.todo}
-          <span className={tick} onClick={props.productFound}>✔</span>
-          <span className={back} onClick={props.backToDo}>🔙</span>
-          <span className={cross} onClick={props.productNotFound}>✖</span>
+          {shopperUI}
         </Typography>
       </Paper>
     </div>
@@ -62,38 +73,3 @@ todoBoxShooper.propTypes = {
 };
 
 export default withStyles(styles)(todoBoxShooper);
-
-/*
-
-const todoBoxShooper = (props) => {
-  let boxColor = 'box';
-  let tick = 'complete';
-  let back = 'hide';
-  let cross = 'cross';
-
-  if(props.changeMe === 'done'){
-    boxColor = 'boxDone';
-    tick = 'hide';
-    back = 'back';
-    cross = 'hide';
-  }
-
-  if(props.changeMe === 'notFound'){
-    boxColor = 'not-found';
-    tick = 'hide';
-    back = 'back';
-    cross = 'hide';
-  }
-
-  return (
-    <div className={boxColor}>
-      <span className={tick} onClick={props.productFound}>✔</span>
-      <span className={back} onClick={props.backToDo}>🔙</span>
-      <span className={cross} onClick={props.productNotFound}>✖</span>
-      <p className="wrap">{props.todo}</p>
-    </div>
-  )
-}
-
-export default todoBoxShooper;
-*/
