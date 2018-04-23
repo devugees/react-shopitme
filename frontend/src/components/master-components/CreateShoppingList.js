@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import Notes from '../Additional-Notes/Notes';
@@ -21,10 +21,10 @@ export default class CreateShoppingList extends Component {
             <Details location = {this.state.location}/>
             <Notes />
       <Button  variant="raised" color="secondary">
-        <a href="/sure">Delete </a>
+        <Link to="/sure">Delete </Link>
       </Button>
       <Button  variant="raised" color="primary">
-        <a href="/acceptsingledelivery">Send</a>
+        <Link to="/acceptsingledelivery">Send</Link>
       </Button>
       
     </div>
