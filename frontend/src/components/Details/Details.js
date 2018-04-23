@@ -18,44 +18,67 @@ export default class Details extends Component {
             number: '154',
             postcode: '12055',
             city: 'Berlin'
-        },
-        editing:false,
-        todo:''
+          },
+          editing:false,
+          newDeliverAdress:{
+            street: '',
+            number: '',
+            postcode: '',
+            city: ''
+          }
       }
     }
-   
-      editing = () =>{
+    componentDidMount(){
+      this.setState({
+          newDeliverAdress:{
+            street: this.state.deliverAdress.street,
+            number: this.state.deliverAdress.number,
+            postcode: this.state.deliverAdress.postcode,
+            city: this.state.deliverAdress.city
+          }
+        })
+    }
+
+    editing = () =>{
         this.setState(prevState => { return {editing: !prevState.editing}})
+    }
+
+    finishEditing = () => {
+      this.setState({
+        newDeliverAdress:{
+          street: this.state.street,
+          number: this.state.number,
+          postcode: this.state.postcode,
+          city: this.state.city
+        }
+      })
+      this.setState(prevState => { return {editing: !prevState.editing}})
     }
     
     editLocation = name => event => {
-      console.log(event.target.value);
         this.setState({
           [name]: event.target.value,
-          
         });
       };
     
     render() {
       let whatToRender = (
-        <p>{this.state.deliverAdress.street}.{this.state.deliverAdress.number}<br/> {this.state.deliverAdress.postcode} {this.state.deliverAdress.city} <span onClick={this.editing}>✎</span> </p>          
+        <p>{this.state.newDeliverAdress.street}.{this.state.newDeliverAdress.number}<br/> {this.state.newDeliverAdress.postcode} {this.state.newDeliverAdress.city} <span onClick={this.editing}>✎</span> </p>          
 
         )
       if(this.state.editing){
-        console.log(this.state.deliverAdress)
-          whatToRender = (  
+        whatToRender = (  
          <p>
             <FormControl className="todo-list-form">
-    
-  <Input autoFocus className="location-input"  onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
-              <Input  className="location-input2"   onChange={this.editLocation('number')} placeholder={this.state.deliverAdress.number} />
-              <Input  className="location-input3"   onChange={this.editLocation('postcode')} placeholder={this.state.deliverAdress.postcode} />
-              <Input  className="location-input4"   onChange={this.editLocation('city')} placeholder={this.state.deliverAdress.city}/>
+            <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.newDeliverAdress.street} />
+              <Input  className="location-input2"  onChange={this.editLocation('number')} placeholder={this.state.newDeliverAdress.number} />
+              <Input  className="location-input3"  onChange={this.editLocation('postcode')} placeholder={this.state.newDeliverAdress.postcode} />
+              <Input  className="location-input4"  onChange={this.editLocation('city')} placeholder={this.state.newDeliverAdress.city}/>
             </FormControl>
-            <span onClick={this.editing}>✔</span>
+            <span onClick={this.finishEditing}>✔</span>
           </p>
-          )
-        }
+        )
+      }
        
   
       return (
