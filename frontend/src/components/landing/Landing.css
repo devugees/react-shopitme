@@ -1,7 +1,7 @@
 @font-face { 
     font-family: "charmelade"; 
     src: url("../../fonts/charmelade.otf"); 
-}
+    }
 
 .landing {
     padding: 0;
@@ -26,13 +26,12 @@
     font-family: charmelade, sans-serif;
     color: white;
     padding: var(--global-padding);
+    padding-top: 0;
     text-align: left;
     z-index: 10;
 }
 
-.triangle {
-    border-bottom: 100px solid red;
-	border-right: 500px solid transparent;
-	height: 0;
-	width: 0;
+.chooserole {
+    color: black;
+    background-color: var(--secondary-bg);
 }
