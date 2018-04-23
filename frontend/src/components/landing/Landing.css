@@ -21,7 +21,7 @@
 }
 
 .deliverit_slogan {
-    font-size: 40px;
+    font-size: 30px;
     background-color: var(--secondary-bg);
     font-family: charmelade, sans-serif;
     color: white;
@@ -34,4 +34,14 @@
 .chooserole {
     color: black;
     background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: row;
+}
+
+.order, .deliver {
+    border: 1px solid white;
+    width: 40%;
+    margin: 0 5%;
+    border-radius: 3px;
+    padding: .5rem;
 }

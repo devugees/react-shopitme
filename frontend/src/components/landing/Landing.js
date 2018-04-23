@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './Landing.css'
 import leadimg from '../../pictures/landing.jpg';
-import leadmobimg from '../../pictures/landing_mob.jpg';
+import leadmobimg from '../../pictures/landing_mob.png';
 
 export default class LandingPage extends Component {
   render() {
@@ -17,14 +17,16 @@ export default class LandingPage extends Component {
             </div>
         </div>
         <div className="chooserole" >
-           
+            <div class="order">
                 <Link to={"/createshoppinglist"} >
                     I need some groceries.
                 </Link>
-
-            <Link to={"/accepteddelivery"} >
-                I want to help someone with his shopping.
+            </div>
+            <div class="deliver">
+                <Link to={"/accepteddelivery"} >
+                    I want to help someone with his shopping.
                 </Link>
+            </div>
 
         </div>
       </div>
