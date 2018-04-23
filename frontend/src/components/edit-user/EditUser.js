@@ -65,8 +65,11 @@ const gender = [
 
 
 class EditUser extends React.Component {
-  state = {
+  constructor(props){
+    super(props)
+    this.state = {
     firstname: '',
+    //firstname: props.globalProps.firstname,
     firstnameError: '',
     lastname: '',
     lastnameError: '',
@@ -89,6 +92,8 @@ class EditUser extends React.Component {
     mobile: '',
     mobileError: ''
   };
+  }
+  
 
   handleChange = name => event => {
     this.setState({
@@ -128,7 +133,7 @@ class EditUser extends React.Component {
                 margin="normal"
                 required={true}
                 fullWidth
-                errorText={this.state.firstnameError}
+                value={this.state.firstname}
               />
             </Grid>
             <Grid item xs={6}>
@@ -281,10 +286,10 @@ class EditUser extends React.Component {
             </Grid>
             <Grid item xs={12}>
               <Button variant="raised" color="secondary" className={classes.buttonleft}>
-                Cancel
+                <a href="/">Cancel</a>
               </Button>
               <Button variant="raised" color="primary" onClick={this.handleSubmit} className={classes.buttonright}>
-                Create Account
+                <a href="">Create Account</a>
               </Button>
             </Grid>
           </Grid>

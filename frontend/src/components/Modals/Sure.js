@@ -57,10 +57,10 @@ class SimpleModal extends React.Component {
               The shopping list will be deleted
             </Typography>
             <Button variant="raised" color="secondary" className={classNames(classes.margin,classes.button)} onClick={this.handleClose}>
-              Cancel
+              <a href="/createshoppinglist">Cancel</a>
             </Button>
             <Button variant="raised" color="primary" className={classes.button}>
-              Delete
+              <a href="/">Delete</a>
             </Button>
           </div>
         </Modal>
