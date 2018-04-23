@@ -9,13 +9,13 @@ import Modals from '../Modals/Modals'
 import Login from '../Modals/Login'
 import ResetPassword from '../Modals/ResetPassword'
 import Sure from '../Modals/Sure'
+import NotFound from '../not-found/notFound'
 // get main for testing
 import Main from  '../Main';
 
 const Router = () => (
  <BrowserRouter>
    <Switch>
-{/*notfound*/}
     <Route exact path='/' component={LandingPage} />
     <Route exact path='/main' component={Main} />
     <Route exact path='/login' component={Login} />
@@ -25,6 +25,7 @@ const Router = () => (
     <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
     <Route exact path='/createshoppinglist' component={CreateShoppingList} />
     <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
+    <Route path="*" component={ NotFound } />
    </Switch>
  </BrowserRouter>
 
