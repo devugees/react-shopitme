@@ -4,6 +4,7 @@
     width: 100%;
     padding: .1rem 0;
     color: var(--primary);
+    background-color: var(--secondary-bg);
 }
 .footer p {
     text-align: center;

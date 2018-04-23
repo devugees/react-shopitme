@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -57,10 +58,10 @@ class SimpleModal extends React.Component {
               The shopping list will be deleted
             </Typography>
             <Button variant="raised" color="secondary" className={classNames(classes.margin,classes.button)} onClick={this.handleClose}>
-              Cancel
+              <Link to="/createshoppinglist">Cancel</Link>
             </Button>
             <Button variant="raised" color="primary" className={classes.button}>
-              Delete
+              <Link to="/">Delete</Link>
             </Button>
           </div>
         </Modal>

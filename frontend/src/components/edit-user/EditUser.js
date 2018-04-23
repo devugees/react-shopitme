@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import MenuItem from 'material-ui/Menu/MenuItem';
@@ -286,10 +287,10 @@ class EditUser extends React.Component {
             </Grid>
             <Grid item xs={12}>
               <Button variant="raised" color="secondary" className={classes.buttonleft}>
-                Cancel
+                <Link to="/">Cancel</Link>
               </Button>
               <Button variant="raised" color="primary" onClick={this.handleSubmit} className={classes.buttonright}>
-                Create Account
+                <Link to="">Create Account</Link>
               </Button>
             </Grid>
           </Grid>

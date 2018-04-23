@@ -4,14 +4,15 @@
   /* BG Colors */
   --primary-bg: #fff;
   --secondary-bg: #54b9b6;
+  --ternary-bg: #282627;
   /* Text Colors */
   --primary: #262627;
   --secondary: #181818;
   /* Text Sizes*/
   --text: 1rem;
   /* Link color */
-  --light: blue;
-  --dark: red;
+  --light: #fff;
+  --dark: #54b9b6;
   /* Border */
   --border: 3px solid black;
   /* Padings*/
@@ -32,8 +33,13 @@ body {
 
 .main {
   width: calc(100vw - 2rem);
+  margin: 1rem 0;
   padding: var(--text-padding);
   background-color: var(--primary-bg);
+}
+
+.main button {
+  margin: 1rem 0.5rem 0 0.5rem;
 }
 
 img {
@@ -53,8 +59,9 @@ h1 {
 }
 
 a {
-  text-decoration: none;
   color: var(--light);
+  text-decoration: none;
+  
 }
 a:hover{
   color: var(--dark);
@@ -64,7 +71,7 @@ a:hover{
   border: var(--border);
 }
 .landing-circle {
-  margin:  0 auto;
+  margin: auto;
   transform: rotate(25deg);
 }
 
@@ -96,3 +103,16 @@ a:hover{
   transform: rotate(-25deg);
   color:  white;
 }
+
+.landing-page {
+  display: grid;
+  margin: auto;
+  overflow:hidden;
+  width: 100%;
+  height: 700px;
+  background-color: var(--ternary-bg) ;
+}
+
+button[class^="MuiButtonBase"] {
+    padding:'0'
+  }
