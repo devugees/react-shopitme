@@ -64,7 +64,9 @@ class ButtonAppBar extends React.Component {
         <Toolbar style={{padding: "0"}}>
           <Grid item xs={2} sm={2}>     
             <div style={styles.row}>
-             <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar} />
+            <a href="/">
+              <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar}  />
+            </a>
             </div>
           </Grid>
 
@@ -74,21 +76,20 @@ class ButtonAppBar extends React.Component {
               ( <React.Fragment>
                   <Grid item xs={9} sm={9}>
      
-                      <Button color="inherit" onClick={this.LogoutClickHandler}> Logout</Button>
                       <i class="material-icons">notifications</i>
                       <i class="material-icons">chat_bubble_outline</i>
-                      <DropMenu />
+                      <DropMenu logOut={this.LogoutClickHandler} />
                   
                   </Grid>
                 </React.Fragment>
                ):
               (<React.Fragment>
-                <Grid item xs={6} sm={6}>
+                <Grid item xs={7} sm={7}>
                 <div>
                   
                 </div>
                 </Grid> 
-                <Grid item xs={4} sm={4}>
+                <Grid item xs={3} sm={3}>
                   <Button color="inherit" onClick={this.LoginClickHandler}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
