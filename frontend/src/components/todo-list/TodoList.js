@@ -6,7 +6,6 @@ import { FormControl } from 'material-ui/Form';
 // import Components
 import TodoBoxShopper from './TodoBoxShopper';
 import TodoBoxOrdered from './TodoBoxOrdered';
-import ShoppingList from './shoppingList';
 
 // import CSS
 import './TodoList.css';
@@ -94,7 +93,7 @@ export default class TodoList extends Component {
     let changingTodo;
 
     if(this.state.shopperPerson || this.state.checkingPerson){
-      changingTodo = (this.state.items.map((item, index) => <ShoppingList index={index} shooper={this.state.shopperPerson} todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper index={index} shooper={this.state.shopperPerson} todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
     }
     let whatToShow;
     if(this.state.orderPerson){
@@ -109,7 +108,7 @@ export default class TodoList extends Component {
           </Button>
         </React.Fragment>)
 
-      changingTodo = (this.state.items.map((item, index) => <ShoppingList index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
     }
 
     
