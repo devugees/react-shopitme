@@ -33,7 +33,7 @@ class FadeMenu extends React.Component {
     const { anchorEl } = this.state;
 
     return (
-      <div>
+      <React.Fragment>
         <Button
           aria-owns={anchorEl ? 'fade-menu' : null}
           aria-haspopup="true"
@@ -53,7 +53,7 @@ class FadeMenu extends React.Component {
           <MenuItem onClick={this.handleClose}>Your Profile</MenuItem>
           <MenuItem onClick={this.handleClose}>Logout</MenuItem>
         </Menu>
-      </div>
+      </React.Fragment>
     );
   }
 }
