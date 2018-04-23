@@ -10,8 +10,8 @@
   /* Text Sizes*/
   --text: 1rem;
   /* Link color */
-  --light: blue;
-  --dark: red;
+  --light: #fff;
+  --dark: #54b9b6;
   /* Border */
   --border: 3px solid black;
   /* Padings*/
@@ -32,8 +32,13 @@ body {
 
 .main {
   width: calc(100vw - 2rem);
+  margin: 1rem 0;
   padding: var(--text-padding);
   background-color: var(--primary-bg);
+}
+
+.main button {
+  margin: 1rem 0.5rem 0 0.5rem;
 }
 
 img {
@@ -53,8 +58,9 @@ h1 {
 }
 
 a {
-  text-decoration: none;
   color: var(--light);
+  text-decoration: none;
+  
 }
 a:hover{
   color: var(--dark);
