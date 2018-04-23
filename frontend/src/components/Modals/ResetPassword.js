@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -84,10 +85,10 @@ class SimpleModal extends React.Component {
                 Reset password 
             </Button>
             <Typography variant="subheading">
-                <a href="./login">Login!</a>
+                <Link to="./login">Login!</Link>
             </Typography>
             <Typography variant="subheading">
-                <a href="./register">Don't have an Account? Register now</a>
+                <Link to="/register">Don't have an Account? Register now</Link>
             </Typography>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X

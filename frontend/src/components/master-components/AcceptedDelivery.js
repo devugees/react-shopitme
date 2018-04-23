@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button'
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
@@ -23,10 +23,10 @@ state = {...fakeStore}
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
         <Button  variant="raised" color="secondary">
-        <a href="">Report Issue</a>
+        <Link to="">Report Issue</Link>
       </Button>
       <Button  variant="raised" color="primary">
-        <a href="/">Delivered</a>
+        <Link to="/">Delivered</Link>
       </Button>
       </div>
     )
