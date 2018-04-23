@@ -18,7 +18,7 @@ export default class ShoppingListTitle extends Component {
   constructor(props){
     super(props);
     this.state = {
-      listName: props.listName,
+      listName: 'ShoppingList',
       listId: props.listId,
       editing: false,
       isShopperAvailable: false,
@@ -30,7 +30,6 @@ export default class ShoppingListTitle extends Component {
         accountPage: props.ordererAccountPage
       },
       shopper: {
-        noShopper: 'Pending...',
         name: props.shopperName,
         accountPage: props.shopperAccountPage
       }
@@ -38,14 +37,14 @@ export default class ShoppingListTitle extends Component {
   }
  
   
-  editing = () =>{
+  editingButton = () =>{
+    console.log('editing')
       this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
   editText = event => {
-    this.setState({
-      listName:event.target.value
-    })
+    const listName = event.target.value;
+    this.setState({ listName })
   }
 
   newShopper = () => {
@@ -63,8 +62,12 @@ export default class ShoppingListTitle extends Component {
   }
 
   render() {
+    const style = {
+
+    }
+
     let whatToRender = (
-      <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editing}>✎</span></h1> 
+      <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editingButton}>✎</span></h1> 
       )
 
     if(this.state.editing){
@@ -74,24 +77,22 @@ export default class ShoppingListTitle extends Component {
             <InputLabel htmlFor="name-input">New List Name</InputLabel>
             <Input autoFocus className="todo-list-input" id="name-input" onChange={this.editText} value={this.state.listName} />
           </FormControl>
-          <span onClick={this.editing}>✔</span>
+          <span onClick={this.editingButton}>✔</span>
         </h1>
         )
     }
+    let shopper = 'Pending...';
 
     if(this.state.checkingPerson || this.state.shopperPerson){
       whatToRender = (
       <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
       )
-    }
-
-    let shopper = this.state.shopper.noShopper;
-
-    if(this.state.shopper.name !== null){
+      if(this.state.shopper.name !== null){
       this.setState({
         isShopperAvailable: false,
       })
       shopper = (<a href={this.state.shopper.accountPage}>{this.state.shopper.name}</a>)
+      }
     }
 
     return (
