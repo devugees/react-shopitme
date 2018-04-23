@@ -1,0 +1,19 @@
+.landing-page {
+    background-image: url("../../pictures/lorder.jpg");
+}
+
+.go {
+    background-color: #54b9b6;
+    height: 350px;
+};
+
+.order, .deliver {
+    
+    text-align: center;
+    font-size: 2rem;
+    margin: -1.5rem 0 0 0;
+    color:  white;
+  };
+  
+
+  

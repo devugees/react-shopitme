@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // import Components
-import LandingPage from './LandingPage';
+import Landing from './landing/Landing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import EditUser from './edit-user/EditUser';
 import TodoList from './todo-list/TodoList';
