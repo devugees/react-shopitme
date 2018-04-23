@@ -1,0 +1,106 @@
+@font-face { 
+    font-family: "charmelade"; 
+    src: url("../../fonts/charmelade.otf"); 
+    }
+
+.landing {
+    padding: 0;
+    margin: 0;
+}
+
+.primary {
+    position:relative;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-bg);
+    z-index: 0;
+    
+}
+
+.primary > img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+    position:relative;
+}
+
+.clip {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+} 
+
+.deliverit_slogan {
+    font-size: 30px;
+    background-color: transparent;
+    font-family: charmelade, sans-serif;
+    color: white;
+    padding: var(--global-padding);
+    padding-top: 0;
+    text-align: left;
+    margin-top: -100px;
+    z-index: 10;
+    position:relative;
+}
+
+.slogantext {
+    z-index: 11;
+}
+
+.chooserole {
+    color: black;
+    background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+}
+
+.order, .deliver {
+    border: 0px solid white;
+    border-bottom: 3px solid white;
+    margin: 0 auto 5%;
+    border-radius: 2px;
+    padding: .5rem;
+}
+
+
+
+.primary_1 {
+    position:relative;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order_btn, .delivery_btn {
+    border: 0px solid white;
+    margin: 0 auto;
+    border-radius: 2px;
+    padding: .5rem;
+    heigth: 40vh;
+}
+
+.order_btn > img, .delivery_btn > img {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.order_btn {
+    background-color: #CEE5F2;
+}
+
+.delivery_btn {
+    background-color: #FC9F5B;
+}
+
+.order_btn > div, .delivery_btn > div {
+    color: black;
+}
+
+.order_btn > div > a, .delivery_btn > div > a {
+    color: black;
+}
