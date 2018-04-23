@@ -63,7 +63,7 @@ export default class ShoppingListTitle extends Component {
 
   render() {
     const style = {
-
+      padding: '0.1rem 0'
     }
 
     let whatToRender = (
@@ -97,7 +97,7 @@ export default class ShoppingListTitle extends Component {
 
     return (
       <div className="shopping-list-title" >
-        <Paper>
+        <Paper style={style}>
           {whatToRender}
           <p>Created: {day}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
           <p>Shopper: {shopper}</p>

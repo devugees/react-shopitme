@@ -24,7 +24,7 @@ export default class CreateShoppingList extends Component {
         <Link to="/sure">Delete </Link>
       </Button>
       <Button  variant="raised" color="primary">
-        <Link to="/acceptsingledelivery">Send</Link>
+        <Link to="/">Send</Link>
       </Button>
       
     </div>
