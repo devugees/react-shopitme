@@ -8,6 +8,7 @@ import starGrey from '../pictures/starGrey.png';
 import starYellow from '../pictures/starYellow.png';
 
 
+
 export default class RatingStars extends React.Component {
   constructor() {
     super();

@@ -7,11 +7,11 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/Menu';
-import '../css/Navbar.css';
+import './Navbar.css';
 import DropMenu from './DropMenu';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
-import avatar from '../pictures/BoB.jpg';
+import avatar from '../../pictures/BoB.png';
 
 
 
@@ -22,7 +22,7 @@ const styles = {
 
   },
   avatar: {
-    margin: 2,
+    margin: 2
   },
   bigAvatar: {
     width: 40,
@@ -60,21 +60,38 @@ class ButtonAppBar extends React.Component {
   return (
     <div className="navbar">
       <div>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar style={{padding: "0"}}>
-          <div style={styles.row}>
-           <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar} />
-          </div>
+          <Grid item xs={2} sm={2}>     
+            <div style={styles.row}>
+            <a href="/">
+              <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar}  />
+            </a>
+            </div>
+          </Grid>
+
           
           {this.state.login?
-              (<React.Fragment >
-                <Button style={styles.fonto} color="inherit" onClick={this.LogoutClickHandler}> Logout</Button>
-                <i  class="material-icons">notifications</i>
-                <i  class="material-icons">chat_bubble_outline</i>
-                <DropMenu style={styles.fonto} />
-              </React.Fragment>) :
+            
+              ( <React.Fragment>
+                  <Grid item xs={9} sm={9}>
+     
+                      <i class="material-icons">notifications</i>
+                      <i class="material-icons">chat_bubble_outline</i>
+                      <DropMenu logOut={this.LogoutClickHandler} />
+                  
+                  </Grid>
+                </React.Fragment>
+               ):
               (<React.Fragment>
-                <Button style={styles.fonto} color="inherit" onClick={this.LoginClickHandler}>Login</Button>
+                <Grid item xs={7} sm={7}>
+                <div>
+                  
+                </div>
+                </Grid> 
+                <Grid item xs={3} sm={3}>
+                  <Button color="inherit" onClick={this.LoginClickHandler}>Login</Button>
+                </Grid> 
               </React.Fragment>) }
         </Toolbar>
       </AppBar>
