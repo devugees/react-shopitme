@@ -68,9 +68,9 @@ class ButtonAppBar extends React.Component {
       <AppBar position="static" >
         <Toolbar>
           <Grid item xs={2} sm={2} >     
-            <div style={styles.row}>
-            <a href="/">
-              <Avatar style={styles.avatar} alt="Remy Sharp" src={avatar}  />
+            <div >
+            <a href="/" sy>
+              <p>Shopitme</p>
             </a>
             </div>
           </Grid>
