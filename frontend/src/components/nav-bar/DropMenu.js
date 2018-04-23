@@ -8,9 +8,13 @@ import Avatars from './Avatars'
 
 
 class FadeMenu extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     anchorEl: null,
   };
+ }
+
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -29,7 +33,7 @@ class FadeMenu extends React.Component {
   }
 
 
-  render() {
+  render(props) {
     const { anchorEl } = this.state;
 
     return (
@@ -51,7 +55,7 @@ class FadeMenu extends React.Component {
         >
           <MenuItem onClick={this.handleClose}>History</MenuItem>
           <MenuItem onClick={this.handleClose}>Your Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+          <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
         </Menu>
       </React.Fragment>
     );

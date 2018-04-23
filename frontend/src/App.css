@@ -8,6 +8,7 @@
   /* BG Colors */
   --primary-bg: #fff;
   --secondary-bg: #54b9b6;
+  --ternary-bg: #282627;
   /* Text Colors */
   --primary: #262627;
   --secondary: #181818;
@@ -75,7 +76,6 @@ a:hover{
 .text{
   border: var(--border);
 }
-
 
 button[class^="MuiButtonBase"] {
     padding:'0'
