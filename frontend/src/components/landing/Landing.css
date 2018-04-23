@@ -1,0 +1,38 @@
+@font-face { 
+    font-family: "charmelade"; 
+    src: url("../../fonts/charmelade.otf"); 
+}
+
+.landing {
+    padding: 0;
+    margin: 0;
+}
+
+.primary {
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-bg);
+}
+
+.primary > img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.deliverit_slogan {
+    font-size: 40px;
+    background-color: var(--secondary-bg);
+    font-family: charmelade, sans-serif;
+    color: white;
+    padding: var(--global-padding);
+    text-align: left;
+    z-index: 10;
+}
+
+.triangle {
+    border-bottom: 100px solid red;
+	border-right: 500px solid transparent;
+	height: 0;
+	width: 0;
+}
