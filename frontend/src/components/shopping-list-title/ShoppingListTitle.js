@@ -38,7 +38,6 @@ export default class ShoppingListTitle extends Component {
  
   
   editingButton = () =>{
-    console.log('editing')
       this.setState(prevState => { return {editing: !prevState.editing}})
   }
 

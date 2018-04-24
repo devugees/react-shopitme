@@ -4,7 +4,8 @@ import Landing from '../landing/Landing'
 import UserDetails from '../master-components/UserDetails'
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
-import AcceptedDelivery from '../master-components/AcceptedDelivery'
+import AcceptedDelivery from '../master-components/AcceptedDelivery';
+import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory'
 import Modals from '../Modals/Modals'
 import Login from '../Modals/Login'
 import ResetPassword from '../Modals/ResetPassword'
@@ -25,6 +26,7 @@ const Router = () => (
     <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
     <Route exact path='/createshoppinglist' component={CreateShoppingList} />
     <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
+    <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
     <Route path="*" component={ NotFound } />
    </Switch>
  </BrowserRouter>
