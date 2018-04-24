@@ -13,7 +13,9 @@ import Notes from './Additional-Notes/Notes'
 import Details from './Details/Details'
 import OrderDeliveryHistory from './order-delivery-history'
 import CreateShoppingList from './master-components/CreateShoppingList'
-import SingleOrderHistory from './SingleOrderHistory';
+import SingleOrderHistory from './single-order-deliver-history/SingleOrderHistory';
+import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
+
 //import fake store
 import fakeStore from '../fakeStore';
 
@@ -29,6 +31,8 @@ state = {...fakeStore}
     return (
       <div className="main">
        <SingleOrderHistory order={this.state.orderHistory[3]}/>
+       {/*<SingleDeliverHistory order={this.state.orderHistory[3]}/>
+
         {/*<OrderDeliveryHistory />*/}
         {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
