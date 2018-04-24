@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LandingPage from '../LandingPage'
 import Landing from '../landing/Landing'
 import UserDetails from '../master-components/UserDetails'
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
