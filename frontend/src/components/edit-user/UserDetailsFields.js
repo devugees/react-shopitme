@@ -27,10 +27,11 @@ const gender = [
 
 class UserDetailsForm extends Component {
     render() {
+        console.log('hi', this.props)
         const { classes } = this.props;
         return (
             <React.Fragment>
-                <Grid item xs='12'>
+                <Grid item xs={12}>
                     <TextField
                             id='username'
                             label='Username'
@@ -42,7 +43,7 @@ class UserDetailsForm extends Component {
                             value={this.props.userdetails.username}
                     />
                 </Grid>
-                <Grid item xs='6'>
+                <Grid item xs={6}>
                     <TextField
                             id='firstname'
                             label='Firstname'
@@ -54,7 +55,7 @@ class UserDetailsForm extends Component {
                             value={this.props.userdetails.firstname}
                     />
                 </Grid>
-                <Grid item xs='6'>
+                <Grid item xs={6}>
                     <TextField
                             id='lastname'
                             label='Laststname'
@@ -66,7 +67,7 @@ class UserDetailsForm extends Component {
                             value={this.props.userdetails.lastname}
                     />
                 </Grid>
-                <Grid item xs='8'>
+                <Grid item xs={8}>
                     <TextField
                             id='street'
                             label='Street'
@@ -75,10 +76,10 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.street}
+                            value={this.props.userdetails.deliverAdress.street}
                     />
                 </Grid>
-                <Grid item xs='4'>
+                <Grid item xs={4}>
                     <TextField
                             id='number'
                             label='Number'
@@ -87,10 +88,10 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.number}
+                            value={this.props.userdetails.deliverAdress.number}
                     />
                 </Grid>
-                <Grid item xs='4'>
+                <Grid item xs={4}>
                     <TextField
                             id='postcode'
                             label='Postcode'
@@ -99,10 +100,10 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.postcode}
+                            value={this.props.userdetails.deliverAdress.postcode}
                     />
                 </Grid>
-                <Grid item xs='8'>
+                <Grid item xs={8}>
                     <TextField
                             id='city'
                             label='City'
@@ -111,10 +112,10 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.city}
+                            value={this.props.userdetails.deliverAdress.city}
                     />
                 </Grid>
-                <Grid item xs='12'>
+                <Grid item xs={12}>
                     <TextField
                             id='country'
                             label='Country'
@@ -123,10 +124,10 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.country}
+                            value={this.props.userdetails.deliverAdress.country}
                     />
                 </Grid>
-                <Grid item xs='12'>
+                <Grid item xs={12}>
                     <TextField
                             id='mobile'
                             label='Mobile'

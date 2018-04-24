@@ -16,10 +16,15 @@ export default class UserDetails extends Component {
     });
   };
 
-  handleSubmit = (event) => {
-    console.log(this.state)
-    // Check for errors
-    // Clear form 
+  handleSubmit = formtype => event => {
+    console.log(formtype);
+    event.preventDefault();
+    const userDetails = {...this.state}; // Make a copy of state
+    if (formtype === "register") {
+      console.log("send the Data to the Backend-Route Register")
+    } else if (formtype === "changeuserdetails") {
+      console.log("send the Data to the Backend-Route Changeuserdetails")
+    } else { console.log("form type must be specified")}
   };
 
 

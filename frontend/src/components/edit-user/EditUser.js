@@ -12,21 +12,36 @@ import Button from 'material-ui/Button';
 
 // Sub Components & CSS
 import './EditUser.css';
-import UserDetails from './UserDetails'; 
+import UserDetailsFields from './UserDetailsFields'; 
 import PasswordFields from './PasswordFields';
 
 const formType = {
   Register: false,
+  ChangeUser: true
 }
 
 class EditUser extends React.Component {
   render() {
     const isRegisterForm = formType.Register;
+    const isChangeUser = formType.ChangeUser;
+    let endpoint; 
+
+    /* depending on the Form Type Data will be sent to different endpoints */
+    if(isRegisterForm) 
+        { endpoint = "register"} 
+    else if (isChangeUser) 
+        { endpoint = "changeuserdetails"}
+    else { console.log("form type must be specified")}
 
     return (
       <div className="edit-user">
-        <form noValidate autoComplete="off">
-          <Grid container spacing={16}>
+        <form 
+          noValidate 
+          autoComplete="off" 
+          onSubmit={this.props.handleSubmit(endpoint)}>
+
+          <Grid container spacing={16} className="formbgr">
+          
             {/* If Register Form Render Heading Register else Render Change User Details */}
             <Grid item xs={12}>
               {(isRegisterForm) ? <Typography variant="display1">Register</Typography> :  <Typography variant="display1">Change Account Detail</Typography>}
@@ -36,23 +51,22 @@ class EditUser extends React.Component {
             </Grid>
             
             {/* Render Form Part 1 with User Details */}
-            <Grid item container xs={12} className="formBgr" spacing={16}>
-              <UserDetails handleChange={this.props.handleChange} userdetails={this.props.userdetails} />
-            </Grid>
+            {/* <Grid item container xs={12} className="formBgr" spacing={16}> */}
+              <UserDetailsFields handleChange={this.props.handleChange} userdetails={this.props.userdetails} />
+            {/* </Grid> */}
 
             {/* Submit Button for Change User/Account Details */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               {(!isRegisterForm) ? <Button variant="flat" onClick={this.props.handleSubmit} className="button-right" size="large">
                     Change Account Details
                   </Button> :  null}
-            </Grid>
+            </Grid> */}
 
             {/* If Change User Details Form Render Change User Details Heading */}
             <Grid item xs={12}>
               {(!isRegisterForm) ? <Typography variant="display1" className="margin">Change Password</Typography> :  <Typography variant="title" className="margin">Your Password</Typography>}
             </Grid>
 
-   
             {/* If Change User Details Form Render Additional Textfield Old Password */}
             <Grid item container xs={12} className="formBgr" spacing={16}>
               {(!isRegisterForm) ? 
@@ -71,15 +85,15 @@ class EditUser extends React.Component {
                 {/* Password / Confirm Password Fields */}
                 <PasswordFields handleChange={this.props.handleChange} />
               </Grid>
-              
-              
-              <Grid item xs={12}>
-                <Button variant="flat" onClick={this.props.handleSubmit} className="button-right" size="large">
-                  {(!isRegisterForm) ? "Change Password" :  "Submit Registration"}
-                </Button>
-              </Grid>
-            
-            </Grid>
+              </Grid> 
+                
+              <Grid container spacing={16} className="button-right">
+              <Grid item container xs={12} spacing={16}>
+                    {<Button variant="raised" size="large" type="submit">
+                      Submit
+                      </Button>}
+                </Grid>
+              </Grid>  
         </form>
       </div>
     );
