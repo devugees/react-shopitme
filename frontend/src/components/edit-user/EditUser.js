@@ -16,8 +16,8 @@ import UserDetailsFields from './UserDetailsFields';
 import PasswordFields from './PasswordFields';
 
 const formType = {
-  Register: false,
-  ChangeUser: true
+  Register: true,
+  ChangeUser: false
 }
 
 class EditUser extends React.Component {
