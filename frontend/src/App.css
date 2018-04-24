@@ -40,7 +40,7 @@ body {
 .main {
   width: calc(100vw - 2rem);
   margin: 1rem 0;
-  min-height: calc(100vh - 112px - 3rem);
+  min-height: calc(100vh - 112px - 2.35rem);
   padding: var(--text-padding);
   background-color: var(--primary-bg);
 }

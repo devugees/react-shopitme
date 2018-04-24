@@ -11,7 +11,7 @@ import ImageCropper from './ImageCropper';
 import RatingStars from './RatingStars';
 import Notes from './Additional-Notes/Notes'
 import Details from './Details/Details'
-import OrderDeliveryHistory from './order-delivery-history'
+import OrderDeliveryHistory from './master-components/OrderDeliveryHistory'
 import CreateShoppingList from './master-components/CreateShoppingList'
 //import fake store
 import fakeStore from '../fakeStore';
@@ -24,10 +24,9 @@ export default class Main extends Component {
 state = {...fakeStore}
 
   render() {
-    console.log(this.state)
     return (
       <div className="main">
-        {<OrderDeliveryHistory orderHistory={this.state.orderHistory}/>}
+        {<OrderDeliveryHistory orderView={false} orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>}
         {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
         {/*<Map />*/}
