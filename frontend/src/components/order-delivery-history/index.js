@@ -6,7 +6,8 @@ import Button from 'material-ui/Button';
 import OrderHistory from './orderHistory';
 import DeliverHistory from './deliverHistory';
 // import next component fo single view
-import SingleOrderHistory from '../SingleOrderHistory'
+import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHistory';
+import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory'
 //import fake store
 import fakeStore from '../../fakeStore';
 
