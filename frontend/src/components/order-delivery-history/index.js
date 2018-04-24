@@ -8,15 +8,18 @@ import OrderHistory from './orderHistory';
 
 export default class OrderDeliveryHistory extends Component {
 
-moreInfo = () => {
+orderMoreInfo = index => {
   console.log('more info pressed')
+  const order = [...this.props.orderHistory];
+  const selectedOrder= order[index];
+  console.log('order props',selectedOrder);
 }
   render() {
 
     return (
       <div className="order-delivery-history" >
         <h1>Order History</h1>
-       {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} moreInfo={()=> {this.moreInfo(index)}}/>)}
+       {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} orderMoreInfo={()=> {this.orderMoreInfo(index)}}/>)}
       </div>
       )
   }

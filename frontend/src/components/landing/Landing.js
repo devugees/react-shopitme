@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
                     I need some groceries.
                 </Link>
 
-            <Link to={"/accepteddelivery"} >
+            <Link to={"/acceptsingledelivery"} >
                 I want to help someone with his shopping.
                 </Link>
 

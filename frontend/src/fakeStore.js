@@ -62,21 +62,53 @@ const fakeStore = {
       shop: 'Rewe',
       deliverBy: '',
       created: '23.03.2018',
+      accepted:'',
       delivered:{
         date:'',
         time: ''
-      }
-    },
-    {
+      },
+       items:
+        [{
+          status:'box',
+          todo:"5 little breads"
+        },{
+          status:'box',
+          todo:"Bateries AAA pack of 4"
+        },{ 
+          status:'box',
+          todo:"Ice Cream triple flavour"
+        },{
+          status:'box',
+          todo:"2x Orange Juice low sugar"
+        }
+        ]
+      },
+      {
       orderID: 13466,
       status:'In Progress',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
       created: '21.03.2018',
+      accepted:'21.03.2018',
       delivered:{
         date:'',
         time:''
-      }
+      },
+       items:
+        [{
+          status:'box',
+          todo:"2x Corn Bread"
+        },{
+          status:'box',
+          todo:"Kellogs AllBran"
+        },{ 
+          status:'box',
+          todo:"4x Milk 3.8% Fet"
+        },{
+          status:'box',
+          todo:"2x Orange Juice low sugar"
+        }
+        ]
     },
     {
       orderID: 11787,
@@ -84,10 +116,26 @@ const fakeStore = {
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
       created: '17.02.2018',
+      accepted:'18.02.2018',
       delivered:{
         date:'18.02.2018',
         time: '18:22'
-      }
+      },
+      items:
+        [{
+          status:'box',
+          todo:"Cheddar Cheese 1x"
+        },{
+          status:'box',
+          todo:"Soy milk x3"
+        },{ 
+          status:'box',
+          todo:"3x Butter(cheapest)"
+        },{
+          status:'box',
+          todo:"2x Orange Juice low sugar"
+        }
+        ]
     },
     {
       orderID: 9907,
@@ -95,10 +143,26 @@ const fakeStore = {
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
       created: '11.02.2018',
+      accepted:'11.02.2018',
       delivered:{
         date:'11.02.2018',
         time: '19:37'
-      }
+      },
+      items:
+        [{
+          status:'box',
+          todo:"2x Coffe"
+        },{
+          status:'box',
+          todo:"Bio Bread (dark)"
+        },{ 
+          status:'box',
+          todo:'2x water Still'
+        },{
+          status:'box',
+          todo:"2x Orange Juice low sugar"
+        }
+        ]
     }],
   notes:'Bring me all in a box please. Thank you',
 }
