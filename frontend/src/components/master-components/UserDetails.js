@@ -6,17 +6,7 @@ import EditUser from '../edit-user/EditUser';
 
 export default class UserDetails extends Component {
 
-    state = { 
-    firstname: 'alice',
-    lastname: 'Doe',
-    email: 'alice.doe@mail.com',
-    username: 'AliDoe',  
-    street: 'Munsterstrass',
-    number: '56',
-    postcode: '12345',
-    city: 'Bernau',
-    mobile: '644099344',
-  };
+  state = {...fakeStore}
 
 
   render() {
