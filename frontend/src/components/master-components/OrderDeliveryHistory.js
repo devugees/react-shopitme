@@ -4,6 +4,7 @@ import ImageCropper from '../ImageCropper';
 import RatingStars from '../RatingStars';
 //import fake store
 import fakeStore from '../../fakeStore';
+import starRed from '../../pictures/starRed.png'
 
 export default class OrderDeliveryHistory extends Component {
 
@@ -12,8 +13,8 @@ export default class OrderDeliveryHistory extends Component {
     render() {
       return (
         <div className="createShoppingList main">
-          <ImageCropper />
-          <RatingStars />
+          <ImageCropper imgSrc={starRed}/>
+          <RatingStars rating='4'/>
           <OrderDelivery orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>
         </div>
       )

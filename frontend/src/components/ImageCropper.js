@@ -8,7 +8,7 @@ export default class ImageCropper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            imgSrc: "",
+            imgSrc: props.imgSrc,
 
         }
 
