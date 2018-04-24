@@ -5,19 +5,27 @@ import Button from 'material-ui/Button';
 // import children components
 import OrderHistory from './orderHistory';
 import DeliverHistory from './deliverHistory';
+// import next component fo single view
+import SingleOrderHistory from '../SingleOrderHistory'
 //import fake store
 import fakeStore from '../../fakeStore';
 
 export default class OrderDeliveryHistory extends Component {
 
 state = {
-  view: true
+  view: true,
+  singleOrder: false,
 }
 
 orderMoreInfo = index => {
   const order = [...this.props.orderHistory];
   const selectedOrder= order[index];
-  console.log('order props',selectedOrder);
+  console.log('deliver props',selectedOrder);
+  this.setState({
+    singleOrder: true,
+    view: 'canceled',
+    order: selectedOrder
+  })
 }
 
 deliverMoreInfo = index => {
@@ -27,11 +35,19 @@ deliverMoreInfo = index => {
 }
 
 changeToOrder = () =>{
-  this.setState({view: true})
+  this.setState({
+    view: true,
+    singleOrder: false,
+    order:null
+  })
 }
 
 changeToDeliver = () =>{
-  this.setState({view: false})
+  this.setState({
+    view: false,
+    singleDeliver: false,
+    deliver:[]
+  })
 }
 
   render() {
@@ -41,25 +57,48 @@ changeToDeliver = () =>{
       }
     }
     let whatToRender;
-    if(this.state.view){
-      whatToRender = (
-        <div className="order-delivery-history" > 
-        {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} orderMoreInfo={()=> {this.orderMoreInfo(index)}}/>)}
-        </div>
-      )
-    }else {
-      whatToRender = (
-        <div className="order-delivery-history" >
-        {this.props.deliverHistory.map((deliverHistory, index)=> <DeliverHistory deliverHistory={deliverHistory} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
-        </div>
-      )
+    switch(this.state.view)
+      {
+        case (this.state.view = true):
+          whatToRender = (
+            <div className="order-delivery-history" > 
+            {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} orderMoreInfo={()=> {this.orderMoreInfo(index)}}/>)}
+            </div>
+          )
+          break;
+        case (this.state.view = false):
+          whatToRender = (
+            <div className="order-delivery-history" >
+            {this.props.deliverHistory.map((deliverHistory, index)=> <DeliverHistory deliverHistory={deliverHistory} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
+            </div>
+          )
+          break;
+        default:
+          whatToRender = null;
+          break;
+      }
+    
+    let singleOrder;
+    if(this.state.singleOrder){
+      singleOrder = (<SingleOrderHistory order={this.state.order}/>)
+    }
+
+    let orderColorButtonSelector;
+    let deliverColorButtonSelector;
+    if(this.state.singleOrder || this.state.view){
+      orderColorButtonSelector = 'primary';
+      deliverColorButtonSelector = null;
+    } else {
+      orderColorButtonSelector = null;
+      deliverColorButtonSelector = 'primary';
     }
 
     return (
         <React.Fragment>
-          <Button style={styles.button} color={(this.state.view)? "primary" : null} variant="raised" onClick={this.changeToOrder}>Order History</Button>
-          <Button style={styles.button} color={(this.state.view)? null : "primary"} variant="raised" onClick={this.changeToDeliver}>Deliver History</Button>
+          <Button style={styles.button} color={orderColorButtonSelector} variant="raised" onClick={this.changeToOrder}>Order History</Button>
+          <Button style={styles.button} color={deliverColorButtonSelector} variant="raised" onClick={this.changeToDeliver}>Deliver History</Button>
           {whatToRender}
+          {singleOrder}
         </React.Fragment>
       
       )

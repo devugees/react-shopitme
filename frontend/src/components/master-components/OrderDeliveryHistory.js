@@ -14,7 +14,6 @@ export default class OrderDeliveryHistory extends Component {
         <div className="createShoppingList main">
           <ImageCropper />
           <RatingStars />
-
           <OrderDelivery orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>
         </div>
       )
