@@ -10,11 +10,11 @@ import starYellow from '../pictures/starYellow.png';
 
 
 export default class RatingStars extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
  
     this.state = {
-      rating: 1
+      rating: props.rating
     };
   }
  
