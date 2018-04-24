@@ -4,18 +4,19 @@ import Typography from 'material-ui/Typography';
 //import fake store
 import fakeStore from '../../fakeStore';
 // import children components
-import orderHistory from './orderHistory';
+import OrderHistory from './orderHistory';
 
 export default class OrderDeliveryHistory extends Component {
 
-state = {...fakeStore}
-
+moreInfo = () => {
+  console.log('more info pressed')
+}
   render() {
 
     return (
       <div className="order-delivery-history" >
         <h1>Order History</h1>
-       {this.state.orderHistory.map(order => <orderHistory orderID={order.orderID}/>)}
+       {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} moreInfo={()=> {this.moreInfo(index)}}/>)}
       </div>
       )
   }

@@ -60,7 +60,7 @@ const fakeStore = {
       orderID: 15675,
       status:'Pending',
       shop: 'Rewe',
-      delivered: '',
+      deliverBy: '',
       created: '23.03.2018',
       delivered:{
         date:'',
@@ -71,7 +71,7 @@ const fakeStore = {
       orderID: 13466,
       status:'In Progress',
       shop: 'Rewe',
-      delivered: 'Alice Doe',
+      deliverBy: 'Alice Doe',
       created: '21.03.2018',
       delivered:{
         date:'',
@@ -82,7 +82,7 @@ const fakeStore = {
       orderID: 11787,
       status:'Delivered',
       shop: 'Rewe',
-      delivered: 'Alice Doe',
+      deliverBy: 'Alice Doe',
       created: '17.02.2018',
       delivered:{
         date:'18.02.2018',
@@ -93,7 +93,7 @@ const fakeStore = {
       orderID: 9907,
       status:'Delivered',
       shop: 'Rewe',
-      delivered: 'Alice Doe',
+      deliverBy: 'Alice Doe',
       created: '11.02.2018',
       delivered:{
         date:'11.02.2018',

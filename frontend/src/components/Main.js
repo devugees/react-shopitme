@@ -27,13 +27,13 @@ state = {...fakeStore}
     console.log(this.state)
     return (
       <div className="main">
-        {/*<OrderDeliveryHistory />*/}
+        {<OrderDeliveryHistory orderHistory={this.state.orderHistory}/>}
         {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
         {/*<Map />*/}
         {/*<LandingPage /> */}      
         {/*<ShoppingListTitle checkingPerson={true} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>*/}
-        <TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/>
+        {/*<TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/>*/}
         {/*<EditUser />*/}
        {/*<Notes />*/}
        {/*<Details />*/}
