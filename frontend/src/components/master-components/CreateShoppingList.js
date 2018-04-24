@@ -14,16 +14,19 @@ export default class CreateShoppingList extends Component {
     
     
       render() {
+      const style = {
+        margin: '1rem 0.5rem 0 0.5rem',
+      }
         return (
           <div className="createShoppingList main">
             <ShoppingListTitle listId={this.state.listId} checkingPerson={false} />
             <TodoList orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
-      <Button  variant="raised" color="secondary">
+      <Button style={style} variant="raised" color="secondary">
         <Link to="/sure">Delete </Link>
       </Button>
-      <Button  variant="raised" color="primary">
+      <Button style={style} variant="raised" color="primary">
         <Link to="/">Send</Link>
       </Button>
       

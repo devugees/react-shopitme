@@ -31,7 +31,7 @@ export default class LandingPage extends Component {
                         <img src={buttonm} />
                         </div>
                         <div className="btn_txt">
-                            <Link to={"/accepteddelivery"} >
+                            <Link to={"/acceptsingledelivery"} >
                                 I want to shop for someone.
                             </Link>
                         </div>
