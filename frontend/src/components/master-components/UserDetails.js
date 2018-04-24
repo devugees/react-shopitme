@@ -16,6 +16,7 @@ export default class UserDetails extends Component {
     postcode: '12345',
     city: 'Bernau',
     mobile: '644099344',
+    rating: 3
   };
 
 
@@ -23,7 +24,7 @@ export default class UserDetails extends Component {
     return (
       <div className="user-details main">
         <ImageCropper />
-        <RatingStars />
+        <RatingStars rating={this.state.rating}/>
         <EditUser globalProps={this.state}/>
       </div>
     )
