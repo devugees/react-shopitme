@@ -1,18 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+@font-face { 
+    font-family: "charmelade"; 
+    src: url("/fonts/charmelade.otf"); 
+  }
 
 :root {
   /* BG Colors */
   --primary-bg: #fff;
   --secondary-bg: #54b9b6;
-  --ternary-bg: #5f5851;
+  --ternary-bg: #282627;
   /* Text Colors */
   --primary: #262627;
   --secondary: #181818;
   /* Text Sizes*/
   --text: 1rem;
   /* Link color */
-  --light: #fff;
-  --dark: #54b9b6;
+  --light: #4476c4;
+  --dark: #4435c6;
   /* Border */
   --border: 3px solid black;
   /* Padings*/
@@ -23,10 +27,12 @@
   --form-background: #e6e6e6;
 }
 
+
+
 /* Basic Setup*/
 
 body {
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
   text-align: center;
 }
 
@@ -69,48 +75,6 @@ a:hover{
 
 .text{
   border: var(--border);
-}
-.landing-circle {
-  margin: auto;
-  transform: rotate(25deg);
-}
-
-.landing-order, .landing-deliver {
-  height: var(--landing-size);
-  width: calc(var(--landing-size)/2);
-  display: inline-block;
-  position: relative;
-}
-
-.landing-order {
-  border-bottom-left-radius: var(--landing-size);
-  border-top-left-radius: var(--landing-size);
-  background: linear-gradient(to right top, #29bf89, #00b3a3, #00a5b6, #0083b8);
-}
-
-.landing-deliver {
-  border-bottom-right-radius: var(--landing-size);
-  border-top-right-radius: var(--landing-size);
-  background: linear-gradient(to left bottom, #29bf89, #00b3a3, #00a5b6, #0083b8);
-}
-
-.landing-order > h1, .landing-deliver > h1 {
-  position: relative;
-  top: 50%;
-  text-align: center;
-  font-size: 3rem;
-  margin: -1.5rem 0 0 0;
-  transform: rotate(-25deg);
-  color:  white;
-}
-
-.landing-page {
-  display: grid;
-  margin: auto;
-  overflow:hidden;
-  width: 100%;
-  height: 700px;
-  background-color: var(--ternary-bg) ;
 }
 
 button[class^="MuiButtonBase"] {

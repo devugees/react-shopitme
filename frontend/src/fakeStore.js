@@ -207,22 +207,7 @@ const fakeStore = {
       delivered:{
         date:'11.02.2018',
         time: '19:37'
-      },
-      items:
-  [{
-    status:'box',
-    todo:"2x Corn Bread"
-  },{
-    status:'box',
-    todo:"Kellogs AllBran"
-  },{ 
-    status:'box',
-    todo:"4x Milk 3.8% Fet"
-  },{
-    status:'box',
-    todo:"2x Orange Juice low sugar"
-  }
-  ]
+      }
     }],
   notes:'Bring me all in a box please. Thank you',
 }
