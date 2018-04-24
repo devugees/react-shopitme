@@ -32,8 +32,8 @@ export default class UserDetails extends Component {
     return (
       <div className="user-details">
         <ImageCropper />
-        <RatingStars />
-        <EditUser globalProps={this.state}/>
+        <RatingStars rating={this.state.rating}/>
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
   }
