@@ -15,6 +15,9 @@ state = {...fakeStore}
 
 
   render() {
+    const style = {
+      margin: '1rem 0.5rem 0 0.5rem',
+    }
     return (
       <div className="accept-single-delivery main">
         <ShoppingListTitle checkingPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>
@@ -22,10 +25,10 @@ state = {...fakeStore}
         <TodoList items={this.state.items} checkingPerson={true}/>
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
-        <Button  variant="raised" color="secondary">
+        <Button  style={style} variant="raised" color="secondary">
         <Link to="/">Cancel</Link>
       </Button>
-      <Button  variant="raised" color="primary">
+      <Button  style={style} variant="raised" color="primary">
         <Link to="/accepteddelivery">Accept</Link>
       </Button>
       </div>

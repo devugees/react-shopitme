@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const styles = {
-      alinment:{
+      alignment:{
         position:"relative",
         left:"0"
       }
@@ -12,23 +12,43 @@ const styles = {
 
 export default class SingleOrderHistory extends Component {
 
-      render() {
-        console.log("sdfsdfsdf",this.props)
+      render() { 
+      let orderStatus;
+        switch(this.props.order.status)
+          {
+            case (this.props.order.status = 'Pending'):
+              orderStatus = (
+                <React.Fragment>
+                  <p >Published: {this.props.order.created}</p>
+                  <p>by - </p>
+                </React.Fragment>
+                )
+              break;
+            case (this.props.order.status = 'In Progress'):
+              orderStatus = (
+                <React.Fragment>
+                  <p>Accepted: {this.props.order.accepted}</p>
+                  <p>by <Link to="#">{this.props.order.deliverBy}</Link></p>
+                </React.Fragment>
+                )
+              break;
+            case (this.props.order.status = 'Delivered'):
+              orderStatus = (
+                <React.Fragment>
+                  <p>Delivered: {this.props.order.delivered.date} at {this.props.order.delivered.time}</p>
+                  <p>by <Link to="#">{this.props.order.deliverBy}</Link></p>
+                </React.Fragment>
+                )
+              break;
+          }    
         return (
-          <React.Fragment style={styles.alinment}>
-             
+          <React.Fragment style={styles.alignment}>
               <p><h1>{this.props.order.shop}</h1></p>
-              <p><Link to="#">Back to Order History</Link></p>
-              <p>delivered on {this.props.order.delivered.date} {this.props.order.delivered.time} </p>
-              <p>by <Link to="#">{this.props.order.deliverBy}</Link></p>
-              <p> <h1> Order #{this.props.order.orderID} </h1></p>
-              
+              {orderStatus}
+              <p><h1>Order #{this.props.order.orderID}</h1></p>            
            <TodoList
             items={this.props.order.items}  checkingPerson={true}/>
           </React.Fragment>
-          
-      
-   
         )
       }
     };
