@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // Material UI
 import { withStyles } from 'material-ui/styles';
 import MenuItem from 'material-ui/Menu/MenuItem';
@@ -17,12 +16,11 @@ import UserDetails from './UserDetails';
 import PasswordFields from './PasswordFields';
 
 const formType = {
-  Register: true,
+  Register: false,
 }
 
 class EditUser extends React.Component {
   render() {
-    const { classes } = this.props;
     const isRegisterForm = formType.Register;
 
     return (
@@ -88,8 +86,6 @@ class EditUser extends React.Component {
   }
 }
 
-EditUser.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+
 
 export default EditUser;

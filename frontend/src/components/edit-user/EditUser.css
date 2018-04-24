@@ -5,3 +5,6 @@
     margin: 1rem;
 }
 
+form > * {
+    text-align: left;
+}
