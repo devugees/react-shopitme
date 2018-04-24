@@ -6,32 +6,61 @@
 .landing {
     padding: 0;
     margin: 0;
+    background-color: #CEE5F2;
 }
 
-.primary {
+.order_btn, .delivery_btn {
+    padding: 0 0 1em;
     margin: 0;
-    padding: 0;
-    background-color: var(--secondary-bg);
 }
 
-.primary > img {
+.order_btn {
+    background-color: #CEE5F2;
+}
+
+.delivery_btn {
+    background-color: #FC9F5B;
+}
+
+.imgd {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.order_btn > div, .delivery_btn > div {
+    color: black;
+}
+
+.order_btn > div > a, .delivery_btn > div > a {
+    color: black;
+}
+
+.order_btn > img, .delivery_btn > img {
+    margin: 0;
+    position: relative;
+    padding-top: 0;
+    z-index: 0;
     width: 100%;
-    padding: 0;
-    margin: 0;
+}
+
+.btn_txt {
+    position: relative;
+    font-size: 21px;
+    z-index: 1;
+    margin-top: -50px;
+    background-color: var(--secondary-bg);
+    width: 50%;
+    border-radius: 2px;
+    margin: -4em auto 1em;
+    padding: .7em 1em;
+    font-family: charmelade;
 }
 
 .deliverit_slogan {
     font-size: 40px;
-    background-color: var(--secondary-bg);
+    background-color: #ECE4B7;
     font-family: charmelade, sans-serif;
-    color: white;
-    padding: var(--global-padding);
-    padding-top: 0;
-    text-align: left;
-    z-index: 10;
-}
-
-.chooserole {
+    padding: 1.5em 2em;
     color: black;
-    background-color: var(--secondary-bg);
+    text-align: left;
 }
