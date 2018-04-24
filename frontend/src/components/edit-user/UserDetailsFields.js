@@ -28,7 +28,6 @@ const gender = [
 class UserDetailsForm extends Component {
     render() {
         console.log('hi', this.props)
-        const { classes } = this.props;
         return (
             <React.Fragment>
                 <Grid item xs={12}>
