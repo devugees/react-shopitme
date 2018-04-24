@@ -16,15 +16,15 @@ export default class CreateShoppingList extends Component {
       render() {
         return (
           <div className="createShoppingList main">
-            <ShoppingListTitle  listName="Shopping List" listId={this.state.listId} checkingPerson={false} />
+            <ShoppingListTitle listId={this.state.listId} checkingPerson={false} />
             <TodoList orderPerson={true}  items={this.state.items}/>
-            <Details location = {this.state.location}/>
+            <Details />
             <Notes />
       <Button  variant="raised" color="secondary">
         <Link to="/sure">Delete </Link>
       </Button>
       <Button  variant="raised" color="primary">
-        <Link to="/acceptsingledelivery">Send</Link>
+        <Link to="/">Send</Link>
       </Button>
       
     </div>

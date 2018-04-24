@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import Avatar from 'material-ui/Avatar';
-import avatar from '../pictures/BoB.jpg';
+import avatar from '../../pictures/BoB.png';
 
 
 const styles = {
@@ -13,7 +13,7 @@ const styles = {
 
   },
   avatar: {
-    margin: 5,
+    margin: 0,
   },
   bigAvatar: {
     width: 40,
