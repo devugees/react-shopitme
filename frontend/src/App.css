@@ -1,7 +1,7 @@
 
 @font-face { 
-  font-family: "charmelade"; 
-  src: url("/fonts/charmelade.otf"); 
+    font-family: "charmelade"; 
+    src: url("/fonts/charmelade.otf"); 
   }
 
 :root {
@@ -15,8 +15,8 @@
   /* Text Sizes*/
   --text: 1rem;
   /* Link color */
-  --light: #fff;
-  --dark: #54b9b6;
+  --light: #4476c4;
+  --dark: #4435c6;
   /* Border */
   --border: 3px solid black;
   /* Padings*/

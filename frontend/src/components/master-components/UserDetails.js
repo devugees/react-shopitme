@@ -32,7 +32,7 @@ export default class UserDetails extends Component {
     return (
       <div className="user-details">
         <ImageCropper />
-        <RatingStars />
+        <RatingStars rating={this.state.rating}/>
         <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
