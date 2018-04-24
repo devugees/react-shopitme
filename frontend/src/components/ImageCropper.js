@@ -27,8 +27,19 @@ export default class ImageCropper extends Component {
 
 
     render() {
+        const style = {
+            width: '135px',
+            height: '135px',
+            position: "absolute",
+            top: "56px",
+            right: "1rem",
+            margin: 'auto',
+            border: '1px solid #ccc',
+            borderRadius: '50%',
+            marginTop: '20px'
+        }
         return (
-            <div style={{ width: '150px', height: '150px', position: "absolute", top: "4%", right: "5%", margin: 'auto', border: '1px solid #ccc', borderRadius: '50%', marginTop: '20px' }}>
+            <div style={style}>
                 <AvatarImageCropper apply={this.apply} rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%' }} />
             </div>
 

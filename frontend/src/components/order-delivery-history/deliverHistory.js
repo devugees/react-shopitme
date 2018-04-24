@@ -46,7 +46,7 @@ switch(props.deliverHistory.status)
     case (props.deliverHistory.status = 'In Progress'):
       deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
       break;
-    default:
+    case (props.deliverHistory.status = 'Delivered'):
       deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
       break;
   }

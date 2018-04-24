@@ -16,13 +16,14 @@ export default class OrderDeliveryHistory extends Component {
 state = {
   view: true,
   singleOrder: false,
+  singleDeliver: false,
 }
 
 orderMoreInfo = index => {
   const order = [...this.props.orderHistory];
   const selectedOrder= order[index];
-  console.log('deliver props',selectedOrder);
   this.setState({
+    singleDeliver: false,
     singleOrder: true,
     view: 'canceled',
     order: selectedOrder
@@ -32,13 +33,20 @@ orderMoreInfo = index => {
 deliverMoreInfo = index => {
   const deliver = [...this.props.deliverHistory];
   const selectedDeliver= deliver[index];
-  console.log('deliver props',selectedDeliver);
+  console.log(selectedDeliver)
+  this.setState({
+    singleDeliver: true,
+    singleOrder: false,
+    view: 'canceled',
+    order: selectedDeliver
+  })
 }
 
 changeToOrder = () =>{
   this.setState({
     view: true,
     singleOrder: false,
+    singleDeliver: false,
     order:null
   })
 }
@@ -47,7 +55,8 @@ changeToDeliver = () =>{
   this.setState({
     view: false,
     singleDeliver: false,
-    deliver:[]
+    singleOrder: false,
+    order:null
   })
 }
 
@@ -79,9 +88,12 @@ changeToDeliver = () =>{
           break;
       }
     
-    let singleOrder;
+    let displaySingleHistory;
     if(this.state.singleOrder){
-      singleOrder = (<SingleOrderHistory order={this.state.order}/>)
+      displaySingleHistory = (<SingleOrderHistory order={this.state.order}/>)
+    }
+    if(this.state.singleDeliver){
+      displaySingleHistory = (<SingleDeliverHistory deliver={this.state.order}/>)
     }
 
     let orderColorButtonSelector;
@@ -95,13 +107,12 @@ changeToDeliver = () =>{
     }
 
     return (
-        <React.Fragment>
-          <Button style={styles.button} color={orderColorButtonSelector} variant="raised" onClick={this.changeToOrder}>Order History</Button>
-          <Button style={styles.button} color={deliverColorButtonSelector} variant="raised" onClick={this.changeToDeliver}>Deliver History</Button>
-          {whatToRender}
-          {singleOrder}
-        </React.Fragment>
-      
-      )
+      <React.Fragment>
+        <Button style={styles.button} color={orderColorButtonSelector} variant="raised" onClick={this.changeToOrder}>Order History</Button>
+        <Button style={styles.button} color={deliverColorButtonSelector} variant="raised" onClick={this.changeToDeliver}>Deliver History</Button>
+        {whatToRender}
+        {displaySingleHistory}
+      </React.Fragment>
+    )
   }
 };
