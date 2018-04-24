@@ -53,16 +53,27 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-  state = {
-    open: true,
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      password: '',
+      showPassword: false,
+    };
+  }
+
+  UNSAFE_componentWillReceiveProps(e){
+    this.setState({ open: e});
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  handleForget = (props, e) => {
+    this.setState({ open: false });
+    this.props.openForgotpassword(true)
+  }
   // input handels
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
@@ -76,7 +87,7 @@ class SimpleModal extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render() {
+  render(props) {
     const { classes } = this.props;
 
     return (
@@ -137,20 +148,21 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" color="green" className={classes.loginButtons}>
+              <Button variant="raised" color="green" className={classes.loginButtons} onClick={this.props.loginclick}>
                 Login 
               </Button>
-              <Typography variant="subheading">
-                <Link to="#">Forgot your password?</Link>
-              </Typography>
-              <Typography variant="subheading">
-                <Link to="#">Don't have an Account? Register now</Link>
-              </Typography>
+              <Button variant="subheading" onClick={this.handleForget}>
+                Forgot your password?
+              </Button>
+              <Button variant="subheading">
+                <a href='/userdetails'>Don't Have an account? Register Now</a>
+              </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
             </Button>
           </div>
         </Modal>
+        
       </div>
     );
   }

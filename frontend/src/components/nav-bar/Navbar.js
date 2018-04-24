@@ -12,7 +12,8 @@ import DropMenu from './DropMenu';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import avatar from '../../pictures/BoB.png';
-
+import Login from '../Modals/Login';
+import ResetPassword from '../Modals/ResetPassword'
 
 
 const styles = {
@@ -95,11 +96,18 @@ class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={this.LoginClickHandler}>Login</Button>
+                  <Button color="inherit" onClick={(e) => this.login.setState({open: true})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>
       </AppBar>
+      <Login ref={(ref) => this.login = ref} openLogin={this.state.open}
+        openForgotpassword={(e) => this.resetpass.setState({openForgotpass: true})}
+        loginclick={this.LoginClickHandler}
+      /> 
+      <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.open}
+        openLog={(e) => this.login.setState({openLogin: true})}
+      />
     </div>
   </div>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -41,17 +40,27 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-  state = {
-    open: true,
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false
+    };
+  }
+  
+  UNSAFE_componentWillReceiveProps(e){
+    this.setState({ open: e});
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
-  render() {
+  handlelogin = (props, e) => {
+    this.setState({ open: false });
+    this.props.openLog(true)
+  }
+
+  render(props) {
     const { classes } = this.props;
 
     return (
@@ -84,12 +93,12 @@ class SimpleModal extends React.Component {
             <Button variant="raised" color="green" className={classes.loginButtons}>
                 Reset password 
             </Button>
-            <Typography variant="subheading">
-                <Link to="./login">Login!</Link>
-            </Typography>
-            <Typography variant="subheading">
-                <Link to="/register">Don't have an Account? Register now</Link>
-            </Typography>
+            <Button variant="subheading" onClick={this.handlelogin}>
+                go back to Login!
+            </Button>
+            <Button variant="subheading" onClick={this.props.regClick}>
+                Don't have an Account? Register now
+            </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
             </Button>
