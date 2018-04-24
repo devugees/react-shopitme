@@ -4,13 +4,19 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import Fade from 'material-ui/transitions/Fade';
 import Avatars from './Avatars'
 
-
+const styles = {
+padding: "0"
+}
 
 
 class FadeMenu extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     anchorEl: null,
   };
+ }
+
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -29,12 +35,12 @@ class FadeMenu extends React.Component {
   }
 
 
-  render() {
+  render(props) {
     const { anchorEl } = this.state;
 
     return (
-      <div>
-        <Button
+      <React.Fragment>
+        <Button style={styles}
           aria-owns={anchorEl ? 'fade-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
@@ -42,7 +48,7 @@ class FadeMenu extends React.Component {
         <Avatars/>
     
         </Button>
-        <Menu
+        <Menu style={{position:"absolute" ,top:"2.3rem"}}
           id="fade-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -51,9 +57,9 @@ class FadeMenu extends React.Component {
         >
           <MenuItem onClick={this.handleClose}>History</MenuItem>
           <MenuItem onClick={this.handleClose}>Your Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+          <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
         </Menu>
-      </div>
+      </React.Fragment>
     );
   }
 }

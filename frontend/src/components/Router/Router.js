@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LandingPage from '../LandingPage'
+import Landing from '../landing/Landing'
 import UserDetails from '../master-components/UserDetails'
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
@@ -9,14 +10,14 @@ import Modals from '../Modals/Modals'
 import Login from '../Modals/Login'
 import ResetPassword from '../Modals/ResetPassword'
 import Sure from '../Modals/Sure'
+import NotFound from '../not-found/notFound'
 // get main for testing
 import Main from  '../Main';
 
 const Router = () => (
  <BrowserRouter>
    <Switch>
-{/*notfound*/}
-    <Route exact path='/' component={LandingPage} />
+    <Route exact path='/' component={Landing} />
     <Route exact path='/main' component={Main} />
     <Route exact path='/login' component={Login} />
     <Route exact path='/resetpassword' component={ResetPassword} />
@@ -25,6 +26,7 @@ const Router = () => (
     <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
     <Route exact path='/createshoppinglist' component={CreateShoppingList} />
     <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
+    <Route path="*" component={ NotFound } />
    </Switch>
  </BrowserRouter>
 
