@@ -6,64 +6,56 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
 
-
 import './Details.css';
 
 export default class Details extends Component {
     constructor(props){
         super();
         this.state = {
-          deliverAdress:{
-            street: 'Sonnenallee',
-            number: '154',
-            postcode: '12055',
-            city: 'Berlin'
-        },
-        editing:false,
-        todo:''
+          location: `Sonnenalle 123
+           12054 Berlin`,
+           editing: false,
+
+        }
       }
-    }
-   
+      editLocation = event => {
+        this.setState({
+            location:event.target.value
+        })
+      }
       editing = () =>{
         this.setState(prevState => { return {editing: !prevState.editing}})
     }
     
-    editLocation = name => event => {
-      console.log(event.target.value);
+
+
+    handleChange = name => event => {
         this.setState({
           [name]: event.target.value,
-          
         });
       };
-    
     render() {
       let whatToRender = (
-        <p>{this.state.deliverAdress.street}.{this.state.deliverAdress.number}<br/> {this.state.deliverAdress.postcode} {this.state.deliverAdress.city} <span onClick={this.editing}>✎</span> </p>          
+        <p>{this.state.location} <span onClick={this.editing}>✎</span> </p>          
 
         )
       if(this.state.editing){
-        console.log(this.state.deliverAdress)
-          whatToRender = (  
-         <p>
+        whatToRender = (
+          <p>
             <FormControl className="todo-list-form">
-    
-  <Input autoFocus className="location-input"  onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
-              <Input  className="location-input2"   onChange={this.editLocation('number')} placeholder={this.state.deliverAdress.number} />
-              <Input  className="location-input3"   onChange={this.editLocation('postcode')} placeholder={this.state.deliverAdress.postcode} />
-              <Input  className="location-input4"   onChange={this.editLocation('city')} placeholder={this.state.deliverAdress.city}/>
+              <InputLabel htmlFor="name-input">New location</InputLabel>
+              <Input autoFocus className="location-input"  onChange={this.editLocation} value={this.state.location} />
             </FormControl>
             <span onClick={this.editing}>✔</span>
           </p>
           )
-        }
-       
-  
+      }
       return (
     <div className="details">
 <Paper>
 <Grid container spacing={24}>
     <Grid  item xs={12}>
-      From:
+       from:
        <TextField
         type="datetime-local"
         defaultValue="2018-05-01T16:30"
@@ -73,7 +65,7 @@ export default class Details extends Component {
       />
     </Grid>
     <Grid  item xs={12}>
-       To: 
+       to:   
        <TextField
         type="datetime-local"
         defaultValue="2018-05-01T16:30"

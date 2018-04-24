@@ -13,6 +13,7 @@ import Notes from './Additional-Notes/Notes'
 import Details from './Details/Details'
 import OrderDeliveryHistory from './order-delivery-history'
 import CreateShoppingList from './master-components/CreateShoppingList'
+import MainDelivery from './master-components/MainDeliveryPage'
 //import fake store
 import fakeStore from '../fakeStore';
 
@@ -33,10 +34,10 @@ state = {...fakeStore}
         {/*<Map />*/}
         {/*<LandingPage /> */}      
         {/*<ShoppingListTitle checkingPerson={true} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>*/}
-        <TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/>
         {/*<EditUser />*/}
        {/*<Notes />*/}
        {/*<Details />*/}
+     <MainDelivery />
       {/*<CreateShoppingList />*/}
       </div>
     )
