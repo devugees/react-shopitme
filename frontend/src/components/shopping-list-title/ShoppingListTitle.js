@@ -18,7 +18,7 @@ export default class ShoppingListTitle extends Component {
   constructor(props){
     super(props);
     this.state = {
-      listName: 'ShoppingList',
+      listName: 'Order',
       listId: props.listId,
       editing: false,
       isShopperAvailable: false,
