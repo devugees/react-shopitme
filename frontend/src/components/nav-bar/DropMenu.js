@@ -2,11 +2,21 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Fade from 'material-ui/transitions/Fade';
+import Avatars from './Avatars'
+
+const styles = {
+padding: "0"
+}
+
 
 class FadeMenu extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     anchorEl: null,
   };
+ }
+
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -16,19 +26,29 @@ class FadeMenu extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  render() {
+   handleDeleteChip =() => {
+  alert('You clicked the delete icon.'); // eslint-disable-line no-alert
+  }
+
+   handleClickChip =() => {
+  alert('You clicked the Chip.'); // eslint-disable-line no-alert
+  }
+
+
+  render(props) {
     const { anchorEl } = this.state;
 
     return (
-      <div>
-        <Button
+      <React.Fragment>
+        <Button style={styles}
           aria-owns={anchorEl ? 'fade-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <a href="/userdetails">Alice Doe </a>
+        <Avatars/>
+    
         </Button>
-        <Menu
+        <Menu style={{position:"absolute" ,top:"2.3rem"}}
           id="fade-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -37,9 +57,9 @@ class FadeMenu extends React.Component {
         >
           <MenuItem onClick={this.handleClose}>History</MenuItem>
           <MenuItem onClick={this.handleClose}>Your Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+          <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
         </Menu>
-      </div>
+      </React.Fragment>
     );
   }
 }

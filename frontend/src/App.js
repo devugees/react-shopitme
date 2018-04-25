@@ -7,7 +7,7 @@ import Router from './components/Router/Router'
 import './App.css';
 
 // import Components
-import Navbar from './components/Navbar';
+import Navbar from './components/nav-bar/Navbar';
 import Main from './components/Main';
 import Footer from './components/Footer'
 

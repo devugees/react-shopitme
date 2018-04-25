@@ -1,71 +1,36 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import Button from 'material-ui/Button'
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import ShowDeliveryDetails from '../show-delivery-details/ShowDeliveryDetails';
 import Notes from '../Additional-Notes/Notes';
 import Map from '../map/Map';
-
+//import fake store
+import fakeStore from '../../fakeStore';
 
 export default class AcceptSingleDelivery extends Component {
 
-state = {
-  listId: 3323,
-  shopper:{
-    name: 'Alice Doe',
-    accountPage: 'user323223'
-  },
-  orderer:{
-    name: 'Bob Doe',
-    accountPage: 'user324332',
-    coords:{
-      lat: 52.522955,
-      lng: 13.477175,
-    },
-    deliverAdress:{
-      street: 'Sonnenallee',
-      number: '154',
-      postalCode: '12055',
-      city: 'Berlin'
-    },
-  },
-  deliveringTime:{
-    start: '14:00',
-    end:'16:00'
-  },
-  items:
-  [{
-    status:'box',
-    todo:"2x Corn Bread"
-  },{
-    status:'box',
-    todo:"Kellogs AllBran"
-  },{ 
-    status:'box',
-    todo:"4x Milk 3.8% Fet"
-  },{
-    status:'box',
-    todo:"2x Orange Juice low sugar"
-  }
-  ],
-  notes:'Bring me all in a box please. Thank you',
-}
+state = {...fakeStore}
 
 
   render() {
+    const style = {
+      margin: '1rem 0.5rem 0 0.5rem',
+    }
+    
     return (
       <div className="accept-single-delivery main">
-        <ShoppingListTitle shopperPerson={true} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage}/>
+        <ShoppingListTitle shopperPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId} shopperName={this.state.shopper.firstname} shopperAccountPage={this.state.shopper.accountPage}/>
         <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
         <TodoList items={this.state.items} shopperPerson={true}/>
         <Notes notes={this.state.notes}/>
         <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
-        <Button  variant="raised" color="secondary">
-        <a href="">Report Issue</a>
+        <Button style={style} variant="raised" color="secondary">
+        <Link to="">Report Issue</Link>
       </Button>
-      <Button  variant="raised" color="primary">
-        <a href="/">Delivered</a>
+      <Button style={style} variant="raised" color="primary">
+        <Link to="/">Delivered</Link>
       </Button>
       </div>
     )

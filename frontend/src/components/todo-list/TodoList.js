@@ -102,7 +102,7 @@ export default class TodoList extends Component {
         <React.Fragment>
           <FormControl className="todo-list-form">
             <InputLabel htmlFor="name-input">Add Item</InputLabel>
-            <Input autoFocus className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo}/>
+            <Input className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo}/>
           </FormControl>
           <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
           </Button>
