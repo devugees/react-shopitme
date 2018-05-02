@@ -13,6 +13,7 @@ let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 const zeroDay = (day > 9) ? (day) : ('0' + day);
+let listName;
 
 export default class ShoppingListTitle extends Component {
 
@@ -39,11 +40,14 @@ export default class ShoppingListTitle extends Component {
  
   
   editingButton = () => {
+    if (listName === ''){
+      this.setState({listName : 'Order'})
+    }
     this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
   editText = event => {
-    const listName = event.target.value;
+    listName = event.target.value;
     this.setState({ listName })
   }
 
