@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import ImageCropper from '../avatar/ImageCropper';
+import Image from '../avatar/image';
+import userPic from '../../pictures/BoB.png'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
@@ -9,7 +11,8 @@ import { crudAPI } from './../../helpers/helpers';
 
 export default class UserDetails extends Component {
   state = { 
-    ...fakeStore.orderer
+    ...fakeStore.orderer,
+    imageEdit:false
   };
 
   handleChange = name => event => {
@@ -36,13 +39,21 @@ export default class UserDetails extends Component {
     event.currentTarget.reset();
   };
 
+  editpicHandler = () => {
+    this.setState({
+    imageEdit:true
+   }) 
+  }
+
 
   render() {
     return (
       <div className="user-details">
-        <ImageCropper />
+        <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
+        {this.state.imageEdit ? <ImageCropper/>: null}
         <RatingStars rating={this.state.rating}/>
         <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+
       </div>
     )
   }
