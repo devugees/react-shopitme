@@ -16,6 +16,7 @@ const moment = require('moment');
 require('./config/passport.js');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+var cors = require('cors');
 
 // Connection to DB using .env File
 mongoose.connect(process.env.DB_URI);
@@ -30,6 +31,7 @@ db.on("error", (err) => {
 });
 
 // Using Body Parser Middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

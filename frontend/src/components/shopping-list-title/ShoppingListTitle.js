@@ -18,7 +18,7 @@ export default class ShoppingListTitle extends Component {
   constructor(props){
     super(props);
     this.state = {
-      listName: 'ShoppingList',
+      listName: 'Order',
       listId: props.listId,
       editing: false,
       isShopperAvailable: false,
@@ -38,7 +38,6 @@ export default class ShoppingListTitle extends Component {
  
   
   editingButton = () =>{
-    console.log('editing')
       this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
