@@ -63,7 +63,7 @@ class SimpleModal extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(e){
-    this.setState({ open: e});
+    this.setState({ open: e.openLogin});
   }
 
   handleClose = () => {

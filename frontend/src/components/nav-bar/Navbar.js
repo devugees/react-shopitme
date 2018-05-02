@@ -44,20 +44,45 @@ class ButtonAppBar extends React.Component {
     super();
  
     this.state = {
-      login: false
+      login: false,
+      openLogin: false,
+      openForgotpass :false
     };
   }
 
 
   LoginClickHandler = () => {
     this.setState({
-      login: true
-    })
+      login: true,
+      openLogin: false,
+      openForgotpass :false
+    });
   }
 
   LogoutClickHandler = () => {
     this.setState({
-      login: false
+      login: false,
+      openLogin: false,
+      openForgotpass :false
+
+    })
+  }
+
+  popupLogin = () => {
+    this.setState({
+      login: false,
+      openLogin: true,
+      openForgotpass :false
+
+    })
+  }
+
+  popupForgot = () => {
+    this.setState({
+      login: false,
+      openLogin: false,
+      openForgotpass :true
+
     })
   }
 
@@ -96,17 +121,17 @@ class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={(e) => this.login.setState({open: true})}>Login</Button>
+                  <Button color="inherit" onClick={(e) => this.setState({openLogin: true})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>
       </AppBar>
-      <Login ref={(ref) => this.login = ref} openLogin={this.state.open}
-        openForgotpassword={(e) => this.resetpass.setState({openForgotpass: true})}
+      <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
+        openForgotpassword={this.popupForgot}
         loginclick={this.LoginClickHandler}
       /> 
-      <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.open}
-        openLog={(e) => this.login.setState({openLogin: true})}
+      <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.openForgotpass}
+        openLog={this.popupLogin}
       />
     </div>
   </div>

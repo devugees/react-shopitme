@@ -48,7 +48,7 @@ class SimpleModal extends React.Component {
   }
   
   UNSAFE_componentWillReceiveProps(e){
-    this.setState({ open: e});
+    this.setState({ open: e.openForgotpass});
   }
 
   handleClose = () => {
@@ -93,7 +93,7 @@ class SimpleModal extends React.Component {
             <Button variant="raised" color="green" className={classes.loginButtons}>
                 Reset password 
             </Button>
-            <Button variant="subheading" onClick={this.handlelogin}>
+            <Button variant="subheading" onClick={this.props.openLog}>
                 go back to Login!
             </Button>
             <Button variant="subheading" onClick={this.props.regClick}>
