@@ -25,10 +25,10 @@ export default class CreateShoppingList extends Component {
             <TodoList orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
-      <Button  variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
+      <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
         Delete
       </Button>
-      <Button  variant="raised" color="primary">
+      <Button style={style} variant="raised" color="primary">
         <Link to="/">Create</Link>
       </Button>
       <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>

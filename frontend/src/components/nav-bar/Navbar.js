@@ -41,7 +41,7 @@ const styles = {
 };
 
 
-class ButtonAppBar extends React.Component {
+export default class ButtonAppBar extends React.Component {
   constructor(props) {
     super();
  
@@ -97,9 +97,7 @@ class ButtonAppBar extends React.Component {
         <Toolbar>
           <Grid item xs={2} sm={2} >     
             <div >
-            <a href="/" sy>
-              <p>Shopitme</p>
-            </a>
+              <Link to="/">ShopItMe</Link>
             </div>
           </Grid>
 
@@ -139,6 +137,3 @@ class ButtonAppBar extends React.Component {
   </div>
   );
 } }
-
-
-export default ButtonAppBar;
