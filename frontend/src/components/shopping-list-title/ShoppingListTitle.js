@@ -39,8 +39,7 @@ export default class ShoppingListTitle extends Component {
  
   
   editingButton = () => {
-    console.log('editing');
-      this.setState(prevState => { return {editing: !prevState.editing}})
+    this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
   editText = event => {
@@ -55,7 +54,7 @@ export default class ShoppingListTitle extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(nextState.shopper.name === ''){
+    if(nextState.shopper.name === '' || nextState.editing || nextState.editing === false){
       return true
     }else {
       return false
