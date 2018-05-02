@@ -14,6 +14,8 @@ import Avatar from 'material-ui/Avatar';
 import avatar from '../../pictures/BoB.png';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
+import { Link } from 'react-router-dom';
+
 
 
 const styles = {
