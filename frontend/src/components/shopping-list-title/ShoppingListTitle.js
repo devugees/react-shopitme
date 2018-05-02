@@ -4,7 +4,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 
 
-const date =new Date();
+const date = new Date();
 const day = date.getDate();
 const month = date.getMonth();
 const year = date.getFullYear();
@@ -12,6 +12,8 @@ const timeHours = date.getHours();
 let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
+const zeroDay = (day > 9) ? (day) : ('0' + day);
+let listName;
 
 export default class ShoppingListTitle extends Component {
 
@@ -37,12 +39,15 @@ export default class ShoppingListTitle extends Component {
   }
  
   
-  editingButton = () =>{
-      this.setState(prevState => { return {editing: !prevState.editing}})
+  editingButton = () => {
+    if (listName === ''){
+      this.setState({listName : 'Order'})
+    }
+    this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
   editText = event => {
-    const listName = event.target.value;
+    listName = event.target.value;
     this.setState({ listName })
   }
 
@@ -53,7 +58,7 @@ export default class ShoppingListTitle extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(nextState.shopper.name === ''){
+    if(nextState.shopper.name === '' || nextState.editing || nextState.editing === false){
       return true
     }else {
       return false
@@ -98,7 +103,7 @@ export default class ShoppingListTitle extends Component {
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
-          <p>Created: {day}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
+          <p>Created: {zeroDay}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
           <p>Shopper: {shopper}</p>
         </Paper>
       </div>
