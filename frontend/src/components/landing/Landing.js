@@ -11,34 +11,21 @@ export default class LandingPage extends Component {
   render() {
     return (
       <div className="landing">
-        <Grid container spacing={0}>
-            <Grid item xs={12} sm={4} md={4}>
-                <Link to={"/createshoppinglist"} >
-                    <div className="order_btn">
-                        <div class="imgd">
-                            <img src={buttonw} />
-                        </div>
-                        <div className="btn_txt">
-                                I need some shopping.
-                        </div>
+        <Link to={"/createshoppinglist"} >
+            <div className="order_btn btn">
+                <div class="imgd">
+                <i class="fas fa-list fa-5x"></i> 
                     </div>
-                </Link>
-            </Grid>
-            <Grid item xs={12} sm={4} md={4}>
-                <Link to={"/createshoppinglist"} >
-                    <div className="delivery_btn">
-                    <div class="imgd">
-                        <img src={buttonm} />
-                        </div>
-                        <div className="btn_txt">
-                            <Link to={"/acceptsingledelivery"} >
-                                I want to shop for someone.
-                            </Link>
-                        </div>
-                    </div>
-                </Link>
-            </Grid>
-        </Grid>
+                </div>
+        </Link>
+            
+        <Link to={"/acceptsingledelivery"} >
+            <div className="delivery_btn btn">
+                <div class="imgd">
+                <i class="fas fa-shopping-basket fa-5x"></i>
+                </div>
+            </div>
+        </Link>
       </div>
     )
   }
