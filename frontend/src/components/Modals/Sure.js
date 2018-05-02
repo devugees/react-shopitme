@@ -29,15 +29,23 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-  state = {
-    open: true,
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      password: '',
+      showPassword: false,
+    };
+    
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  componentWillReceiveProps(){
+    this.setState({ open: true});
+  }
 
   render() {
     const { classes } = this.props;
@@ -58,7 +66,7 @@ class SimpleModal extends React.Component {
               The shopping list will be deleted
             </Typography>
             <Button variant="raised" color="secondary" className={classNames(classes.margin,classes.button)} onClick={this.handleClose}>
-              <Link to="/createshoppinglist">Cancel</Link>
+              Cancel
             </Button>
             <Button variant="raised" color="primary" className={classes.button}>
               <Link to="/">Delete</Link>
