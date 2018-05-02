@@ -6,32 +6,50 @@
 .landing {
     padding: 0;
     margin: 0;
-}
-
-.primary {
-    margin: 0;
-    padding: 0;
+    min-height: calc(100vh - 112px);
     background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.primary > img {
-    width: 100%;
+.order_btn, .delivery_btn {
     padding: 0;
     margin: 0;
 }
 
-.deliverit_slogan {
-    font-size: 40px;
-    background-color: var(--secondary-bg);
-    font-family: charmelade, sans-serif;
+.btn {
+    width: 200px;
+    height: 200px;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    padding: var(--global-padding);
-    padding-top: 0;
-    text-align: left;
-    z-index: 10;
 }
 
-.chooserole {
-    color: black;
+.btn a {
+    color: white;
+}
+
+.btn_txt {
+    position: relative;
+    font-size: 21px;
+    z-index: 1;
+    margin-top: -50px;
     background-color: var(--secondary-bg);
+    width: 50%;
+    border-radius: 2px;
+    margin: -4em auto 1em;
+    padding: .7em 1em;
+    font-family: charmelade;
+}
+
+@media only screen and (min-width: 768px) {
+    .landing {
+        flex-direction: row;
+    }
 }
