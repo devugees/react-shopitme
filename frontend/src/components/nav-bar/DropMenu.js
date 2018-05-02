@@ -2,7 +2,10 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Fade from 'material-ui/transitions/Fade';
-import Avatars from './Avatars'
+import Avatars from './Avatars';
+//import { Link , withRouter, BrowserRouter as Router } from 'react-router-dom';
+
+
 
 const styles = {
 padding: "0"
@@ -24,6 +27,7 @@ class FadeMenu extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+    this.props.history.push('/main')
   };
 
    handleDeleteChip =() => {
@@ -55,13 +59,14 @@ class FadeMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
-          <MenuItem onClick={this.handleClose}>History</MenuItem>
-          <MenuItem onClick={this.handleClose}>Your Profile</MenuItem>
-          <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+            <MenuItem onClick={this.handleClose}> <a href="/orderdeliveryhistory">  History </a>  </MenuItem>
+            <MenuItem onClick={this.handleClose}> <a href="/userdetails"> Your Profile </a></MenuItem>
+            <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
         </Menu>
       </React.Fragment>
     );
   }
 }
 
+//export default withRouter(FadeMenu);
 export default FadeMenu;

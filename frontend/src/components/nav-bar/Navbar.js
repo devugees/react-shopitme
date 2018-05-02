@@ -12,6 +12,8 @@ import DropMenu from './DropMenu';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import avatar from '../../pictures/BoB.png';
+import { Link } from 'react-router-dom';
+
 
 
 
