@@ -86,8 +86,9 @@ class EditUser extends React.Component {
                 <PasswordFields handleChange={this.props.handleChange} />
               </Grid>
               </Grid> 
-                
+
               <Grid container spacing={16} className="button-right">
+               { (this.props.error) ? <p className="error">{this.props.error}</p> : null}
               <Grid item container xs={12} spacing={16}>
                     {<Button variant="raised" size="large" type="submit">
                       Submit

@@ -30,18 +30,6 @@ class UserDetailsForm extends Component {
         console.log('hi', this.props)
         return (
             <React.Fragment>
-                <Grid item xs={12}>
-                    <TextField
-                            id='username'
-                            label='Username'
-                            placeholder='Username'
-                            onChange={this.props.handleChange('username')}
-                            margin="normal"
-                            required
-                            fullWidth
-                            value={this.props.userdetails.username}
-                    />
-                </Grid>
                 <Grid item xs={6}>
                     <TextField
                             id='firstname'
@@ -114,7 +102,7 @@ class UserDetailsForm extends Component {
                             value={this.props.userdetails.deliverAdress.city}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <TextField
                             id='country'
                             label='Country'
@@ -124,6 +112,18 @@ class UserDetailsForm extends Component {
                             required
                             fullWidth
                             value={this.props.userdetails.deliverAdress.country}
+                    />
+                </Grid> */}
+                <Grid item xs={12}>
+                    <TextField
+                            id='email'
+                            label='Email'
+                            placeholder='Email Address'
+                            onChange={this.props.handleChange('email')}
+                            margin="normal"
+                            required
+                            fullWidth
+                            value={this.props.userdetails.email}
                     />
                 </Grid>
                 <Grid item xs={12}>

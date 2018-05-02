@@ -12,13 +12,12 @@ export function crudAPI(method, url, data) {
         redirect: 'follow',
         referrer: 'no-referrer',
     })
+    .then(res => res.json())
         
 }
 
 export function authCrudAPI(method, url, data) {
     const token = localStorage.getItem(token);
-
-
 
     return fetch(url, {
         body: JSON.stringify(data),
@@ -32,6 +31,6 @@ export function authCrudAPI(method, url, data) {
         mode: 'cors',
         redirect: 'follow',
         referrer: 'no-referrer',
-    })
+    }).then(res => res.json())
         
 }
