@@ -29,7 +29,7 @@ export default class CreateShoppingList extends Component {
         Delete
       </Button>
       <Button  variant="raised" color="primary">
-        Send
+        <Link to="/">Create</Link>
       </Button>
       <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
     </div>
