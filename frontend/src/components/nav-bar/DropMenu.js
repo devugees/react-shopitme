@@ -27,7 +27,7 @@ class FadeMenu extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
-    this.props.history.push('/main')
+    //this.props.history.push('/main')
   };
 
    handleDeleteChip =() => {

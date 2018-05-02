@@ -5,7 +5,7 @@ import EditUser from './edit-user/EditUser';
 import TodoList from './todo-list/TodoList';
 import ShoppingListTitle from './shopping-list-title/ShoppingListTitle';
 import Map from './map/Map';
-import ImageCropper from './ImageCropper';
+import ImageCropper from './avatar/ImageCropper';
 import RatingStars from './RatingStars';
 import Notes from './Additional-Notes/Notes'
 import Details from './Details/Details'

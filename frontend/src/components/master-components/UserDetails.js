@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ImageCropper from '../ImageCropper';
+import ImageCropper from '../avatar/ImageCropper';
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
