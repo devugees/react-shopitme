@@ -4,7 +4,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 
 
-const date =new Date();
+const date = new Date();
 const day = date.getDate();
 const month = date.getMonth();
 const year = date.getFullYear();
@@ -12,6 +12,7 @@ const timeHours = date.getHours();
 let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
+const zeroDay = (day > 9) ? (day) : ('0' + day);
 
 export default class ShoppingListTitle extends Component {
 
@@ -37,7 +38,8 @@ export default class ShoppingListTitle extends Component {
   }
  
   
-  editingButton = () =>{
+  editingButton = () => {
+    console.log('editing');
       this.setState(prevState => { return {editing: !prevState.editing}})
   }
 
@@ -98,7 +100,7 @@ export default class ShoppingListTitle extends Component {
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
-          <p>Created: {day}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
+          <p>Created: {zeroDay}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
           <p>Shopper: {shopper}</p>
         </Paper>
       </div>
