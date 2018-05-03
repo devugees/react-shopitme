@@ -2,10 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from '../landing/Landing'
 import UserDetails from '../master-components/UserDetails'
-import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
+import AcceptSingleDelivery from '../master-components/MainDeliveryList/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory'
+import MainDeliveryList from '../master-components/MainDeliveryList/index'
 import Modals from '../Modals/Modals'
 import Login from '../Modals/Login'
 import ResetPassword from '../Modals/ResetPassword'
@@ -23,8 +24,10 @@ const Router = () => (
     <Route exact path='/resetpassword' component={ResetPassword} />
     <Route exact path='/sure' component={Sure} />
     <Route exact path='/userdetails' component={UserDetails} />
-    <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
+    <Route exact path='/Main' component={MainDeliveryList} />
     <Route exact path='/createshoppinglist' component={CreateShoppingList} />
+    <Route exact path='/mainDeliveryPage' component={MainDeliveryList} />
+    <Route exact path='/mainDeliveryPage/acceptsingledelivery' component={AcceptSingleDelivery} />
     <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
     <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
     <Route path="*" component={ NotFound } />

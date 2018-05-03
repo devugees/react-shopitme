@@ -33,15 +33,6 @@ export default class Map extends Component {
       ]
 */
   componentDidMount() {
-    const geoPos = JSON.parse(localStorage.getItem('geoPos'))
-    if(geoPos && geoPos.latitude !== null){
-      this.setState({
-        coords: {
-        latitude: geoPos.latitude,
-        longitude: geoPos.longitude,
-        }
-      })
-    } else {
       this.geoId = navigator.geolocation.watchPosition(
         position => {
           this.setState({
@@ -56,10 +47,8 @@ export default class Map extends Component {
         }
       );
     }
-  }
-    componentDidUpdate = () => localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
 
-  componentWillUnmount() {
+componentWillUnmount() {
     navigator.geolocation.clearWatch(this.geoId);
   }
 
@@ -87,3 +76,4 @@ export default class Map extends Component {
     )
   }
 }
+

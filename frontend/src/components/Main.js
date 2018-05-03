@@ -13,6 +13,7 @@ import OrderDeliveryHistory from './master-components/OrderDeliveryHistory'
 import CreateShoppingList from './master-components/CreateShoppingList'
 import SingleOrderHistory from './single-order-deliver-history/SingleOrderHistory';
 import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
+// import MainDeliveryPage from './master-components/MainDeliveryPage'
 //import fake store
 import fakeStore from '../fakeStore';
 
@@ -26,22 +27,24 @@ state = {...fakeStore}
   render() {
     return (
       <div className="main">
-       <SingleOrderHistory order={this.state.orderHistory[3]}/>
+       {/* <SingleOrderHistory order={this.state.orderHistory[3]}/> */}
        {/*<SingleDeliverHistory order={this.state.orderHistory[3]}/>
 
         {/*<OrderDeliveryHistory />*/}
-        {<OrderDeliveryHistory orderView={false} orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>}
-        {/*<ImageCropper />*/}
+{/*         <OrderDeliveryHistory orderView={false} orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>
+ */}       {/*<ImageCropper />*/}
         {/*<RatingStars />*/}
         {/*<Map />*/}
         {/*<LandingPage /> */}      
         {/*<ShoppingListTitle checkingPerson={true} shopperName={this.state.shopper.name} shopperAccountPage={this.state.shopper.accountPage} ordererName={this.state.orderer.name} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId}/>*/}
-        <TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/>
+       {/*  <TodoList orderPerson={true} checkingPerson={false} shopperPerson={false} items={this.state.items}/> */}
         {/*<EditUser />*/}
        {/*<Notes />*/}
        {/*<Details />*/}
-     <MainDelivery />
-      {/*<CreateShoppingList />*/}
+    { /*<MainDelivery />*/}
+      {/*<CreateShoppingList />
+        <MainDeliveryPage />*/}
+    
       </div>
     )
   }

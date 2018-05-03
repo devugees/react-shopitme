@@ -25,13 +25,13 @@ export default class LandingPage extends Component {
                 </Link>
             </Grid>
             <Grid item xs={12} sm={4} md={4}>
-                <Link to={"/createshoppinglist"} >
+                <Link to={"/MainDeliveryPage"} >
                     <div className="delivery_btn">
                     <div class="imgd">
                         <img src={buttonm} />
                         </div>
                         <div className="btn_txt">
-                            <Link to={"/acceptsingledelivery"} >
+                            <Link to={"/MainDeliveryPage"} >
                                 I want to shop for someone.
                             </Link>
                         </div>
