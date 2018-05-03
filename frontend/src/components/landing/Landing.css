@@ -6,42 +6,33 @@
 .landing {
     padding: 0;
     margin: 0;
-    background-color: #CEE5F2;
     min-height: calc(100vh - 112px);
+    background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .order_btn, .delivery_btn {
-    padding: 0 0 1em;
+    padding: 0;
     margin: 0;
 }
 
-.order_btn {
-    background-color: #CEE5F2;
-}
-
-.delivery_btn {
-    background-color: #FC9F5B;
-}
-
-.imgd {
-    width: 80%;
+.btn {
+    width: 200px;
+    height: 200px;
+    border: 2px solid white;
+    border-radius: 50%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
-.order_btn > div, .delivery_btn > div {
-    color: black;
-}
-
-.order_btn > div > a, .delivery_btn > div > a {
-    color: black;
-}
-
-.order_btn > img, .delivery_btn > img {
-    margin: 0;
-    position: relative;
-    padding-top: 0;
-    z-index: 0;
-    width: 100%;
+.btn a {
+    color: white;
 }
 
 .btn_txt {
@@ -57,11 +48,8 @@
     font-family: charmelade;
 }
 
-.deliverit_slogan {
-    font-size: 40px;
-    background-color: #ECE4B7;
-    font-family: charmelade, sans-serif;
-    padding: 1.5em 2em;
-    color: black;
-    text-align: left;
+@media only screen and (min-width: 768px) {
+    .landing {
+        flex-direction: row;
+    }
 }

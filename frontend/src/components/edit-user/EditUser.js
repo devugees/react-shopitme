@@ -1,10 +1,5 @@
 import React from 'react';
 // Material UI
-import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Select from 'material-ui/Select';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
@@ -16,8 +11,8 @@ import UserDetailsFields from './UserDetailsFields';
 import PasswordFields from './PasswordFields';
 
 const formType = {
-  Register: false,
-  ChangeUser: true
+  Register: true,
+  ChangeUser: false
 }
 
 class EditUser extends React.Component {

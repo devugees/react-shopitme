@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 /* POST register user */
 router.post('/register', (req, res)  => {
-    console.log(req.body.password)
+    console.log('This is the req to register', req.body)
     const email = req.body.email;
     const password = req.body.password;
     

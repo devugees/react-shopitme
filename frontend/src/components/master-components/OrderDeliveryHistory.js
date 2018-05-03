@@ -4,7 +4,7 @@ import ImageCropper from '../ImageCropper';
 import RatingStars from '../RatingStars';
 //import fake store
 import fakeStore from '../../fakeStore';
-import starRed from '../../pictures/starRed.png'
+import starRed from '../../pictures/BoB.png'
 
 export default class OrderDeliveryHistory extends Component {
 

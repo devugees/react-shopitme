@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
 import Modal from 'material-ui/Modal';
 import Button from 'material-ui/Button';
 
@@ -19,9 +17,9 @@ import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   paper: {
     position: 'absolute',
@@ -53,16 +51,27 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-  state = {
-    open: true,
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      password: '',
+      showPassword: false,
+    };
+  }
+
+  UNSAFE_componentWillReceiveProps(e){
+    this.setState({ open: e.openLogin});
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
+  handleForget = (props, e) => {
+    this.setState({ open: false });
+    this.props.openForgotpassword(true)
+  }
   // input handels
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
@@ -76,7 +85,7 @@ class SimpleModal extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render() {
+  render(props) {
     const { classes } = this.props;
 
     return (
@@ -137,20 +146,21 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" color="green" className={classes.loginButtons}>
+              <Button variant="raised" className={classes.loginButtons} onClick={this.props.loginclick}>
                 Login 
               </Button>
-              <Typography variant="subheading">
-                <Link to="#">Forgot your password?</Link>
-              </Typography>
-              <Typography variant="subheading">
-                <Link to="#">Don't have an Account? Register now</Link>
-              </Typography>
+              <Button variant="flat" onClick={this.handleForget}>
+                Forgot your password?
+              </Button>
+              <Button variant="flat">
+                <a href='/userdetails'>Don't Have an account? Register Now</a>
+              </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
             </Button>
           </div>
         </Modal>
+        
       </div>
     );
   }
