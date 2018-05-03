@@ -7,7 +7,7 @@ import Router from './components/Router/Router'
 import './App.css';
 
 // import Components
-import Main from './components/Main';
+// import Main from './components/Main';
 
 class App extends Component {
   render() {
