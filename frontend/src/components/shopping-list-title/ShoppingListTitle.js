@@ -60,7 +60,7 @@ export default class ShoppingListTitle extends Component {
   shouldComponentUpdate(nextProps, nextState){
     if(nextState.isShopperAvailable){
       return false
-    }else if(nextState.shopper.name === '' || nextState.editing || nextState.editing === false){
+    }else if(nextState.shopper.name === '' || nextState.editing || !nextState.editing){
       return true
     }
   }

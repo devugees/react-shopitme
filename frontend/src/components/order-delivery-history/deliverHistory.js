@@ -39,10 +39,10 @@ if(props.deliverHistory.deliverTo){
 let deliverDate;
 switch(props.deliverHistory.status)
   {
-    case (props.deliverHistory.status = 'Pending'):
+    case ('Pending'):
       deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
       break;
-    case (props.deliverHistory.status = 'In Progress'):
+    case ('In Progress'):
       deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
       break;
     default:

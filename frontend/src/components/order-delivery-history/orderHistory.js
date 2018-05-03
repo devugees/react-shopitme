@@ -39,10 +39,10 @@ if(props.orderHistory.deliverBy){
 let deliverDate;
 switch(props.orderHistory.status)
   {
-    case (props.orderHistory.status = 'Pending'):
+    case ('Pending'):
       deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
       break;
-    case (props.orderHistory.status = 'In Progress'):
+    case ('In Progress'):
       deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
       break;
     default:

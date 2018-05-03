@@ -65,14 +65,14 @@ changeToDeliver = () =>{
     let whatToRender;
     switch(this.state.view)
       {
-        case (this.state.view = true):
+        case (true):
           whatToRender = (
             <div className="order-delivery-history" > 
             {this.props.orderHistory.map((orderHistory, index)=> <OrderHistory orderHistory={orderHistory} orderMoreInfo={()=> {this.orderMoreInfo(index)}}/>)}
             </div>
           )
           break;
-        case (this.state.view = false):
+        case (false):
           whatToRender = (
             <div className="order-delivery-history" >
             {this.props.deliverHistory.map((deliverHistory, index)=> <DeliverHistory deliverHistory={deliverHistory} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
@@ -94,12 +94,12 @@ changeToDeliver = () =>{
 
     let orderColorButtonSelector;
     let deliverColorButtonSelector;
-    if(this.state.singleOrder || this.state.view){
-      orderColorButtonSelector = 'primary';
-      deliverColorButtonSelector = null;
-    } else {
+    if(this.state.singleDeliver || !this.state.view) {
       orderColorButtonSelector = null;
       deliverColorButtonSelector = 'primary';
+    }else if(this.state.singleOrder || this.state.view){
+      orderColorButtonSelector = 'primary';
+      deliverColorButtonSelector = null;
     }
 
     return (

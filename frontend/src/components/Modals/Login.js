@@ -146,13 +146,13 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" color="green" className={classes.loginButtons} onClick={this.props.loginclick}>
+              <Button variant="raised" className={classes.loginButtons} onClick={this.props.loginclick}>
                 Login 
               </Button>
-              <Button variant="subheading" onClick={this.handleForget}>
+              <Button variant="flat" onClick={this.handleForget}>
                 Forgot your password?
               </Button>
-              <Button variant="subheading">
+              <Button variant="flat">
                 <a href='/userdetails'>Don't Have an account? Register Now</a>
               </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>

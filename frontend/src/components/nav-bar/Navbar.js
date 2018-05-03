@@ -100,8 +100,8 @@ export default class ButtonAppBar extends React.Component {
                     <div></div>
                   </Grid>
                   <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} class="material-icons">notifications</i>
-                    <i  style={styles.notifications} class="material-icons">chat_bubble_outline</i>
+                    <i  style={styles.notifications} className="material-icons">notifications</i>
+                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu logOut={this.LogoutClickHandler} />
                   
                   </Grid>

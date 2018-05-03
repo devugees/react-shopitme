@@ -25,14 +25,14 @@ export default class CreateShoppingList extends Component {
             <TodoList orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
-      <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
-        Delete
-      </Button>
-      <Button style={style} variant="raised" color="primary">
-        <Link to="/">Create</Link>
-      </Button>
-      <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
-    </div>
+            <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
+              Delete
+            </Button>
+            <Button style={style} variant="raised" color="primary">
+              <Link to="/">Create</Link>
+            </Button>
+            <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
+          </div>
         )
       }
     };
