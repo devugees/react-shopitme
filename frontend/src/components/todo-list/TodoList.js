@@ -35,7 +35,7 @@ export default class TodoList extends Component {
     const items = [...this.state.items];
     items[index].status = 'editMe';
     this.setState({todo: items[index].todo})
-    if(this.state.todo = ''){
+    if(this.state.todo === ''){
       return
     }
     this.setState({ items });

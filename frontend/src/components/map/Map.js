@@ -71,7 +71,7 @@ export default class Map extends Component {
    defaultZoom={14}
    defaultCenter={{ lat:this.state.markers[0].lat, lng:this.state.markers[0].lng }}>
     <Marker position={{ lat: lat, lng: lng }}/>
-  {this.state.markers.map(marker=> <Marker position={{ lat: marker.lat, lng: marker.lng}}/>)}
+  {this.state.markers.map((marker, index)=> <Marker key={index} position={{ lat: marker.lat, lng: marker.lng}}/>)}
 
   </GoogleMap>
 ));

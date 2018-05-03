@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
 import Modal from 'material-ui/Modal';
 import Button from 'material-ui/Button';
 
@@ -19,9 +17,9 @@ import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   paper: {
     position: 'absolute',
@@ -148,13 +146,13 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" color="green" className={classes.loginButtons} onClick={this.props.loginclick}>
+              <Button variant="raised" className={classes.loginButtons} onClick={this.props.loginclick}>
                 Login 
               </Button>
-              <Button variant="subheading" onClick={this.handleForget}>
+              <Button variant="flat" onClick={this.handleForget}>
                 Forgot your password?
               </Button>
-              <Button variant="subheading">
+              <Button variant="flat">
                 <a href='/userdetails'>Don't Have an account? Register Now</a>
               </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>

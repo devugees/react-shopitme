@@ -31,6 +31,8 @@ export default class SingleDeliverHistory extends Component {
                 </React.Fragment>
                 )
               break;
+            default:
+              deliverStatus =(<p>No info available</p>);
           } 
     return (
       <React.Fragment style={styles.alignment}>
