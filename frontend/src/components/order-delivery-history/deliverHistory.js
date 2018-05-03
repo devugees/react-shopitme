@@ -1,7 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
@@ -46,7 +45,7 @@ switch(props.deliverHistory.status)
     case (props.deliverHistory.status = 'In Progress'):
       deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
       break;
-    case (props.deliverHistory.status = 'Delivered'):
+    default:
       deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
       break;
   }

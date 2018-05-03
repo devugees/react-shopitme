@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
-import Input, { InputLabel } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { withStyles } from 'material-ui/styles';
 
 // Define the Gender Options here!!
 const gender = [

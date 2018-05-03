@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 // import children components
 import OrderHistory from './orderHistory';
@@ -8,8 +6,6 @@ import DeliverHistory from './deliverHistory';
 // import next component fo single view
 import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHistory';
 import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory'
-//import fake store
-import fakeStore from '../../fakeStore';
 
 export default class OrderDeliveryHistory extends Component {
 
