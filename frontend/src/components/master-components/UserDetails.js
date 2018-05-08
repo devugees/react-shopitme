@@ -12,8 +12,6 @@ export default class UserDetails extends Component {
     ...fakeStore.orderer
   };
 
-
-
   handleChange = name => event => {
     this.setState( {
       [name]: event.target.value,
@@ -54,7 +52,7 @@ export default class UserDetails extends Component {
         if(res.err) {
           this.setState({error: res.err})
         } else {
-          this.props.history.push("/login:123")
+          this.props.history.push("/")
         }
       })
         
