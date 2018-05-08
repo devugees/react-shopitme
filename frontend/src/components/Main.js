@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 
 // import Components
-import EditUser from './edit-user/EditUser';
-import TodoList from './todo-list/TodoList';
-import ShoppingListTitle from './shopping-list-title/ShoppingListTitle';
-import Map from './map/Map';
-import ImageCropper from './avatar/ImageCropper';
-import RatingStars from './RatingStars';
-import Notes from './Additional-Notes/Notes'
-import Details from './Details/Details'
+
+// import EditUser from './edit-user/EditUser';
+// import TodoList from './todo-list/TodoList';
+// import ShoppingListTitle from './shopping-list-title/ShoppingListTitle';
+// import Map from './map/Map';
+// import ImageCropper from './ImageCropper';
+// import RatingStars from './RatingStars';
+// import Notes from './Additional-Notes/Notes'
+// import Details from './Details/Details'
 import OrderDeliveryHistory from './master-components/OrderDeliveryHistory'
-import CreateShoppingList from './master-components/CreateShoppingList'
+// import CreateShoppingList from './master-components/CreateShoppingList'
 import SingleOrderHistory from './single-order-deliver-history/SingleOrderHistory';
-import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
+// import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
 
 //import fake store
 import fakeStore from '../fakeStore';

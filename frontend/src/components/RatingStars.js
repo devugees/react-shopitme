@@ -1,13 +1,7 @@
-import React, { Component , Fragment } from 'react';
+import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-
-// import stars pics
-import starGrey from '../pictures/starGrey.png';
-import starYellow from '../pictures/starYellow.png';
-
-
 
 export default class RatingStars extends React.Component {
   constructor(props) {

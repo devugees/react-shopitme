@@ -1,24 +1,22 @@
 import React from 'react';
 import Button from 'material-ui/Button';
+import { Link } from 'react-router-dom';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Fade from 'material-ui/transitions/Fade';
 import Avatars from './Avatars';
-//import { Link , withRouter, BrowserRouter as Router } from 'react-router-dom';
-
 
 
 const styles = {
-padding: "0"
+  padding: "0"
 }
 
-
-class FadeMenu extends React.Component {
+export default class FadeMenu extends React.Component {
   constructor(props) {
     super(props);
-  this.state = {
+    this.state = {
     anchorEl: null,
-  };
- }
+    };
+  }
 
 
   handleClick = event => {
@@ -28,16 +26,8 @@ class FadeMenu extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
     //this.props.history.push('/main')
+
   };
-
-   handleDeleteChip =() => {
-  alert('You clicked the delete icon.'); // eslint-disable-line no-alert
-  }
-
-   handleClickChip =() => {
-  alert('You clicked the Chip.'); // eslint-disable-line no-alert
-  }
-
 
   render(props) {
     const { anchorEl } = this.state;
@@ -59,8 +49,8 @@ class FadeMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
-            <MenuItem onClick={this.handleClose}> <a href="/orderdeliveryhistory">  History </a>  </MenuItem>
-            <MenuItem onClick={this.handleClose}> <a href="/userdetails"> Your Profile </a></MenuItem>
+            <MenuItem onClick={this.handleClose}><Link to="/orderdeliveryhistory">History</Link></MenuItem>
+            <MenuItem onClick={this.handleClose}><Link to="/userdetails">Your Profile</Link></MenuItem>
             <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
         </Menu>
       </React.Fragment>
@@ -68,5 +58,3 @@ class FadeMenu extends React.Component {
   }
 }
 
-//export default withRouter(FadeMenu);
-export default FadeMenu;
