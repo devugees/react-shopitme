@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './Landing.css';
+import './Landing.css'
+import Grid from 'material-ui/Grid';
 
 export default class LandingPage extends Component {
   render() {
