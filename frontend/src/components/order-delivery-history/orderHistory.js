@@ -1,7 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
@@ -40,13 +39,13 @@ if(props.orderHistory.deliverBy){
 let deliverDate;
 switch(props.orderHistory.status)
   {
-    case (props.orderHistory.status = 'Pending'):
+    case ('Pending'):
       deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
       break;
-    case (props.orderHistory.status = 'In Progress'):
+    case ('In Progress'):
       deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
       break;
-    case (props.orderHistory.status = 'Delivered'):
+    default:
       deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
       break;
   }

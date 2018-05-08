@@ -48,9 +48,9 @@ const todoBoxShooper = (props) => {
   if(shopper){
     shopperUI = (
       <React.Fragment>
-        <span className={tick} onClick={props.productFound}>✔</span>
-        <span className={back} onClick={props.backToDo}>🔙</span>
-        <span className={cross} onClick={props.productNotFound}>✖</span>
+        <span role="img" aria-label="tick" className={tick} onClick={props.productFound}>✔</span>
+        <span role="img" aria-label="goBack" className={back} onClick={props.backToDo}>🔙</span>
+        <span role="img" aria-label="cross" className={cross} onClick={props.productNotFound}>✖</span>
       </React.Fragment>
     )
   }

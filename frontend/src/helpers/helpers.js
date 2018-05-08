@@ -17,6 +17,7 @@ export function crudAPI(method, url, data) {
 }
 
 export function authCrudAPI(method, url, data) {
+    // eslint-disable-next-line
     const token = localStorage.getItem(token);
 
     return fetch(url, {

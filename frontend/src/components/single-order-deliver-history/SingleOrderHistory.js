@@ -40,6 +40,8 @@ export default class SingleOrderHistory extends Component {
                 </React.Fragment>
                 )
               break;
+              default:
+              orderStatus =(<p>No info available</p>);
           }    
         return (
           <React.Fragment style={styles.alignment}>

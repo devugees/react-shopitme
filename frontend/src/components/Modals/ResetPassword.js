@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
 import Modal from 'material-ui/Modal';
 import Button from 'material-ui/Button';
 
@@ -13,9 +11,9 @@ import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   paper: {
     position: 'absolute',
@@ -41,17 +39,27 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-  state = {
-    open: true,
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false
+    };
+  }
+  
+  UNSAFE_componentWillReceiveProps(e){
+    this.setState({ open: e.openForgotpass});
+  }
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
-  render() {
+  handlelogin = (props, e) => {
+    this.setState({ open: false });
+    this.props.openLog(true)
+  }
+
+  render(props) {
     const { classes } = this.props;
 
     return (
@@ -81,15 +89,15 @@ class SimpleModal extends React.Component {
                 />
               </FormControl>
             </div>
-            <Button variant="raised" color="green" className={classes.loginButtons}>
+            <Button variant="raised" color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>
-            <Typography variant="subheading">
-                <Link to="./login">Login!</Link>
-            </Typography>
-            <Typography variant="subheading">
-                <Link to="/register">Don't have an Account? Register now</Link>
-            </Typography>
+            <Button variant="flat" onClick={this.props.openLog}>
+                go back to Login!
+            </Button>
+            <Button variant="flat" onClick={this.props.regClick}>
+                Don't have an Account? Register now
+            </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
             </Button>
