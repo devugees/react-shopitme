@@ -25,6 +25,7 @@ const fakeStore = {
     email: 'boobyy@gmail.com',
     accountPage: 'user324332',
     mobile: '01453099344',
+    gender: 'Male',
     coords:{
       lat: 52.522955,
       lng: 13.477175,
