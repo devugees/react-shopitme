@@ -14,7 +14,7 @@ export default class LandingPage extends Component {
                 </div>
         </Link>
             
-        <Link to={"/acceptsingledelivery"} >
+        <Link to={"/maindeliverypage"} >
             <div className="delivery_btn btn">
                 <div className="imgd">
                 <i className="fas fa-shopping-basket fa-5x"></i>

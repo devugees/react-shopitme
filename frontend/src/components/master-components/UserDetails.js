@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
 import ImageCropper from '../ImageCropper';
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
