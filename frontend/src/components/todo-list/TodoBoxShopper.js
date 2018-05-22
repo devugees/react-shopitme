@@ -1,8 +1,7 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
+import {Paper, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     box:{
@@ -48,9 +47,9 @@ const todoBoxShooper = (props) => {
   if(shopper){
     shopperUI = (
       <React.Fragment>
-        <span className={tick} onClick={props.productFound}>✔</span>
-        <span className={back} onClick={props.backToDo}>🔙</span>
-        <span className={cross} onClick={props.productNotFound}>✖</span>
+        <span role="img" aria-label="tick" className={tick} onClick={props.productFound}>✔</span>
+        <span role="img" aria-label="goBack" className={back} onClick={props.backToDo}>🔙</span>
+        <span role="img" aria-label="cross" className={cross} onClick={props.productNotFound}>✖</span>
       </React.Fragment>
     )
   }

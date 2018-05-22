@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-
+import { Input, InputLabel, Paper, FormControl } from '@material-ui/core';
 
 const date = new Date();
 const day = date.getDate();
@@ -58,10 +55,10 @@ export default class ShoppingListTitle extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(nextState.shopper.name === '' || nextState.editing || nextState.editing === false){
-      return true
-    }else {
+    if(nextState.isShopperAvailable){
       return false
+    }else if(nextState.shopper.name === '' || nextState.editing || !nextState.editing){
+      return true
     }
   }
 
@@ -91,9 +88,9 @@ export default class ShoppingListTitle extends Component {
       whatToRender = (
       <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
       )
-      if(this.state.shopper.name !== null){
+      if(this.state.shopper.name !== undefined){
       this.setState({
-        isShopperAvailable: false,
+        isShopperAvailable: true,
       })
       shopper = (<a href={this.state.shopper.accountPage}>{this.state.shopper.name}</a>)
       }

@@ -1,8 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import {Paper, Typography} from '@material-ui/core';
 
 const styles = {
     box:{
@@ -12,8 +9,7 @@ const styles = {
     }
 };
 
-const notFound = (props) => {
-  const { classes } = props;
+const notFound = props => {
 
   return (
     <div>
@@ -26,8 +22,5 @@ const notFound = (props) => {
   );
 }
 
-notFound.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(notFound);
+export default notFound;

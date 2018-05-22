@@ -1,17 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/Menu';
+import {AppBar, Toolbar, Button, Grid} from '@material-ui/core';
 import './Navbar.css';
 import DropMenu from './DropMenu';
-import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
-import avatar from '../../pictures/BoB.png';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
@@ -41,7 +31,7 @@ const styles = {
 };
 
 
-class ButtonAppBar extends React.Component {
+export default class ButtonAppBar extends React.Component {
   constructor(props) {
     super();
  
@@ -97,9 +87,7 @@ class ButtonAppBar extends React.Component {
         <Toolbar>
           <Grid item xs={2} sm={2} >     
             <div >
-            <a href="/" sy>
-              <p>Shopitme</p>
-            </a>
+              <Link to="/">ShopItMe</Link>
             </div>
           </Grid>
 
@@ -109,8 +97,8 @@ class ButtonAppBar extends React.Component {
                     <div></div>
                   </Grid>
                   <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} class="material-icons">notifications</i>
-                    <i  style={styles.notifications} class="material-icons">chat_bubble_outline</i>
+                    <i  style={styles.notifications} className="material-icons">notifications</i>
+                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu logOut={this.LogoutClickHandler} />
                   
                   </Grid>
@@ -139,6 +127,3 @@ class ButtonAppBar extends React.Component {
   </div>
   );
 } }
-
-
-export default ButtonAppBar;
