@@ -1,13 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import Modal from 'material-ui/Modal';
-import Button from 'material-ui/Button';
-
+import { withStyles } from '@material-ui/core/styles';
+import {IconButton, Input, InputLabel, InputAdornment, FormControl, Modal, Button} from '@material-ui/core';
 import Visibility from './svg/visibility.svg';
 import VisibilityOff from './svg/visibilityOff.svg';
 import Facebook from './svg/facebook.svg';

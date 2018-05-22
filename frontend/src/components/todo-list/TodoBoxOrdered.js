@@ -1,10 +1,7 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
+import {Input, InputLabel, FormControl, Typography, Paper } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   box:{

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './map.css'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import Paper from 'material-ui/Paper';
+import {Paper} from '@material-ui/core';
 require('dotenv').config();
 
 const key = process.env.REACT_APP_MY_KEY

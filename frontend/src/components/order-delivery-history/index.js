@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
+import {Button} from '@material-ui/core';
 // import children components
 import OrderHistory from './orderHistory';
 import DeliverHistory from './deliverHistory';

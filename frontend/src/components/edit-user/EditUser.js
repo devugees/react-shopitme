@@ -1,10 +1,6 @@
 import React from 'react';
 // Material UI
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-
+import {Grid, Typography, TextField, Button} from '@material-ui/core';
 // Sub Components & CSS
 import './EditUser.css';
 import UserDetailsFields from './UserDetailsFields'; 

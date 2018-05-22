@@ -1,12 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import Modal from 'material-ui/Modal';
-import Button from 'material-ui/Button';
-
+import { withStyles } from '@material-ui/core/styles';
+import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
 import './Modals.css';
 
 const styles = theme => ({
