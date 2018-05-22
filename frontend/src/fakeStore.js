@@ -26,8 +26,9 @@ const fakeStore = {
     accountPage: 'user324332',
     mobile: '01453099344',
     gender: 'Male',
+    passwordMatchError: true,
     coords:{
-      lat: 52.522955,
+      lat: 52.522955, 
       lng: 13.477175,
     },
     deliverAdress:{

@@ -16,11 +16,23 @@ export default class UserDetails extends Component {
     this.setState( {
       [name]: event.target.value,
     });
-  };
+
+    if (name === "confirmpassword") {
+      const password = this.state.password;
+      if( password === event.target.value) {
+        this.setState({passwordMatchError: false})
+      } else {
+        this.setState({passwordMatchError: true})
+      }
+    }
+
+    
+  }
+
+
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-    console.log(this.state)
     // const userDetails = {...this.state}; // Make a copy of state
     const { firstname, 
             lastname, 
@@ -29,8 +41,7 @@ export default class UserDetails extends Component {
             gender, 
             accountPage, 
             deliverAdress,
-            password,
-            confirmpassword
+            password
            } = this.state
     
     const userDetails = {
@@ -78,12 +89,12 @@ export default class UserDetails extends Component {
 
 
   render() {
-    console.log(this.props.history)
+    //console.log(this.props.history)
     return (
       <div className="user-details">
         <ImageCropper />
         <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} />
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
   }

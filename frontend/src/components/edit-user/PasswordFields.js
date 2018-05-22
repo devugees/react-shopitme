@@ -27,6 +27,7 @@ class PasswordForm extends Component {
                   margin="normal"
                   required
                   fullWidth
+                  error={this.props.passwordMatchError}
                 />
               </Grid>
             </React.Fragment>

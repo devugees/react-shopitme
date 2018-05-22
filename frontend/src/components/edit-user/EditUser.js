@@ -74,16 +74,17 @@ class EditUser extends React.Component {
                         />
                       </Grid> :  null }
                 {/* Password / Confirm Password Fields */}
-                <PasswordFields handleChange={this.props.handleChange} />
+                <PasswordFields handleChange={this.props.handleChange} passwordMatchError={this.props.userdetails.passwordMatchError}/>
               </Grid>
               </Grid> 
 
               <Grid container spacing={16} className="button-right">
                { (this.props.error) ? <p className="error">{this.props.error}</p> : null}
               <Grid item container xs={12} spacing={16}>
-                    {<Button variant="raised" size="large" type="submit">
+                    {(this.props.userdetails.passwordMatchError) ? <Button label="Submit" disabled size="large">Submit
+                      </Button> : <Button variant="raised" size="large" type="submit">
                       Submit
-                      </Button>}
+                      </Button> }
                 </Grid>
               </Grid>  
         </form>
