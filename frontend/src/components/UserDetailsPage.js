@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
 // import Components
-import Button from 'material-ui/Button';
-
+import {Button} from '@material-ui/core';
 // import CSS
 import nyancat from '../pictures/nyancat.jpg';
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
-import Grid from 'material-ui/Grid';
+import {TextField, Grid }from '@material-ui/core';
 
 // Define the Gender Options here!!
 const gender = [

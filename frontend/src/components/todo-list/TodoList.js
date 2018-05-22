@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-
+import { Input, InputLabel, Button, FormControl } from '@material-ui/core';
 // import Components
 import TodoBoxShopper from './TodoBoxShopper';
 import TodoBoxOrdered from './TodoBoxOrdered';
