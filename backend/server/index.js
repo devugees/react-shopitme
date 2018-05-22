@@ -43,7 +43,7 @@ app.use(cookieParser());
 
 //app.use('/', userRoutes);
 app.use('/', authRoutes);
-app.use('/user', passport.authenticate('jwt', {session: false}), userRoutes);
+app.use('/user', /* passport.authenticate('jwt', {session: false}), */ userRoutes);
 
 
 

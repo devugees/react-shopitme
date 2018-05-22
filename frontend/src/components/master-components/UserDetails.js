@@ -43,7 +43,8 @@ export default class UserDetails extends Component {
       city: this.state.deliverAdress.city,
       gender,
       password,
-      accountPage: this.state.accountPage
+      accountPage: this.state.accountPage,
+      _id: "5ae9b5de39bac871b69caecd"
     }
 
     if (formtype === "register") {
@@ -57,7 +58,16 @@ export default class UserDetails extends Component {
       })
         
     } else if (formtype === "changeuserdetails") {
-      console.log("send the Data to the Backend-Route Changeuserdetails")
+      console.log(userDetails);
+      crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)
+      .then((res) => {
+        if(res.err) {
+          this.setState({error: res.err})
+        } else {
+          console.log("success editing user details")
+          /* this.props.history.push("/users/changeuserdetails") */
+        }
+      })
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
   };

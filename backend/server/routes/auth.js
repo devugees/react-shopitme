@@ -9,7 +9,6 @@ const bcrypt = require('bcryptjs');
 /* POST register user */
 router.post('/register', (req, res)  => {
     const user = {...req.body};
-    console.log(user);
     
     if(!user.email) {
       return res.send({"error": "Must provide an email adress"});
