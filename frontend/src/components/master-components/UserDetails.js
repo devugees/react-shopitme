@@ -22,7 +22,6 @@ export default class UserDetails extends Component {
     event.preventDefault();
     console.log(this.state)
     // const userDetails = {...this.state}; // Make a copy of state
-
     const { firstname, 
             lastname, 
             email, 
@@ -30,7 +29,9 @@ export default class UserDetails extends Component {
             gender, 
             accountPage, 
             deliverAdress,
-            password } = this.state
+            password,
+            confirmpassword
+           } = this.state
     
     const userDetails = {
       firstname,
@@ -48,15 +49,18 @@ export default class UserDetails extends Component {
     }
 
     if (formtype === "register") {
-      crudAPI("POST", "http://localhost:4000/register", userDetails)
-      .then((res) => {
-        if(res.err) {
-          this.setState({error: res.err})
-        } else {
-          this.props.history.push("/")
-        }
-      })
-        
+      /* if (password === confirmpassword){ */
+        crudAPI("POST", "http://localhost:4000/register", userDetails)
+        .then((res) => {
+          if(res.err) {
+            this.setState({error: res.err})
+          } else {
+            this.props.history.push("/")
+          }
+        })
+      /* } else {
+        console.log("passwords need to be the same!")
+      } */ 
     } else if (formtype === "changeuserdetails") {
       console.log(userDetails);
       crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)

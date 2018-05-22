@@ -15,7 +15,6 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.put('/changeuserdetails', function(req, res, next) {
-  console.log(req.body);
   const _id = req.body._id;
   User.findOne({_id: _id}, (err, oldUser) => {
     if (err) return console.log(err) // here need to handle the error
@@ -32,13 +31,9 @@ router.put('/changeuserdetails', function(req, res, next) {
           gender: req.body.gender
         }
         if(!req.body.password){
-          // if User is found 
-          // compare both objects and change data if values are different
-          // console.log(Object.keys(newUser));
+          // if user is found compare both objects and change data if values are different
           Object.keys(newUser).forEach(key => {
             if(newUser[key].toString() !== oldUser[key].toString()) {
-              //const changedValue = {[key]: newUser[key]};
-              // console.lg(key, {_id: oldUser._id}, {$set: {[key]: newUser[key]}})
                User.update({_id: oldUser._id}, {$set: {[key]: newUser[key]}}, (err) => {
                 if (err) console.log(err);
                 else(res.json({'success': 'Details are changed'}))
