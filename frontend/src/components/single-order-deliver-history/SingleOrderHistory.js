@@ -2,7 +2,6 @@ import React, { Component  } from 'react';
 import TodoList from '../todo-list/TodoList';
 import { Link } from 'react-router-dom';
 
-
 const styles = {
       alignment:{
         position:"relative",

@@ -1,7 +1,6 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
-import Paper from 'material-ui/Paper';
-import Grid from 'material-ui/Grid';
+import {Paper, Grid} from '@material-ui/core';
 
 export default class RatingStars extends React.Component {
   constructor(props) {

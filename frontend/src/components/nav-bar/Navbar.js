@@ -1,10 +1,7 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Button from 'material-ui/Button';
+import {AppBar, Toolbar, Button, Grid} from '@material-ui/core';
 import './Navbar.css';
 import DropMenu from './DropMenu';
-import Grid from 'material-ui/Grid';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
