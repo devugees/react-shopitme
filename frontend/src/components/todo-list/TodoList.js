@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-
+import { Input, InputLabel, Button, FormControl } from '@material-ui/core';
 // import Components
 import TodoBoxShopper from './TodoBoxShopper';
 import TodoBoxOrdered from './TodoBoxOrdered';
@@ -35,7 +32,7 @@ export default class TodoList extends Component {
     const items = [...this.state.items];
     items[index].status = 'editMe';
     this.setState({todo: items[index].todo})
-    if(this.state.todo = ''){
+    if(this.state.todo === ''){
       return
     }
     this.setState({ items });

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-
+import { Input, InputLabel, Paper, FormControl } from '@material-ui/core';
 
 const date = new Date();
 const day = date.getDate();
@@ -60,7 +57,7 @@ export default class ShoppingListTitle extends Component {
   shouldComponentUpdate(nextProps, nextState){
     if(nextState.isShopperAvailable){
       return false
-    }else if(nextState.shopper.name === '' || nextState.editing || nextState.editing === false){
+    }else if(nextState.shopper.name === '' || nextState.editing || !nextState.editing){
       return true
     }
   }

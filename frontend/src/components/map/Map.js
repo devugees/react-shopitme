@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './map.css'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import Paper from 'material-ui/Paper';
+import {Paper} from '@material-ui/core';
 require('dotenv').config();
 
 const key = process.env.REACT_APP_MY_KEY
@@ -15,13 +15,7 @@ export default class Map extends Component {
       latitude: null,
       longitude: null
     },
-    error: null,
-    markers: [
-      {lat:props.lat0,lng:props.lng0},
-      {lat:props.lat1,lng:props.lng1},
-      {lat:props.lat2,lng:props.lng2},
-      {lat:props.lat3,lng:props.lng3}
-      ]
+    error: null
     }
   }
 /*
@@ -57,7 +51,7 @@ export default class Map extends Component {
       );
     }
   }
-    componentDidUpdate = () => localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
+  componentDidUpdate(){localStorage.setItem('geoPos', JSON.stringify(this.state.coords))}
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.geoId);
@@ -68,10 +62,13 @@ export default class Map extends Component {
     let lng = this.state.coords.longitude;
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
   <GoogleMap
-   defaultZoom={14}
-   defaultCenter={{ lat:this.state.markers[0].lat, lng:this.state.markers[0].lng }}>
+    defaultZoom={14}
+    defaultCenter={{
+      lat:(this.props.deliveryList ? lat : this.props.markers[0].lat),
+      lng:(this.props.deliveryList ? lng : this.props.markers[0].lng)
+    }}>
     <Marker position={{ lat: lat, lng: lng }}/>
-  {this.state.markers.map(marker=> <Marker position={{ lat: marker.lat, lng: marker.lng}}/>)}
+  {this.props.markers.map((marker, index)=> <Marker key={index} position={{ lat: marker.lat, lng: marker.lng}}/>)}
 
   </GoogleMap>
 ));
@@ -79,9 +76,9 @@ export default class Map extends Component {
       <Paper className="map" elevation={4}>
        <MapWithAMarker
         googleMapURL={url}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
+        loadingElement={<div style={{ height: '100%' }} />}
+        containerElement={<div style={{ height: '400px' }} />}
+        mapElement={<div style={{ height: '100%' }} />}
     />
     </Paper>
     )
