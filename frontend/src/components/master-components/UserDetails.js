@@ -9,7 +9,8 @@ import { crudAPI } from './../../helpers/helpers';
 
 export default class UserDetails extends Component {
   state = { 
-    ...fakeStore.orderer
+    ...fakeStore.orderer,
+    passwordMatchError: true
   };
 
   handleChange = name => event => {
@@ -20,6 +21,15 @@ export default class UserDetails extends Component {
     if (name === "confirmpassword") {
       const password = this.state.password;
       if( password === event.target.value) {
+        this.setState({passwordMatchError: false})
+      } else {
+        this.setState({passwordMatchError: true})
+      }
+    }
+
+    if (name === "password") {
+      const confirmpassword = this.state.confirmpassword;
+      if( confirmpassword === event.target.value) {
         this.setState({passwordMatchError: false})
       } else {
         this.setState({passwordMatchError: true})
@@ -49,40 +59,29 @@ export default class UserDetails extends Component {
       lastname,
       email,
       mobile,
-      street: this.state.deliverAdress.street,
-      number: this.state.deliverAdress.number,
-      postcode: this.state.deliverAdress.postcode,
-      city: this.state.deliverAdress.city,
+      location: { 
+        street: deliverAdress.street,
+        number: deliverAdress.number,
+        postcode: deliverAdress.postcode,
+        city: deliverAdress.city},
       gender,
       password,
       accountPage: this.state.accountPage,
-      _id: "5ae9b5de39bac871b69caecd"
+      _id: "5b055a82e04dd029be377773"
     }
 
     if (formtype === "register") {
-      /* if (password === confirmpassword){ */
+        console.log("this is register")
         crudAPI("POST", "http://localhost:4000/register", userDetails)
-        .then((res) => {
+        .then(res => {
           if(res.err) {
             this.setState({error: res.err})
-          } else {
-            this.props.history.push("/")
-          }
+          } 
         })
-      /* } else {
-        console.log("passwords need to be the same!")
-      } */ 
     } else if (formtype === "changeuserdetails") {
+      console.log("this is userdetails")
       console.log(userDetails);
       crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)
-      .then((res) => {
-        if(res.err) {
-          this.setState({error: res.err})
-        } else {
-          console.log("success editing user details")
-          /* this.props.history.push("/users/changeuserdetails") */
-        }
-      })
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
   };
@@ -94,7 +93,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         <ImageCropper />
         <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error}/>
       </div>
     )
   }

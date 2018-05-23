@@ -12,7 +12,7 @@ export function crudAPI(method, url, data) {
         redirect: 'follow',
         referrer: 'no-referrer',
     })
-    .then(res => res.json())     
+    .then(res => res.json())    
 }
 
 export function authCrudAPI(method, url, data) {

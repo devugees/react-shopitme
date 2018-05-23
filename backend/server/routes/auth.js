@@ -18,28 +18,27 @@ router.post('/register', (req, res)  => {
       const newUser = new User({
         firstname: user.firstname,
         lastname: user.lastname,
-        street: user.street,
-        number: user.number,
-        postcode: user.postcode,
-        city: user.city,
+        location: {
+          street: user.location.street,
+          number: user.location.number,
+          postcode: user.location.postcode,
+          city: user.location.city},
         email: user.email,
         mobile: user.mobile,
         gender: user.gender,
         password: user.password
       });
-
-      console.log(newUser);
   
-      bcrypt.genSalt(10, function(err, salt){
+      bcrypt.genSalt(10, function(error, salt){
         bcrypt.hash(newUser.password, salt, function(err, hash){
           if(err){
-            console.log('err1', err);
+            console.log('error', error);
           }
           newUser.password = hash;
-          newUser.save(function(err){
+          newUser.save(function(error){
             if(err){
-              console.log('err', err);
-              res.send(err);
+              console.log('error', error);
+              res.send(error);
             } else {
               res.json({'success': 'You are registered and can now login'});
             }

@@ -11,7 +11,7 @@ passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password'
     },(email, password, cb) => {
-
+        console.log(email);
         //Assume there is a DB module providing a global UserModel
         return User.findOne({email})
             .then(user => {
