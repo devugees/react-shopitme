@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import Fade from 'material-ui/transitions/Fade';
+import { Menu, MenuItem, Fade } from '@material-ui/core';
 import Avatars from './Avatars';
 
 
@@ -25,6 +24,8 @@ export default class FadeMenu extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+    //this.props.history.push('/main')
+
   };
 
   render(props) {

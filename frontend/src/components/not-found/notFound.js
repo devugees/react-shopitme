@@ -1,6 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
+import {Paper, Typography} from '@material-ui/core';
 
 const styles = {
     box:{

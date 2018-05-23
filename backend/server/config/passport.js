@@ -12,7 +12,7 @@ passport.use(new LocalStrategy({
         passwordField: 'password'
     },(email, password, cb) => {
 
-        //Assume there is a DB module pproviding a global UserModel
+        //Assume there is a DB module providing a global UserModel
         return User.findOne({email})
             .then(user => {
                 if (!user) {

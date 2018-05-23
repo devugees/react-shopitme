@@ -8,18 +8,25 @@ const bcrypt = require('bcryptjs');
 
 /* POST register user */
 router.post('/register', (req, res)  => {
-    console.log('This is the req to register', req.body)
-    const email = req.body.email;
-    const password = req.body.password;
+    const user = {...req.body};
+    console.log(user);
     
-    if(!email) {
+    if(!user.email) {
       return res.send({"error": "Must provide an email adress"});
-    } else if(!password) {
+    } else if(!user.password) {
       return res.send({"error": "Must provide an password"});
     } else {
       const newUser = new User({
-        email: email,
-        password: password
+        firstname: user.firstname,
+        lastname: user.lastname,
+        street: user.street,
+        number: user.number,
+        postcode: user.postcode,
+        city: user.city,
+        email: user.email,
+        mobile: user.mobile,
+        gender: user.gender,
+        password: user.password
       });
 
       console.log(newUser);
@@ -27,20 +34,20 @@ router.post('/register', (req, res)  => {
       bcrypt.genSalt(10, function(err, salt){
         bcrypt.hash(newUser.password, salt, function(err, hash){
           if(err){
-            console.log(err);
+            console.log('err1', err);
           }
           newUser.password = hash;
           newUser.save(function(err){
             if(err){
+              console.log('err', err);
               res.send(err);
-              return;
             } else {
               res.json({'success': 'You are registered and can now login'});
             }
           });
         });
-      }); 
-    } 
+      });  
+    }  
   });
 
 

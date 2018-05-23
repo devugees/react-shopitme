@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Grid from 'material-ui/Grid';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
-
-
+import { Paper, TextField, Grid, Input, InputLabel, FormControl } from '@material-ui/core';
 import './Details.css';
 
 export default class Details extends Component {

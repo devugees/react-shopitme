@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import Notes from '../Additional-Notes/Notes';
-import Button from 'material-ui/Button';
+import {Button} from '@material-ui/core'
 import Details from '../Details/Details';
 import Sure from '../Modals/Sure';
 //import fake store
