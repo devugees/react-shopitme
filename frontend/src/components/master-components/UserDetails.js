@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
 import userPic from '../../pictures/BoB.png'
