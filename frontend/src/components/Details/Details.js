@@ -53,7 +53,6 @@ export default class Details extends Component {
           [name]: event.target.value,
         });
       };
-    
     render() {
       let whatToRender = (
         <p>{this.state.newDeliverAdress.street}.{this.state.newDeliverAdress.number}<br/> {this.state.newDeliverAdress.postcode} {this.state.newDeliverAdress.city} <span onClick={this.editing}>✎</span> </p>          
@@ -79,7 +78,7 @@ export default class Details extends Component {
 <Paper>
 <Grid container spacing={24}>
     <Grid  item xs={12}>
-      From:
+       from:
        <TextField
         type="datetime-local"
         defaultValue="2018-05-01T16:30"
@@ -89,7 +88,7 @@ export default class Details extends Component {
       />
     </Grid>
     <Grid  item xs={12}>
-       To: 
+       to:   
        <TextField
         type="datetime-local"
         defaultValue="2018-05-01T16:30"

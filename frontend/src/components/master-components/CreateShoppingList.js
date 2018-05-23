@@ -23,7 +23,7 @@ export default class CreateShoppingList extends Component {
           <div className="createShoppingList main">
             <ShoppingListTitle listId={this.state.listId} checkingPerson={false} />
             <TodoList orderPerson={true}  items={this.state.items}/>
-            <Details />
+            <Details location = {this.state.location}/>
             <Notes />
             <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
               Delete

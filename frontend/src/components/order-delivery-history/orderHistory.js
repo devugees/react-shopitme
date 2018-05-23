@@ -29,25 +29,10 @@ const styles = theme => ({
 });
 
 const orderHistory = (props) => {
-const { classes } = props; 
-let shopper = (<p className={classes.p}>By: - </p>)
-if(props.orderHistory.deliverBy){
-  shopper = (<p className={classes.p}>By: {props.orderHistory.deliverBy}</p>)
-}
+console.log(props);
 
-let deliverDate;
-switch(props.orderHistory.status)
-  {
-    case ('Pending'):
-      deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
-      break;
-    case ('In Progress'):
-      deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
-      break;
-    default:
-      deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
-      break;
-  }
+const { classes } = props; 
+
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
@@ -55,9 +40,9 @@ switch(props.orderHistory.status)
           {/*<p>orderID: {props.orderHistory.orderID}</p>*/}
           <p className={classes.p}>{props.orderHistory.status}</p>
           <p className={classes.p}>{props.orderHistory.shop}</p>
-          {shopper}
+          {/* {shopper} */}
           {/*<p>created: {props.orderHistory.created}</p>*/}
-          {deliverDate}
+          {/* {deliverDate} */}
           {/*<p>delivered time: {props.orderHistory.delivered.time}</p>*/}
         </div>
         <div className={classes.buttonDiv}>
