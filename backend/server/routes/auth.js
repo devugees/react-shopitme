@@ -5,7 +5,13 @@ const passport = require('passport');
 router.use(passport.initialize());
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const waterfall = require('async-waterfall');
+const async = require('async');
+const crypto = require('crypto');
+const mailnotifier = require('./mailnotifier');
+const bodyParser = require('body-parser');
 
+router.use(bodyParser.urlencoded({ extended: false }));
 /* POST register user */
 router.post('/register', (req, res)  => {
     const user = {...req.body};
@@ -50,8 +56,52 @@ router.post('/register', (req, res)  => {
     }  
   });
 
-// Post to Login Page 
+// Forget Password
+router.post('/forget', (req, res)  => {
+  let token;
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, (err, buf) => {
+         token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(done) {
+      User.findOne({ email: req.body.email }, (err, user) =>{
+        console.log(user,'here first')
+        if (!user) {
+          req.send('there is no user registered with this email');
+        }
+        user.resetPasswordToken = token;
+        user.save(function(err, user) {
+          console.log(err, 'error here');
+          mailnotifier.sendMail(user.email,`Password Reset`,`You are receiving this because you (or someone else) have requested the reset of the password for your account.
+          'Please click on the following link: http://localhost:3000/reset/${token}
+           or paste this into your browser to complete the process:`)
+          res.send('it is working')
+        });
+      });
+    },
+  ], function(err) {
+    if (err) throw (err);
+    res.redirect('/forgot');
+  });
+});
 
+// Reset Password
+router.post('/resets/:token', (req, res)  => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    res.render('reset', {
+      user: req.user
+    });
+  });
+});
+
+// Post to Login Page 
 
 router.post('/login', (req, res, next) => {
   if (req.body.password && req.body.email) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
 import './Modals.css';
@@ -38,7 +39,10 @@ class SimpleModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      email: '',
+      resault: ''
+
     };
   }
   
@@ -49,6 +53,24 @@ class SimpleModal extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  emailHandler = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  resetHandler = () => {
+    axios.post('http://localhost:4000/forget', {
+      email: this.state.email,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   handlelogin = (props, e) => {
     this.setState({ open: false });
@@ -82,10 +104,11 @@ class SimpleModal extends React.Component {
                     underline: classes.inputUnderline,
                   }}
                   id="custom-color-input"
+                  onChange={this.emailHandler.bind(this)}
                 />
               </FormControl>
             </div>
-            <Button variant="raised" color="default" className={classes.loginButtons}>
+            <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>
             <Button variant="flat" onClick={this.props.openLog}>
