@@ -24,6 +24,8 @@ export default class FadeMenu extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+    //this.props.history.push('/main')
+
   };
 
   render(props) {

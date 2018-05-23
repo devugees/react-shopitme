@@ -25,7 +25,7 @@ state = {...fakeStore}
         <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
         <TodoList items={this.state.items} shopperPerson={true}/>
         <Notes notes={this.state.notes}/>
-        <Map lat0={this.state.orderer.coords.lat} lng0={this.state.orderer.coords.lng}/>
+        <Map markers={[this.state.orderer.coords]}/>
         <Button style={style} variant="raised" color="secondary">
         <Link to="">Report Issue</Link>
       </Button>
