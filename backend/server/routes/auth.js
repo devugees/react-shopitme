@@ -68,9 +68,8 @@ router.post('/forget', (req, res)  => {
     },
     function(done) {
       User.findOne({ email: req.body.email }, (err, user) =>{
-        console.log(user,'here first')
         if (!user) {
-          req.send('there is no user registered with this email');
+          return res.send('there is no user registered with this email');
         }
         user.resetPasswordToken = token;
         user.save(function(err, user) {

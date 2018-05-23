@@ -123,7 +123,10 @@ export default class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={(e) => this.setState({openLogin: true})}>Login</Button>
+                  <Button color="inherit"
+                          onClick={(e) => this.setState({
+                            openLogin: true,
+                            openForgotpass :false})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>

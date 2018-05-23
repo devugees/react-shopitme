@@ -95,7 +95,7 @@ class SimpleModal extends React.Component {
                   FormLabelClasses={{
                     focused: classes.inputLabelFocused,
                   }}
-                  htmlFor="custom-color-input"
+                  htmlFor="custom-color-input2"
                 >
                   E-mail
                 </InputLabel>
@@ -103,7 +103,7 @@ class SimpleModal extends React.Component {
                   classes={{
                     underline: classes.inputUnderline,
                   }}
-                  id="custom-color-input"
+                  id="custom-color-input2"
                   onChange={this.emailHandler.bind(this)}
                 />
               </FormControl>
