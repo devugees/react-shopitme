@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-
+router.use(passport.initialize());
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
@@ -50,32 +50,23 @@ router.post('/register', (req, res)  => {
     }  
   });
 
+// Post to Login Page 
 
-/* POST login. */
+
 router.post('/login', (req, res, next) => {
-    console.log('hello')
-
-    passport.authenticate('local', {session: false}, (err, user, info) => {
+  if (req.body.password && req.body.email) {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) { return next(err); }
+      if (info["error"]) { return res.send(info)}
+      req.logIn(user, (err) => {
         if (err) { return next(err); }
-        if (info["error"]) { return res.send(info)}
-        if (user === false) {return res.send(info)}
-        // if (user) { return res.send(user)}
-
-       req.login(user, {session: false}, (err) => {
-           if (err) {
-               res.send(err);
-           }
-           // generate a signed son web token with the contents of user object and return it in the response
-           const token = jwt.sign(user.toJSON(), 'secret');
-            console.log(token, user);
-
-           return res.json({user, token});
-        });
-    })(req, res); 
-}); 
-
-router.get('/login', function (req, res, next) {
-    console.log(req);
+        const token = jwt.sign(user.toJSON(), 'secret');
+        return res.json({user, token});
+      });
+    })(req, res, next);
+  } else {
+      return res.send({"error": "Email and Password must be provided"});
+  }
 });
 
 module.exports = router;
