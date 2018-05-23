@@ -42,6 +42,11 @@ const styles = theme => ({
   },
   iconwww: {
     width: '24%',
+  },
+  error: {
+    color: 'crimson',
+    margin: '1rem auto',
+    textAlign:'center'
   }
 });
 
@@ -82,7 +87,7 @@ class SimpleModal extends React.Component {
 
   render(props) {
     const { classes } = this.props;
-
+    let showError;
     return (
       <div>
         <Modal
@@ -117,6 +122,7 @@ class SimpleModal extends React.Component {
                     underline: classes.inputUnderline,
                   }}
                   id="custom-color-input"
+                  //value={'boobyy@gmail.com'}
                 />
               </FormControl>
               </div>
@@ -142,12 +148,13 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
+              {this.props.error ? <p className={classNames(classes.error)}>{this.props.error}</p> : null}
               <Button
                 variant="raised"
                 className={classes.loginButtons} 
                 onClick={()=>{this.props.loginclick({
-                  pass:this.state.password,
-                  email:this.state.email})
+                  email:this.state.email,
+                  password:this.state.password})
                 }}>
                 Login 
               </Button>
@@ -162,7 +169,6 @@ class SimpleModal extends React.Component {
             </Button>
           </div>
         </Modal>
-        
       </div>
     );
   }
