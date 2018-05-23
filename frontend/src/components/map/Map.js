@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './map.css'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import Paper from 'material-ui/Paper';
+import fakeStore from '../../fakeStore';
 require('dotenv').config();
 
 const key = process.env.REACT_APP_MY_KEY
 const url = `https://maps.googleapis.com/maps/api/js?key=${key}`
 
 export default class Map extends Component {
-  constructor(props){
+/*   constructor(props){
     super(props)
     this.state = {
     coords: {
@@ -23,7 +24,7 @@ export default class Map extends Component {
       {lat:props.lat3,lng:props.lng3}
       ]
     }
-  }
+  } */
 /*
   markers: [
       {lat:52.524978,lng:13.480479},
@@ -32,6 +33,7 @@ export default class Map extends Component {
       {lat:52.526125,lng:13.482797}
       ]
 */
+state = {...fakeStore}
   componentDidMount() {
       this.geoId = navigator.geolocation.watchPosition(
         position => {
@@ -53,20 +55,20 @@ componentWillUnmount() {
   }
 
   render() {
-    let lat = this.state.coords.latitude;
-    let lng = this.state.coords.longitude;
+    let lat = this.state.shopper.coords.latitude;
+    let lng = this.state.shopper.coords.longitude;
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
   <GoogleMap
    defaultZoom={14}
-   defaultCenter={{ lat:this.state.markers[0].lat, lng:this.state.markers[0].lng }}>
+   defaultCenter={{ lat:this.state.shopper.coords.lat, lng:this.state.shopper.coords.lng }}>
     <Marker position={{ lat: lat, lng: lng }}/>
-  {this.state.markers.map((marker, index)=> <Marker key={index} position={{ lat: marker.lat, lng: marker.lng}}/>)}
+  {this.state.orderers.map((marker, index)=> <Marker key={index} position={{ lat: marker.coords.lat, lng: marker.coords.lng}}/>)}
 
   </GoogleMap>
 ));
   return (
       <Paper className="map" elevation={4}>
-       <MapWithAMarker
+       <MapWithAMarker 
         googleMapURL={url}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `400px` }} />}

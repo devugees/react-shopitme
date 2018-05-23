@@ -9,13 +9,14 @@ import React, { Component } from 'react';
 // import RatingStars from './RatingStars';
 // import Notes from './Additional-Notes/Notes'
 // import Details from './Details/Details'
-import OrderDeliveryHistory from './master-components/OrderDeliveryHistory'
+// import OrderDeliveryHistory from './master-components/OrderDeliveryHistory'
 // import CreateShoppingList from './master-components/CreateShoppingList'
-import SingleOrderHistory from './single-order-deliver-history/SingleOrderHistory';
+// import SingleOrderHistory from './single-order-deliver-history/SingleOrderHistory';
 // import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
-import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
+// import SingleDeliverHistory from './single-order-deliver-history/SingleDeliverHistory';
 //import fake store
 import fakeStore from '../fakeStore';
+import MainDeliveryPage from './master-components/MainDeliveryPage'
 
 
 
@@ -41,7 +42,7 @@ state = {...fakeStore}
         {/*<EditUser />*/}
        {/*<Notes />*/}
        {/*<Details />*/}
-    { /*<MainDelivery />*/}
+    <MainDeliveryPage />
       {/*<CreateShoppingList />
         <MainDeliveryPage />*/}
     

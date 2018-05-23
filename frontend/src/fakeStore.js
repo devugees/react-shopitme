@@ -21,6 +21,7 @@ const fakeStore = {
   },
   orderers:[
     {
+      orderId: 3324,
     firstname: 'Bob',
     lastname: 'Doe',
     username: 'Bobby',
@@ -38,9 +39,31 @@ const fakeStore = {
       city: 'Berlin',
       mobile: '01453099344'
     },
+    deliveringTime:{
+      start:'14:00',
+      end:'16:00',
+      date:'23.03.18'
+    },
+    shop: 'Rewe',
+    items:
+    [{
+      status:'box',
+      todo:"5 little breads"
+    },{
+      status:'box',
+      todo:"Bateries AAA pack of 4"
+    },{ 
+      status:'box',
+      todo:"Ice Cream triple flavour"
+    },{
+      status:'box',
+      todo:"2x Orange Juice low sugar"
+    }
+    ],
+    notes:'Bring me all in a box please. Thank you', 
   },
-
 {
+   orderId:3325,
     firstname: 'Laith',
     lastname: 'Massoud',
     username: 'LEO',
@@ -59,8 +82,31 @@ const fakeStore = {
       mobile: '01453021344',
       Distince:"2 km"
     },
+    deliveringTime:{
+      start:'14:00',
+      end:'16:00',
+      date:'23.03.18'
+    },
+    shop: 'Lidl',
+    items:
+    [{
+      status:'box',
+      todo:"5 little breads"
+    },{
+      status:'box',
+      todo:"Bateries AAA pack of 4"
+    },{ 
+      status:'box',
+      todo:"Ice Cream triple flavour"
+    },{
+      status:'box',
+      todo:"2x Orange Juice low sugar"
+    }
+    ],
+    notes:'Bring me all in a box please. Thank you',
   },
 {
+  orderId:3326,
     firstname: 'Orwa',
     lastname: 'Houry',
     username: 'Orwa377',
@@ -78,8 +124,31 @@ const fakeStore = {
       city: 'Berlin',
       mobile: '01453021312'
     },
+    deliveringTime:{
+      start:'14:00',
+      end:'16:00',
+      date:'23.03.18'
+    },
+    shop:'Aldi',
+    items:
+    [{
+      status:'box',
+      todo:"5 little breads"
+    },{
+      status:'box',
+      todo:"Bateries AAA pack of 4"
+    },{ 
+      status:'box',
+      todo:"Ice Cream triple flavour"
+    },{
+      status:'box',
+      todo:"2x Orange Juice low sugar"
+    }
+    ],
+    notes:'Bring me all in a box please. Thank you',  
   },
 {
+ orderId:3327,
     firstname: 'Tarek',
     lastname: 'AlKhatieb',
     username: 'TOM',
@@ -97,13 +166,30 @@ const fakeStore = {
       city: 'Berlin',
       mobile: '01453021312'
     },
+    deliveringTime:{
+      start:'14:00',
+      end:'16:00',
+      date:'23.03.18'
+    },
+    shop: 'Rewe',
+    items:
+    [{
+      status:'box',
+      todo:"5 little breads"
+    },{
+      status:'box',
+      todo:"Bateries AAA pack of 4"
+    },{ 
+      status:'box',
+      todo:"Ice Cream triple flavour"
+    },{
+      status:'box',
+      todo:"2x Orange Juice low sugar"
+    }
+    ],
+    notes:'Bring me all in a box please. Thank you',
   },
   ],
-  deliveringTime:{
-    start: '14:00',
-    end:'16:00',
-    date: '23.03.18'
-  },
   items:
   [{
     status:'box',
