@@ -112,6 +112,7 @@ class SimpleModal extends React.Component {
                   E-mail
               </InputLabel>
                 <Input
+                onChange={this.handleChange('email')}
                   classes={{
                     underline: classes.inputUnderline,
                   }}
@@ -141,7 +142,13 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" className={classes.loginButtons} onClick={this.props.loginclick}>
+              <Button
+                variant="raised"
+                className={classes.loginButtons} 
+                onClick={()=>{this.props.loginclick({
+                  pass:this.state.password,
+                  email:this.state.email})
+                }}>
                 Login 
               </Button>
               <Button variant="flat" onClick={this.handleForget}>

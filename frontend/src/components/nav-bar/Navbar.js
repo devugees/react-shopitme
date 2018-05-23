@@ -5,6 +5,7 @@ import DropMenu from './DropMenu';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
+import {crudAPI} from '../../helpers/helpers'
 
 
 
@@ -43,7 +44,8 @@ export default class ButtonAppBar extends React.Component {
   }
 
 
-  LoginClickHandler = () => {
+  LoginClickHandler = params => {
+    console.log('try to login',params)
     this.setState({
       login: true,
       openLogin: false,
