@@ -7,8 +7,6 @@ import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
 import { crudAPI } from '../../helpers/helpers'
 
-
-
 const styles = {
   row: {
     display: 'flex',
@@ -53,6 +51,7 @@ export default class NavBar extends React.Component {
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
+          this.props.updateUserData(data.user)
           this.setState({
             data: data.user,
             error:null,

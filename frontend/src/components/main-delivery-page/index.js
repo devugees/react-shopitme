@@ -36,7 +36,7 @@ componentDidMount(){
   }
 
   render(){
-
+    console.log(this.props.data)
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
