@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
 import './Modals.css';
@@ -38,10 +39,11 @@ class SimpleModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      email: '',
+      resault: ''
     };
   }
-  
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openForgotpass});
   }
@@ -49,6 +51,27 @@ class SimpleModal extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  emailHandler = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  resetHandler = () => {
+
+    axios.post('http://localhost:4000/forgot', {
+      email: this.state.email,
+    })
+    .then( response => {
+      this.setState({
+        resault: response.data
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   handlelogin = (props, e) => {
     this.setState({ open: false });
@@ -73,7 +96,7 @@ class SimpleModal extends React.Component {
                   FormLabelClasses={{
                     focused: classes.inputLabelFocused,
                   }}
-                  htmlFor="custom-color-input"
+                  htmlFor="custom-color-input2"
                 >
                   E-mail
                 </InputLabel>
@@ -81,11 +104,13 @@ class SimpleModal extends React.Component {
                   classes={{
                     underline: classes.inputUnderline,
                   }}
-                  id="custom-color-input"
+                  id="custom-color-input2"
+                  onChange={this.emailHandler.bind(this)}
                 />
               </FormControl>
             </div>
-            <Button variant="raised" color="default" className={classes.loginButtons}>
+            <p>{this.state.resault}</p>
+            <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>
             <Button variant="flat" onClick={this.props.openLog}>

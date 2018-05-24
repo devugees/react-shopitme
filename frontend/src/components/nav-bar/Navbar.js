@@ -7,8 +7,6 @@ import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
 import { crudAPI } from '../../helpers/helpers'
 
-
-
 const styles = {
   row: {
     display: 'flex',
@@ -32,7 +30,7 @@ const styles = {
 };
 
 
-export default class ButtonAppBar extends React.Component {
+export default class NavBar extends React.Component {
   constructor(props) {
     super();
  
@@ -53,6 +51,7 @@ export default class ButtonAppBar extends React.Component {
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
+          this.props.updateUserData(data.user)
           this.setState({
             data: data.user,
             error:null,
@@ -65,11 +64,11 @@ export default class ButtonAppBar extends React.Component {
   }
 
   LogoutClickHandler = () => {
+    localStorage.removeItem('token');
     this.setState({
       login: false,
       openLogin: false,
       openForgotpass :false
-
     })
   }
 
@@ -111,7 +110,7 @@ export default class ButtonAppBar extends React.Component {
                   <Grid  item xs={6} sm={6} >
                     <i  style={styles.notifications} className="material-icons">notifications</i>
                     <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} />
+                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
                 </React.Fragment>
@@ -123,7 +122,10 @@ export default class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={(e) => this.setState({openLogin: true})}>Login</Button>
+                  <Button color="inherit"
+                          onClick={(e) => this.setState({
+                            openLogin: true,
+                            openForgotpass :false})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>
