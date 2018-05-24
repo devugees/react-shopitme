@@ -66,7 +66,6 @@ router.post('/login', (req, res, next) => {
       return res.send({"error": "Email and Password must be provided"});
   }
 });
-});
 
 router.get('/data',function(req, res, next){
   History.find(function(err, history){
