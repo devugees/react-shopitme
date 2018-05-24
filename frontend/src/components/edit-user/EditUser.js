@@ -64,6 +64,7 @@ class EditUser extends React.Component {
 
           <Grid container spacing={16} className="button-right">
             {(this.props.error) ? <p className="error">{this.props.error}</p> : null}
+            {(this.props.response) ? <p className="message">{this.props.response}</p> : null}
             <Grid item container xs={12} spacing={16}>
             {(isRegisterForm && !this.props.userdetails.passwordMatchError || 
               isChangeUser && !this.props.userdetails.password && !this.props.userdetails.confirmpassword || 

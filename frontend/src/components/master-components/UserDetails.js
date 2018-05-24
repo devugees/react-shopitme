@@ -72,16 +72,17 @@ export default class UserDetails extends Component {
         .then(res => {
           console.log(res)
           if(res.err) {
-            this.setState({error: res.err})
+            this.setState({response: res.err})
           } else {
-            this.setState({message: res})
+            this.setState({response: res})
           }
         })
     } else if (formtype === "changeuserdetails") {
-      console.log("this is userdetails")
-      console.log(userDetails);
+      if (!userDetails.password) { delete userDetails[password]}
       crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)
-      .then(res => console.log(res))
+      .then(res => { if(res.err){this.setState({response: res.err})}
+                     else {this.setState({response: res.message})}
+                    })
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
   };
@@ -93,7 +94,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         <ImageCropper />
         <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error}/>
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response}/>
       </div>
     )
   }
