@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const User = require('../models/user');
+const History = require('../models/history');
 const bcrypt = require('bcryptjs');
 
 /* POST register user */
@@ -19,10 +20,7 @@ router.post('/register', (req, res)  => {
       const newUser = new User({
         firstname: user.firstname,
         lastname: user.lastname,
-        street: user.street,
-        number: user.number,
-        postcode: user.postcode,
-        city: user.city,
+        location:{ ...user.location},
         email: user.email,
         mobile: user.mobile,
         gender: user.gender,
@@ -74,8 +72,37 @@ router.post('/login', (req, res, next) => {
     })(req, res); 
 }); 
 
-router.get('/login', function (req, res, next) {
-    console.log(req);
+router.post('/data', function (req, res, next) {
+  if(!req.body) {
+    res.status(400).send({message: "can not be empty"});
+}
+newHistory = new History(req.body);
+  newHistory.save(function(err) {
+    if(err) {
+      return res.send(err);
+    }
+    
+    return res.send({message: "created successfully!"})
 });
+});
+
+router.get('/data',function(req, res, next){
+  History.find(function(err, history){
+    if(err) {
+        res.status(500).send({message: "Some error ocuured while retrieving data."});
+    } else {
+        res.send(history);
+    }
+});
+})
+router.get('/users',function(req, res, next){
+  User.find(function(err, users){
+    if(err) {
+        res.status(500).send({message: "Some error ocuured while retrieving data."});
+    } else {
+        res.send(users);
+    }
+});
+})
 
 module.exports = router;
