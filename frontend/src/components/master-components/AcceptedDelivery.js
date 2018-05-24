@@ -8,7 +8,7 @@ import Notes from '../Additional-Notes/Notes';
 import Map from '../map/Map';
 //import fake store
 import fakeStore from '../../fakeStore';
-import {FakeStoreContext} from '../../fakeStore';
+import {Store} from '../../fakeStore';
 
 export default class AcceptSingleDelivery extends Component {
 
@@ -21,7 +21,7 @@ state = {...fakeStore}
     }
     
     return (
-      <FakeStoreContext.Consumer>
+      <Store.Consumer>
         <div className="accept-single-delivery main">
           <ShoppingListTitle shopperPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId} shopperName={this.state.shopper.firstname} shopperAccountPage={this.state.shopper.accountPage}/>
           <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
@@ -35,7 +35,7 @@ state = {...fakeStore}
             <Link to="/">Delivered</Link>
           </Button>
         </div>
-      </FakeStoreContext.Consumer>
+      </Store.Consumer>
     )
   }
 };

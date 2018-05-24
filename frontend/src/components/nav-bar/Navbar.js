@@ -7,9 +7,6 @@ import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
 import { crudAPI } from '../../helpers/helpers'
 
-import {FakeStoreContext} from '../../fakeStore';
-
-
 const styles = {
   row: {
     display: 'flex',
@@ -54,8 +51,7 @@ export default class NavBar extends React.Component {
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
-          console.log(data)
-          this.props.uploadUserData(data.user)
+          this.props.updateUserData(data.user)
           this.setState({
             data: data.user,
             error:null,
@@ -95,7 +91,6 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    console.log('navbar',this.props.uploadUserData)
   return (
     <div className="navbar">
       <div>

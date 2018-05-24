@@ -40,7 +40,6 @@ componentDidMount(){
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
-        <button onClick={()=>{this.props.data.updateStore('HERE COMES DATA!')}}>click</button>
         <Map deliveryList={true} markers={this.state.coords}/>
         {this.state.orders.map((order, index) => <DeliveryList key={index} order={order} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
       </React.Fragment>)

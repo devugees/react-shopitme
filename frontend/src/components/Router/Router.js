@@ -12,14 +12,14 @@ import Footer from '../Footer'
 import NotFound from '../not-found/notFound'
 // get main for testing
 import Main from  '../Main';
-import {FakeStoreContext} from '../../fakeStore';
+import {Store} from '../../fakeStore';
 
 const Router = () => (
  <BrowserRouter>
     <React.Fragment>
-    <FakeStoreContext.Consumer>
-    {data =>(<Navbar uploadUserData={data.updateStore}/>)}
-    </FakeStoreContext.Consumer>
+    <Store.Consumer>
+    {data =>(<Navbar updateUserData={data.updateUserData}/>)}
+    </Store.Consumer>
     <Switch>
         <Route exact path='/' component={Landing} />
         <Route exact path='/main' component={Main} />
