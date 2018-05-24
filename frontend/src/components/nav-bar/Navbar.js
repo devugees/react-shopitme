@@ -32,7 +32,7 @@ const styles = {
 };
 
 
-export default class ButtonAppBar extends React.Component {
+export default class NavBar extends React.Component {
   constructor(props) {
     super();
  
@@ -65,11 +65,11 @@ export default class ButtonAppBar extends React.Component {
   }
 
   LogoutClickHandler = () => {
+    localStorage.removeItem('token');
     this.setState({
       login: false,
       openLogin: false,
       openForgotpass :false
-
     })
   }
 
@@ -111,7 +111,7 @@ export default class ButtonAppBar extends React.Component {
                   <Grid  item xs={6} sm={6} >
                     <i  style={styles.notifications} className="material-icons">notifications</i>
                     <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} />
+                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
                 </React.Fragment>

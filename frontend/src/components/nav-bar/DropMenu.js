@@ -9,7 +9,7 @@ const styles = {
   padding: "0"
 }
 
-export default class FadeMenu extends React.Component {
+export default class DropMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ export default class FadeMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-        <Avatars/>
+        <Avatars userName={this.props.userName}/>
     
         </Button>
         <Menu style={{position:"absolute" ,top:"2.3rem"}}
@@ -48,9 +48,9 @@ export default class FadeMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
-            <MenuItem onClick={this.handleClose}><Link to="/orderdeliveryhistory">History</Link></MenuItem>
-            <MenuItem onClick={this.handleClose}><Link to="/userdetails">Your Profile</Link></MenuItem>
-            <MenuItem onClick={this.props.logOut}>Logout</MenuItem>
+          <MenuItem onClick={this.handleClose}><Link to="/orderdeliveryhistory">History</Link></MenuItem>
+          <MenuItem onClick={this.handleClose}><Link to="/userdetails">Your Profile</Link></MenuItem>
+          <MenuItem onClick={this.props.logOut}><Link to="/">Logout</Link></MenuItem>
         </Menu>
       </React.Fragment>
     );
