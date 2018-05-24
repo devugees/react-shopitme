@@ -5,8 +5,9 @@ import UserDetails from '../master-components/UserDetails'
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
-import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory'
-import MainDeliveryPage from '../master-components/MainDeliveryPage'
+import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
+import MainDeliveryPage from '../master-components/MainDeliveryPage';
+import NewPassword from '../master-components/NewPassord'
 import Navbar from '../nav-bar/Navbar';
 import Footer from '../Footer'
 import NotFound from '../not-found/notFound'
@@ -26,6 +27,7 @@ const Router = () => (
         <Route exact path='/createshoppinglist' component={CreateShoppingList} />
         <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
         <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
+        <Route exact path='/reset/*' component={NewPassword} />
         <Route path="*" component={ NotFound } />
     </Switch>
     <Footer />
