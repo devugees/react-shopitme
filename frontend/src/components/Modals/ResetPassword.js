@@ -42,10 +42,8 @@ class SimpleModal extends React.Component {
       open: false,
       email: '',
       resault: ''
-
     };
   }
-  
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openForgotpass});
   }
@@ -61,11 +59,14 @@ class SimpleModal extends React.Component {
   }
 
   resetHandler = () => {
-    axios.post('http://localhost:4000/forget', {
+
+    axios.post('http://localhost:4000/forgot', {
       email: this.state.email,
     })
-    .then(function (response) {
-      console.log(response);
+    .then( response => {
+      this.setState({
+        resault: response.data
+      })
     })
     .catch(function (error) {
       console.log(error);
@@ -108,6 +109,7 @@ class SimpleModal extends React.Component {
                 />
               </FormControl>
             </div>
+            <p>{this.state.resault}</p>
             <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>

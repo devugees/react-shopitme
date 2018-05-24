@@ -57,46 +57,77 @@ router.post('/register', (req, res)  => {
   });
 
 // Forget Password
-router.post('/forget', (req, res)  => {
-  let token;
+router.post('/forgot', function(req, res, next) {
   async.waterfall([
     function(done) {
-      crypto.randomBytes(20, (err, buf) => {
-         token = buf.toString('hex');
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
         done(err, token);
       });
     },
-    function(done) {
-      User.findOne({ email: req.body.email }, (err, user) =>{
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
-          return res.send('there is no user registered with this email');
+          console.log('you are here')
+          return res.send('No account with that email address exists.');
         }
+
         user.resetPasswordToken = token;
-        user.save(function(err, user) {
-          console.log(err, 'error here');
-          mailnotifier.sendMail(user.email,`Password Reset`,`You are receiving this because you (or someone else) have requested the reset of the password for your account.
-          'Please click on the following link: http://localhost:3000/reset/${token}
-           or paste this into your browser to complete the process:`)
-          res.send('it is working')
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
         });
       });
     },
+    function(token, user) {
+      mailnotifier.sendMail(user.email,`Password Reset`,`You are receiving this because you (or someone else) have requested the reset of the password for your account.
+          'Please click on the following link: http://localhost:3000/reset/${token}
+           this link is valid just for one hour or paste this into your browser to complete the process:`)
+          return res.send('Please check your email, we have sent the reset form')
+    }
   ], function(err) {
-    if (err) throw (err);
+    if (err) return next(err);
     res.redirect('/forgot');
   });
 });
 
 // Reset Password
-router.post('/resets/:token', (req, res)  => {
-  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-    if (!user) {
-      req.flash('error', 'Password reset token is invalid or has expired.');
-      return res.redirect('/forgot');
+router.post('/reset/:token', function(req, res) {
+  async.waterfall([
+    function(done) {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          return res.send('Password reset token is invalid or has expired.');
+        }
+
+        user.password = req.body.password;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        bcrypt.genSalt(10, function(err, salt){
+          bcrypt.hash(user.password, salt, function(err, hash){
+            if(err){
+              console.log('err1', err);
+            }
+            user.password = hash;
+            user.save(function(err) {
+              req.logIn(user, function(err) {
+                done(err, user);
+              });
+            });
+          });
+        }); 
+
+        
+      });
+    },
+    function(user) {
+      mailnotifier.sendMail(user.email,`Password Changed`,`This is a confirmation that the password for your account has just been changed`)
+      return res.send('Your Password has been changed successfully you can login now')
     }
-    res.render('reset', {
-      user: req.user
-    });
+  ], function(err) {
+    res.redirect('/');
   });
 });
 
