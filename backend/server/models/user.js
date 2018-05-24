@@ -28,6 +28,12 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
+  },
   location: {
     type: Object,
     required: true

@@ -5,8 +5,7 @@ import DropMenu from './DropMenu';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
-
-
+import { crudAPI } from '../../helpers/helpers'
 
 const styles = {
   row: {
@@ -31,32 +30,45 @@ const styles = {
 };
 
 
-export default class ButtonAppBar extends React.Component {
+export default class NavBar extends React.Component {
   constructor(props) {
     super();
  
     this.state = {
       login: false,
       openLogin: false,
-      openForgotpass :false
+      openForgotpass :false,
+      error: null
     };
   }
 
 
-  LoginClickHandler = () => {
-    this.setState({
-      login: true,
-      openLogin: false,
-      openForgotpass :false
-    });
+  LoginClickHandler = params => {
+    //{email:'123@123.com', pass:123}
+    crudAPI('post', 'http://localhost:4000/login', params)
+      .then(data => {
+        if(data.error){
+          this.setState({ error:data.error })
+        } else {
+          localStorage.setItem('token', data.token);
+          this.props.updateUserData(data.user)
+          this.setState({
+            data: data.user,
+            error:null,
+            login: true,
+            openLogin: false,
+            openForgotpass :false
+          })
+        }
+    })
   }
 
   LogoutClickHandler = () => {
+    localStorage.removeItem('token');
     this.setState({
       login: false,
       openLogin: false,
       openForgotpass :false
-
     })
   }
 
@@ -78,7 +90,6 @@ export default class ButtonAppBar extends React.Component {
     })
   }
 
-
   render() {
   return (
     <div className="navbar">
@@ -91,7 +102,7 @@ export default class ButtonAppBar extends React.Component {
             </div>
           </Grid>
 
-          {this.state.login?
+          {this.state.login ?
               ( <React.Fragment >
                   <Grid item xs={4} sm={4} >
                     <div></div>
@@ -99,7 +110,7 @@ export default class ButtonAppBar extends React.Component {
                   <Grid  item xs={6} sm={6} >
                     <i  style={styles.notifications} className="material-icons">notifications</i>
                     <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} />
+                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
                 </React.Fragment>
@@ -111,7 +122,10 @@ export default class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={(e) => this.setState({openLogin: true})}>Login</Button>
+                  <Button color="inherit"
+                          onClick={(e) => this.setState({
+                            openLogin: true,
+                            openForgotpass :false})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>
@@ -119,6 +133,7 @@ export default class ButtonAppBar extends React.Component {
       <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
         openForgotpassword={this.popupForgot}
         loginclick={this.LoginClickHandler}
+        error={this.state.error}
       /> 
       <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.openForgotpass}
         openLog={this.popupLogin}
