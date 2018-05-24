@@ -15,19 +15,13 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.put('/changeuserdetails', function(req, res) {
-  const _id = req.body._id;
-  User.findOne({_id: _id}, (err, oldUser) => {
-    if (err) res.send(err); // here need to handle the error
-    else {
-      
-        const newUser = {
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          email: req.body.email,
-          mobile: req.body.mobile,
-          gender: req.body.gender
-        }
+  let newUser = {...req.body}
+  delete newUser.accountPage
+  console.log(newUser)
 
+  User.findOne({_id: newUser._id}, (error, oldUser) => {
+    if (error) res.send(error); // here need to handle the error
+    else {
        /*  if (req.body.password) {
           bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password, salt, function(err, hash){
@@ -36,20 +30,29 @@ router.put('/changeuserdetails', function(req, res) {
               }
               return newUser.password = hash;
         }})} */
-
-        if(!newUser.password){
-          // if user is found compare both objects and change data if values are different
-          Object.keys(newUser).forEach(key => {
-            console.log(key, newUser[key], oldUser[key]);
-            if(newUser[key].toString() !== oldUser[key].toString()) {
-               User.update({_id: oldUser._id}, {$set: {[key]: newUser[key]}}, (err) => {
-                if (err) console.log(err);
-               /*  else( res.json({'success': 'Details are changed'})) */
-              }) 
-            }
+        if(newUser.password) { // if new password was sent, hash it and store in database
+          bcrypt.genSalt(10, function(err, salt){ 
+            bcrypt.hash(newUser.password, salt, (error, hash) => {
+              if(err){ res.json({error: error})}
+              newUser.password = hash;
+              User.findByIdAndUpdate(newUser._id, {$set: {password: newUser.password}}, (err, query) => {
+                if(err) res.send(err)
+                res.send(query)
+              })
+            })
           })
-            
-        } 
+        }
+
+        Object.keys(newUser).forEach(key => {
+            //console.log(key, newUser[key], oldUser[key]);
+            if(newUser[key].toString() !== oldUser[key].toString()) {
+              User.update({_id: oldUser._id}, {$set: {[key]: newUser[key]}}, (err, query) => {
+                if(err) res.send(err)
+              })      
+            }
+          }) 
+        res.json({"message" : "data updated sucessfully"}) 
+
     }
   })
 });

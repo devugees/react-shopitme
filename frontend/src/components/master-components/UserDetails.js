@@ -14,7 +14,7 @@ export default class UserDetails extends Component {
   };
 
   handleChange = name => event => {
-    this.setState( {
+    this.setState({
       [name]: event.target.value,
     });
 
@@ -35,15 +35,12 @@ export default class UserDetails extends Component {
         this.setState({passwordMatchError: true})
       }
     }
-
-    
   }
 
 
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-    // const userDetails = {...this.state}; // Make a copy of state
     const { firstname, 
             lastname, 
             email, 
@@ -71,17 +68,20 @@ export default class UserDetails extends Component {
     }
 
     if (formtype === "register") {
-        console.log("this is register")
         crudAPI("POST", "http://localhost:4000/register", userDetails)
         .then(res => {
+          console.log(res)
           if(res.err) {
             this.setState({error: res.err})
-          } 
+          } else {
+            this.setState({message: res})
+          }
         })
     } else if (formtype === "changeuserdetails") {
       console.log("this is userdetails")
       console.log(userDetails);
       crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)
+      .then(res => console.log(res))
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
   };
