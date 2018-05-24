@@ -1,5 +1,7 @@
-const fakeStore = {
-  listId: 3323,
+import React from 'react';
+
+let fakeStore = {
+  listId: 3313,
   fakeDeliverAdresses:[{
     // first
       orderer:{
@@ -462,3 +464,8 @@ const fakeStore = {
 }
 
 export default fakeStore
+
+export const FakeStoreContext = React.createContext({
+  store: fakeStore,
+  updateStore: data => {fakeStore.userInfo = data; console.log(fakeStore)}
+});
