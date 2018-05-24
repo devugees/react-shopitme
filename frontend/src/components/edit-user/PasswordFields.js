@@ -3,7 +3,6 @@ import {TextField, Grid} from '@material-ui/core';
 
 class PasswordForm extends Component {
     render() {
-      console.log(this.props.isRegisterForm)
         return (
             <React.Fragment>
                 <Grid item xs={12}>
