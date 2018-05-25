@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 router.use(passport.initialize());
 const User = require('../models/user');
+const History = require('../models/history');
 const bcrypt = require('bcryptjs');
 const waterfall = require('async-waterfall');
 const async = require('async');
@@ -25,10 +26,7 @@ router.post('/register', (req, res)  => {
       const newUser = new User({
         firstname: user.firstname,
         lastname: user.lastname,
-        street: user.street,
-        number: user.number,
-        postcode: user.postcode,
-        city: user.city,
+        location:{ ...user.location},
         email: user.email,
         mobile: user.mobile,
         gender: user.gender,
@@ -148,5 +146,24 @@ router.post('/login', (req, res, next) => {
       return res.send({"error": "Email and Password must be provided"});
   }
 });
+
+router.get('/data',function(req, res, next){
+  History.find(function(err, history){
+    if(err) {
+        res.status(500).send({message: "Some error ocuured while retrieving data."});
+    } else {
+        res.send(history);
+    }
+});
+})
+router.get('/users',function(req, res, next){
+  User.find(function(err, users){
+    if(err) {
+        res.status(500).send({message: "Some error ocuured while retrieving data."});
+    } else {
+        res.send(users);
+    }
+});
+})
 
 module.exports = router;

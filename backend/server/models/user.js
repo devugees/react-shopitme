@@ -11,29 +11,41 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  street: {
-    type: String,
-    required: true
-  },
-  number: {
-    type: Number,
-    required: true
-  },
-  postcode: {
-    type: Number,
-    required: true
-  },
-  city: {
-    type: String,
-    required: true
-  },
+location:{
+      street: {
+        type: String,
+        required: true
+      },
+      number: {
+        type: Number,
+        required: true
+      },
+      postcode: {
+        type: Number,
+        required: true
+      },
+      city: {
+        type: String,
+        required: true
+      } 
+    },
+  coords: {
+      lat:{
+        type:Number,
+        required:false
+      },
+      lng:{
+        type:Number,
+        required:false
+      }
+    },
   email: {
     type: String,
     required: true, 
     unique: true
   },
   mobile: {
-    type: Number,
+    type: Number, 
     required: true
   },
   gender: {
@@ -43,6 +55,10 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  ratingstarts: {
+    type:Number,
+    required:false
   },
   resetPasswordToken: {
     type: String
