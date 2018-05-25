@@ -467,5 +467,5 @@ export default fakeStore
 
 export const Store = React.createContext({
   store: fakeStore,
-  updateUserData: data => {fakeStore.userInfo = data},
+  updateUserData: data => {fakeStore.userInfo = data; console.log(fakeStore)},
 });

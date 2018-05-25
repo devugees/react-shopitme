@@ -1,6 +1,6 @@
-const api_key = 'key-e4db0a9cbeb6b642e687f9aa47a958fc';
-const DOMAIN = 'sandboxc2ed28612199472288e2556ee43f3e58.mailgun.org';
-const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+const dotenv = require('dotenv').config();
+//ASK NACHO FOR THE .ENV FILE
+const mailgun = require('mailgun-js')({apiKey: process.env.MAIL_API_KEY, domain: process.env.DOMAIN});
 
 function sendMail(recipientAddress, subject, text){
 	const data = {
