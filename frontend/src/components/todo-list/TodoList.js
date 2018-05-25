@@ -108,10 +108,6 @@ export default class TodoList extends Component {
       changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
     }
 
-    
-
-
-
     return (
       <div className="todo-list">
         {whatToShow}
