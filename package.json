@@ -5,8 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "server": "nodemon server/index.js",
-    "client": "cd frontend && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "client": "cd frontend && npm run start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

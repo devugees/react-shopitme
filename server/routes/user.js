@@ -3,40 +3,6 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-router.post('/register', (req, res)  => {
-  console.log(req.body.password)
-  const email = req.body.email;
-  const password = req.body.password;
-  
-  if(!email) {
-    return res.send({"error": "Must provide an email adress"});
-  } else if(!password) {
-    return res.send({"error": "Must provide an password"});
-  } else {
-    const newUser = new User({
-      email: email,
-      password: password
-    });
-
-    bcrypt.genSalt(10, (err, salt)=>{
-      bcrypt.hash(newUser.password, salt, (err, hash)=>{
-        if(err){
-          console.log(err);
-        }
-        newUser.password = hash;
-        newUser.save(err =>{
-          if(err){
-            res.send(err);
-            return;
-          } else {
-            res.json({'success': 'You are registered and can now login'});
-          }
-        });
-      });
-    });
-  }
-});
-
 /* GET users listing. */
 router.get('/', (req, res, next) => {
   res.send('respond with a resource');
@@ -45,6 +11,36 @@ router.get('/', (req, res, next) => {
 /* GET user profile. */
 router.get('/profile', (req, res, next) => {
     res.send(req.user);
+});
+
+router.put('/changeuserdetails', function(req, res) {
+  if (req.body.password===undefined) {delete req.body.password}
+  let newUser = {...req.body}
+  delete newUser.accountPage
+
+  User.findOne({_id: newUser._id}, (error, user) => {
+    if (error) throw error; // here need to handle the error
+    else {
+      // after finding a user replace all the user data with data from request
+      bcrypt.genSalt(10, function(err, salt){ 
+          bcrypt.hash(newUser.password, salt, (error, hash) => {
+            if(err){ res.json({error: error})}
+            user.password = hash;
+            user.firstname = newUser.firstname;
+            user.lastname = newUser.lastname;
+            user.gender = newUser.gender;
+            user.email = newUser.email;
+            user.mobile = newUser.mobile;
+            user.location = {street: newUser.location.street, number: newUser.location.number, 
+            postcode: newUser.location.postcode, city: newUser.location.city}
+            user.save((error) => {
+              if(error) {res.send(error)}
+              else {res.send({message: "User has been successfully updated."})}
+            })
+          })
+      }) 
+    }
+  })
 });
 
 module.exports = router;
