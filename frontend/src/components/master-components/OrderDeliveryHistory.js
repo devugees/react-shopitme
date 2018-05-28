@@ -4,7 +4,8 @@ import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
 //import fake store
 import fakeStore from '../../fakeStore';
-import userPic from '../../pictures/BoB.png'
+import userPic from '../../pictures/BoB.png';
+import starRed from '../../pictures/BoB.png';
 
 export default class OrderDeliveryHistory extends Component {
 

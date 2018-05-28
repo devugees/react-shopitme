@@ -18,11 +18,10 @@ const styles = {
     return (
 
       <div>
-        <p>sdfsdfasd</p>
 
       <div  onClick={props.editpicHandler}>
-
         <img style={styles} src={props.imgSrc} alt=""/>
+      </div>
       </div>
     )
 };
