@@ -72,7 +72,6 @@ export default class UserDetails extends Component {
   };
 
   editpicHandler = () => {
-    console.log('editpicHandler')
     this.setState({
     imageEdit:true
    }) 
