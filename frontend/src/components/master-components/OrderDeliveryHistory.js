@@ -4,7 +4,7 @@ import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
 //import fake store
 import fakeStore from '../../fakeStore';
-import starRed from '../../pictures/BoB.png'
+import userPic from '../../pictures/BoB.png'
 
 export default class OrderDeliveryHistory extends Component {
 
@@ -13,7 +13,7 @@ export default class OrderDeliveryHistory extends Component {
     render() {
       return (
         <div className="createShoppingList main">
-          <Image imgSrc={starRed}/>
+          <Image imgSrc={userPic}/>
           <RatingStars rating='4'/>
           <OrderDelivery orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>
         </div>

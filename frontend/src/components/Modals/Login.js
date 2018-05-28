@@ -1,15 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import IconButton from 'material-ui/IconButton';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
-import Modal from 'material-ui/Modal';
-import Button from 'material-ui/Button';
-
+import { withStyles } from '@material-ui/core/styles';
+import {IconButton, Input, InputLabel, InputAdornment, FormControl, Modal, Button} from '@material-ui/core';
 import Visibility from './svg/visibility.svg';
 import VisibilityOff from './svg/visibilityOff.svg';
 import Facebook from './svg/facebook.svg';
@@ -19,9 +12,9 @@ import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   paper: {
     position: 'absolute',
@@ -49,18 +42,21 @@ const styles = theme => ({
   },
   iconwww: {
     width: '24%',
+  },
+  error: {
+    color: 'crimson',
+    margin: '1rem auto',
+    textAlign:'center'
   }
 });
 
-class SimpleModal extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      password: '',
-      showPassword: false,
-    };
-  }
+class Login extends React.Component {
+
+  state = {
+    open: false,
+    password: '',
+    showPassword: false,
+  };
 
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openLogin});
@@ -87,9 +83,8 @@ class SimpleModal extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render(props) {
+  render() {
     const { classes } = this.props;
-
     return (
       <div>
         <Modal
@@ -114,15 +109,17 @@ class SimpleModal extends React.Component {
                   FormLabelClasses={{
                     focused: classes.inputLabelFocused,
                   }}
-                  htmlFor="custom-color-input"
+                  htmlFor="custom-color-input1"
                 >
                   E-mail
               </InputLabel>
                 <Input
+                onChange={this.handleChange('email')}
                   classes={{
                     underline: classes.inputUnderline,
                   }}
-                  id="custom-color-input"
+                  id="custom-color-input1"
+                  //value={'boobyy@gmail.com'}
                 />
               </FormControl>
               </div>
@@ -148,13 +145,20 @@ class SimpleModal extends React.Component {
                   />
                 </FormControl>
               </div>
-              <Button variant="raised" color="green" className={classes.loginButtons} onClick={this.props.loginclick}>
+              {this.props.error ? <p className={classNames(classes.error)}>{this.props.error}</p> : null}
+              <Button
+                variant="raised"
+                className={classes.loginButtons} 
+                onClick={()=>{this.props.loginclick({
+                  email:this.state.email,
+                  password:this.state.password})
+                }}>
                 Login 
               </Button>
-              <Button variant="subheading" onClick={this.handleForget}>
+              <Button variant="flat" onClick={this.handleForget}>
                 Forgot your password?
               </Button>
-              <Button variant="subheading">
+              <Button variant="flat">
                 <a href='/userdetails'>Don't Have an account? Register Now</a>
               </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
@@ -162,16 +166,13 @@ class SimpleModal extends React.Component {
             </Button>
           </div>
         </Modal>
-        
       </div>
     );
   }
 }
 
-SimpleModal.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const Login = withStyles(styles)(SimpleModal);
-export default Login ;
+export default withStyles(styles)(Login);

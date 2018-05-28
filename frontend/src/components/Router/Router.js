@@ -5,32 +5,40 @@ import UserDetails from '../master-components/UserDetails'
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
-import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory'
-import Modals from '../Modals/Modals'
-/* import Login from '../Modals/Login' */
-import ResetPassword from '../Modals/ResetPassword'
-/* import Sure from '../Modals/Sure' */
+import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
+import MainDeliveryPage from '../master-components/MainDeliveryPage';
+import NewPassword from '../master-components/NewPassord'
+import Navbar from '../nav-bar/Navbar';
+import Footer from '../Footer'
 import NotFound from '../not-found/notFound'
 // get main for testing
 import Main from  '../Main';
+import {Store} from '../../fakeStore';
 
 const Router = () => (
  <BrowserRouter>
-   <Switch>
-    <Route exact path='/' component={Landing} />
-    <Route exact path='/main' component={Main} />
-    {/*<Route exact path='/login' component={Login} />*/}
-    <Route exact path='/resetpassword' component={ResetPassword} />
-    {/*<Route exact path='/sure' component={Sure} />*/}
-    <Route exact path='/userdetails' component={UserDetails} />
-    <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
-    <Route exact path='/createshoppinglist' component={CreateShoppingList} />
-    <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
-    <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
-    <Route path="*" component={ NotFound } />
-   </Switch>
+    <React.Fragment>
+    <Store.Consumer>
+    {data =>(<Navbar updateUserData={data.updateUserData}/>)}
+    </Store.Consumer>
+    <Switch>
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/main' component={Main} />
+        <Route exact path='/userdetails' component={UserDetails} />
+        <Route exact path='/maindeliverypage' component={MainDeliveryPage} />
+        <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
+        <Route exact path='/createshoppinglist' component={CreateShoppingList} />
+        <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
+        <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
+        <Route exact path='/reset/*' component={NewPassword} />
+        <Route path="*" component={ NotFound } />
+    </Switch>
+    <Footer />
+    </React.Fragment>
  </BrowserRouter>
-
  );
 
 export default Router;
+
+      
+        

@@ -1,5 +1,5 @@
-export function crudAPI(method, url, data) {
-    return fetch(url, {
+export const crudAPI = async (method, endPoint, data) => {
+    const response = await fetch(endPoint, {
         body: JSON.stringify(data),
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -12,15 +12,17 @@ export function crudAPI(method, url, data) {
         redirect: 'follow',
         referrer: 'no-referrer',
     })
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
         
 }
 
-export function authCrudAPI(method, url, data) {
+export function authCrudAPI(method, endPoint, data) {
+    // eslint-disable-next-line
     const token = localStorage.getItem(token);
 
-
-
-    return fetch(url, {
+    return fetch(endPoint, {
         body: JSON.stringify(data),
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -32,6 +34,6 @@ export function authCrudAPI(method, url, data) {
         mode: 'cors',
         redirect: 'follow',
         referrer: 'no-referrer',
-    })
+    }).then(res => res.json())
         
 }

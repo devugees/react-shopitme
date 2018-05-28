@@ -1,15 +1,6 @@
 import React from 'react';
 // Material UI
-import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-
+import {Grid, Typography, TextField, Button} from '@material-ui/core';
 // Sub Components & CSS
 import './EditUser.css';
 import UserDetailsFields from './UserDetailsFields'; 
@@ -86,8 +77,9 @@ class EditUser extends React.Component {
                 <PasswordFields handleChange={this.props.handleChange} />
               </Grid>
               </Grid> 
-                
+
               <Grid container spacing={16} className="button-right">
+               { (this.props.error) ? <p className="error">{this.props.error}</p> : null}
               <Grid item container xs={12} spacing={16}>
                     {<Button variant="raised" size="large" type="submit">
                       Submit

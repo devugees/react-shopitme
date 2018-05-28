@@ -2,7 +2,6 @@ import React, { Component  } from 'react';
 import TodoList from '../todo-list/TodoList';
 import { Link } from 'react-router-dom';
 
-
 const styles = {
       alignment:{
         position:"relative",
@@ -40,6 +39,8 @@ export default class SingleOrderHistory extends Component {
                 </React.Fragment>
                 )
               break;
+              default:
+              orderStatus =(<p>No info available</p>);
           }    
         return (
           <React.Fragment style={styles.alignment}>

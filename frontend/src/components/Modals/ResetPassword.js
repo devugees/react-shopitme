@@ -1,20 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import Typography from 'material-ui/Typography';
-import Modal from 'material-ui/Modal';
-import Button from 'material-ui/Button';
-
+import axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
+import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
 import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
   paper: {
     position: 'absolute',
@@ -36,6 +32,11 @@ const styles = theme => ({
   loginButtons: {
     width: '75%',
     margin: '10px'
+  },
+  error: {
+    color: 'crimson',
+    margin: '1rem auto',
+    textAlign:'center'
   }
 });
 
@@ -43,10 +44,11 @@ class SimpleModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      email: '',
+      result: ''
     };
   }
-  
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openForgotpass});
   }
@@ -54,6 +56,26 @@ class SimpleModal extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  emailHandler = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  resetHandler = () => {
+    axios.post('/forgot', {
+      email: this.state.email,
+    })
+    .then( response => {
+      this.setState({
+        result: response.data
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   handlelogin = (props, e) => {
     this.setState({ open: false });
@@ -78,7 +100,7 @@ class SimpleModal extends React.Component {
                   FormLabelClasses={{
                     focused: classes.inputLabelFocused,
                   }}
-                  htmlFor="custom-color-input"
+                  htmlFor="custom-color-input2"
                 >
                   E-mail
                 </InputLabel>
@@ -86,17 +108,19 @@ class SimpleModal extends React.Component {
                   classes={{
                     underline: classes.inputUnderline,
                   }}
-                  id="custom-color-input"
+                  id="custom-color-input2"
+                  onChange={this.emailHandler.bind(this)}
                 />
               </FormControl>
             </div>
-            <Button variant="raised" color="green" className={classes.loginButtons}>
+            <p className={classNames(classes.error)}>{this.state.result}</p>
+            <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>
-            <Button variant="subheading" onClick={this.props.openLog}>
+            <Button variant="flat" onClick={this.props.openLog}>
                 go back to Login!
             </Button>
-            <Button variant="subheading" onClick={this.props.regClick}>
+            <Button variant="flat" onClick={this.props.regClick}>
                 Don't have an Account? Register now
             </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>

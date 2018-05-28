@@ -1,22 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/Menu';
+import {AppBar, Toolbar, Button, Grid} from '@material-ui/core';
 import './Navbar.css';
 import DropMenu from './DropMenu';
-import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
-import avatar from '../../pictures/BoB.png';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
-
-
+import { crudAPI } from '../../helpers/helpers'
 
 const styles = {
   row: {
@@ -41,32 +30,49 @@ const styles = {
 };
 
 
-class ButtonAppBar extends React.Component {
+export default class NavBar extends React.Component {
   constructor(props) {
     super();
  
     this.state = {
       login: false,
       openLogin: false,
-      openForgotpass :false
+      openForgotpass :false,
+      error: null
     };
   }
 
 
-  LoginClickHandler = () => {
-    this.setState({
-      login: true,
-      openLogin: false,
-      openForgotpass :false
-    });
+  LoginClickHandler = params => {
+    //{email:'123@123.com', pass:123}
+    crudAPI('post', '/login', params)
+      .then(data => {
+        if(data.error){
+          this.setState({ error:data.error })
+        } else {
+          localStorage.setItem('token', data.token);
+          delete data.user.password;
+          delete data.user.resetPasswordExpires;
+          delete data.user.resetPasswordToken;
+          delete data.user.__v;
+          this.props.updateUserData(data.user)
+          this.setState({
+            data: data.user,
+            error:null,
+            login: true,
+            openLogin: false,
+            openForgotpass :false
+          })
+        }
+    })
   }
 
   LogoutClickHandler = () => {
+    localStorage.removeItem('token');
     this.setState({
       login: false,
       openLogin: false,
       openForgotpass :false
-
     })
   }
 
@@ -88,7 +94,6 @@ class ButtonAppBar extends React.Component {
     })
   }
 
-
   render() {
   return (
     <div className="navbar">
@@ -97,21 +102,19 @@ class ButtonAppBar extends React.Component {
         <Toolbar>
           <Grid item xs={2} sm={2} >     
             <div >
-            <a href="/" sy>
-              <p>Shopitme</p>
-            </a>
+              <Link to="/">ShopItMe</Link>
             </div>
           </Grid>
 
-          {this.state.login?
+          {this.state.login ?
               ( <React.Fragment >
                   <Grid item xs={4} sm={4} >
                     <div></div>
                   </Grid>
                   <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} class="material-icons">notifications</i>
-                    <i  style={styles.notifications} class="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} />
+                    <i  style={styles.notifications} className="material-icons">notifications</i>
+                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
+                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
                 </React.Fragment>
@@ -123,7 +126,10 @@ class ButtonAppBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit" onClick={(e) => this.setState({openLogin: true})}>Login</Button>
+                  <Button color="inherit"
+                          onClick={(e) => this.setState({
+                            openLogin: true,
+                            openForgotpass :false})}>Login</Button>
                 </Grid> 
               </React.Fragment>) }
         </Toolbar>
@@ -131,6 +137,7 @@ class ButtonAppBar extends React.Component {
       <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
         openForgotpassword={this.popupForgot}
         loginclick={this.LoginClickHandler}
+        error={this.state.error}
       /> 
       <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.openForgotpass}
         openLog={this.popupLogin}
@@ -139,6 +146,3 @@ class ButtonAppBar extends React.Component {
   </div>
   );
 } }
-
-
-export default ButtonAppBar;

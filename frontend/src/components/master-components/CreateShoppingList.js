@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import Notes from '../Additional-Notes/Notes';
-import Button from 'material-ui/Button';
+import {Button} from '@material-ui/core'
 import Details from '../Details/Details';
 import Sure from '../Modals/Sure';
 //import fake store
@@ -25,14 +25,14 @@ export default class CreateShoppingList extends Component {
             <TodoList orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
-      <Button  variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
-        Delete
-      </Button>
-      <Button  variant="raised" color="primary">
-        Send
-      </Button>
-      <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
-    </div>
+            <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
+              Delete
+            </Button>
+            <Button style={style} variant="raised" color="primary">
+              <Link to="/">Create</Link>
+            </Button>
+            <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
+          </div>
         )
       }
     };

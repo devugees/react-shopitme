@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const styles = {
     width: '135px',
@@ -9,13 +9,13 @@ const styles = {
     margin: 'auto',
     border: '1px solid #ccc',
     borderRadius: '50%',
-    marginTop: '20px'
+    marginTop: '20px',
+    paddingTop:'0'
  }
 
  const image =(props)=> {
     return (
-      <div>
-        <p>sdfsdfasd</p>
+      <div  onClick={props.editpicHandler}>
         <img style={styles} src={props.imgSrc} alt=""/>
       </div>
     )
