@@ -16,6 +16,7 @@
   "author": "sabine gottfried, nacho merinio, laith massoud, tarek alkhatib, orwa houry",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.1",
     "async-waterfall": "^0.1.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",

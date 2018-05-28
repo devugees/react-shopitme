@@ -59,6 +59,12 @@ location:{
   ratingstarts: {
     type:Number,
     required:false
+  },
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
   }
 });
 

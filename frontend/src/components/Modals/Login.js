@@ -50,15 +50,13 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      open: false,
-      password: '',
-      showPassword: false,
-    };
-  }
+class Login extends React.Component {
+
+  state = {
+    open: false,
+    password: '',
+    showPassword: false,
+  };
 
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openLogin});
@@ -85,9 +83,8 @@ class SimpleModal extends React.Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render(props) {
+  render() {
     const { classes } = this.props;
-    let showError;
     return (
       <div>
         <Modal
@@ -112,7 +109,7 @@ class SimpleModal extends React.Component {
                   FormLabelClasses={{
                     focused: classes.inputLabelFocused,
                   }}
-                  htmlFor="custom-color-input"
+                  htmlFor="custom-color-input1"
                 >
                   E-mail
               </InputLabel>
@@ -121,7 +118,7 @@ class SimpleModal extends React.Component {
                   classes={{
                     underline: classes.inputUnderline,
                   }}
-                  id="custom-color-input"
+                  id="custom-color-input1"
                   //value={'boobyy@gmail.com'}
                 />
               </FormControl>
@@ -174,10 +171,8 @@ class SimpleModal extends React.Component {
   }
 }
 
-SimpleModal.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const Login = withStyles(styles)(SimpleModal);
-export default Login ;
+export default withStyles(styles)(Login);

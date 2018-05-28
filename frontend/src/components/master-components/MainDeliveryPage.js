@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import DeliveryList from '../main-delivery-page'
 //import fake store
-import fakeStore from '../../fakeStore';
+import {Store} from '../../fakeStore';
 
 export default class MainDeliveryPage extends Component {
 
-state = {...fakeStore}
-
   render(){
     return(
-        <DeliveryList store={this.state}/>
+      <Store.Consumer>
+      {data =>(<DeliveryList data={data} store={data.store}/>)}
+      </Store.Consumer>
       )
   }
 
