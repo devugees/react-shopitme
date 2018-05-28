@@ -21,7 +21,6 @@ state = {...fakeStore}
     }
     
     return (
-      <Store.Consumer>
         <div className="accept-single-delivery main">
           <ShoppingListTitle shopperPerson={true} ordererName={this.state.orderer.firstname} ordererAccountPage={this.state.orderer.accountPage} listName="Shopping List" listId={this.state.listId} shopperName={this.state.shopper.firstname} shopperAccountPage={this.state.shopper.accountPage}/>
           <ShowDeliveryDetails deliveringTime={this.state.deliveringTime} deliverAdress={this.state.orderer.deliverAdress}/>
@@ -35,7 +34,6 @@ state = {...fakeStore}
             <Link to="/">Delivered</Link>
           </Button>
         </div>
-      </Store.Consumer>
     )
   }
 };

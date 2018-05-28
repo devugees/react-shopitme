@@ -53,7 +53,7 @@ export default class UserDetails extends Component {
     }
 
     if (formtype === "register") {
-      crudAPI("POST", "http://localhost:4000/register", userDetails)
+      crudAPI("POST", "/register", userDetails)
       .then((res) => {
         if(res.err) {
           this.setState({error: res.err})

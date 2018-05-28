@@ -1,5 +1,5 @@
 const passport    = require('passport');
-const passportJWT = require("passport-jwt");
+const passportJWT = require('passport-jwt');
 const User = require('../models/user');
 const ExtractJWT = passportJWT.ExtractJwt;
 const bcrypt = require('bcryptjs');
@@ -7,13 +7,12 @@ const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy   = passportJWT.Strategy;
 
-passport.use(new LocalStrategy({
+  passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password'
     },(email, password, cb) => {
       // Match Username
-      let query = { email: email };
-      User.findOne(query, (err, user) => {
+      User.findOne({ email: email }, (err, user) => {
         if (err) throw err;
         if (!user) {
           return cb(null, false, { "error": "Wrong User Or Password" });
@@ -32,7 +31,8 @@ passport.use(new LocalStrategy({
           return cb(err);
       });
     }
-));
+  ));
+
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });

@@ -56,7 +56,7 @@ class NewPassword extends React.Component {
       })
     } else {
       let token = window.location.href.slice(-40);
-      axios.post(`http://localhost:4000/reset/${token}`, {
+      axios.post(`/reset/${token}`, {
       password: this.state.password2,
       })
       .then( response => {
