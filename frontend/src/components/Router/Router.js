@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from '../landing/Landing'
 import UserDetails from '../master-components/UserDetails'
-import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingList from '../master-components/CreateShoppingList'
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
@@ -26,7 +25,6 @@ const Router = () => (
         <Route exact path='/main' component={Main} />
         <Route exact path='/userdetails' component={UserDetails} />
         <Route exact path='/maindeliverypage' component={MainDeliveryPage} />
-        <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
         <Route exact path='/createshoppinglist' component={CreateShoppingList} />
         <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
         <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />

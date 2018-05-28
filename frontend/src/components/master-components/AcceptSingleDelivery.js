@@ -15,6 +15,7 @@ export default class AcceptSingleDelivery extends Component {
     }
     return (
       <div className="accept-single-delivery main">
+      {console.log(this.props.orderer.firstname)}
         <ShoppingListTitle checkingPerson={true} ordererName={this.props.orderer.firstname} ordererAccountPage={this.props.orderer.accountPage} listName="Shopping List" listId={this.props.listId}/>
         <ShowDeliveryDetails deliveringTime={this.props.deliveringTime} deliverAdress={this.props.orderer.deliverAdress}/>
         <TodoList items={this.props.items} checkingPerson={true}/>

@@ -4,7 +4,7 @@ import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
 import userPic from '../../pictures/BoB.png'
 
-import { BrowserRouter as Router } from 'react-router-dom'
+//import { BrowserRouter as Router } from 'react-router-dom'
 
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
@@ -69,6 +69,7 @@ export default class UserDetails extends Component {
   };
 
   editpicHandler = () => {
+    console.log('editpicHandler')
     this.setState({
     imageEdit:true
    }) 
@@ -76,7 +77,6 @@ export default class UserDetails extends Component {
 
 
   render() {
-    console.log(this.props.history)
     return (
       <div className="user-details">
         <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
