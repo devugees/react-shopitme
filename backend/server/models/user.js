@@ -65,10 +65,6 @@ location:{
   },
   resetPasswordExpires: {
     type: Date
-  },
-  location: {
-    type: Object,
-    required: true
   }
 });
 
