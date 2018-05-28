@@ -15,14 +15,19 @@ import { crudAPI } from './../../helpers/helpers';
 export default class UserDetails extends Component {
   state = { 
     ...fakeStore.orderer,
+    street: fakeStore.orderer.deliverAdress.street,
+    number: fakeStore.orderer.deliverAdress.number,
+    city: fakeStore.orderer.deliverAdress.city,
+    postcode: fakeStore.orderer.deliverAdress.postcode,
     imageEdit:false,
     passwordMatchError: true
   };
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
+      this.setState({
+        [name]: event.target.value,
+      });
+
 
     if (name === "confirmpassword") {
       const password = this.state.password;
@@ -53,7 +58,10 @@ export default class UserDetails extends Component {
             mobile, 
             gender, 
             accountPage, 
-            deliverAdress,
+            street,
+            postcode,
+            number,
+            city,
             password
            } = this.state
     
@@ -63,32 +71,37 @@ export default class UserDetails extends Component {
       email,
       mobile,
       location: { 
-        street: deliverAdress.street,
-        number: deliverAdress.number,
-        postcode: deliverAdress.postcode,
-        city: deliverAdress.city},
+        street: street,
+        number: number,
+        postcode: postcode,
+        city: city},
       gender,
       password,
       accountPage: this.state.accountPage,
-      _id: "5b055a82e04dd029be377773"
+      _id: "5b0bcf9f1886ca325f69b68a"
     }
 
     if (formtype === "register") {
+      console.log(userDetails);
         crudAPI("POST", "http://localhost:4000/register", userDetails)
-        .then(res => {
-          console.log(res)
-          if(res.err) {
-            this.setState({response: res.err})
+        .then(body => {
+          console.log(body)
+          if(body.err) {
+            this.setState({response: body.err})
           } else {
-            this.setState({response: res})
+            this.setState({response: body.success})
           }
         })
     } else if (formtype === "changeuserdetails") {
+      console.log(userDetails);
       if (!userDetails.password) { delete userDetails[password]}
       crudAPI("PUT", "http://localhost:4000/user/changeuserdetails", userDetails)
-      .then(res => { if(res.err){this.setState({response: res.err})}
+      /* .then(res => { if(res.err){this.setState({response: res.err})}
                      else {this.setState({response: res.message})}
-                    })
+                    }) */
+      .then(body => { if(body.err){this.setState({response: body.err})}
+      else {this.setState({response: body.message})}
+     });              
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
   };
