@@ -1,4 +1,3 @@
-//routes/user.js
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
@@ -19,13 +18,13 @@ router.post('/register', (req, res)  => {
       password: password
     });
 
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
+    bcrypt.genSalt(10, (err, salt)=>{
+      bcrypt.hash(newUser.password, salt, (err, hash)=>{
         if(err){
           console.log(err);
         }
         newUser.password = hash;
-        newUser.save(function(err){
+        newUser.save(err =>{
           if(err){
             res.send(err);
             return;
@@ -39,12 +38,12 @@ router.post('/register', (req, res)  => {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
 
 /* GET user profile. */
-router.get('/profile', function(req, res, next) {
+router.get('/profile', (req, res, next) => {
     res.send(req.user);
 });
 

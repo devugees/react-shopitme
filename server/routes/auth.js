@@ -16,7 +16,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 /* POST register user */
 router.post('/register', (req, res)  => {
     const user = {...req.body};
-    console.log(user);
     
     if(!user.email) {
       return res.send({"error": "Must provide an email adress"});
@@ -33,15 +32,13 @@ router.post('/register', (req, res)  => {
         password: user.password
       });
 
-      console.log(newUser);
-  
-      bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(newUser.password, salt, function(err, hash){
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
           if(err){
             console.log('err1', err);
           }
           newUser.password = hash;
-          newUser.save(function(err){
+          newUser.save((err) =>{
             if(err){
               console.log('err', err);
               res.send(err);
@@ -55,46 +52,45 @@ router.post('/register', (req, res)  => {
   });
 
 // Forget Password
-router.post('/forgot', function(req, res, next) {
+router.post('/forgot', (req, res, next)=> {
   async.waterfall([
-    function(done) {
-      crypto.randomBytes(20, function(err, buf) {
-        var token = buf.toString('hex');
+    done => {
+      crypto.randomBytes(20, (err, buf) => {
+        const token = buf.toString('hex');
         done(err, token);
       });
     },
-    function(token, done) {
-      User.findOne({ email: req.body.email }, function(err, user) {
+    (token, done) => {
+      User.findOne({ email: req.body.email }, (err, user) => {
         if (!user) {
-          console.log('you are here')
           return res.send('No account with that email address exists.');
         }
 
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-        user.save(function(err) {
+        user.save(err => {
           done(err, token, user);
         });
       });
     },
-    function(token, user) {
-      mailnotifier.sendMail(user.email,`Password Reset`,`You are receiving this because you (or someone else) have requested the reset of the password for your account.
+    (token, user) => {
+      mailnotifier.sendMail(user.email,'Password Reset',`You are receiving this because you (or someone else) have requested the reset of the password for your account.
           'Please click on the following link: http://localhost:3000/reset/${token}
            this link is valid just for one hour or paste this into your browser to complete the process:`)
           return res.send('Please check your email, we have sent the reset form')
     }
-  ], function(err) {
+  ], err => {
     if (err) return next(err);
     res.redirect('/forgot');
   });
 });
 
 // Reset Password
-router.post('/reset/:token', function(req, res) {
+router.post('/reset/:token', (req, res) => {
   async.waterfall([
-    function(done) {
-      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    done => {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
         if (!user) {
           return res.send('Password reset token is invalid or has expired.');
         }
@@ -103,14 +99,14 @@ router.post('/reset/:token', function(req, res) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
 
-        bcrypt.genSalt(10, function(err, salt){
-          bcrypt.hash(user.password, salt, function(err, hash){
+        bcrypt.genSalt(10, (err, salt)=>{
+          bcrypt.hash(user.password, salt, (err, hash)=>{
             if(err){
               console.log('err1', err);
             }
             user.password = hash;
-            user.save(function(err) {
-              req.logIn(user, function(err) {
+            user.save(err => {
+              req.logIn(user, err => {
                 done(err, user);
               });
             });
@@ -120,11 +116,11 @@ router.post('/reset/:token', function(req, res) {
         
       });
     },
-    function(user) {
-      mailnotifier.sendMail(user.email,`Password Changed`,`This is a confirmation that the password for your account has just been changed`)
+    user => {
+      mailnotifier.sendMail(user.email,'Password Changed','This is a confirmation that the password for your account has just been changed')
       return res.send('Your Password has been changed successfully you can login now')
     }
-  ], function(err) {
+  ], err => {
     res.redirect('/');
   });
 });
@@ -147,23 +143,28 @@ router.post('/login', (req, res, next) => {
   }
 });
 
-router.get('/data',function(req, res, next){
-  History.find(function(err, history){
+router.get('/data',(req, res, next)=>{
+  History.find((err, history)=>{
     if(err) {
-        res.status(500).send({message: "Some error ocuured while retrieving data."});
+        res.status(500).send({message: "Some error occured while retrieving data."});
     } else {
         res.send(history);
     }
 });
 })
-router.get('/users',function(req, res, next){
-  User.find(function(err, users){
+router.get('/users',(req, res, next)=>{
+  User.find((err, users)=>{
     if(err) {
-        res.status(500).send({message: "Some error ocuured while retrieving data."});
+        res.status(500).send({message: "Some error occured while retrieving data."});
     } else {
         res.send(users);
     }
 });
 })
+
+/*router.get("/", (req, res) => {
+  res.send("hello world!")
+});*/
+
 
 module.exports = router;
