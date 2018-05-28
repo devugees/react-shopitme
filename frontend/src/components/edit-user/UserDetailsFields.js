@@ -23,7 +23,7 @@ const gender = [
 
 class UserDetailsForm extends Component {
     render() {
-        console.log('hi', this.props)
+        // console.log('hi', this.props)
         return (
             <React.Fragment>
                 <Grid item xs={6}>
@@ -59,7 +59,7 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.deliverAdress.street}
+                            value={this.props.userdetails.street}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -71,7 +71,7 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.deliverAdress.number}
+                            value={this.props.userdetails.number}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -83,7 +83,7 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.deliverAdress.postcode}
+                            value={this.props.userdetails.postcode}
                     />
                 </Grid>
                 <Grid item xs={8}>
@@ -95,7 +95,7 @@ class UserDetailsForm extends Component {
                             margin="normal"
                             required
                             fullWidth
-                            value={this.props.userdetails.deliverAdress.city}
+                            value={this.props.userdetails.city}
                     />
                 </Grid>
                 {/* <Grid item xs={12}>
