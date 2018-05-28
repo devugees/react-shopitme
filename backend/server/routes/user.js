@@ -18,9 +18,8 @@ router.put('/changeuserdetails', function(req, res) {
   if (req.body.password===undefined) {delete req.body.password}
   let newUser = {...req.body}
   delete newUser.accountPage
-  
+
   User.findOne({_id: newUser._id}, (error, user) => {
-    console.log(user);
     if (error) throw error; // here need to handle the error
     else {
       // after finding a user replace all the user data with data from request
