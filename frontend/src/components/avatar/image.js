@@ -9,13 +9,19 @@ const styles = {
     margin: 'auto',
     border: '1px solid #ccc',
     borderRadius: '50%',
-    marginTop: '20px',
-    paddingTop:'0'
+
+    marginTop: '20px'
+
  }
 
  const image =(props)=> {
     return (
+
+      <div>
+        <p>sdfsdfasd</p>
+
       <div  onClick={props.editpicHandler}>
+
         <img style={styles} src={props.imgSrc} alt=""/>
       </div>
     )

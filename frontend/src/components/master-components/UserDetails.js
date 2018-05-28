@@ -6,6 +6,9 @@ import userPic from '../../pictures/BoB.png'
 
 //import { BrowserRouter as Router } from 'react-router-dom'
 
+
+import ImageCropper from '../avatar/ImageCropper';
+
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
