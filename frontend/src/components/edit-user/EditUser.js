@@ -6,16 +6,26 @@ import './EditUser.css';
 import UserDetailsFields from './UserDetailsFields';
 import PasswordFields from './PasswordFields';
 
-const formType = {
+/* const formType = {
   Register: true,
   ChangeUser: false
-}
+} */
 
 class EditUser extends React.Component {
   render() {
-    const isRegisterForm = formType.Register;
-    const isChangeUser = formType.ChangeUser;
+    let isRegisterForm;
+    let isChangeUser; 
     let endpoint;
+
+    console.log(this.props.userdetails);
+
+    if(this.props.userdetails._id) {
+      isRegisterForm = false;
+      isChangeUser = true;
+    } else {
+      isRegisterForm = true;
+      isChangeUser = false;
+    }
 
     /* depending on the Form Type Data will be sent to different endpoints */
     if (isRegisterForm) { endpoint = "register" }

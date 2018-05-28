@@ -10,11 +10,11 @@ import { crudAPI } from './../../helpers/helpers';
 
 export default class UserDetails extends Component {
   state = { 
-    ...fakeStore.orderer,
-    street: fakeStore.orderer.deliverAdress.street,
-    number: fakeStore.orderer.deliverAdress.number,
-    city: fakeStore.orderer.deliverAdress.city,
-    postcode: fakeStore.orderer.deliverAdress.postcode,
+    ...fakeStore.userInfo,
+    /* street: fakeStore.userInfo.location.street,
+    number: fakeStore.userInfo.location.number,
+    city: fakeStore.userInfo.location.city,
+    postcode: fakeStore.userInfo.location.postcode, */
     imageEdit:false,
     passwordMatchError: true
   };
@@ -110,12 +110,13 @@ export default class UserDetails extends Component {
 
 
   render() {
+    console.log(fakeStore.userInfo)
     return (
       <div className="user-details">
         <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
         {this.state.imageEdit ? <ImageCropper/>: null}
         <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response}/>
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
       </div>
     )
   }
