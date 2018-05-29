@@ -7,7 +7,7 @@ const HistorySchema = mongoose.Schema({
      required: true 
   },
     shop: {
-      type:Array,
+      type:String,
       required: true 
     },
     deliveringTime: {
@@ -23,6 +23,10 @@ const HistorySchema = mongoose.Schema({
       type:String,
       required:false
       }
+    },
+    notes:{
+      type:String,
+      required:false
     }
   })
 
