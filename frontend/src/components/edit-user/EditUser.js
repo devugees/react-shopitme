@@ -17,9 +17,9 @@ class EditUser extends React.Component {
     let isChangeUser; 
     let endpoint;
 
-    console.log(this.props.userdetails);
-
-    if(this.props.userdetails._id) {
+    // if there is a token (after login) render the Change SUer Details Form
+    // else render Register Form
+    if(localStorage.getItem("token")) {
       isRegisterForm = false;
       isChangeUser = true;
     } else {

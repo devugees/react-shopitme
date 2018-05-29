@@ -40,17 +40,16 @@ router.post('/register', (req, res)  => {
     bcrypt.genSalt(10, function(error, salt){
       bcrypt.hash(newUser.password, salt, function(error, hash){
         if(error){
-          console.log('error', error);
+          res.json({'error': 'Error Password'});
         }
         newUser.password = hash;
         newUser.save(function(error){
           if(error){
-            console.log(error);
-            if (error.message) {
+            if (error.message) { // some info is required but not sent
               res.json({'error': error.message});
             } 
 
-            if (error.err) {
+            if (error.err) { // some info already exist in DB and needs to be unique
               res.json({'error': error.err});
             }
             
