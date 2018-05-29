@@ -68,7 +68,7 @@ location:{
   }
 });
 
-UserSchema.post('save', function(err, doc, next) {
+UserSchema.post('save', (err, doc, next) => {
   console.log(err)
   if (err.code === 11000) {
     next({"err": "Account with this Email already exists."});

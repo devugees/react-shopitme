@@ -32,6 +32,11 @@ const styles = theme => ({
   loginButtons: {
     width: '75%',
     margin: '10px'
+  },
+  error: {
+    color: 'crimson',
+    margin: '1rem auto',
+    textAlign:'center'
   }
 });
 
@@ -41,7 +46,7 @@ class SimpleModal extends React.Component {
     this.state = {
       open: false,
       email: '',
-      resault: ''
+      result: ''
     };
   }
   UNSAFE_componentWillReceiveProps(e){
@@ -59,13 +64,12 @@ class SimpleModal extends React.Component {
   }
 
   resetHandler = () => {
-
-    axios.post('http://localhost:4000/forgot', {
+    axios.post('/forgot', {
       email: this.state.email,
     })
     .then( response => {
       this.setState({
-        resault: response.data
+        result: response.data
       })
     })
     .catch(function (error) {
@@ -109,7 +113,7 @@ class SimpleModal extends React.Component {
                 />
               </FormControl>
             </div>
-            <p>{this.state.resault}</p>
+            <p className={classNames(classes.error)}>{this.state.result}</p>
             <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>

@@ -45,12 +45,16 @@ export default class NavBar extends React.Component {
 
   LoginClickHandler = params => {
     //{email:'123@123.com', pass:123}
-    crudAPI('post', 'http://localhost:4000/login', params)
+    crudAPI('post', '/login', params)
       .then(data => {
         if(data.error){
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
+          delete data.user.password;
+          delete data.user.resetPasswordExpires;
+          delete data.user.resetPasswordToken;
+          delete data.user.__v;
           this.props.updateUserData(data.user)
           this.setState({
             data: data.user,

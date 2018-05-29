@@ -230,16 +230,7 @@ let fakeStore = {
   items:
   [{
     status:'box',
-    todo:"2x Corn Bread"
-  },{
-    status:'box',
-    todo:"Kellogs AllBran"
-  },{ 
-    status:'box',
-    todo:"4x Milk 3.8% Fet"
-  },{
-    status:'box',
-    todo:"2x Orange Juice low sugar"
+    todo:"Test Item, you can EDIT or DELETE it"
   }
   ],
   orderHistory:
@@ -467,5 +458,5 @@ export default fakeStore
 
 export const Store = React.createContext({
   store: fakeStore,
-  updateUserData: data => {fakeStore.userInfo = data},
+  updateUserData: data => {fakeStore.userInfo = data; console.log(fakeStore)},
 });

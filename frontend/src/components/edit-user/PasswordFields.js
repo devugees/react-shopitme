@@ -6,16 +6,25 @@ class PasswordForm extends Component {
         return (
             <React.Fragment>
                 <Grid item xs={12}>
-                <TextField
+                {(this.props.isRegisterForm) ? <TextField
+                    id="password"
+                    label="Password"
+                    placeholder="Password"
+                    onChange={this.props.handleChange('password')}
+                    type="password"
+                    margin="normal"
+                    required
+                    fullWidth
+                  /> : <TextField
                   id="password"
-                  label="Password"
-                  placeholder="Password"
+                  label="New Password"
+                  placeholder=" New Password"
                   onChange={this.props.handleChange('password')}
                   type="password"
                   margin="normal"
                   required
                   fullWidth
-                />
+                />}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -27,6 +36,7 @@ class PasswordForm extends Component {
                   margin="normal"
                   required
                   fullWidth
+                  error={this.props.passwordMatchError}
                 />
               </Grid>
             </React.Fragment>
