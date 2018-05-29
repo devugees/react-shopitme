@@ -1,20 +1,27 @@
-const api_key = 'key-e4db0a9cbeb6b642e687f9aa47a958fc';
-const DOMAIN = 'sandboxc2ed28612199472288e2556ee43f3e58.mailgun.org';
-const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+const nodemailer = require('nodemailer');
 
-function sendMail(recipientAddress, subject, text){
-	const data = {
-		from: 'ShopItMe <resetpassword@shopitme.com>',
-		to: recipientAddress,
-		subject: subject,
-		text: text
-	};
+module.exports = function sendMail(recipientAddress, subject, body) {
+  var smtpConfig = {
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'devugees.shop@gmail.com',
+    pass: 'www123com'
+  }
+};
 
-	mailgun.messages().send(data, function (error, body) {
-		if(error) {
-			console.log(error)
-		}
-	console.log('this the mail',body);
-	})
+var transporter = nodemailer.createTransport(smtpConfig);
+var mailOptions = {
+  From: '"Shop It Me" <devugees.shop@gmail.com>',
+  to: recipientAddress,
+  subject: subject,
+  text: body,
+};
+
+transporter.sendMail(mailOptions, function(err, info) {
+	console.log('this the mail info: ',info);
+  if(err)
+    console.log('error');
+});
 }
-module.exports.sendMail = sendMail;
