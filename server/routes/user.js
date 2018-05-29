@@ -35,7 +35,11 @@ router.put('/changeuserdetails', function(req, res) {
             postcode: newUser.location.postcode, city: newUser.location.city}
             user.save((error) => {
               if(error) {res.send(error)}
-              else {res.send({message: "User has been successfully updated."})}
+              else {
+                res.send({message: "User has been successfully updated.",
+                user: newUser
+              })
+            }
             })
           })
       }) 
