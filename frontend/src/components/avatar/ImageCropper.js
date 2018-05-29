@@ -40,7 +40,7 @@ export default class ImageCropper extends Component {
         }
         return (
             <div style={style}>
-                <AvatarImageCropper apply={this.apply} rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%' }} />
+                <AvatarImageCropper apply={this.apply} rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%'}} />
             </div>
 
         );

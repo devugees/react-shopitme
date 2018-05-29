@@ -9,19 +9,16 @@ const styles = {
     margin: 'auto',
     border: '1px solid #ccc',
     borderRadius: '50%',
-
-    marginTop: '20px'
-
+    marginTop: '20px',
+    paddingTop:"0"
  }
 
  const image =(props)=> {
     return (
-
       <div>
-
-      <div  onClick={props.editpicHandler}>
-        <img style={styles} src={props.imgSrc} alt=""/>
-      </div>
+        <div  onClick={props.editpicHandler}>
+          <img style={styles} src={props.imgSrc} alt=""/>
+        </div>
       </div>
     )
 };
