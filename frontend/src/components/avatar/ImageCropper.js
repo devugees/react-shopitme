@@ -28,8 +28,8 @@ export default class ImageCropper extends Component {
 
     render() {
         const style = {
-            width: '135px',
-            height: '135px',
+            width: '137px',
+            height: '153px',
             position: "absolute",
             top: "56px",
             right: "1rem",
@@ -37,6 +37,7 @@ export default class ImageCropper extends Component {
             border: '1px solid #ccc',
             borderRadius: '50%',
             marginTop: '20px'
+
         }
         return (
             <div style={style}>
