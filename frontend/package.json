@@ -7,6 +7,7 @@
     "@material-ui/icons": "^1.0.0",
     "axios": "^0.18.0",
     "dotenv": "^5.0.1",
+    "npm-check-updates": "^2.14.2",
     "react": "^16.3.1",
     "react-autosize-textarea": "^3.0.3",
     "react-avatar-image-cropper": "^1.1.7",
@@ -16,7 +17,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-star-rating-component": "^1.4.1",
-    "recompose": "^0.26.0"
+    "recompose": "^0.27.1"
   },
   "scripts": {
     "start": "react-scripts start",
