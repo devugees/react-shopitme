@@ -40,8 +40,9 @@ class SimpleModal extends React.Component {
     this.setState({ open: false });
   };
 
-  componentWillReceiveProps(){
-    this.setState({ open: true});
+  componentWillReceiveProps(nextProps){
+    // console.log('jj',nextProps)
+    // this.setState({ open: true});
   }
 
   render() {

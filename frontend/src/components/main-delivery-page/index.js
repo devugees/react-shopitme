@@ -45,7 +45,7 @@ componentDidMount(){
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-        <AcceptSingleDelivery goback={()=>{this.goback()}} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items}/>
+        <AcceptSingleDelivery goback={()=>{this.goback()}} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={'this.state.notes'}/>
         )
     }
 

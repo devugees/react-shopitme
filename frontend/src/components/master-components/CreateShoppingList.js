@@ -11,18 +11,40 @@ import fakeStore from '../../fakeStore';
 
 export default class CreateShoppingList extends Component {
 
-    state = {...fakeStore}
-    
+    state = {
+      ...fakeStore,
+      listName:'',
+      todo: {}
+    }
+
+    sendDataShoppingListTitle = (data) => {
+      this.setState({
+        listName:data
+      });
+     // console.log(this.state.listName)
+    }
+
+     sendDataToDoList = (data) => {
+      this.setState({
+        todo:data
+      });
+     // console.log(this.state.listName)
+    }
+
+
+
 
     
       render() {
+
       const style = {
         margin: '1rem 0.5rem 0 0.5rem',
       }
         return (
+
           <div className="createShoppingList main">
-            <ShoppingListTitle listId={this.state.listId} checkingPerson={false} />
-            <TodoList orderPerson={true}  items={this.state.items}/>
+            <ShoppingListTitle dataReceive={this.sendDataShoppingListTitle} listName={this.state.listName} listId={this.state.listId} checkingPerson={false} />
+            <TodoList dataReceive={this.sendDataToDoList}orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
             <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
@@ -31,7 +53,7 @@ export default class CreateShoppingList extends Component {
             <Button style={style} variant="raised" color="primary">
               <Link to="/">Create</Link>
             </Button>
-            <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
+            <Sure ref={(ref) => this.sure = ref} />
           </div>
         )
       }

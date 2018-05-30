@@ -13,43 +13,54 @@ const mailnotifier = require('./mailnotifier');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: false }));
+
 /* POST register user */
 router.post('/register', (req, res)  => {
-    const user = {...req.body};
-    
-    if(!user.email) {
-      return res.send({"error": "Must provide an email adress"});
-    } else if(!user.password) {
-      return res.send({"error": "Must provide an password"});
-    } else {
-      const newUser = new User({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        location:{ ...user.location},
-        email: user.email,
-        mobile: user.mobile,
-        gender: user.gender,
-        password: user.password
-      });
+  const user = {...req.body};
+  
+  if(!user.email) {
+    return res.send({"error": "Must provide an email adress"});
+  } else if(!user.password) {
+    return res.send({"error": "Must provide an password"});
+  } else {
+    const newUser = new User({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      location: {
+        street: user.location.street,
+        number: user.location.number,
+        postcode: user.location.postcode,
+        city: user.location.city},
+      email: user.email,
+      mobile: user.mobile,
+      gender: user.gender,
+      password: user.password
+    });
 
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if(err){
-            console.log('err1', err);
-          }
-          newUser.password = hash;
-          newUser.save((err) =>{
-            if(err){
-              console.log('err', err);
-              res.send(err);
-            } else {
-              res.json({'success': 'You are registered and can now login'});
+    bcrypt.genSalt(10, function(error, salt){
+      bcrypt.hash(newUser.password, salt, function(error, hash){
+        if(error){
+          res.json({'error': 'Error Password'});
+        }
+        newUser.password = hash;
+        newUser.save(function(error){
+          if(error){
+            if (error.message) { // some info is required but not sent
+              res.json({'error': error.message});
+            } 
+
+            if (error.err) { // some info already exist in DB and needs to be unique
+              res.json({'error': error.err});
             }
-          });
+            
+          } else {
+            res.json({'success': 'You are registered and can now login'});
+          }
         });
-      });  
-    }  
-  });
+      });
+    });  
+  }  
+});
 
 // Forget Password
 router.post('/forgot', (req, res, next)=> {
@@ -126,7 +137,6 @@ router.post('/reset/:token', (req, res) => {
 });
 
 // Post to Login Page 
-
 router.post('/login', (req, res, next) => {
   if (req.body.password && req.body.email) {
     passport.authenticate('local', (err, user, info) => {
@@ -152,6 +162,7 @@ router.get('/data',(req, res, next)=>{
     }
 });
 })
+
 router.get('/users',(req, res, next)=>{
   User.find((err, users)=>{
     if(err) {
@@ -161,10 +172,6 @@ router.get('/users',(req, res, next)=>{
     }
 });
 })
-
-/*router.get("/", (req, res) => {
-  res.send("hello world!")
-});*/
 
 
 module.exports = router;

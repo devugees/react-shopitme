@@ -32,20 +32,23 @@ export default class ShoppingListTitle extends Component {
         name: props.shopperName,
         accountPage: props.shopperAccountPage
       }
+
     }
   }
- 
+
+
   
   editingButton = () => {
     if (listName === ''){
       this.setState({listName : 'Order'})
     }
-    this.setState(prevState => { return {editing: !prevState.editing}})
+    this.setState(prevState => { return {editing: !prevState.editing}});
+
   }
 
   editText = event => {
     listName = event.target.value;
-    this.setState({ listName })
+    this.setState({ listName } ,()=> this.props.dataReceive(this.state.listName));
   }
 
   newShopper = () => {
@@ -63,6 +66,9 @@ export default class ShoppingListTitle extends Component {
   }
 
   render() {
+
+
+
     const style = {
       padding: '0.1rem 0'
     }

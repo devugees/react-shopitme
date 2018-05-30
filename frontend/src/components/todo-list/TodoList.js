@@ -20,6 +20,7 @@ export default class TodoList extends Component {
     }
   }
 
+
   changeText = event => {
     const disabled = event.target.value.length === 0;
     this.setState({
@@ -87,6 +88,8 @@ export default class TodoList extends Component {
   }
 
   render() {
+      console.log(this.state)
+
     let changingTodo;
 
     if(this.state.shopperPerson || this.state.checkingPerson){
