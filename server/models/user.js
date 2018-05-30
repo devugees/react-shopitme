@@ -58,7 +58,7 @@ location:{
   },
   password: {
     type: String,
-    required: true
+    required: false
   },
   ratingstarts: {
     type:Number,
