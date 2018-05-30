@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', authRoutes);
-app.use('/user', passport.authenticate('jwt', {session: false}), userRoutes);
+app.use('/user',/*  passport.authenticate('jwt', {session: false}), */ userRoutes);
 
 // Server Port
 const PORT = process.env.PORT || 4000;
