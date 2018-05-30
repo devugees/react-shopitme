@@ -37,12 +37,17 @@ class SimpleModal extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false },this.props.sendback());
   };
 
+
   componentWillReceiveProps(nextProps){
-    // console.log('jj',nextProps)
-    // this.setState({ open: true});
+    console.log('componentWillReceiveProps', nextProps)
+    if(nextProps.open){
+      this.setState({ open: true});
+    } else {
+      this.setState({ open: false});
+    }
   }
 
   render() {

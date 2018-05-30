@@ -13,8 +13,15 @@ export default class CreateShoppingList extends Component {
 
     state = {
       ...fakeStore,
-      listName:'',
-      todo: {}
+      openSureModal:false
+    }
+    
+    openCloseModal = () => {
+      this.setState(prevState => {return {openSureModal: !prevState.openSureModal}});
+    }
+
+    sendback = () => {
+      this.setState({openSureModal: false})
     }
 
     sendDataShoppingListTitle = (data) => {
@@ -47,13 +54,18 @@ export default class CreateShoppingList extends Component {
             <TodoList dataReceive={this.sendDataToDoList}orderPerson={true}  items={this.state.items}/>
             <Details />
             <Notes />
-            <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
+            <Button
+              style={style}
+              variant="raised"
+              color="secondary"
+              onClick={this.openCloseModal}
+            >
               Delete
             </Button>
             <Button style={style} variant="raised" color="primary">
               <Link to="/">Create</Link>
             </Button>
-            <Sure ref={(ref) => this.sure = ref} />
+            <Sure sendback={this.sendback} open={this.state.openSureModal}/>
           </div>
         )
       }
