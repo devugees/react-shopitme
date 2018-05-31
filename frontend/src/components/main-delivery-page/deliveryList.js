@@ -27,7 +27,7 @@ const styles = theme => ({
     display: 'inline-block',
   },
   highlight:{
-    backgroundColor:{:root --seconday-bg},
+    backgroundColor:'#54b9b6',
     margin: '1rem 0',
     padding: '5px'
   }
