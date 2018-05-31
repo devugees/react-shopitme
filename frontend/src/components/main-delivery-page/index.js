@@ -13,7 +13,8 @@ state = {
 }
 
 componentDidMount(){
-  this.props.store.fakeDeliverAdresses.map(data => {
+  this.props.store.map(data => {
+
     return(
       this.setState( prevState => {return {
           coords: [...prevState.coords, data.orderer.coords],
@@ -30,6 +31,7 @@ componentDidMount(){
       loadSingleView: true,
       order: selectedDeliver
     })
+    
   }
 
   resertToFalse = arrayToReset => {
@@ -67,7 +69,11 @@ componentDidMount(){
 
   goback = () => {
     this.setState({loadSingleView: false})
+
+
   }
+ render(){
+    let whatToRender = (
 
   render(){
     let whatToRender = (
@@ -88,7 +94,7 @@ componentDidMount(){
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-        <AcceptSingleDelivery goback={()=>{this.goback()}} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={'this.state.notes'}/>
+        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} />
         )
     }
 

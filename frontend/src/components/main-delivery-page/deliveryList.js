@@ -34,7 +34,8 @@ const styles = theme => ({
 });
 
 const deliveryList = props => {
-const { classes } = props; 
+const { classes } = props;
+
   return (
     <div>
       <Paper className={props.highlight ? classes.highlight : classes.paper} elevation={4}>
