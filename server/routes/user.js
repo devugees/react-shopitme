@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 
 
 /* GET users listing. */
@@ -76,5 +78,9 @@ router.put('/changeuserdetails', (req, res) => {
     }
   })
 });
+
+router.post('/profile', upload.single('avatar'), (req, res, next) => {
+  res.json({src: req.file.path})
+})
 
 module.exports = router;
