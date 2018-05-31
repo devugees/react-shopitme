@@ -6,16 +6,26 @@ import './EditUser.css';
 import UserDetailsFields from './UserDetailsFields';
 import PasswordFields from './PasswordFields';
 
-const formType = {
+/* const formType = {
   Register: true,
   ChangeUser: false
-}
+} */
 
 class EditUser extends React.Component {
   render() {
-    const isRegisterForm = formType.Register;
-    const isChangeUser = formType.ChangeUser;
+    let isRegisterForm;
+    let isChangeUser; 
     let endpoint;
+
+    // if there is a token (after login) render the Change SUer Details Form
+    // else render Register Form
+    if(localStorage.getItem("token")) {
+      isRegisterForm = false;
+      isChangeUser = true;
+    } else {
+      isRegisterForm = true;
+      isChangeUser = false;
+    }
 
     /* depending on the Form Type Data will be sent to different endpoints */
     if (isRegisterForm) { endpoint = "register" }

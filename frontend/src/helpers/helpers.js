@@ -14,13 +14,12 @@ export const crudAPI = async (method, endPoint, data) => {
     })
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    return body;
-        
+    return body;      
 }
 
 export function authCrudAPI(method, endPoint, data) {
     // eslint-disable-next-line
-    const token = localStorage.getItem(token);
+    const token = localStorage.getItem('token');
 
     return fetch(endPoint, {
         body: JSON.stringify(data),
@@ -28,7 +27,8 @@ export function authCrudAPI(method, endPoint, data) {
         credentials: 'same-origin',
         headers: {
             'user-agent': 'NachoMerino',
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         method: method,
         mode: 'cors',
