@@ -38,7 +38,8 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: false,
       openForgotpass :false,
-      error: null
+      error: null,
+      isAuthenticated: false
     };
   }
 
@@ -61,7 +62,9 @@ export default class NavBar extends React.Component {
             error:null,
             login: true,
             openLogin: false,
-            openForgotpass :false
+            openForgotpass :false,
+            isAuthenticated: true
+
           })
         }
     })
