@@ -41,14 +41,12 @@ class SimpleModal extends React.Component {
   };
 
 
-  componentWillReceiveProps(nextProps){
-    console.log('componentWillReceiveProps', nextProps)
-    if(nextProps.open){
-      this.setState({ open: true});
-    } else {
-      this.setState({ open: false});
-    }
-  }
+  static getDerivedStateFromProps(props, state){
+   if(props.open){
+     return { open: true};
+   }
+   return null
+ }
 
   render() {
     const { classes } = this.props;

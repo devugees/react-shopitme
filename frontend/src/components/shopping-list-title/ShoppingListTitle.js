@@ -12,6 +12,9 @@ const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 const zeroDay = (day > 9) ? (day) : ('0' + day);
 let listName;
 
+const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
+
+
 export default class ShoppingListTitle extends Component {
 
   constructor(props){
@@ -31,7 +34,8 @@ export default class ShoppingListTitle extends Component {
       shopper: {
         name: props.shopperName,
         accountPage: props.shopperAccountPage
-      }
+      },
+      createdate:createdate
 
     }
   }
@@ -48,7 +52,7 @@ export default class ShoppingListTitle extends Component {
 
   editText = event => {
     listName = event.target.value;
-    this.setState({ listName } ,()=> this.props.dataReceive(this.state.listName));
+    this.setState({ listName } ,()=> this.props.dataReceive(this.state.listName, this.state.createdate));
   }
 
   newShopper = () => {
@@ -103,10 +107,12 @@ export default class ShoppingListTitle extends Component {
     }
 
     return (
+
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
           <p>Created: {zeroDay}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
+
           <p>Shopper: {shopper}</p>
         </Paper>
       </div>

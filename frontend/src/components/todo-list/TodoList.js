@@ -80,15 +80,20 @@ export default class TodoList extends Component {
   }
 
   sendToDo = () => {
-    this.setState( prevState => {return {
+    this.setState( prevState => {
+    this.props.dataReceive([...prevState.items, {todo:prevState.todo,status:'box'}])
+      return {
       items: [...prevState.items, {todo:prevState.todo,status:'box'}],
       todo: '',
       disabled: true,
-    }})
+    }
+
+  })
+    
   }
 
   render() {
-      console.log(this.state)
+  //console.log(this.state.items)
 
     let changingTodo;
 
@@ -112,6 +117,7 @@ export default class TodoList extends Component {
     }
 
     return (
+
       <div className="todo-list">
         {whatToShow}
         {changingTodo}
