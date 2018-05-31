@@ -227,12 +227,7 @@ let fakeStore = {
     start: '2018-04-31T12:00',
     end:'2018-04-31T15:00'
   },
-  items:
-  [{
-    status:'box',
-    todo:"Test Item, you can EDIT or DELETE it"
-  }
-  ],
+  items:[],
   orderHistory:
     [{
       orderID: 15675,
