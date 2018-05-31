@@ -6,7 +6,7 @@ import DeliverHistory from './deliverHistory';
 // import next component fo single view
 import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHistory';
 import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory';
-import EditOrderView from '../master-components/CreateShoppingList';
+import CreateShoppingList from '../master-components/CreateShoppingList';
 
 export default class OrderDeliveryHistory extends Component {
 
@@ -108,7 +108,7 @@ changeToDeliver = () =>{
       displaySingleHistory = (<SingleDeliverHistory deliver={this.state.order}/>)
     }
     if(this.state.EditOrder){
-      displaySingleHistory = (<EditOrderView deliver={this.state.order}/>)
+      displaySingleHistory = (<CreateShoppingList editing={true} editOrder={this.state.order}/>)
     }
 
     let orderColorButtonSelector;

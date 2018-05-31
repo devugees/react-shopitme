@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import { Input, InputLabel, Paper, FormControl } from '@material-ui/core';
 
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth();
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9) ? (month) : ('0' + month);
-const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
-const zeroDay = (day > 9) ? (day) : ('0' + day);
+
 let listName;
 
 export default class ShoppingListTitle extends Component {
@@ -19,6 +11,7 @@ export default class ShoppingListTitle extends Component {
     this.state = {
       listName: 'Order',
       listId: props.listId,
+      creatingDate: props.creatingDate,
       editing: false,
       isShopperAvailable: false,
       orderPerson:props.orderPerson,
@@ -100,7 +93,7 @@ export default class ShoppingListTitle extends Component {
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
-          <p>Created: {zeroDay}/{zeroMonth}/{year} {timeHours}:{zeroMin}</p>
+          <p>Created: {this.state.creatingDate}</p>
           <p>Shopper: {shopper}</p>
         </Paper>
       </div>
