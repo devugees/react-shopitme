@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
-import userPic from '../../pictures/BoB.png'
+import defaultPic from '../../pictures/BoB.png'
 import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
@@ -16,10 +16,9 @@ export default class UserDetails extends Component {
     number: fakeStore.userInfo && fakeStore.userInfo.location.number,
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
-    passwordMatchError: true
+    passwordMatchError: true,
+    userPicture: defaultPic
   };
-
-
 
 handleChange = name => event => {
     
@@ -105,11 +104,38 @@ handleChange = name => event => {
 
 
   render() {
+    let isRegisterForm;
+    let isChangeUser; 
+    let endpoint;
+
+    // if there is a token (after login) render the Change SUer Details Form
+    // else render Register Form
+    if(localStorage.getItem("token")) {
+      isRegisterForm = false;
+      isChangeUser = true;
+    } else {
+      isRegisterForm = true;
+      isChangeUser = false;
+    }
+
+    let userPicture = defaultPic;
+    if(this.state.profileImgPath) {
+      userPicture = this.state.profileImgPath
+    }
+
+    console.log(userPicture);
+
+    /* depending on the Form Type Data will be sent to different endpoints */
+    if (isRegisterForm) { endpoint = "register" }
+    else if (isChangeUser) { endpoint = "changeuserdetails" }
+    else { console.log("form type must be specified") }
+
+
     return (
       <div className="user-details">
-        <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
+        { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper/>: null}
-        <RatingStars rating={this.state.rating}/>
+        {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
         <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
       </div>
     )

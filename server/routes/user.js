@@ -79,8 +79,16 @@ router.put('/changeuserdetails', (req, res) => {
   })
 });
 
-router.post('/profile', upload.single('avatar'), (req, res, next) => {
-  res.json({src: req.file.path})
+router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
+  const id = req.params.id;
+  User.findOneAndUpdate({_id: id}, {profileImgPath: req.file.path}, (err, user) => {
+    if (user) {
+      res.json({src: user.profileImgPath})
+    } if (err) {
+      res.json({error: err})
+    }
+  })
+  
 })
 
 module.exports = router;

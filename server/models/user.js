@@ -69,8 +69,10 @@ location:{
   },
   resetPasswordExpires: {
     type: Date
+  },
+  profileImgPath : {
+    type: String
   }
-  
 });
 
 UserSchema.post('save', (err, doc, next) => {
