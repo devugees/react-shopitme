@@ -13,7 +13,6 @@ state = {
 }
 
 componentDidMount(){
-  console.log('componentDidMount')
   this.props.store.fakeDeliverAdresses.map(data => {
     return(
       this.setState( prevState => {return {
@@ -33,24 +32,33 @@ componentDidMount(){
     })
   }
 
+  resertToFalse = arrayToReset => {
+    arrayToReset.map(marker => {
+      if(marker.highlight) delete marker.highlight
+      return(
+        marker
+      )
+    })
+  }
+
+  toggleHighlight = (item, index) => {
+    if(item[index].highlight){
+      item[index].highlight = false;
+    }else {
+      item[index].highlight = true;
+    }
+  }
+
   highlightMarker = index => {
     const markerToHighlight = [...this.state.coords];
-    //
     const orderToHightLight = [...this.state.orders];
-    orderToHightLight[index].highlight = true
-    console.log(orderToHightLight[index])
-    //
-    const resertToFalse = markerToHighlight.map(marker => {
-      if(marker.highlight) delete marker.highlight
-        return(
-          marker
-        )
-      })
-    if(markerToHighlight[index].highlight){
-      markerToHighlight[index].highlight = false;
-    }else {
-      markerToHighlight[index].highlight = true;
-    }
+
+    this.resertToFalse(markerToHighlight)
+    this.resertToFalse(orderToHightLight)
+
+    this.toggleHighlight(markerToHighlight, index)
+    this.toggleHighlight(orderToHightLight, index)
+    
     this.setState({
       coords: markerToHighlight,
       orders: orderToHightLight
@@ -73,6 +81,7 @@ componentDidMount(){
               order={order}
               deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}
               highlightMarker={()=> {this.highlightMarker(index)}}
+              highlight={order.highlight}
             />
           )
         })}
