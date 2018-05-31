@@ -26,7 +26,6 @@ const Router = () => (
         <Route exact path='/main' component={Main} />
         <Route exact path='/userdetails' component={UserDetailsMiddleware} />
         <Route exact path='/maindeliverypage' component={MainDeliveryPage} />
-        <Route exact path='/acceptsingledelivery' component={AcceptSingleDelivery} />
         <Route exact path='/createshoppinglist' component={CreateShoppingList} />
         <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
         <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
