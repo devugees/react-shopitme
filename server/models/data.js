@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 // User Schema
 const HistorySchema = mongoose.Schema({
 
@@ -7,7 +8,7 @@ const HistorySchema = mongoose.Schema({
      required: true 
   },
     shop: {
-      type:Array,
+      type:String,
       required: true 
     },
     deliveringTime: {
@@ -23,7 +24,21 @@ const HistorySchema = mongoose.Schema({
       type:String,
       required:false
       }
-    }
+    },
+    notes:{
+      type:String,
+      required:false
+    },
+    ordername:{
+      type:String
+    },
+    createdate:{
+      type:String
+    },
+      orderer : {
+         type: Schema.Types.ObjectId,
+          ref: 'User'
+         }
   })
 
 HistorySchema.post('save', (err, doc, next) => {
@@ -35,4 +50,4 @@ HistorySchema.post('save', (err, doc, next) => {
   }
 });
 
-const History = module.exports = mongoose.model('History', HistorySchema);
+const Data = module.exports = mongoose.model('History', HistorySchema);

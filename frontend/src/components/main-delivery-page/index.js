@@ -13,7 +13,8 @@ state = {
 }
 
 componentDidMount(){
-  this.props.store.fakeDeliverAdresses.map(data => {
+  this.props.store.map(data => {
+
     return(
       this.setState( prevState => {return {
           coords: [...prevState.coords, data.orderer.coords],
@@ -30,22 +31,24 @@ componentDidMount(){
       loadSingleView: true,
       order: selectedDeliver
     })
+    
   }
   goback = () => {
     this.setState({loadSingleView: false})
-  }
 
-  render(){
-    console.log(this.props.data)
+
+  }
+ render(){
     let whatToRender = (
+
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
-        <Map deliveryList={true} markers={this.state.coords}/>
-        {this.state.orders.map((order, index) => <DeliveryList key={index} order={order} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
+         <Map deliveryList={true} markers={this.state.coords}/>
+        {this.props.store.map((order, index) => <DeliveryList key={index} order={order} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-        <AcceptSingleDelivery goback={()=>{this.goback()}} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={'this.state.notes'}/>
+        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} />
         )
     }
 
