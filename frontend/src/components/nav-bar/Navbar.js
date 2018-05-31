@@ -64,8 +64,8 @@ export default class NavBar extends React.Component {
             openLogin: false,
             openForgotpass :false,
             isAuthenticated: true
-
           })
+          this.props.handleLoginSuccess()
         }
     })
   }

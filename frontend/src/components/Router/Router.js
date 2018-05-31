@@ -22,26 +22,34 @@ class Router extends Component {
     constructor(props) {
        super(props);
        this.state = {
-        authed: false
+        isAuthenticated: false
          }
-        
+    
+
+   this.handleLoginSuccess = () => {
+        console.log('this',this);
+          this.setState({
+              isAuthenticated:true
+          }) 
        }
+    }
        render() {
+           console.log('state',this.state);
            return (
  <BrowserRouter>
     <React.Fragment>
     <Store.Consumer>
-    {data =>(<Navbar updateUserData={data.updateUserData} /> )}
+    {data =>(<Navbar handleLoginSuccess={this.handleLoginSuccess} updateUserData={data.updateUserData} /> )}
     </Store.Consumer>
     <Switch>
         <Route exact path='/' component={Landing} />
-        <PrivateRoute exact path='/main' component={Main}  authenticated={this.state.authenticated} />
-        <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.authed} />
-        <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.authed} />
+        <PrivateRoute exact path='/main' component={Main}  authed={this.state.isAuthenticated} />
+        <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.isAuthenticated} />
+        <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/acceptsingledelivery' component={AcceptSingleDelivery}  authed={this.state.authed} />
-        <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingList}  authed={this.state.authed} />
-        <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.authed} />
-        <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.authed} />
+        <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingList}  authed={this.state.isAuthenticated} />
+        <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.isAuthenticated} />
+        <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.isAuthenticated} />
         <Route exact path='/reset/*' component={NewPassword}  />
         <Route path="*" component={ NotFound } />
     </Switch>

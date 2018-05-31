@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 const PrivateRoute = ({component: Component, authed, ...rest}) => {
+console.log(authed,'authed');
 
   return (
     <Route 

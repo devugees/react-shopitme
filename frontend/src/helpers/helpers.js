@@ -1,4 +1,6 @@
 export const crudAPI = async (method, endPoint, data) => {
+    console.log('data here',data);
+    
     const response = await fetch(endPoint, {
         body: JSON.stringify(data),
         cache: 'no-cache',
