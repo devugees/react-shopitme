@@ -5,23 +5,22 @@ import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
 
 export default class ShoppingDeliveryLists extends Component {
 
-state = {
-  coords:[],
-  orders:[],
-  order: null,
-  loadSingleView: false,
-}
+  state = {
+    coords:[],
+    orders:[],
+    order: null,
+    loadSingleView: false,
+  }
 
-componentDidMount(){
-  this.props.store.map(data => {
-
-    return(
-      this.setState( prevState => {return {
-          coords: [...prevState.coords, data.orderer.coords],
-          orders: [...prevState.orders, data]
-      }})
+  componentDidMount(){
+    this.props.store.map(data => {
+      return(
+        this.setState( prevState => {return {
+            coords: [...prevState.coords, data.orderer.coords],
+            orders: [...prevState.orders, data]
+        }})
       )
-  })
+    })
   }
 
   deliverMoreInfo = index => {
@@ -68,12 +67,13 @@ componentDidMount(){
   }
 
   goback = () => {
+    const markerToHighlight = [...this.state.coords];
+    const orderToHightLight = [...this.state.orders];
+
+    this.resertToFalse(markerToHighlight)
+    this.resertToFalse(orderToHightLight)
     this.setState({loadSingleView: false})
-
-
   }
- render(){
-    let whatToRender = (
 
   render(){
     let whatToRender = (
