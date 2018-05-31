@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 router.use(passport.initialize());
 const User = require('../models/user');
-const History = require('../models/history');
+const Data = require('../models/data');
 const bcrypt = require('bcryptjs');
 const waterfall = require('async-waterfall');
 const async = require('async');
@@ -40,17 +40,16 @@ router.post('/register', (req, res)  => {
     bcrypt.genSalt(10, function(error, salt){
       bcrypt.hash(newUser.password, salt, function(error, hash){
         if(error){
-          console.log('error', error);
+          res.json({'error': 'Error Password'});
         }
         newUser.password = hash;
         newUser.save(function(error){
           if(error){
-            console.log(error);
-            if (error.message) {
+            if (error.message) { // some info is required but not sent
               res.json({'error': error.message});
             } 
 
-            if (error.err) {
+            if (error.err) { // some info already exist in DB and needs to be unique
               res.json({'error': error.err});
             }
             
@@ -155,7 +154,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/data',(req, res, next)=>{
-  History.find((err, history)=>{
+  Data.find((err, history)=>{
     if(err) {
         res.status(500).send({message: "Some error occured while retrieving data."});
     } else {

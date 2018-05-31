@@ -6,20 +6,24 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
-import { crudAPI } from './../../helpers/helpers';
+import { crudAPI, authCrudAPI } from './../../helpers/helpers';
 
 export default class UserDetails extends Component {
   state = { 
-    ...fakeStore.orderer,
-    street: fakeStore.orderer.deliverAdress.street,
-    number: fakeStore.orderer.deliverAdress.number,
-    city: fakeStore.orderer.deliverAdress.city,
-    postcode: fakeStore.orderer.deliverAdress.postcode,
+    ...fakeStore.userInfo,
+    city: fakeStore.userInfo && fakeStore.userInfo.location.city, 
+    street: fakeStore.userInfo && fakeStore.userInfo.location.street,
+    number: fakeStore.userInfo && fakeStore.userInfo.location.number,
+    postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true
   };
 
-  handleChange = name => event => {
+
+
+handleChange = name => event => {
+    
+  console.log(name, event.target.value)
     this.setState({
       [name]: event.target.value,
     });
@@ -48,36 +52,24 @@ export default class UserDetails extends Component {
   handleSubmit = formtype => event => {
     event.preventDefault();
     console.log(this.state)
-    // const userDetails = {...this.state}; // Make a copy of state
 
-    const { firstname, 
-      lastname, 
-      email, 
-      mobile, 
-      gender, 
-      accountPage, 
-      street,
-      postcode,
-      number,
-      city,
-      password
-     } = this.state
-    
      const userDetails = {
-      firstname,
-      lastname,
-      email,
-      mobile,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      mobile: this.state.mobile,
       location: { 
-        street: street,
-        number: number,
-        postcode: postcode,
-        city: city},
-      gender,
-      password,
+        street: this.state.street,
+        number: this.state.number,
+        postcode: this.state.postcode,
+        city: this.state.city},
+      gender: this.state.gender,
+      password: this.state.password,
       accountPage: this.state.accountPage,
-      _id: "5b0bcf9f1886ca325f69b68a"
+      _id: this.state._id
     }
+
+    
     if (formtype === "register") {
       console.log(userDetails);
         crudAPI("POST", "/register", userDetails)
@@ -90,13 +82,16 @@ export default class UserDetails extends Component {
         })
     } else if (formtype === "changeuserdetails") {
       console.log(userDetails);
-      if (!userDetails.password) { delete userDetails[password]}
-      crudAPI("PUT", "/user/changeuserdetails", userDetails)
+      if (!userDetails.password) { delete userDetails["password"]}
+       authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
-        console.log('body error', body.error);
         if(body.error){this.setState({response: body.error})
       }
-      else {this.setState({response: body.message})}
+      else {
+        this.setState({response: body.message});
+        console.log(body)
+        this.props.updateUserData(body.user)
+      }
      });              
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
@@ -115,7 +110,7 @@ export default class UserDetails extends Component {
         <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
         {this.state.imageEdit ? <ImageCropper/>: null}
         <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response}/>
+        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
       </div>
     )
   }

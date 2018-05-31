@@ -13,10 +13,12 @@ export default class AcceptSingleDelivery extends Component {
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }
+    console.log(this.props);
+    
     return (
       <div className="accept-single-delivery main">
         <ShoppingListTitle checkingPerson={true} ordererName={this.props.orderer.firstname} ordererAccountPage={this.props.orderer.accountPage} listName="Shopping List" listId={this.props.listId}/>
-        <ShowDeliveryDetails deliveringTime={this.props.deliveringTime} deliverAdress={this.props.orderer.deliverAdress}/>
+        <ShowDeliveryDetails deliveringTime={this.props.deliveringTime} deliverAdress={this.props.deliverAdress}/>
         <TodoList items={this.props.items} checkingPerson={true}/>
         <Notes notes={this.props.notes}/>
         <Map markers={[this.props.orderer.coords]}/>
