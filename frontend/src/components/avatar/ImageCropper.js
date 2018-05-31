@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AvatarImageCropper from 'react-avatar-image-cropper';
 //import config from "../config/config.js";
+import { authCrudFileAPI } from '../../helpers/helpers';
 
 export default class ImageCropper extends Component {
 
@@ -9,20 +10,20 @@ export default class ImageCropper extends Component {
         super(props);
         this.state = {
             imgSrc: props.imgSrc,
-
         }
 
     }
+
     apply = (file) => {
-
-        //let objectURL = URL.createObjectURL(file);
-
-        // this.setState({
-        //     imgSrc: objectURL,
-        // })
-        // console.log(this.state);
-        // //this.props.saveCropedImage(file)
-        console.log(file)
+        var fd = new FormData();
+        fd.append('avatar', file, file.name)
+        
+        authCrudFileAPI('/user/profile', fd)
+        .then(res => {
+            this.setState({
+                imgSrc: 'http://localhost:4000/' + res.src
+            })
+        })
     }
 
 
