@@ -15,7 +15,7 @@ export default class ImageCropper extends Component {
     }
 
     apply = (file) => {
-        var fd = new FormData();
+        let fd = new FormData();
         fd.append('avatar', file, file.name)
         
         authCrudFileAPI('/user/profile', fd)
