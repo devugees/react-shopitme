@@ -29,7 +29,7 @@ export default class ImageCropper extends Component {
     render() {
         const style = {
             width: '137px',
-            height: '153px',
+            height: '137px',
             position: "absolute",
             top: "56px",
             right: "1rem",
