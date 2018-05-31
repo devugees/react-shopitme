@@ -13,6 +13,7 @@ state = {
 }
 
 componentDidMount(){
+  console.log('componentDidMount')
   this.props.store.fakeDeliverAdresses.map(data => {
     return(
       this.setState( prevState => {return {
@@ -31,17 +32,50 @@ componentDidMount(){
       order: selectedDeliver
     })
   }
+
+  highlightMarker = index => {
+    const markerToHighlight = [...this.state.coords];
+    //
+    const orderToHightLight = [...this.state.orders];
+    orderToHightLight[index].highlight = true
+    console.log(orderToHightLight[index])
+    //
+    const resertToFalse = markerToHighlight.map(marker => {
+      if(marker.highlight) delete marker.highlight
+        return(
+          marker
+        )
+      })
+    if(markerToHighlight[index].highlight){
+      markerToHighlight[index].highlight = false;
+    }else {
+      markerToHighlight[index].highlight = true;
+    }
+    this.setState({
+      coords: markerToHighlight,
+      orders: orderToHightLight
+    })
+  }
+
   goback = () => {
     this.setState({loadSingleView: false})
   }
 
   render(){
-    console.log(this.props.data)
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
         <Map deliveryList={true} markers={this.state.coords}/>
-        {this.state.orders.map((order, index) => <DeliveryList key={index} order={order} deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}/>)}
+        {this.state.orders.map((order, index) => {
+          return(
+            <DeliveryList
+              key={index}
+              order={order}
+              deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}
+              highlightMarker={()=> {this.highlightMarker(index)}}
+            />
+          )
+        })}
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (

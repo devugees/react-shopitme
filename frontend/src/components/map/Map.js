@@ -51,6 +51,7 @@ export default class Map extends Component {
       );
     }
   }
+
   componentDidUpdate(){localStorage.setItem('geoPos', JSON.stringify(this.state.coords))}
 
   componentWillUnmount() {
@@ -68,8 +69,11 @@ export default class Map extends Component {
       lng:(this.props.deliveryList ? lng : this.props.markers[0].lng)
     }}>
     <Marker position={{ lat: lat, lng: lng }}/>
-  {this.props.markers.map((marker, index)=> <Marker key={index} position={{ lat: marker.lat, lng: marker.lng}}/>)}
-
+    {this.props.markers.map((marker, index)=> {
+      return(
+        <Marker label={marker.highlight ? 'true' : null} key={index} position={{ lat: marker.lat, lng: marker.lng}}/>
+      )
+    })}
   </GoogleMap>
 ));
   return (
