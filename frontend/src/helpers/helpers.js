@@ -36,3 +36,20 @@ export function authCrudAPI(method, endPoint, data) {
         referrer: 'no-referrer',
     }).then(res => res.json())   
 }
+
+export function authCrudFileAPI(endPoint, file) {
+    // eslint-disable-next-line
+    const token = localStorage.getItem('token');
+
+    return fetch(endPoint, {
+        body: file,
+        cache: 'no-cache',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        method: "POST",
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer',
+    }).then(res => res.json())   
+}

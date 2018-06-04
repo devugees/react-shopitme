@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
 
 
@@ -14,12 +16,10 @@ router.get('/', (req, res, next) => {
 /* GET All the shopping list */
 router.get('/maindeliverylist', (req, res, next) => {
   Data.find().populate('orderer').exec((err, data)=> {
-    console.log(data);
-    
+  
     if(err) {
         res.status(500).send({message: "Could not retrieve user with id "});
     } else {
-      console.log(data);
       delete data.shop
       delete data.__v
         res.send(data);
@@ -29,11 +29,9 @@ router.get('/maindeliverylist', (req, res, next) => {
 });
 router.get('/maindeliverylist/:userId', (req, res, next) => {
   Data.findById(req.params.userId).populate('orderer').exec((err, data)=> {
-    console.log(data);
     if(err) {
         res.status(500).send({message: "Could not retrieve user with id "});
     } else {
-      console.log(data);
       delete data.shop
       delete data.__v
         res.send(data);
@@ -117,5 +115,9 @@ router.put('/changeuserdetails', (req, res) => {
     }
   })
 });
+
+router.post('/profile', upload.single('avatar'), (req, res, next) => {
+  res.json({src: req.file.path})
+})
 
 module.exports = router;
