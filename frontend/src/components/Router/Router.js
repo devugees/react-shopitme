@@ -20,21 +20,32 @@ import PrivateRoute from '../privateRoute';
 
 class Router extends Component {
     constructor(props) {
-       super(props);
-       this.state = {
-        isAuthenticated: false
-         }
+        
+        super(props);
+        this.state = {
+            isAuthenticated: false
+        }
     
+        this.handleLoginSuccess = () => {
+            this.setState({
+                isAuthenticated:true
+            }) 
+        }
+    
+        this.openLogin = () => {
+            isAuthenticated:true
+        }
 
-   this.handleLoginSuccess = () => {
-        console.log('this',this);
-          this.setState({
-              isAuthenticated:true
-          }) 
-       }
+
     }
+
+
+
        render() {
            console.log('state',this.state);
+
+
+
            return (
  <BrowserRouter>
     <React.Fragment>

@@ -4,6 +4,7 @@ import './Landing.css'
 
 export default class LandingPage extends Component {
   render() {
+    
     return (
       <div className="landing">
         <Link to={"/createshoppinglist"} >
