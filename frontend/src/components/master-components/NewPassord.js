@@ -49,6 +49,13 @@ class NewPassword extends React.Component {
         resaultMessage: resaultMessage,
         buttonActive: true
       })
+    } else if(event.target.value.length < 1) {
+      resaultMessage = 'The fields shoudn\'t be empty, wriete a password Please!';
+      this.setState({
+        [prop]: event.target.value,
+        resaultMessage: resaultMessage,
+        buttonActive: true
+      })
     } else {
       this.setState({ 
         [prop]: event.target.value,
@@ -72,7 +79,7 @@ class NewPassword extends React.Component {
     .then( response => {
       this.setState({
         inputActive: response.data,
-        buttonActive: response.data
+        buttonActive: true
       })
     })
     .catch(function (error) {
