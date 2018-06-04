@@ -16,17 +16,14 @@ export default class UserDetails extends Component {
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true
-  };
+  }
 
 
 
-handleChange = name => event => {
-    
-  console.log(name, event.target.value)
+  handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
-
 
     if (name === "confirmpassword") {
       const password = this.state.password;
@@ -50,8 +47,6 @@ handleChange = name => event => {
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-    console.log(this.state)
-
      const userDetails = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -70,7 +65,6 @@ handleChange = name => event => {
 
     
     if (formtype === "register") {
-      console.log(userDetails);
         crudAPI("POST", "/register", userDetails)
         .then(body => {
           if(body.error) {
@@ -80,7 +74,6 @@ handleChange = name => event => {
           }
         })
     } else if (formtype === "changeuserdetails") {
-      console.log(userDetails);
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
@@ -88,7 +81,6 @@ handleChange = name => event => {
       }
       else {
         this.setState({response: body.message});
-        console.log(body)
         this.props.updateUserData(body.user)
       }
      });              
