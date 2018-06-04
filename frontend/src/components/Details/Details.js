@@ -4,21 +4,21 @@ import './Details.css';
 
 export default class Details extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state = {
-          deliverAdress:{
-            street: 'Sonnenallee',
-            number: '154',
-            postcode: '12055',
-            city: 'Berlin'
-          },
+          deliverAdress: {...props.deliverAdress},
           editing:false,
           newDeliverAdress:{
             street: '',
             number: '',
             postcode: '',
             city: ''
-          }
+          },
+          deliveringTime: {
+            start: props.start,
+            end: props.end
+          },
+          shop: props.shop
       }
     }
     componentDidMount(){
@@ -82,7 +82,7 @@ export default class Details extends Component {
       From:
        <TextField
         type="datetime-local"
-        defaultValue="2018-05-01T16:30"
+        defaultValue={this.state.deliveringTime.start}
         InputLabelProps={{
           shrink: true,
         }}
@@ -92,7 +92,7 @@ export default class Details extends Component {
        To: 
        <TextField
         type="datetime-local"
-        defaultValue="2018-05-01T16:30"
+        defaultValue={this.state.deliveringTime.end}
         InputLabelProps={{
           shrink: true,
        }}
@@ -101,7 +101,7 @@ export default class Details extends Component {
     <Grid  item xs={12}>
         <FormControl>
            <InputLabel htmlFor="name-input">Store:</InputLabel>
-           <Input id="name-input" />
+           <Input id="name-input" defaultValue={this.state.shop}/>
         </FormControl>
     </Grid>
     <Grid  item xs={12}>

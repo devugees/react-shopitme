@@ -9,10 +9,19 @@ import Sure from '../Modals/Sure';
 //import fake store
 import fakeStore from '../../fakeStore';
 
+const date = new Date();
+const day = date.getDate();
+const month = date.getMonth();
+const year = date.getFullYear();
+const timeHours = date.getHours();
+let timeMin = date.getMinutes();
+const zeroMonth = (month > 9) ? (month) : ('0' + month);
+const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
+const zeroDay = (day > 9) ? (day) : ('0' + day);
+
 export default class CreateShoppingList extends Component {
 
     state = {...fakeStore}
-    
 
     
       render() {
@@ -21,10 +30,18 @@ export default class CreateShoppingList extends Component {
       }
         return (
           <div className="createShoppingList main">
-            <ShoppingListTitle listId={this.state.listId} checkingPerson={false} />
-            <TodoList orderPerson={true}  items={this.state.items}/>
-            <Details />
-            <Notes />
+            <ShoppingListTitle 
+                listId={this.props.editing ? this.props.editOrder.orderID : this.state.listId} checkingPerson={false}
+                creatingDate={this.props.editing ? this.props.editOrder.created : `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`}
+            />
+            <TodoList orderPerson={true}  items={this.props.editing ? this.props.editOrder.items : this.state.items}/>
+            <Details
+                start={this.props.editing ? this.props.editOrder.deliveringTime.start : ''}
+                end={this.props.editing ? this.props.editOrder.deliveringTime.end : ''}
+                shop={this.props.editing ? this.props.editOrder.shop : this.state.shop}
+                deliverAdress={this.props.editing ? {...this.props.editOrder.deliverAdress} : {...this.state.deliverAdress} }
+            />
+            <Notes noteText={this.props.editing ? this.props.editOrder.notes : ''}/>
             <Button style={style} variant="raised" color="secondary" onClick={(e) => this.sure.setState({open: true})}>
               Delete
             </Button>
