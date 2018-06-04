@@ -20,6 +20,7 @@ export default class TodoList extends Component {
     }
   }
 
+
   changeText = event => {
     const disabled = event.target.value.length === 0;
     this.setState({
@@ -79,14 +80,21 @@ export default class TodoList extends Component {
   }
 
   sendToDo = () => {
-    this.setState( prevState => {return {
+    this.setState( prevState => {
+    this.props.dataReceive([...prevState.items, {todo:prevState.todo,status:'box'}])
+      return {
       items: [...prevState.items, {todo:prevState.todo,status:'box'}],
       todo: '',
       disabled: true,
-    }})
+    }
+
+  })
+    
   }
 
   render() {
+  //console.log(this.state.items)
+
     let changingTodo;
 
     if(this.state.shopperPerson || this.state.checkingPerson){
@@ -109,6 +117,7 @@ export default class TodoList extends Component {
     }
 
     return (
+
       <div className="todo-list">
         {whatToShow}
         {changingTodo}

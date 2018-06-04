@@ -19,7 +19,7 @@ export default class RatingStars extends React.Component {
     const { rating } = this.state;
     
     return (                
-      <div>
+      <div style={{margin:"1.6rem"}}>
       <Grid item xs={6} sm={6}>
         <Paper>
         <h1>Alice Doe</h1>
