@@ -50,11 +50,15 @@ export default class NavBar extends React.Component {
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
+          const coords = this.state.coords
           delete data.user.password;
           delete data.user.resetPasswordExpires;
           delete data.user.resetPasswordToken;
           delete data.user.__v;
+          console.log('before',data.user)
+          data.user.coords = coords
           this.props.updateUserData(data.user)
+          console.log('after',data.user)
           localStorage.setItem('userInfo', JSON.stringify(data.user));
           this.setState({
             data: data.user,
