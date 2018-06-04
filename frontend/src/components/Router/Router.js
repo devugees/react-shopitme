@@ -23,7 +23,8 @@ class Router extends Component {
         
         super(props);
         this.state = {
-            isAuthenticated: false
+            isAuthenticated: false,
+            login:false
         }
     
         this.handleLoginSuccess = () => {
@@ -33,7 +34,10 @@ class Router extends Component {
         }
     
         this.openLogin = () => {
-            isAuthenticated:true
+            this.setState({
+                isAuthenticated:true,
+                login:true
+            })
         }
 
 
