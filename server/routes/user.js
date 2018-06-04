@@ -15,12 +15,10 @@ router.get('/', (req, res, next) => {
 /* GET All the shopping list */
 router.get('/maindeliverylist', (req, res, next) => {
   Data.find().populate('orderer').exec((err, data)=> {
-    console.log(data);
-    
+  
     if(err) {
         res.status(500).send({message: "Could not retrieve user with id "});
     } else {
-      console.log(data);
       delete data.shop
       delete data.__v
         res.send(data);
@@ -30,11 +28,9 @@ router.get('/maindeliverylist', (req, res, next) => {
 });
 router.get('/maindeliverylist/:userId', (req, res, next) => {
   Data.findById(req.params.userId).populate('orderer').exec((err, data)=> {
-    console.log(data);
     if(err) {
         res.status(500).send({message: "Could not retrieve user with id "});
     } else {
-      console.log(data);
       delete data.shop
       delete data.__v
         res.send(data);
