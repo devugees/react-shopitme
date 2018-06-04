@@ -5,7 +5,7 @@ import {Store} from '../../fakeStore';
 const CreateShoppingListMiddleware = () => {
     return (
     <Store.Consumer>
-      {data =>(<CreateShoppingList updateUserData={data.updateUserData}/>)}
+      {data =>(<CreateShoppingList updateOrderData={data.updateOrderData}/>)}
     </Store.Consumer>
     )
 }

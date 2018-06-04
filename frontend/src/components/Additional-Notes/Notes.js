@@ -9,7 +9,7 @@ export default class TextFields extends Component {
 
   onChangeHandler = (event) => {
     const inputValue = event.target.value;
-    console.log(inputValue)
+    //console.log(inputValue)
     this.setState({
       inputValue,
     }), this.props.dataReceive(this.state.inputValue)

@@ -13,44 +13,25 @@ import { authCrudAPI } from '../../helpers/helpers'
 export default class CreateShoppingList extends Component {
 
   state = {
-    ...fakeStore,
-    openSureModal:false,
-    order: {
-      deliveringTime:{
-        start: '',
-        end: ''
-      },
-      items:[],
-
-      shop:'',
-      notes: '',
-      createdate:'',
-      orderName: '',
-      orderer: {
-        firstname: fakeStore.userInfo.firstname,
-        lastname: fakeStore.userInfo.lastname,
-        location:{
-          street:fakeStore.userInfo.location.street,
-          number:fakeStore.userInfo.location.number,
-          postcode:fakeStore.userInfo.location.postcode,
-          city:fakeStore.userInfo.location.city
+      ...fakeStore.userInfo,
+      openSureModal:false,
+      order: {
+        deliveringTime:{
+          start: '',
+          end: ''
         },
-        email:fakeStore.userInfo.email,
-        mobile:fakeStore.userInfo.mobile,
-        gender:fakeStore.userInfo.gender,
-        password:'',
-        coords:{
-          lat:fakeStore.userInfo.coords.lat,
-          lng:fakeStore.userInfo.coords.lng
-           }
-
-      }
+        items: fakeStore.items,
     
-    }
+        shop:'',
+        notes: '',
+        createdate:'',
+        orderName: '',
+      }
 }
+  
+
+
  
-
-
   openCloseModal = () => {
     this.setState(prevState => {return {openSureModal: !prevState.openSureModal}});
   }
@@ -74,9 +55,10 @@ export default class CreateShoppingList extends Component {
     });
   }
 
-  grabDataDetails = (details) => {
+  grabDataDetails = (details,shop) => {
     this.setState({
       order:{ ...this.state.order,
+        shop,
         orderer:{
           location:{
             street:details.street,
@@ -88,50 +70,72 @@ export default class CreateShoppingList extends Component {
         }
       }
     })
-    //console.log(this.state)
   }
 
-   grabDataNotes = (notes) => {
+  grabDataNotes = (notes) => {
     this.setState({
       order:{...this.state.order, notes}
     });
-    console.log('notes')
+  }
+
+  
+
+  grabDataStartDelivering = (startTime) => {
+    let order = {...this.state.order}
+    order.deliveringTime.start = startTime
+    this.setState({
+      order:{...order}
+    });
+  }
+
+  grabDataEndDelivering = (endTime) => {
+   let order = {...this.state.order}
+    order.deliveringTime.end = endTime
+    this.setState({
+      order:{...order}
+    });
   }
 
   sendDataToServer= ()=> {
-    console.log(this.state.order);
-   // authCrudAPI("post",'', this.state.order) // waiting to handle request from server
+    //console.log(this.state.order);
+    this.props.updateOrderData(this.state.order);
+    authCrudAPI("post",'http://localhost:4000/user/createshoppinglist', this.state.order).then(date=>console.info(date))
+    //console.log(fakeStore)
   }
 
-
-
-
-    render() {
-     console.log(this.state.orderer)
-
+  render() {
+    // console.log('fakeStore.items[0]',fakeStore.items[0])
+    // console.log('fake store', fakeStore);
+    // console.log("this is the state",this.state)
+    // console.log(this.state.order)
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }
-      return (
+    return (
 
-        <div className="createShoppingList main">
-          <ShoppingListTitle dataReceive={this.grabDataShoppingListTitle} listName={this.state.listName} listId={this.state.listId} checkingPerson={false} />
-          <TodoList dataReceive={this.grabDataDoList} orderPerson={true}  items={this.state.items}/>
-          <Details dataReceive={this.grabDataDetails} />
-          <Notes dataReceive={this.grabDataNotes} />
-          <Button
-            style={style}
-            variant="raised"
-            color="secondary"
-            onClick={this.openCloseModal}
-          >
-            Delete
-          </Button>
-          <Button onClick={this.sendDataToServer}style={style} variant="raised" color="primary">
-            <Link to="/">Create</Link>
-          </Button>
-          <Sure sendback={this.sendback} open={this.state.openSureModal}/>
-        </div>
-      )
-    }
-  };
+      <div className="createShoppingList main">
+        <ShoppingListTitle dataReceive={this.grabDataShoppingListTitle} listName={this.state.listName} listId={this.state.listId} checkingPerson={false} />
+        <TodoList dataReceive={this.grabDataDoList} orderPerson={true}  items={this.state.order.items}/>
+        <Details
+          grabDataStartDelivering={this.grabDataStartDelivering}
+          dataReceive={this.grabDataDetails}
+          grabDataEndDelivering={this.grabDataEndDelivering}
+           />
+          
+        <Notes dataReceive={this.grabDataNotes} />
+        <Button
+          style={style}
+          variant="raised"
+          color="secondary"
+          onClick={this.openCloseModal}
+        >
+          Delete
+        </Button>
+        <Button onClick={this.sendDataToServer}style={style} variant="raised" color="primary">
+          <Link to="/">Create</Link>
+        </Button>
+        <Sure sendback={this.sendback} open={this.state.openSureModal}/>
+      </div>
+    )
+  }
+};

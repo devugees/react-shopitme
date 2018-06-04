@@ -34,6 +34,5 @@ export function authCrudAPI(method, endPoint, data) {
         mode: 'cors',
         redirect: 'follow',
         referrer: 'no-referrer',
-    }).then(res => res.json())
-        
+    }).then(res => res.json())   
 }

@@ -19,7 +19,7 @@ export default class Details extends Component {
             postcode: '',
             city: ''
           },
-          store:'',
+          shop:'',
           orderer:{
             listId: 43,
             firstname: 'Bob',
@@ -69,22 +69,28 @@ export default class Details extends Component {
           city: this.state.city
         }
       })
-      this.setState(prevState => { return {editing: !prevState.editing}}), this.props.dataReceive(this.state.newDeliverAdress)
+      this.setState(
+        prevState => { return {editing: !prevState.editing}}
+        )
     }
     
     editLocation = name => event => {
-        this.setState({
-          [name]: event.target.value,
-        });
+        this.setState({[name]: event.target.value,},()=>this.props.dataReceive(this.state.newDeliverAdress,
+          this.state.shop, this.state.orderer));
       };
 
-    // changeHandler = (event) => {
-    //   const store = event.target.value;
-    //   this.setState({store})
-    // }
 
-    handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
+
+  handlerChangeStartTime = event => {
+    this.setState({ ...this.state,deliveringTime: {start:event.target.value} },()=>
+      this.props.grabDataStartDelivering(this.state.deliveringTime.start));
+    //console.log(this.state.deliveringTime)
+  };
+
+  handlerChangeEndTime = event => {
+    this.setState({...this.state, deliveringTime:{end:event.target.value} },()=>
+      this.props.grabDataEndDelivering(this.state.deliveringTime.end));
+   // console.log(this.state.deliveringTime)
   };
 
 
@@ -117,7 +123,7 @@ export default class Details extends Component {
     <Grid  item xs={12}>
       From:
        <TextField 
-        onChange={this.handleChange('start')}
+        onChange={this.handlerChangeStartTime}
         type="datetime-local"
         defaultValue="2018-05-01T16:30"
         InputLabelProps={{
@@ -128,7 +134,7 @@ export default class Details extends Component {
     <Grid  item xs={12}>
        To: 
        <TextField 
-        onChange={this.handleChange('start')}
+        onChange={this.handlerChangeEndTime}
         type="datetime-local"
         defaultValue="2018-05-01T16:30"
         InputLabelProps={{
@@ -139,7 +145,7 @@ export default class Details extends Component {
     <Grid  item xs={12}>
         <FormControl>
            <InputLabel htmlFor="name-input">Store:</InputLabel>
-           <Input id="name-input" onChange={this.handleChange('store')} />
+           <Input id="name-input" onChange={this.editLocation('shop')} />
         </FormControl>
     </Grid>
     <Grid  item xs={12}>
