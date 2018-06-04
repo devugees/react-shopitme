@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DeliveryList from './deliveryList'
-import Map from '../map/Map';
+import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
 
 export default class ShoppingDeliveryLists extends Component {
@@ -13,11 +13,12 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
+    // becareful with the store without orderer, delet it from DB
     this.props.store.map(data => {
       return(
         this.setState( prevState => {return {
-            coords: [...prevState.coords, data.orderer.coords],
-            orders: [...prevState.orders, data]
+          coords: [...prevState.coords, data.orderer.coords],
+          orders: [...prevState.orders, data]
         }})
       )
     })
@@ -79,7 +80,7 @@ export default class ShoppingDeliveryLists extends Component {
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
-        <Map deliveryList={true} markers={this.state.coords}/>
+        <MapComponent deliveryList={true} markers={this.state.coords}/>
         {this.state.orders.map((order, index) => {
           return(
             <DeliveryList
