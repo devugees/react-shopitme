@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 router.use(passport.initialize());
 const User = require('../models/user');
-const History = require('../models/history');
+const Data = require('../models/data');
 const bcrypt = require('bcryptjs');
 const waterfall = require('async-waterfall');
 const async = require('async');
@@ -154,7 +154,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/data',(req, res, next)=>{
-  History.find((err, history)=>{
+  Data.find((err, history)=>{
     if(err) {
         res.status(500).send({message: "Some error occured while retrieving data."});
     } else {
