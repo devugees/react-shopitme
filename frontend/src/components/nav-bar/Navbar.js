@@ -55,10 +55,8 @@ export default class NavBar extends React.Component {
           delete data.user.resetPasswordExpires;
           delete data.user.resetPasswordToken;
           delete data.user.__v;
-          console.log('before',data.user)
           data.user.coords = coords
           this.props.updateUserData(data.user)
-          console.log('after',data.user)
           localStorage.setItem('userInfo', JSON.stringify(data.user));
           this.setState({
             data: data.user,
@@ -130,10 +128,8 @@ export default class NavBar extends React.Component {
   componentDidUpdate(){
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
-      console.log('saving in LS geoPos')
       localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
     } else {
-      console.log('geting the LS geoPos')
       const geoPos = JSON.parse(localStorage.getItem('geoPos'))
     }
     
