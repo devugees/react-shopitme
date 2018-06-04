@@ -21,14 +21,13 @@ const styles = {
 
 const ShowDeliveryDetails = (props) => {
 const { classes } = props;
-
   return (
     <div className="show-delivery-details">
       <Paper elevation={4}>
         <Typography className={classes.deliver}>
           Deliver Adress:<br/>
-          {props.deliverAdress.street} {props.deliverAdress.number},<br/>
-          {props.deliverAdress.postalCode} {props.deliverAdress.city}.
+          {props.deliverAdress.location.street} {props.deliverAdress.location.number},<br/>
+          {props.deliverAdress.location.postalCode} {props.deliverAdress.location.city}.
         </Typography>
         <Typography className={classes.delivering}>
           Delivering between:<br/>

@@ -1,24 +1,52 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const User = require('../models/user');
+const Data = require('../models/data');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
+
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
+  res.json({'message':'respond with a resource'});
 });
 
-/* GET user profile. */
-router.get('/profile', (req, res, next) => {
-    res.send(req.user);
+/* GET All the shopping list */
+router.get('/maindeliverylist', (req, res, next) => {
+  Data.find().populate('orderer').exec((err, data)=> {
+  
+    if(err) {
+        res.status(500).send({message: "Could not retrieve user with id "});
+    } else {
+      delete data.shop
+      delete data.__v
+        res.send(data);
+    }
+});
+  
+});
+router.get('/maindeliverylist/:userId', (req, res, next) => {
+  Data.findById(req.params.userId).populate('orderer').exec((err, data)=> {
+    if(err) {
+        res.status(500).send({message: "Could not retrieve user with id "});
+    } else {
+      delete data.shop
+      delete data.__v
+        res.send(data);
+    }
+});
+  
 });
 
-router.put('/changeuserdetails', function(req, res) {
+router.put('/changeuserdetails', (req, res) => {
   if (req.body.password===undefined) {delete req.body.password}
   let newUser = {...req.body}
   delete newUser.accountPage
+  console.log(newUser);
 
-  User.findOne({_id: newUser._id}, (error, user) => {
+ User.findOne({_id: newUser._id}, (error, user) => {
+    console.log(user, error);
     if (error) throw error; // here need to handle the error
     else {
       // after finding a user replace all the user data with data from request
@@ -46,5 +74,9 @@ router.put('/changeuserdetails', function(req, res) {
     }
   })
 });
+
+router.post('/profile', upload.single('avatar'), (req, res, next) => {
+  res.json({src: req.file.path})
+})
 
 module.exports = router;

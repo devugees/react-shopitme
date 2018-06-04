@@ -25,15 +25,21 @@ const styles = theme => ({
   textDiv:{
     width:'70%',
     display: 'inline-block',
+  },
+  highlight:{
+    backgroundColor:'#54b9b6',
+    margin: '1rem 0',
+    padding: '5px'
   }
 });
 
 const deliveryList = props => {
-const { classes } = props; 
+const { classes } = props;
+
   return (
     <div>
-      <Paper className={classes.paper} elevation={4}>
-        <div className={classes.textDiv}>
+      <Paper className={props.highlight ? classes.highlight : classes.paper} elevation={4}>
+        <div className={classes.textDiv} onClick={props.highlightMarker}>
           <p className={classes.p}>#{props.order.orderer.listId}</p>
           <p className={classes.p}>from {props.order.deliveringTime.start} till {props.order.deliveringTime.end}</p>
           <p className={classes.p}>for {props.order.orderer.firstname} {props.order.orderer.lastname}</p>

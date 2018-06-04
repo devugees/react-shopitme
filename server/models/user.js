@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 
 // User Schema
 const UserSchema = mongoose.Schema({
+  
+  userId:{
+    type:Number
+  },
   firstname: {
     type: String,
     required: true
@@ -54,7 +58,7 @@ location:{
   },
   password: {
     type: String,
-    required: true
+    required: false
   },
   ratingstarts: {
     type:Number,
@@ -66,6 +70,7 @@ location:{
   resetPasswordExpires: {
     type: Date
   }
+  
 });
 
 UserSchema.post('save', (err, doc, next) => {
