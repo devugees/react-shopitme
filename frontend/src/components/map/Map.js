@@ -11,48 +11,40 @@ const url = `https://maps.googleapis.com/maps/api/js?key=${key}`
 
 export default class Map extends Component {
   constructor(props){
-    super(props)
+    const geoPos = JSON.parse(localStorage.getItem('geoPos'))
+    super()
     this.state = {
     coords: {
-      latitude: null,
-      longitude: null
-    },
+      latitude: geoPos.latitude,
+      longitude: geoPos.longitude,
+      },
     error: null
     }
   }
-  componentDidMount() {
-    const geoPos = JSON.parse(localStorage.getItem('geoPos'))
-    if(geoPos && geoPos.latitude !== null){
-      this.setState({
-        coords: {
-        latitude: geoPos.latitude,
-        longitude: geoPos.longitude,
-        }
-      })
-    } else {
-      this.geoId = navigator.geolocation.watchPosition(
-        position => {
-          this.setState({
-            coords: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude
-            }
-          });
-        },
-        error => {
-          this.setState({ error });
-        }
-      );
-    }
+  /*componentDidMount() {
+    this.geoId = navigator.geolocation.watchPosition(
+      position => {
+        this.setState({
+          coords: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+        });
+      },
+      error => {
+        this.setState({ error });
+      }
+    );
   }
 
   componentDidUpdate(){localStorage.setItem('geoPos', JSON.stringify(this.state.coords))}
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.geoId);
-  }
+  }*/
 
   render() {
+    console.log(this.state)
     //label=
     let lat = this.state.coords.latitude;
     let lng = this.state.coords.longitude;
@@ -65,6 +57,7 @@ export default class Map extends Component {
     }}>
     <Marker position={{ lat: lat, lng: lng }}/>
     {this.props.markers.map((marker, index)=> {
+      console.log(`${index} is`,marker)
       return(
         <Marker icon={marker.highlight ? whereToGoMarker : positionMarker}  key={index} position={{ lat: marker.lat, lng: marker.lng}}/>
       )
