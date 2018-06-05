@@ -12,6 +12,7 @@ export default class TodoList extends Component {
     super(props);
     this.state = {
       todo:'',
+      editTodo:'',
       items:props.items, //came from Store
       disabled: true,
       orderPerson:props.orderPerson,
@@ -32,7 +33,7 @@ export default class TodoList extends Component {
   editToDo = index => {
     const items = [...this.state.items];
     items[index].status = 'editMe';
-    this.setState({todo: items[index].todo})
+    this.setState({editTodo: items[index].todo})
     if(this.state.todo === ''){
       return
     }
@@ -41,7 +42,7 @@ export default class TodoList extends Component {
 
   editText = event => {
     this.setState({
-      todo:event.target.value
+      editTodo:event.target.value
     })
   }
 
@@ -49,9 +50,9 @@ export default class TodoList extends Component {
     const items = [...this.state.items];
     items[index].status = 'box';
     if(this.state.editing !== ''){
-      items[index].todo = this.state.todo;
+      items[index].todo = this.state.editTodo;
     }
-    this.setState({ items, todo:'' });
+    this.setState({ items, editTodo:'' });
   }
 
   removeToDo = index => {
@@ -113,7 +114,7 @@ export default class TodoList extends Component {
           </Button>
         </React.Fragment>)
 
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
     }
 
     return (

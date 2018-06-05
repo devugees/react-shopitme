@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from '../landing/Landing'
 import UserDetailsMiddleware from '../middlewares/UserDetailsMiddleware';
-import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingListMiddleware from '../middlewares/CreateShoppingListMiddleware';
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
