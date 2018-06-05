@@ -21,7 +21,6 @@ export default class TodoList extends Component {
     }
   }
 
-
   changeText = event => {
     const disabled = event.target.value.length === 0;
     this.setState({
@@ -88,7 +87,6 @@ export default class TodoList extends Component {
       todo: '',
       disabled: true,
     }
-
   })
     
   }
@@ -116,13 +114,10 @@ export default class TodoList extends Component {
       if(!this.state.items) {
         console.log('empty')
       } else {
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.todo} checking={this.state.checkingPerson}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
       }
     }
-  
-
     return (
-
       <div className="todo-list">
         {whatToShow}
         {changingTodo}
