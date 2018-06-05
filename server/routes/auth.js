@@ -30,7 +30,12 @@ router.post('/register', (req, res)  => {
         street: user.location.street,
         number: user.location.number,
         postcode: user.location.postcode,
-        city: user.location.city},
+        city: user.location.city
+      },
+      coords: {
+          lat: user.coords.lat,
+          lng: user.coords.lng
+      },
       email: user.email,
       mobile: user.mobile,
       gender: user.gender,
