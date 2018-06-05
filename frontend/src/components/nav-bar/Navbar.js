@@ -33,7 +33,6 @@ const styles = {
 export default class NavBar extends React.Component {
   constructor(props) {
     super();
- 
     this.state = {
       login: false,
       openLogin: false,
@@ -57,6 +56,7 @@ export default class NavBar extends React.Component {
           delete data.user.resetPasswordToken;
           delete data.user.__v;
           this.props.updateUserData(data.user)
+          localStorage.setItem('userInfo', JSON.stringify(data.user));
           this.setState({
             data: data.user,
             error:null,
@@ -69,7 +69,9 @@ export default class NavBar extends React.Component {
   }
 
   LogoutClickHandler = () => {
+    localStorage.removeItem('geoPos');
     localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
     this.setState({
       login: false,
       openLogin: false,
@@ -93,6 +95,49 @@ export default class NavBar extends React.Component {
       openForgotpass :true
 
     })
+  }
+
+  componentDidMount() {
+    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+    if(userInfoLS){
+      this.props.updateUserData(userInfoLS)
+      this.setState({
+        data: userInfoLS,
+        error:null,
+        login: true,
+        openLogin: false,
+        openForgotpass :false
+      })
+    }
+    this.geoId = navigator.geolocation.watchPosition(
+      position => {
+        this.setState({
+          coords: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+        });
+      },
+      error => {
+        this.setState({ error });
+      }
+    );
+  }
+
+  componentDidUpdate(){
+    const geoPos = localStorage.getItem('geoPos')
+    if(!geoPos){
+      console.log('saving in LS geoPos')
+      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
+    } else {
+      console.log('geting the LS geoPos')
+      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
+    }
+    
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.geoId);
   }
 
   render() {
