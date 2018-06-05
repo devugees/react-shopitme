@@ -9,7 +9,7 @@ const HistorySchema = mongoose.Schema({
   },
     shop: {
       type:String,
-      required: true 
+      required: false 
     },
     deliveringTime: {
       start: {

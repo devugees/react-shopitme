@@ -4,6 +4,9 @@ import { Input, InputLabel, Paper, FormControl } from '@material-ui/core';
 
 let listName;
 
+const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
+
+
 export default class ShoppingListTitle extends Component {
 
   constructor(props){
@@ -24,21 +27,25 @@ export default class ShoppingListTitle extends Component {
       shopper: {
         name: props.shopperName,
         accountPage: props.shopperAccountPage
-      }
+      },
+      createdate:createdate
+
     }
   }
- 
+
+
   
   editingButton = () => {
     if (listName === ''){
       this.setState({listName : 'Order'})
     }
-    this.setState(prevState => { return {editing: !prevState.editing}})
+    this.setState(prevState => { return {editing: !prevState.editing}});
+
   }
 
   editText = event => {
     listName = event.target.value;
-    this.setState({ listName })
+    this.setState({ listName } ,()=> this.props.dataReceive(this.state.listName, this.state.createdate));
   }
 
   newShopper = () => {
@@ -56,6 +63,9 @@ export default class ShoppingListTitle extends Component {
   }
 
   render() {
+
+
+
     const style = {
       padding: '0.1rem 0'
     }
@@ -90,6 +100,7 @@ export default class ShoppingListTitle extends Component {
     }
 
     return (
+
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
