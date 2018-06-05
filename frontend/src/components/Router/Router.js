@@ -29,7 +29,7 @@ const Router = () => (
         <Route exact path='/createshoppinglist' component={CreateShoppingListMiddleware} />
         <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
         <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
-        <Route exact path='/reset/*' component={NewPassword} />
+        <Route exact path='/reset/:token' component={NewPassword} />
         <Route path="*" component={ NotFound } />
     </Switch>
     <Footer />
