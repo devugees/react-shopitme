@@ -19,11 +19,15 @@ export default class ImageCropper extends Component {
         fd.append('avatar', file, file.name);
         
         const id = fakeStore.userInfo._id;
+        const endpoint = 'http://localhost:3000/user/profile/' + id;
 
-        authCrudFileAPI('/user/profile/' + id, fd)
+        authCrudFileAPI(endpoint, fd)
         .then(res => {
+            const url = 'http://localhost:4000/' + res.src;
+            console.log('new Url', url)
+            this.props.updateUserPicture(url)
             this.setState({
-                imgSrc: 'http://localhost:4000/' + res.src
+                imgSrc: url
             })
         })
     }

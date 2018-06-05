@@ -5,7 +5,7 @@ import {Store} from '../../fakeStore';
 const UserDetailsMiddleware = () => {
     return (
     <Store.Consumer>
-    {data =>(<UserDetails updateUserData={data.updateUserData}/>)}
+    {data =>(<UserDetails updateUserData={data.updateUserData} updateUserPicture={data.updateUserPicture} />)}
     </Store.Consumer>
     )
 }

@@ -262,7 +262,7 @@ let fakeStore = {
         ]
       },
       {
-      orderID: 13466,
+      orderID: 13466,  
       status:'In Progress',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
@@ -459,4 +459,5 @@ export default fakeStore
 export const Store = React.createContext({
   store: fakeStore,
   updateUserData: data => {fakeStore.userInfo = data; console.log(fakeStore)},
+  updateUserPicture: data => {fakeStore.userInfo.profileImgPath = data}
 });

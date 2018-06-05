@@ -50,7 +50,6 @@ handleChange = name => event => {
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-    console.log(this.state)
 
      const userDetails = {
       firstname: this.state.firstname,
@@ -70,7 +69,7 @@ handleChange = name => event => {
 
     
     if (formtype === "register") {
-      console.log(userDetails);
+      console.log('from register', userDetails);
         crudAPI("POST", "/register", userDetails)
         .then(body => {
           if(body.error) {
@@ -80,7 +79,7 @@ handleChange = name => event => {
           }
         })
     } else if (formtype === "changeuserdetails") {
-      console.log(userDetails);
+      console.log('from changeuser', userDetails);
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
@@ -123,20 +122,18 @@ handleChange = name => event => {
       userPicture = this.state.profileImgPath
     }
 
-    console.log(userPicture);
-
-    /* depending on the Form Type Data will be sent to different endpoints */
-    if (isRegisterForm) { endpoint = "register" }
-    else if (isChangeUser) { endpoint = "changeuserdetails" }
-    else { console.log("form type must be specified") }
-
+    function updateImg(src){
+      this.setState({
+        userPicture: src
+      })
+    }
 
     return (
       <div className="user-details">
-        { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
-        {this.state.imageEdit ? <ImageCropper/>: null}
+         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
+        {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
         {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
+        <EditUser isRegisterForm={isRegisterForm} isChangeUser={isChangeUser} userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
       </div>
     )
   }
