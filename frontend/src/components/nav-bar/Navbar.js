@@ -37,13 +37,14 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: false,
       openForgotpass :false,
-      error: null,
-
-    };
+      error: null
+    }
   }
 
 
-  LoginClickHandler = params => {
+  LoginClickHandler = (e,params) => {
+    //{email:'123@123.com', pass:123}
+    e.preventDefault();
     crudAPI('post', '/login', params)
       .then(data => {
         if(data.error){
