@@ -89,11 +89,10 @@ render() {
         <PrivateRoute exact path='/main' component={Main}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />
-        <PrivateRoute exact path='/acceptsingledelivery' component={AcceptSingleDelivery}  authed={this.state.authed} />
         <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.isAuthenticated} />
         <Route exact path='/reset/*' component={NewPassword}  />
-        <Route exact path='/createshoppinglist' component={CreateShoppingListMiddleware} />
+        <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingListMiddleware} authed={this.state.isAuthenticated} />
         <Route path="*" component={ NotFound } />
     </Switch>
     <Footer />
