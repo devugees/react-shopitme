@@ -64,7 +64,6 @@ class Router extends Component {
         componentDidMount(){
             authCrudAPI('post','http://localhost:4000/user/checkingToken')
             .then( data => {
-                console.log(data,'data');
                 if ( data === 'Unauthorized') {
                     localStorage.removeItem('userInfo')
                     localStorage.removeItem('token')

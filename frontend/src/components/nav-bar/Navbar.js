@@ -125,7 +125,9 @@ export default class NavBar extends React.Component {
       error => {
         this.setState({ error });
       }
+     
     );
+        
   }
 
   componentDidUpdate(){
