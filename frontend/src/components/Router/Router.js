@@ -24,7 +24,6 @@ class Router extends Component {
         super(props);
         this.state = {
             isAuthenticated: false,
-            login:false
         }
     
         this.handleLoginSuccess = () => {
@@ -34,30 +33,37 @@ class Router extends Component {
         }
     
         this.openLogin = () => {
-            this.setState({
-                isAuthenticated:true,
-                login:true
-            })
+            console.log('openLOGIN', this.navBar)
+
+            // check if authenticated, if not open login
+           this.navBar.current.setState({
+               openLogin:true,
+           })
         }
-
-
+        
+        this.landingPageWrapper = (props) => {
+            return (
+              <Landing
+                onClick={this.openLogin}
+                {...props}
+              />
+            );
+          }
+          this.navBar = React.createRef();
+      
     }
+    
 
-
-
-       render() {
-           console.log('state',this.state);
-
-
-
-           return (
+render() {
+           
+         return (
  <BrowserRouter>
     <React.Fragment>
     <Store.Consumer>
-    {data =>(<Navbar handleLoginSuccess={this.handleLoginSuccess} updateUserData={data.updateUserData} /> )}
+    {data =>(<Navbar handleLoginSuccess={this.handleLoginSuccess} updateUserData={data.updateUserData} ref={this.navBar}  /> )}
     </Store.Consumer>
     <Switch>
-        <Route exact path='/' component={Landing} />
+        <Route exact path='/' component={this.landingPageWrapper} />
         <PrivateRoute exact path='/main' component={Main}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />

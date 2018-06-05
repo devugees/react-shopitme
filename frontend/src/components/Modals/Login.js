@@ -82,6 +82,7 @@ class Login extends React.Component {
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
+  
 
   render() {
     const { classes } = this.props;
@@ -92,6 +93,7 @@ class Login extends React.Component {
           aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
+          
         >
           <div className={classNames(classes.paper, classes.modalStyle)}>
             <Button variant="raised" color="primary" className={classes.loginButtons}>
