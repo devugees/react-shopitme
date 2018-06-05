@@ -31,7 +31,8 @@ export default class CreateShoppingList extends Component {
         return (
           <div className="createShoppingList main">
             <ShoppingListTitle 
-                listId={this.props.editing ? this.props.editOrder.orderID : this.state.listId} checkingPerson={false}
+                listId={this.props.editing ? this.props.editOrder.orderID : this.state.listId}
+                checkingPerson={false}
                 creatingDate={this.props.editing ? this.props.editOrder.created : `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`}
             />
             <TodoList orderPerson={true}  items={this.props.editing ? this.props.editOrder.items : this.state.items}/>
