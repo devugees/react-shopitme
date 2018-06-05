@@ -37,8 +37,7 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: false,
       openForgotpass :false,
-      error: null,
-      isAuthenticated: false
+      error: null
     };
   }
 
@@ -61,8 +60,7 @@ export default class NavBar extends React.Component {
             error:null,
             login: true,
             openLogin: false,
-            openForgotpass :false,
-            isAuthenticated: true
+            openForgotpass :false
           })
           this.props.handleLoginSuccess()
         }
@@ -76,8 +74,9 @@ export default class NavBar extends React.Component {
     this.setState({
       login: false,
       openLogin: false,
-      openForgotpass :false
+      openForgotpass :false,
     })
+    this.props.logOut()
   }
 
   popupLogin = () => {
