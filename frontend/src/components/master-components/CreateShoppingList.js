@@ -46,7 +46,7 @@ export default class CreateShoppingList extends Component {
               Delete
             </Button>
             <Button style={style} variant="raised" color="primary">
-              <Link to="/">Create</Link>
+                <Link to="/">{this.props.editing ? 'Update' : 'Create'}</Link> 
             </Button>
             <Sure ref={(ref) => this.sure = ref} open={this.state.open}/>
           </div>
