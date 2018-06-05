@@ -8,7 +8,6 @@ import Notes from '../Additional-Notes/Notes';
 import Map from '../map/Map';
 //import fake store
 import fakeStore from '../../fakeStore';
-//import {Store} from '../../fakeStore';
 
 export default class AcceptSingleDelivery extends Component {
 
