@@ -130,10 +130,7 @@ export default class NavBar extends React.Component {
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
       localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    } else {
-      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
-    }
-    
+    }    
   }
 
   componentWillUnmount() {
