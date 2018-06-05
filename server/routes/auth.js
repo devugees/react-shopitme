@@ -30,7 +30,12 @@ router.post('/register', (req, res)  => {
         street: user.location.street,
         number: user.location.number,
         postcode: user.location.postcode,
-        city: user.location.city},
+        city: user.location.city
+      },
+      coords: {
+          lat: user.coords.lat,
+          lng: user.coords.lng
+      },
       email: user.email,
       mobile: user.mobile,
       gender: user.gender,
@@ -86,10 +91,19 @@ router.post('/forgot', (req, res, next)=> {
       });
     },
     (token, user) => {
-      mailnotifier.sendMail(user.email,'Password Reset',`You are receiving this because you (or someone else) have requested the reset of the password for your account.
-          'Please click on the following link: http://localhost:3000/reset/${token}
-           this link is valid just for one hour or paste this into your browser to complete the process:`)
-          return res.send('Please check your email, we have sent the reset form')
+      let mailtext = `Dear ${user.firstname},
+      
+      You are receiving this message because you (or someone else) have requested reset password of your account.
+      
+      if you want to continue the process, please click on the following link or past it in your browser :
+      http://localhost:3000/reset/${token}
+      Note: "this link is valid just for one hour".
+      
+      We which you a nice day.
+      ShopItME Team © 2018.
+        `;
+      mailnotifier(user.email,`Password Reset`,mailtext);
+      return res.send('Please check your email, we have sent the reset form')
     }
   ], err => {
     if (err) return next(err);
@@ -97,13 +111,25 @@ router.post('/forgot', (req, res, next)=> {
   });
 });
 
+// check validation of the link
+router.get('/checktoken/:token', function(req,res) {
+  User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, 
+function(err, user) {
+  if(!user) {
+    return res.send('true');
+  } else {
+    return res.send('false');
+  }
+})
+})
+
 // Reset Password
 router.post('/reset/:token', (req, res) => {
   async.waterfall([
     done => {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
         if (!user) {
-          return res.send('Password reset token is invalid or has expired.');
+          return res.send('Password reset link is invalid or has expired.');
         }
 
         user.password = req.body.password;
@@ -128,8 +154,15 @@ router.post('/reset/:token', (req, res) => {
       });
     },
     user => {
-      mailnotifier.sendMail(user.email,'Password Changed','This is a confirmation that the password for your account has just been changed')
-      return res.send('Your Password has been changed successfully you can login now')
+      let mailtext = `Dear ${user.firstname},
+ 
+      This is a confirmation that the password for your account has just been changed
+      
+      We which you a nice day.
+      ShopItME Team © 2018.
+        `;
+      mailnotifier(user.email,`Password Changed Notification`,mailtext);  
+      return res.send('done')
     }
   ], err => {
     res.redirect('/');

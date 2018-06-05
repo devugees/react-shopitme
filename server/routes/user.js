@@ -91,10 +91,10 @@ router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (r
 
 
 router.put('/changeuserdetails', (req, res) => {
+  console.log('changin user')
   if (req.body.password===undefined) {delete req.body.password}
   let newUser = {...req.body}
   delete newUser.accountPage
-  console.log(newUser);
 
  User.findOne({_id: newUser._id}, (error, user) => { 
     console.log(user, error);
@@ -110,8 +110,12 @@ router.put('/changeuserdetails', (req, res) => {
             user.gender = newUser.gender;
             user.email = newUser.email;
             user.mobile = newUser.mobile;
-            user.location = {street: newUser.location.street, number: newUser.location.number, 
-            postcode: newUser.location.postcode, city: newUser.location.city}
+            user.location = {
+              street: newUser.location.street,
+              number: newUser.location.number, 
+              postcode: newUser.location.postcode,
+              city: newUser.location.city
+            };
             user.save((error) => {
               if(error) {res.send(error)}
               else {

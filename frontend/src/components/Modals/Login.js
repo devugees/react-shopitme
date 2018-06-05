@@ -93,9 +93,14 @@ class Login extends React.Component {
           aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
-          
-        >
+        > 
           <div className={classNames(classes.paper, classes.modalStyle)}>
+             <form 
+              noValidate
+              onSubmit={(e)=>{this.props.loginclick(e,{
+                          email:this.state.email,
+                          password:this.state.password})
+                        }}>
             <Button variant="raised" color="primary" className={classes.loginButtons}>
               <img src={Facebook} className={classes.iconwww} alt="facebook"/>
               Login with Facebook 
@@ -116,7 +121,7 @@ class Login extends React.Component {
                   E-mail
               </InputLabel>
                 <Input
-                onChange={this.handleChange('email')}
+                  onChange={this.handleChange('email')}
                   classes={{
                     underline: classes.inputUnderline,
                   }}
@@ -151,12 +156,11 @@ class Login extends React.Component {
               <Button
                 variant="raised"
                 className={classes.loginButtons} 
-                onClick={()=>{this.props.loginclick({
-                  email:this.state.email,
-                  password:this.state.password})
-                }}>
+                type="submit"
+                >
                 Login 
               </Button>
+              </form>
               <Button variant="flat" onClick={this.handleForget}>
                 Forgot your password?
               </Button>

@@ -3,10 +3,15 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem, Fade } from '@material-ui/core';
 import Avatars from './Avatars';
-
+import './Navbar.css';
 
 const styles = {
-  padding: "0"
+  button:{padding: "0"},
+  menuItem:{
+    position:"absolute",
+    top:"2.3rem",
+    color:'black'
+  }
 }
 
 export default class DropMenu extends React.Component {
@@ -33,7 +38,7 @@ export default class DropMenu extends React.Component {
 
     return (
       <React.Fragment>
-        <Button style={styles}
+        <Button style={styles.button}
           aria-owns={anchorEl ? 'fade-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
@@ -41,7 +46,7 @@ export default class DropMenu extends React.Component {
         <Avatars userName={this.props.userName}/>
     
         </Button>
-        <Menu style={{position:"absolute" ,top:"2.3rem"}}
+        <Menu style={styles.menuItem}
           id="fade-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}

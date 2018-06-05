@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from '../landing/Landing'
 import UserDetailsMiddleware from '../middlewares/UserDetailsMiddleware';
-import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
-import CreateShoppingList from '../master-components/CreateShoppingList'
+import CreateShoppingListMiddleware from '../middlewares/CreateShoppingListMiddleware';
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
 import MainDeliveryPage from '../master-components/MainDeliveryPage';
@@ -91,10 +90,10 @@ render() {
         <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/acceptsingledelivery' component={AcceptSingleDelivery}  authed={this.state.authed} />
-        <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingList}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.isAuthenticated} />
         <Route exact path='/reset/*' component={NewPassword}  />
+        <Route exact path='/createshoppinglist' component={CreateShoppingListMiddleware} />
         <Route path="*" component={ NotFound } />
     </Switch>
     <Footer />
