@@ -1,4 +1,4 @@
-export const crudAPI = async (method, endPoint, data) => {
+export const crudAPI = async (method, endPoint, data) => {    
     const response = await fetch(endPoint, {
         body: JSON.stringify(data),
         cache: 'no-cache',
@@ -34,7 +34,14 @@ export function authCrudAPI(method, endPoint, data) {
         mode: 'cors',
         redirect: 'follow',
         referrer: 'no-referrer',
-    }).then(res => res.json())   
+    }).then(response => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          return response.json()
+        } else {
+          return response.text()
+        }
+      })
 }
 
 export function authCrudFileAPI(endPoint, file) {
