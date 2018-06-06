@@ -23,6 +23,7 @@ const gender = [
 
 class UserDetailsForm extends Component {
     render() {
+        console.log('hi', this.props)
         return (
             <React.Fragment>
                 <Grid item xs={6}>
