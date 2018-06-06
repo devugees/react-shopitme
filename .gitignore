@@ -61,3 +61,5 @@ typings/
 
 
 frontend/src/dataBase\.js
+
+package-lock\.json

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
-import defaultPic from '../../pictures/BoB.png'
+import userPic from '../../pictures/BoB.png'
 import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
@@ -20,13 +20,25 @@ export default class UserDetails extends Component {
     userPicture: defaultPic
   };
 
-handleChange = name => event => {
-    
-  console.log(name, event.target.value)
+  componentDidMount(){
+    const geoPos = localStorage.getItem('geoPos')
+    if(!geoPos){
+      return;
+    } else {
+      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
+      this.setState({
+        coords: {
+          lat: geoPos.latitude,
+          lng: geoPos.longitude
+        }
+      }); 
+    }
+  }
+
+  handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
-
 
     if (name === "confirmpassword") {
       const password = this.state.password;
@@ -50,6 +62,7 @@ handleChange = name => event => {
 
   handleSubmit = formtype => event => {
     event.preventDefault();
+    console.log(this.state)
 
      const userDetails = {
       firstname: this.state.firstname,
@@ -60,16 +73,18 @@ handleChange = name => event => {
         street: this.state.street,
         number: this.state.number,
         postcode: this.state.postcode,
-        city: this.state.city},
+        city: this.state.city
+      },
+      coords: this.state.coords,
       gender: this.state.gender,
       password: this.state.password,
       accountPage: this.state.accountPage,
       _id: this.state._id
     }
-
+    console.log('What to send',userDetails)
     
     if (formtype === "register") {
-      console.log('from register', userDetails);
+      console.log(userDetails);
         crudAPI("POST", "/register", userDetails)
         .then(body => {
           if(body.error) {
@@ -79,7 +94,7 @@ handleChange = name => event => {
           }
         })
     } else if (formtype === "changeuserdetails") {
-      console.log('from changeuser', userDetails);
+      console.log(userDetails);
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
@@ -87,7 +102,6 @@ handleChange = name => event => {
       }
       else {
         this.setState({response: body.message});
-        console.log(body)
         this.props.updateUserData(body.user)
       }
      });              

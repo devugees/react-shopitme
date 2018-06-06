@@ -1,6 +1,6 @@
 import React from 'react';
 // Material UI
-import { Grid, Typography, TextField, Button } from '@material-ui/core';
+import { Grid, Typography, Button } from '@material-ui/core';
 // Sub Components & CSS
 import './EditUser.css';
 import UserDetailsFields from './UserDetailsFields';
@@ -77,12 +77,13 @@ class EditUser extends React.Component {
             {(this.props.error) ? <p className="error">{this.props.error}</p> : null}
             {(this.props.response) ? <p className="message">{this.props.response}</p> : null}
             <Grid item container xs={12} spacing={16}>
-            {(isRegisterForm && !this.props.userdetails.passwordMatchError || 
-              isChangeUser && !this.props.userdetails.password && !this.props.userdetails.confirmpassword || 
-              isChangeUser && !this.props.userdetails.passwordMatchError ) ? <Button variant="raised" size="large" type="submit">
-                  Submit
-              </Button> : <Button label="Submit" disabled size="large">Submit
-              </Button>}
+            {(
+              (isRegisterForm && !this.props.userdetails.passwordMatchError) || 
+              (isChangeUser && !this.props.userdetails.password && !this.props.userdetails.confirmpassword) ||
+              (isChangeUser && !this.props.userdetails.passwordMatchError) ) ? 
+              <Button variant="raised" size="large" type="submit">Submit</Button> : 
+              <Button label="Submit" disabled size="large">Submit</Button>
+            }
             </Grid>
           </Grid>
         </form>

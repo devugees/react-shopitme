@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({dest: 'uploads/'});
+const passport = require('passport');
 
 
 /* GET users listing. */
@@ -38,6 +39,46 @@ router.get('/maindeliverylist/:userId', (req, res, next) => {
   });
 
 });
+
+
+
+router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
+ (req, res, next) => {
+  //console.log('req from createshoppinglist',req.user)
+
+  const order = {...req.body};
+
+  const newOrder = new Data({
+    items: order.items,
+    shop: order.shop,
+    deliveringTime: {
+      start: order.deliveringTime.start,
+      end: order.deliveringTime.end,
+    },
+    notes:order.notes,
+    ordername:order.orderName,
+    createdate:order.createdate,
+    orderer : req.user._id
+        
+  })
+  newOrder.save((error) =>{
+    if(error){
+      if (error.message) { // some info is required but not sent
+        res.json({'error': error.message});
+      } 
+
+      if (error.err) { // some info already exist in DB and needs to be unique
+        res.json({'error': error.err});
+      }
+      
+    } 
+    else {
+      res.json({'success': 'The order is done'});
+    }
+  });
+});
+
+
 
 router.put('/changeuserdetails', (req, res) => {
   let newUser = { ...req.body }

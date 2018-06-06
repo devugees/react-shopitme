@@ -19,6 +19,7 @@ const JWTStrategy   = passportJWT.Strategy;
         }
         // Match Password
         bcrypt.compare(password, user.password, (err, isMatch) => {
+
             if (err) throw err;
             if (isMatch) {
             return cb(null, user, { message: 'Logged In Successfully'});
