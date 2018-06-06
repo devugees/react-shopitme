@@ -20,11 +20,10 @@ import { authCrudAPI } from '../../helpers/helpers'
 
 
 class Router extends Component {
-    constructor(props) {
-        
-        super();
-        this.state = {
-            isAuthenticated: false
+  constructor(props) {
+    super();
+      this.state = {
+        isAuthenticated: false
         }
     
         this.handleLoginSuccess = () => {
@@ -68,7 +67,7 @@ class Router extends Component {
                     localStorage.removeItem('userInfo')
                     localStorage.removeItem('token')
                 }
-                else { 
+                else{
                     this.setState({
                         isAuthenticated:true
                 })

@@ -123,7 +123,6 @@ export default class CreateShoppingList extends Component {
     userInfo.location = this.state.order.orderer.location
     authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
       .then(data => console.log(data))*/
-    console.log('info sended',this.state.order)
     authCrudAPI('POST','/user/createshoppinglist', this.state.order)
       .then(data => console.log(data))
   }
