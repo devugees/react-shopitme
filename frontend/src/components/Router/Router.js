@@ -68,8 +68,7 @@ class Router extends Component {
                     localStorage.removeItem('userInfo')
                     localStorage.removeItem('token')
                 }
-                else { 
-                    (data === 'OK') 
+                else { if (data === 'OK') 
                     this.setState({
                         isAuthenticated:true
                 })
@@ -92,7 +91,7 @@ render() {
     <Switch>
         <Route exact path='/' component={this.landingPageWrapper} />
         <PrivateRoute exact path='/main' component={Main}  authed={this.state.isAuthenticated} />
-        <PrivateRoute exact path='/userdetails' component={UserDetailsMiddleware}  authed={this.state.isAuthenticated} />
+        <Route exact path='/userdetails' component={UserDetailsMiddleware}  />
         <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.isAuthenticated} />
         <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.isAuthenticated} />
