@@ -3,6 +3,7 @@ import { Input, InputLabel, Button, FormControl } from '@material-ui/core';
 // import Components
 import TodoBoxShopper from './TodoBoxShopper';
 import TodoBoxOrdered from './TodoBoxOrdered';
+//import helpers from '../../helpers/helpers'
 
 // import CSS
 import './TodoList.css';
@@ -20,7 +21,6 @@ export default class TodoList extends Component {
       shopperPerson:props.shopperPerson
     }
   }
-
 
   changeText = event => {
     const disabled = event.target.value.length === 0;
@@ -88,18 +88,20 @@ export default class TodoList extends Component {
       todo: '',
       disabled: true,
     }
-
   })
     
   }
 
   render() {
-    let changingTodo;
-
+  let changingTodo;
+  let whatToShow;
+  if(!this.state.items) {
+    console.log('empty')
+  } else {
     if(this.state.shopperPerson || this.state.checkingPerson){
       changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper index={index} shooper={this.state.shopperPerson} todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
     }
-    let whatToShow;
+  }
     if(this.state.orderPerson){
       const editTodoLng = this.state.editTodo.length
       whatToShow = (
@@ -114,9 +116,7 @@ export default class TodoList extends Component {
 
       changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={editTodoLng > 0 ? null : ()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
     }
-
     return (
-
       <div className="todo-list">
         {whatToShow}
         {changingTodo}

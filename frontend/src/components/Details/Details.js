@@ -3,17 +3,39 @@ import { Paper, TextField, Grid, Input, InputLabel, FormControl } from '@materia
 import './Details.css';
 import fakeStore from '../../fakeStore';
 
+const date = new Date();
+const day = date.getDate();
+const month = date.getMonth();
+const year = date.getFullYear();
+const timeHours = date.getHours();
+let timeMin = date.getMinutes();
+const zeroMonth = (month > 9) ? (month) : ('0' + month);
+const zeroDay = (day > 9) ? (day) : ('0' + day);
+
 export default class Details extends Component {
 
   constructor(props){
     super()
     if(localStorage.getItem('userInfo')){
       const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-      this.state ={...userInfoLS.location}
+      this.state ={
+        ...userInfoLS.location,
+        deliveringTime: {
+          start: props.start,
+          end: props.end
+        },
+        shop: props.shop 
+      }
     } else {
-      this.state ={...fakeStore.userInfo.location}
+      this.state ={
+        ...fakeStore.userInfo.location,
+      deliveringTime: {
+        start: props.start,
+        end: props.end
+      },
+      shop: props.shop
+      }
     }
-
   }
 
   componentDidMount(){
@@ -39,29 +61,33 @@ export default class Details extends Component {
         postcode: this.state.postcode,
         city: this.state.city
       }
-    },()=>this.props.dataReceive(this.state.newDeliverAdress))
+    },()=>this.props.dataReceive(this.state.newDeliverAdress,this.state.shop, this.state.orderer))
     this.setState(prevState => { return {editing: !prevState.editing}})
   }
     
   editLocation = name => event => {
     this.setState({[name]: event.target.value},
-    ()=>this.props.dataReceive( this.state.newDeliverAdress, this.state.shop, this.state.orderer));
+    ()=>this.props.dataReceive(this.state.newDeliverAdress, this.state.shop, this.state.orderer));
   }
 
   handlerChangeStartTime = event => {
-    this.setState({ ...this.state,deliveringTime: {start:event.target.value} },()=>
-      this.props.grabDataStartDelivering(this.state.deliveringTime.start));
+    this.setState({deliveringTime: { start:event.target.value}});
+    this.props.grabDataStartDelivering(event.target.value)
   }
 
   handlerChangeEndTime = event => {
-    this.setState({...this.state, deliveringTime:{end:event.target.value} },()=>
-      this.props.grabDataEndDelivering(this.state.deliveringTime.end));
+    this.setState({deliveringTime:{end:event.target.value} });
+    this.props.grabDataEndDelivering(event.target.value)
   }
     
   render() {
+    console.log('adssad')
     let whatToRender = (
-      <p>{this.state.street}.{this.state.number}<br/> {this.state.postcode} {this.state.city} <span onClick={this.editing}>✎</span> </p>          
-
+      <p>
+      {this.state.street}.{this.state.number}<br/>
+      {this.state.postcode} {this.state.city} 
+      <span onClick={this.editing}>✎</span> 
+      </p>          
       )
     if(this.state.editing){
       whatToRender = (  
@@ -83,27 +109,31 @@ export default class Details extends Component {
         <Grid container spacing={24}>
           <Grid  item xs={12}>
             From:
-            <TextField 
-              onChange={this.handlerChangeStartTime}
+             <TextField
               type="datetime-local"
-              defaultValue="2018-05-01T16:30"
-              InputLabelProps={{ shrink: true }}
+              onChange={this.handlerChangeStartTime}
+              defaultValue={this.state.deliveringTime.start || `${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Grid>
           <Grid  item xs={12}>
-             To: 
-             <TextField 
+            To: 
+            <TextField
               onChange={this.handlerChangeEndTime}
               type="datetime-local"
-              defaultValue="2018-05-01T16:30"
-              InputLabelProps={{ shrink: true }}
+              defaultValue={this.state.deliveringTime.end || `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`}
+              InputLabelProps={{
+                shrink: true,
+            }}
           />
           </Grid>
           <Grid  item xs={12}>
-            <FormControl>
-              <InputLabel htmlFor="name-input">Store:</InputLabel>
-              <Input id="name-input" onChange={this.editLocation('shop')} />
-            </FormControl>
+              <FormControl>
+                 <InputLabel htmlFor="name-input">Store:</InputLabel>
+                 <Input id="name-input" onChange={this.editLocation('shop')} defaultValue={this.state.shop}/>
+              </FormControl>
           </Grid>
           <Grid  item xs={12}>
           {whatToRender}         

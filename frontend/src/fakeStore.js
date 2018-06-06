@@ -25,8 +25,8 @@ let fakeStore = {
       },
     },
     deliveringTime:{
-      start: '11:00',
-      end:'18:00'
+      start: '2018-04-31T12:00',
+      end:'2018-04-31T15:00'
     },
     items:
     [{
@@ -224,26 +224,36 @@ let fakeStore = {
     },
   },
   deliveringTime:{
-    start: '14:00',
-    end:'16:00'
+    start: '2018-04-31T12:00',
+    end:'2018-04-31T15:00'
   },
-  items:
-  [{
+  items:[{
     status:'box',
     todo:"Test Item, you can EDIT or DELETE it"
-  }
-  ],
+  }],
   orderHistory:
     [{
       orderID: 15675,
       status:'Pending',
-      shop: 'Rewe',
+      shop: 'KaufLand',
       deliverBy: '',
       created: '23.03.2018',
       accepted:'',
+      notes: 'Bring me all in a box please. Thank you',
       delivered:{
         date:'',
         time: ''
+      },
+      deliveringTime:{
+        start: '2018-05-31T09:00',
+        end:'2018-05-31T17:00'
+      },
+      deliverAdress:{
+        street: 'Shop Straße',
+        number: '1',
+        postcode: '12321',
+        city: 'Berlin',
+        mobile: '01722017232'
       },
        items:
         [{
@@ -262,7 +272,7 @@ let fakeStore = {
         ]
       },
       {
-      orderID: 13466,
+      orderID: 13466,  
       status:'In Progress',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
@@ -451,7 +461,14 @@ let fakeStore = {
         }
         ]
     }],
-  notes:'Bring me all in a box please. Thank you',
+  notes:'Here you can write notes',
+  deliverAdress:{
+    street: 'New Straße',
+    number: '1',
+    postcode: '13075',
+    city: 'Berlin'
+  },
+
 }
 
 export default fakeStore
@@ -460,4 +477,5 @@ export const Store = React.createContext({
   store: fakeStore,
   updateUserData: data => {fakeStore.userInfo = data; console.log(fakeStore)},
   updateOrderData: data => {fakeStore.orderInfo = data; console.log(fakeStore)},
+  updateUserPicture: data => {fakeStore.userInfo.profileImgPath = data}
 });
