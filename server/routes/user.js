@@ -126,7 +126,10 @@ router.put('/changeuserdetails', (req, res) => {
         if(error) {
           res.json({error: "Error saving User Data."})
         } else {
-          res.json({message: "User successfully updated."})
+          res.send(
+            {message: "User successfully updated.",
+            body: user 
+          })
         }
       }  
     )

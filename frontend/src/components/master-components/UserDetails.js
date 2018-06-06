@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
-import userPic from '../../pictures/BoB.png'
+import defaultPic from '../../pictures/BoB.png'
 import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
@@ -21,11 +21,12 @@ export default class UserDetails extends Component {
   };
 
   componentDidMount(){
-    const geoPos = localStorage.getItem('geoPos')
-    if(!geoPos){
+    let geoPos = localStorage.getItem('geoPos')
+
+    if(geoPos === "undefined"){ 
       return;
     } else {
-      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
+      geoPos = JSON.parse(geoPos);
       this.setState({
         coords: {
           lat: geoPos.latitude,
@@ -81,7 +82,6 @@ export default class UserDetails extends Component {
       accountPage: this.state.accountPage,
       _id: this.state._id
     }
-    console.log('What to send',userDetails)
     
     if (formtype === "register") {
       console.log(userDetails);
@@ -117,6 +117,7 @@ export default class UserDetails extends Component {
 
 
   render() {
+    console.log(fakeStore.userInfo)
     let isRegisterForm;
     let isChangeUser; 
     let endpoint;
