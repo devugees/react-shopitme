@@ -125,7 +125,7 @@ export default class CreateShoppingList extends Component {
       .then(data => console.log(data))*/
     console.log('info sended',this.state.order)
     authCrudAPI('POST','/user/createshoppinglist', this.state.order)
-      .then(data => console.info(data))
+      .then(data => console.log(data))
   }
 
   render() {
