@@ -67,7 +67,6 @@ export default class CreateShoppingList extends Component {
   }
 
   grabDataDetails = (details,shop) => {
-    console.log('grabDataDetails', details, shop)
     this.setState({
       order:{ ...this.state.order,
         shop,
@@ -117,7 +116,6 @@ export default class CreateShoppingList extends Component {
   }
 
   render() {
-    console.log('STATE',this.state)
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }

@@ -94,8 +94,6 @@ export default class TodoList extends Component {
   }
 
   render() {
-  //console.log(this.state.items)
-
     let changingTodo;
 
     if(this.state.shopperPerson || this.state.checkingPerson){
@@ -103,7 +101,7 @@ export default class TodoList extends Component {
     }
     let whatToShow;
     if(this.state.orderPerson){
-
+      const editTodoLng = this.state.editTodo.length
       whatToShow = (
         <React.Fragment>
           <FormControl className="todo-list-form">
@@ -114,7 +112,7 @@ export default class TodoList extends Component {
           </Button>
         </React.Fragment>)
 
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={editTodoLng > 0 ? null : ()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
     }
 
     return (
