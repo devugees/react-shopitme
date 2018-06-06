@@ -22,7 +22,7 @@ const todoBoxOrdered = (props) => {
   if(props.changeMe === 'editMe'){
     tick = 'complete';
     edit = 'hide';
-    cross = 'cross';
+    cross = 'hide';
     wrap = 'hide';
     whatToShow = (
       <FormControl className="todo-list-form">
