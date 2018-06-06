@@ -43,7 +43,6 @@ export default class NavBar extends React.Component {
 
 
   LoginClickHandler = (e,params) => {
-    //{email:'123@123.com', pass:123}
     e.preventDefault();
     crudAPI('post', '/login', params)
       .then(data => {
@@ -125,14 +124,13 @@ export default class NavBar extends React.Component {
       error => {
         this.setState({ error });
       }
-     
-    );
-        
+    );    
   }
 
   componentDidUpdate(){
     const geoPos = localStorage.getItem('geoPos')
-    if(!geoPos){
+    console.log(geoPos)
+    if(!geoPos && this.state.coords){
       localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
     }    
   }
