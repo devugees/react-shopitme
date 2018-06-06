@@ -81,7 +81,6 @@ export default class Details extends Component {
   }
     
   render() {
-    console.log('adssad')
     let whatToRender = (
       <p>
       {this.state.street}.{this.state.number}<br/>
