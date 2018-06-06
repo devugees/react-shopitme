@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AvatarImageCropper from 'react-avatar-image-cropper';
 //import config from "../config/config.js";
 import { authCrudFileAPI } from '../../helpers/helpers';
+import fakeStore from '../../fakeStore';
 
 export default class ImageCropper extends Component {
 
@@ -11,17 +12,22 @@ export default class ImageCropper extends Component {
         this.state = {
             imgSrc: props.imgSrc,
         }
-
     }
 
     apply = (file) => {
         let fd = new FormData();
-        fd.append('avatar', file, file.name)
+        fd.append('avatar', file, file.name);
         
-        authCrudFileAPI('/user/profile', fd)
+        const id = fakeStore.userInfo._id;
+        const endpoint = 'http://localhost:3000/user/profile/' + id;
+
+        authCrudFileAPI(endpoint, fd)
         .then(res => {
+            const url = 'http://localhost:4000/' + res.src;
+            console.log('new Url', url)
+            this.props.updateUserPicture(url)
             this.setState({
-                imgSrc: 'http://localhost:4000/' + res.src
+                imgSrc: url
             })
         })
     }
