@@ -119,7 +119,7 @@ export default class NavBar extends React.Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
-        },localStorage.setItem('geoPos', JSON.stringify(this.state.coords)));
+        },);
       },
       error => {
         this.setState({ error });
@@ -129,7 +129,7 @@ export default class NavBar extends React.Component {
 
   componentDidUpdate(){
     const geoPos = localStorage.getItem('geoPos')
-    if(!geoPos && this.state.coords){
+    if(!geoPos){
       const coords = {latitude:52.5237823, longitude:13.486222}
       localStorage.setItem('geoPos', JSON.stringify(coords))
     }
