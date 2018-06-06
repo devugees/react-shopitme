@@ -15,34 +15,34 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-location:{
-      street: {
-        type: String,
-        required: true
-      },
-      number: {
-        type: Number,
-        required: true
-      },
-      postcode: {
-        type: Number,
-        required: true
-      },
-      city: {
-        type: String,
-        required: true
-      } 
+  location:{
+    street: {
+      type: String,
+      required: true
     },
+    number: {
+      type: Number,
+      required: true
+    },
+    postcode: {
+      type: Number,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    } 
+  },
   coords: {
-      lat:{
-        type:Number,
-        required:false
-      },
-      lng:{
-        type:Number,
-        required:false
-      }
+    lat:{
+      type:Number,
+      required:false
     },
+    lng:{
+      type:Number,
+      required:false
+    }
+  },
   email: {
     type: String,
     required: true, 

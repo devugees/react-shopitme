@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from '../landing/Landing'
 import UserDetailsMiddleware from '../middlewares/UserDetailsMiddleware';
-import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
 import CreateShoppingListMiddleware from '../middlewares/CreateShoppingListMiddleware';
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
@@ -29,7 +28,7 @@ const Router = () => (
         <Route exact path='/createshoppinglist' component={CreateShoppingListMiddleware} />
         <Route exact path='/accepteddelivery' component={AcceptedDelivery} />
         <Route exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} />
-        <Route exact path='/reset/*' component={NewPassword} />
+        <Route exact path='/reset/:token' component={NewPassword} />
         <Route path="*" component={ NotFound } />
     </Switch>
     <Footer />

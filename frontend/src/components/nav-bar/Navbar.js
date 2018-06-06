@@ -51,10 +51,12 @@ export default class NavBar extends React.Component {
           this.setState({ error:data.error })
         } else {
           localStorage.setItem('token', data.token);
+          const coords = this.state.coords
           delete data.user.password;
           delete data.user.resetPasswordExpires;
           delete data.user.resetPasswordToken;
           delete data.user.__v;
+          data.user.coords = coords
           this.props.updateUserData(data.user)
           localStorage.setItem('userInfo', JSON.stringify(data.user));
           this.setState({
@@ -127,13 +129,8 @@ export default class NavBar extends React.Component {
   componentDidUpdate(){
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
-      console.log('saving in LS geoPos')
       localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    } else {
-      console.log('geting the LS geoPos')
-      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
-    }
-    
+    }    
   }
 
   componentWillUnmount() {

@@ -10,28 +10,41 @@ import Sure from '../Modals/Sure';
 import fakeStore from '../../fakeStore';
 import { authCrudAPI } from '../../helpers/helpers'
 
+let importData;
+if(localStorage.getItem('userInfo')){
+    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+    importData ={...userInfoLS}
+  } else {
+    importData ={...fakeStore.userInfo}
+  }
+
 export default class CreateShoppingList extends Component {
 
   state = {
-      ...fakeStore.userInfo,
-      openSureModal:false,
-      order: {
-        deliveringTime:{
-          start: '',
-          end: ''
-        },
-        items: fakeStore.items,
-    
-        shop:'',
-        notes: '',
-        createdate:'',
-        orderName: '',
-      }
-}
+    userInfo: importData,
+    openSureModal:false,
+    order: {
+      deliveringTime:{
+        start: '',
+        end: ''
+      },
+      items: fakeStore.items,
   
-
-
- 
+      shop:'',
+      notes: '',
+      createdate:'',
+      orderName: 'Order',
+      orderer:{
+        location:{
+          street:importData.location.street,
+          number: importData.location.number,
+          postcode: importData.location.postcode,
+          city: importData.location.city
+        },
+      }
+    }
+  }
+  
   openCloseModal = () => {
     this.setState(prevState => {return {openSureModal: !prevState.openSureModal}});
   }
@@ -44,18 +57,17 @@ export default class CreateShoppingList extends Component {
     this.setState({
       order:{...this.state.order,
        orderName,createdate}
-
     });
   }
 
-  grabDataDoList = (items) => {
-    //console.log(items)
+  grabDataDoList = items => {
     this.setState({
       order:{...this.state.order, items}
     });
   }
 
   grabDataDetails = (details,shop) => {
+    console.log('grabDataDetails', details, shop)
     this.setState({
       order:{ ...this.state.order,
         shop,
@@ -66,21 +78,18 @@ export default class CreateShoppingList extends Component {
             postcode: details.postcode,
             city: details.city
           }
-
         }
       }
     })
   }
 
-  grabDataNotes = (notes) => {
+  grabDataNotes = notes => {
     this.setState({
       order:{...this.state.order, notes}
     });
   }
 
-  
-
-  grabDataStartDelivering = (startTime) => {
+  grabDataStartDelivering = startTime => {
     let order = {...this.state.order}
     order.deliveringTime.start = startTime
     this.setState({
@@ -88,8 +97,8 @@ export default class CreateShoppingList extends Component {
     });
   }
 
-  grabDataEndDelivering = (endTime) => {
-   let order = {...this.state.order}
+  grabDataEndDelivering = endTime => {
+    let order = {...this.state.order}
     order.deliveringTime.end = endTime
     this.setState({
       order:{...order}
@@ -97,22 +106,22 @@ export default class CreateShoppingList extends Component {
   }
 
   sendDataToServer= ()=> {
-    //console.log(this.state.order);
     this.props.updateOrderData(this.state.order);
-    authCrudAPI("post",'http://localhost:4000/user/createshoppinglist', this.state.order).then(date=>console.info(date))
-    //console.log(fakeStore)
+    //Updating user Adress, waiting for the sabine fix with empty pass
+    /*const userInfo = {...this.state.userInfo}
+    userInfo.location = this.state.order.orderer.location
+    authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
+      .then(data => console.log(data))*/
+    authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+      .then(data => console.info(data))
   }
 
   render() {
-    // console.log('fakeStore.items[0]',fakeStore.items[0])
-    // console.log('fake store', fakeStore);
-    // console.log("this is the state",this.state)
-    // console.log(this.state.order)
+    console.log('STATE',this.state)
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }
     return (
-
       <div className="createShoppingList main">
         <ShoppingListTitle dataReceive={this.grabDataShoppingListTitle} listName={this.state.listName} listId={this.state.listId} checkingPerson={false} />
         <TodoList dataReceive={this.grabDataDoList} orderPerson={true}  items={this.state.order.items}/>
@@ -121,7 +130,6 @@ export default class CreateShoppingList extends Component {
           dataReceive={this.grabDataDetails}
           grabDataEndDelivering={this.grabDataEndDelivering}
            />
-          
         <Notes dataReceive={this.grabDataNotes} />
         <Button
           style={style}
