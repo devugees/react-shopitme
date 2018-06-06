@@ -119,7 +119,7 @@ export default class NavBar extends React.Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
-        });
+        },localStorage.setItem('geoPos', JSON.stringify(this.state.coords)));
       },
       error => {
         this.setState({ error });
