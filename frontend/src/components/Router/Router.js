@@ -22,7 +22,7 @@ import { authCrudAPI } from '../../helpers/helpers'
 class Router extends Component {
     constructor(props) {
         
-        super(props);
+        super();
         this.state = {
             isAuthenticated: false
         }
@@ -33,15 +33,16 @@ class Router extends Component {
             })
         }
     
-        this.openLogin = () => {            
-            if(!this.state.isAuthenticated){
+        this.openLogin = () => {                      
+            if(!this.state.isAuthenticated)
                 // check if authenticated, if not open login
                 this.navBar.current.setState({
-                    openLogin:true,
+                    openLogin:true
                 })
-            }
-           
+            
+        
         }
+
         this.logOut = ()=> {
             this.setState({
                 isAuthenticated:false
@@ -53,7 +54,6 @@ class Router extends Component {
             return (
               <Landing
                 onClick={this.openLogin}
-                logOut={this.logout}
                 {...props}
               />
             );
@@ -68,12 +68,18 @@ class Router extends Component {
                     localStorage.removeItem('userInfo')
                     localStorage.removeItem('token')
                 }
+                else { 
+                    (data === 'OK') 
+                    this.setState({
+                        isAuthenticated:true
+                })
+                
+            }
             })
              .catch(error =>  {
                 console.log('error',error);
-            }
-        ) 
-        }
+            })
+           }
     
 
 render() {        
