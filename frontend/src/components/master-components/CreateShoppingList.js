@@ -20,36 +20,39 @@ const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 const zeroDay = (day > 9) ? (day) : ('0' + day);
 
-let importData;
-if(localStorage.getItem('userInfo')){
-    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-    importData ={...userInfoLS}
-  } else {
-    importData ={...fakeStore.userInfo}
-  }
 
 export default class CreateShoppingList extends Component {
+  constructor(props){
+    super()
+    let importData;
+    if(localStorage.getItem('userInfo')){
+        const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+        importData ={...userInfoLS}
+      } else {
+        importData ={...fakeStore.userInfo}
+      }
 
-  state = {
-    userInfo: importData,
-    openSureModal:false,
-    order: {
-      deliveringTime:{
-        start: '',
-        end: ''
-      },
-      items: fakeStore.items,
-      shop:'',
-      notes: '',
-      createdate:'',
-      orderName: 'Order',
-      orderer:{
-        location:{
-          street:importData.location.street,
-          number: importData.location.number,
-          postcode: importData.location.postcode,
-          city: importData.location.city
+    this.state = {
+      userInfo: importData,
+      openSureModal:false,
+      order: {
+        deliveringTime:{
+          start: '',
+          end: ''
         },
+        items: fakeStore.items,
+        shop:'',
+        notes: '',
+        createdate:'',
+        orderName: 'Order',
+        orderer:{
+          location:{
+            street:importData.location.street,
+            number: importData.location.number,
+            postcode: importData.location.postcode,
+            city: importData.location.city
+          },
+        }
       }
     }
   }

@@ -66,6 +66,7 @@ export default class NavBar extends React.Component {
             openLogin: false,
             openForgotpass :false
           })
+          this.props.handleLoginSuccess()
         }
     })
   }
@@ -77,8 +78,9 @@ export default class NavBar extends React.Component {
     this.setState({
       login: false,
       openLogin: false,
-      openForgotpass :false
+      openForgotpass :false,
     })
+    this.props.logOut()
   }
 
   popupLogin = () => {
@@ -123,7 +125,9 @@ export default class NavBar extends React.Component {
       error => {
         this.setState({ error });
       }
+     
     );
+        
   }
 
   componentDidUpdate(){

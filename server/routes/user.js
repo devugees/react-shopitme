@@ -20,6 +20,8 @@ router.get('/maindeliverylist', (req, res, next) => {
     if (err) {
       res.status(500).send({ message: "Could not retrieve user with id " });
     } else {
+      console.log(data);
+      
       delete data.shop
       delete data.__v
       res.send(data);
@@ -77,6 +79,14 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
     }
   });
 });
+
+router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+
+  res.json({message:'OK'})
+ 
+ }
+)
+
 
 
 
