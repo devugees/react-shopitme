@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // User Schema
 const HistorySchema = mongoose.Schema({
-
  items: {
      type:Array,
      required: true 
@@ -19,10 +18,6 @@ const HistorySchema = mongoose.Schema({
       end: {
         type:String,
         required:false
-      },
-    date: {
-      type:String,
-      required:false
       }
     },
     notes:{
