@@ -17,7 +17,8 @@ export default class UserDetails extends Component {
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true,
-    userPicture: defaultPic
+    userPicture: defaultPic,
+    gender: 'Female'
   };
 
   componentDidMount(){
@@ -63,9 +64,7 @@ export default class UserDetails extends Component {
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-    console.log(this.state)
-
-     const userDetails = {
+    const userDetails = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
@@ -84,17 +83,15 @@ export default class UserDetails extends Component {
     }
     
     if (formtype === "register") {
-      console.log(userDetails);
-        crudAPI("POST", "/register", userDetails)
-        .then(body => {
-          if(body.error) {
-            this.setState({response: body.error})
-          } else {
-            this.setState({response: body.success})
-          }
-        })
+      crudAPI("POST", "/register", userDetails)
+      .then(body => {
+        if(body.error) {
+          this.setState({response: body.error})
+        } else {
+          this.setState({response: body.success},window.history.back())
+        }
+      })
     } else if (formtype === "changeuserdetails") {
-      console.log(userDetails);
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
@@ -117,7 +114,6 @@ export default class UserDetails extends Component {
 
 
   render() {
-    console.log(fakeStore.userInfo)
     let isRegisterForm;
     let isChangeUser; 
     let endpoint;
