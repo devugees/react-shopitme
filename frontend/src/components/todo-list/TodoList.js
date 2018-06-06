@@ -102,6 +102,7 @@ export default class TodoList extends Component {
     }
   }
     if(this.state.orderPerson){
+      const editTodoLng = this.state.editTodo.length
       whatToShow = (
         <React.Fragment>
           <FormControl className="todo-list-form">
@@ -111,11 +112,8 @@ export default class TodoList extends Component {
           <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
           </Button>
         </React.Fragment>)
-      if(!this.state.items) {
-        console.log('empty')
-      } else {
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
-      }
+
+      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={editTodoLng > 0 ? null : ()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
     }
     return (
       <div className="todo-list">
