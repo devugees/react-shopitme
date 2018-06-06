@@ -47,6 +47,9 @@ const styles = theme => ({
     color: 'crimson',
     margin: '1rem auto',
     textAlign:'center'
+  },
+  linkColor:{
+    color: 'black'
   }
 });
 
@@ -164,7 +167,7 @@ class Login extends React.Component {
                 Forgot your password?
               </Button>
               <Button variant="flat">
-                <a href='/userdetails'>Don't Have an account? Register Now</a>
+                <a className={classes.linkColor} href='/userdetails'>Don't Have an account? Register Now</a>
               </Button>
             <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
             X
