@@ -10,7 +10,6 @@ const year = date.getFullYear();
 const timeHours = date.getHours();
 let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
-const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 const zeroDay = (day > 9) ? (day) : ('0' + day);
 
 export default class Details extends Component {
