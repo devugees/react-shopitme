@@ -68,7 +68,7 @@ class Router extends Component {
                     localStorage.removeItem('userInfo')
                     localStorage.removeItem('token')
                 }
-                else { if (data === 'OK') 
+                else { 
                     this.setState({
                         isAuthenticated:true
                 })
