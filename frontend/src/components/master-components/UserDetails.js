@@ -19,21 +19,33 @@ export default class UserDetails extends Component {
     passwordMatchError: true,
     userPicture: defaultPic,
     gender: 'Female'
-  };
+  }
 
   componentDidMount(){
-    let geoPos = localStorage.getItem('geoPos')
-
+    const geoPos = localStorage.getItem('geoPos')
+    const userInfoLS = localStorage.getItem('userInfo')
     if(geoPos === "undefined"){ 
       return;
     } else {
-      geoPos = JSON.parse(geoPos);
+      const geoPosParsed = JSON.parse(geoPos);
       this.setState({
         coords: {
-          lat: geoPos.latitude,
-          lng: geoPos.longitude
+          lat: geoPosParsed.latitude,
+          lng: geoPosParsed.longitude
         }
       }); 
+    }
+    if(userInfoLS === null){
+      return;
+    } else {
+      const userInfoLSParsed = JSON.parse(userInfoLS);
+      this.setState({
+        ...userInfoLSParsed,
+        city: userInfoLSParsed.location.city, 
+        street: userInfoLSParsed.location.street,
+        number: userInfoLSParsed.location.number,
+        postcode: userInfoLSParsed.location.postcode,
+      });
     }
   }
 
@@ -104,12 +116,12 @@ export default class UserDetails extends Component {
      });              
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
-  };
+  }
 
   editpicHandler = () => {
     this.setState({
-    imageEdit:true
-   }) 
+      imageEdit:true
+    }) 
   }
 
 
@@ -132,6 +144,10 @@ export default class UserDetails extends Component {
     if(this.state.profileImgPath) {
       userPicture = this.state.profileImgPath
     }
+    if(localStorage.getItem('userInfo')){
+      const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+      userPicture = userInfoLS.profileImgPath
+    }
 
     function updateImg(src){
       this.setState({
@@ -141,7 +157,7 @@ export default class UserDetails extends Component {
 
     return (
       <div className="user-details">
-         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
+        { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
         {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
         <EditUser isRegisterForm={isRegisterForm} isChangeUser={isChangeUser} userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />

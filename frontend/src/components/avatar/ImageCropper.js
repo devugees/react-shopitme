@@ -6,31 +6,33 @@ import fakeStore from '../../fakeStore';
 
 export default class ImageCropper extends Component {
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            imgSrc: props.imgSrc,
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+        imgSrc: props.imgSrc,
     }
+  }
 
-    apply = (file) => {
-        let fd = new FormData();
-        fd.append('avatar', file, file.name);
-        
-        const id = fakeStore.userInfo._id;
-        const endpoint = 'http://localhost:3000/user/profile/' + id;
+  apply = (file) => {
+    let fd = new FormData();
+    fd.append('avatar', file, file.name);
+    
+    const id = fakeStore.userInfo._id;
+    const endpoint = 'http://localhost:3000/user/profile/' + id;
 
-        authCrudFileAPI(endpoint, fd)
-        .then(res => {
-            const url = 'http://localhost:4000/' + res.src;
-            console.log('new Url', url)
-            this.props.updateUserPicture(url)
-            this.setState({
-                imgSrc: url
-            })
+    authCrudFileAPI(endpoint, fd)
+    .then(res => {
+        const url = 'http://localhost:4000/' + res.src;
+        console.log('new Url', url)
+        this.props.updateUserPicture(url)
+        const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+        userInfoLS.profileImgPath = url
+        localStorage.setItem('userInfo', JSON.stringify(userInfoLS));
+        this.setState({
+          imgSrc: url
         })
-    }
+    })
+  }
 
 
     render() {
