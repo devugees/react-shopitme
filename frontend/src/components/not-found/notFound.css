@@ -1,0 +1,10 @@
+@media only screen and (min-width: 600px) {
+    .notFound {
+        font-size:4rem;
+    }
+}
+
+p {
+  text-align: center !important;
+
+  }
