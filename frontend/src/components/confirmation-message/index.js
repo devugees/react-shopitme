@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {Button, Snackbar, IconButton } from '@material-ui/core';
+import { Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
@@ -9,46 +9,45 @@ const styles = theme => ({
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
   },
-});
+})
 
-class SimpleSnackbar extends React.Component {
+class ConfirmationMessage extends React.Component {
   state = {
     open: false,
-  };
+    dataToConfirmationMessage:''
+  }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  static getDerivedStateFromProps(props, state){
+    return {
+      open: props.openConfirmationMessage,
+      dataToConfirmationMessage:props.dataToConfirmationMessage
+    }
+  }
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
-    this.setState({ open: false });
-  };
+    this.props.closeConfirmationMessage()
+  }
 
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <Button onClick={this.handleOpen}>Open simple snackbar</Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
           open={this.state.open}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           onClose={this.handleClose}
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">Note archived</span>}
+          message={<span id="message-id">{this.state.dataToConfirmationMessage}</span>}
           action={[
-            <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
-              UNDO
-            </Button>,
             <IconButton
               key="close"
               aria-label="Close"
@@ -65,8 +64,8 @@ class SimpleSnackbar extends React.Component {
   }
 }
 
-SimpleSnackbar.propTypes = {
+ConfirmationMessage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleSnackbar);
+export default withStyles(styles)(ConfirmationMessage);

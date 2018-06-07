@@ -9,103 +9,84 @@ import MainDeliveryPage from '../master-components/MainDeliveryPage';
 import NewPassword from '../master-components/NewPassord'
 import Navbar from '../nav-bar/Navbar';
 import Footer from '../Footer'
-import NotFound from '../not-found/notFound'
+import NotFound from '../not-found/notFound';
 // get main for testing
 import Main from  '../Main';
 import {Store} from '../../fakeStore';
 import PrivateRoute from '../privateRoute';
 import { authCrudAPI } from '../../helpers/helpers'
 
-// import jwtDecode from 'jwt-decode';
 
 
-class Router extends Component {
+export default class Router extends Component {
   constructor(props) {
     super();
       this.state = {
-        isAuthenticated: false
+        isAuthenticated: false,
         }
-    
-        this.handleLoginSuccess = () => {
-            this.setState({
-                isAuthenticated:true
+      this.handleLoginSuccess = () => {
+        this.setState({
+          isAuthenticated:true
+        })
+      }
+      this.openLogin = () => {                      
+        if(!this.state.isAuthenticated)
+            // check if authenticated, if not open login
+            this.navBar.current.setState({
+                openLogin:true
             })
         }
-    
-        this.openLogin = () => {                      
-            if(!this.state.isAuthenticated)
-                // check if authenticated, if not open login
-                this.navBar.current.setState({
-                    openLogin:true
-                })
-            
-        
-        }
+      this.logOut = ()=> {
+        this.setState({
+          isAuthenticated:false
+        })
+      }
+      this.landingPageWrapper = props => {
+        return (
+          <Landing onClick={this.openLogin} {...props} />
+        );
+      }
+      this.navBar = React.createRef();
+    }
 
-        this.logOut = ()=> {
-            this.setState({
-                isAuthenticated:false
-            })
-        }
-
-      
-        this.landingPageWrapper = (props) => {
-            return (
-              <Landing
-                onClick={this.openLogin}
-                {...props}
-              />
-            );
-        }
-        this.navBar = React.createRef();
-      
-        }
-        componentDidMount(){
-            authCrudAPI('post','http://localhost:4000/user/checkingToken')
-            .then( data => {
-                if ( data === 'Unauthorized') {
-                    localStorage.removeItem('userInfo')
-                    localStorage.removeItem('token')
-                }
-                else{
-                    this.setState({
-                        isAuthenticated:true
-                })
-                
-            }
-            })
-             .catch(error =>  {
-                console.log('error',error);
-            })
-           }
+  componentDidMount(){
+    authCrudAPI('post','/user/checkingToken')
+    .then( data => {
+      if ( data === 'Unauthorized') {
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('token')
+      } else {
+        this.setState({
+          isAuthenticated:true
+        }) 
+      }
+    })
+    .catch(error =>  {
+      console.log('error',error);
+    })
+  }
     
-
-render() {        
-         return (
- <BrowserRouter>
-    <React.Fragment>
-    <Store.Consumer>
-    {data =>(<Navbar handleLoginSuccess={this.handleLoginSuccess} updateUserData={data.updateUserData} ref={this.navBar} logOut={this.logOut}  /> )}
-    </Store.Consumer>
-    <Switch>
-        <Route exact path='/' component={this.landingPageWrapper} />
-        <PrivateRoute exact path='/main' component={Main}  authed={this.state.isAuthenticated} />
-        <Route exact path='/userdetails' component={UserDetailsMiddleware}  />
-        <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage}  authed={this.state.isAuthenticated} />
-        <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery}  authed={this.state.isAuthenticated} />
-        <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory}  authed={this.state.isAuthenticated} />
-        <Route exact path='/reset/*' component={NewPassword}  />
-        <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingListMiddleware} authed={this.state.isAuthenticated} />
-        <Route path="*" component={ NotFound } />
-    </Switch>
-    <Footer />
-    </React.Fragment>
- </BrowserRouter>
+  render() {        
+    return (
+      <BrowserRouter>
+        <React.Fragment>
+          <Store.Consumer>
+          {data =>(<Navbar handleLoginSuccess={this.handleLoginSuccess} updateUserData={data.updateUserData} ref={this.navBar} logOut={this.logOut}  /> )}
+          </Store.Consumer>
+          <Switch>
+            <Route exact path='/' component={this.landingPageWrapper} />
+            <PrivateRoute exact path='/main' component={Main} authed={this.state.isAuthenticated} />
+            <Route exact path='/userdetails' component={UserDetailsMiddleware}  />
+            <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage} authed={this.state.isAuthenticated} />
+            <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery} authed={this.state.isAuthenticated} />
+            <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} authed={this.state.isAuthenticated} />
+            <Route exact path='/reset/*' component={NewPassword}  />
+            <PrivateRoute exact path='/createshoppinglist' component={CreateShoppingListMiddleware} authed={this.state.isAuthenticated} />
+            <Route path="*" component={ NotFound } />
+          </Switch>
+          <Footer />
+        </React.Fragment>
+      </BrowserRouter>
     )
-}
+  }
 };
-
-export default Router;
-
-      
-        
