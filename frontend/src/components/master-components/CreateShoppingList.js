@@ -127,7 +127,7 @@ export default class CreateShoppingList extends Component {
     authCrudAPI('POST','/user/createshoppinglist', this.state.order)
       .then(data => {
         if(!data.error){
-          this.openConfirmationMessage(data.success)
+          this.openConfirmationMessage(data.message)
         } else {
           this.openConfirmationMessage(data.error)
         }
