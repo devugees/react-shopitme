@@ -53,6 +53,20 @@ export default class UserDetails extends Component {
     this.setState({
       [name]: event.target.value,
     });
+    // to update the issue with the text field in userDetailsFields
+    const userInfoLS = localStorage.getItem('userInfo')
+    if(userInfoLS === null){
+      return;
+    } else {
+      const userInfoLSParsed = JSON.parse(userInfoLS);
+      if(name === 'city' || 'street' || 'number' || 'postcode'){
+        userInfoLSParsed.location[name] = event.target.value 
+      }else {
+        userInfoLSParsed[name] = event.target.value
+      }
+      localStorage.setItem('userInfo', JSON.stringify(userInfoLSParsed)) 
+
+    }
 
     if (name === "confirmpassword") {
       const password = this.state.password;
