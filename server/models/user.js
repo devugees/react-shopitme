@@ -72,6 +72,12 @@ const UserSchema = mongoose.Schema({
   },
   profileImgPath : {
     type: String
+  },
+  deliveryHistory: {
+    type: Array
+  },
+  orderHistory: {
+    type: Array
   }
 });
 
