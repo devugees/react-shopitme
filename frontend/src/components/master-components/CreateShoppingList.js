@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import Notes from '../Additional-Notes/Notes';
 import { Button } from '@material-ui/core'
 import Details from '../Details/Details';
 import Sure from '../Modals/Sure';
+import ConfirmationMessage from '../confirmation-message';
 //import fake store
 import fakeStore from '../../fakeStore';
 import { authCrudAPI } from '../../helpers/helpers'
@@ -19,7 +19,6 @@ let timeMin = date.getMinutes();
 const zeroMonth = (month > 9) ? (month) : ('0' + month);
 const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
 const zeroDay = (day > 9) ? (day) : ('0' + day);
-
 
 export default class CreateShoppingList extends Component {
   constructor(props){
@@ -35,6 +34,8 @@ export default class CreateShoppingList extends Component {
     this.state = {
       userInfo: importData,
       openSureModal:false,
+      openConfirmationMessage: false,
+      dataToConfirmationMessage:'',
       order: {
         deliveringTime:{
           start: '',
@@ -123,9 +124,23 @@ export default class CreateShoppingList extends Component {
     userInfo.location = this.state.order.orderer.location
     authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
       .then(data => console.log(data))*/
-    console.log('info sended',this.state.order)
     authCrudAPI('POST','/user/createshoppinglist', this.state.order)
-      .then(data => console.info(data))
+      .then(data => {
+        if(!data.error){
+          this.openConfirmationMessage(data.message)
+        } else {
+          this.openConfirmationMessage(data.error)
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+  openConfirmationMessage = dataToConfirmationMessage => {
+    this.setState({openConfirmationMessage:true, dataToConfirmationMessage})
+  }
+
+  closeConfirmationMessage  = () => {
+    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.history.back())
   }
 
   render() {
@@ -168,9 +183,14 @@ export default class CreateShoppingList extends Component {
           Delete
         </Button>
         <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
-            <Link to="/">{this.props.editing ? 'Update' : 'Create'}</Link> 
+          {this.props.editing ? 'Update' : 'Create'}
         </Button>
         <Sure sendback={this.sendback} open={this.state.openSureModal}/>
+        <ConfirmationMessage
+            openConfirmationMessage={this.state.openConfirmationMessage}
+            dataToConfirmationMessage={this.state.dataToConfirmationMessage}
+            closeConfirmationMessage={this.closeConfirmationMessage}
+          />
       </div>
     )
   }

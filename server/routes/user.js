@@ -80,7 +80,7 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
           }
         }}, (error, done) => {
           if (done) {
-            res.json({'message': 'The shopping list is created.'});
+            res.json({'message': `${order.ordername} has been created`});
           } else if (error) {
             res.send({"error": "error saving order"})
           }
