@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
-import userPic from '../../pictures/BoB.png'
+import defaultPic from '../../pictures/BoB.png'
+import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
@@ -15,15 +16,18 @@ export default class UserDetails extends Component {
     number: fakeStore.userInfo && fakeStore.userInfo.location.number,
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
-    passwordMatchError: true
-  }
+    passwordMatchError: true,
+    userPicture: defaultPic,
+    gender: 'Female'
+  };
 
   componentDidMount(){
-    const geoPos = localStorage.getItem('geoPos')
-    if(!geoPos){
+    let geoPos = localStorage.getItem('geoPos')
+
+    if(geoPos === "undefined"){ 
       return;
     } else {
-      const geoPos = JSON.parse(localStorage.getItem('geoPos'))
+      geoPos = JSON.parse(geoPos);
       this.setState({
         coords: {
           lat: geoPos.latitude,
@@ -60,7 +64,7 @@ export default class UserDetails extends Component {
 
   handleSubmit = formtype => event => {
     event.preventDefault();
-     const userDetails = {
+    const userDetails = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
@@ -77,17 +81,16 @@ export default class UserDetails extends Component {
       accountPage: this.state.accountPage,
       _id: this.state._id
     }
-    console.log('What to send',userDetails)
     
     if (formtype === "register") {
-        crudAPI("POST", "/register", userDetails)
-        .then(body => {
-          if(body.error) {
-            this.setState({response: body.error})
-          } else {
-            this.setState({response: body.success})
-          }
-        })
+      crudAPI("POST", "/register", userDetails)
+      .then(body => {
+        if(body.error) {
+          this.setState({response: body.error})
+        } else {
+          this.setState({response: body.success},window.history.back())
+        }
+      })
     } else if (formtype === "changeuserdetails") {
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
@@ -111,12 +114,37 @@ export default class UserDetails extends Component {
 
 
   render() {
+    let isRegisterForm;
+    let isChangeUser; 
+    let endpoint;
+
+    // if there is a token (after login) render the Change SUer Details Form
+    // else render Register Form
+    if(localStorage.getItem("token")) {
+      isRegisterForm = false;
+      isChangeUser = true;
+    } else {
+      isRegisterForm = true;
+      isChangeUser = false;
+    }
+
+    let userPicture = defaultPic;
+    if(this.state.profileImgPath) {
+      userPicture = this.state.profileImgPath
+    }
+
+    function updateImg(src){
+      this.setState({
+        userPicture: src
+      })
+    }
+
     return (
       <div className="user-details">
-        <Image imgSrc={userPic} editpicHandler={this.editpicHandler} />
-        {this.state.imageEdit ? <ImageCropper/>: null}
-        <RatingStars rating={this.state.rating}/>
-        <EditUser userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
+         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
+        {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
+        {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
+        <EditUser isRegisterForm={isRegisterForm} isChangeUser={isChangeUser} userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
       </div>
     )
   }

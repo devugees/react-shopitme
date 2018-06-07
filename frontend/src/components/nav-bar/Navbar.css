@@ -3,3 +3,10 @@
   color: var(--primary);
 }
 
+ul li a {
+  color: var(--primary);
+}
+
+ul li a:hover {
+  color: var(--secondary-bg);
+}

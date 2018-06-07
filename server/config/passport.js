@@ -18,7 +18,6 @@ const JWTStrategy   = passportJWT.Strategy;
           return cb(null, false, { "error": "Wrong User Or Password" });
         }
         // Match Password
-        console.log('test ' ,password, user.password)
         bcrypt.compare(password, user.password, (err, isMatch) => {
 
             if (err) throw err;

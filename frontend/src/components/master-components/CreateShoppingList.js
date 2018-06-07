@@ -10,10 +10,30 @@ import Sure from '../Modals/Sure';
 import fakeStore from '../../fakeStore';
 import { authCrudAPI } from '../../helpers/helpers'
 
-export default class CreateShoppingList extends Component {
+const date = new Date();
+const day = date.getDate();
+const month = date.getMonth();
+const year = date.getFullYear();
+const timeHours = date.getHours();
+let timeMin = date.getMinutes();
+const zeroMonth = (month > 9) ? (month) : ('0' + month);
+const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
+const zeroDay = (day > 9) ? (day) : ('0' + day);
 
-  state = {
-      ...fakeStore.userInfo,
+
+export default class CreateShoppingList extends Component {
+  constructor(props){
+    super()
+    let importData;
+    if(localStorage.getItem('userInfo')){
+        const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+        importData ={...userInfoLS}
+      } else {
+        importData ={...fakeStore.userInfo}
+      }
+
+    this.state = {
+      userInfo: importData,
       openSureModal:false,
       order: {
         deliveringTime:{
@@ -21,17 +41,22 @@ export default class CreateShoppingList extends Component {
           end: ''
         },
         items: fakeStore.items,
-    
         shop:'',
         notes: '',
         createdate:'',
-        orderName: '',
+        orderName: 'Order',
+        orderer:{
+          location:{
+            street:importData.location.street,
+            number: importData.location.number,
+            postcode: importData.location.postcode,
+            city: importData.location.city
+          },
+        }
       }
-}
+    }
+  }
   
-
-
- 
   openCloseModal = () => {
     this.setState(prevState => {return {openSureModal: !prevState.openSureModal}});
   }
@@ -44,12 +69,10 @@ export default class CreateShoppingList extends Component {
     this.setState({
       order:{...this.state.order,
        orderName,createdate}
-
     });
   }
 
-  grabDataDoList = (items) => {
-    //console.log(items)
+  grabDataDoList = items => {
     this.setState({
       order:{...this.state.order, items}
     });
@@ -66,21 +89,18 @@ export default class CreateShoppingList extends Component {
             postcode: details.postcode,
             city: details.city
           }
-
         }
       }
     })
   }
 
-  grabDataNotes = (notes) => {
+  grabDataNotes = notes => {
     this.setState({
       order:{...this.state.order, notes}
     });
   }
 
-  
-
-  grabDataStartDelivering = (startTime) => {
+  grabDataStartDelivering = startTime => {
     let order = {...this.state.order}
     order.deliveringTime.start = startTime
     this.setState({
@@ -88,8 +108,8 @@ export default class CreateShoppingList extends Component {
     });
   }
 
-  grabDataEndDelivering = (endTime) => {
-   let order = {...this.state.order}
+  grabDataEndDelivering = endTime => {
+    let order = {...this.state.order}
     order.deliveringTime.end = endTime
     this.setState({
       order:{...order}
@@ -97,32 +117,48 @@ export default class CreateShoppingList extends Component {
   }
 
   sendDataToServer= ()=> {
-    //console.log(this.state.order);
     this.props.updateOrderData(this.state.order);
-    authCrudAPI("post",'http://localhost:4000/user/createshoppinglist', this.state.order).then(date=>console.info(date))
-    //console.log(fakeStore)
+    //Updating user Adress, waiting for the sabine fix with empty pass
+    /*const userInfo = {...this.state.userInfo}
+    userInfo.location = this.state.order.orderer.location
+    authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
+      .then(data => console.log(data))*/
+    console.log('info sended',this.state.order)
+    authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+      .then(data => console.info(data))
   }
 
   render() {
-    // console.log('fakeStore.items[0]',fakeStore.items[0])
-    // console.log('fake store', fakeStore);
-    // console.log("this is the state",this.state)
-    // console.log(this.state.order)
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }
     return (
-
       <div className="createShoppingList main">
-        <ShoppingListTitle dataReceive={this.grabDataShoppingListTitle} listName={this.state.listName} listId={this.state.listId} checkingPerson={false} />
-        <TodoList dataReceive={this.grabDataDoList} orderPerson={true}  items={this.state.order.items}/>
+        <ShoppingListTitle
+          dataReceive={this.grabDataShoppingListTitle}
+          listName={this.state.listName} 
+          listId={this.props.editing ? this.props.editOrder.orderID : this.state.listId}
+          checkingPerson={false}
+          creatingDate={this.props.editing ? this.props.editOrder.created : `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`}
+        />
+        <TodoList
+          dataReceive={this.grabDataDoList}
+          orderPerson={true} 
+          items={this.props.editing ? this.props.editOrder.items : this.state.order.items}
+        />
         <Details
           grabDataStartDelivering={this.grabDataStartDelivering}
-          dataReceive={this.grabDataDetails}
           grabDataEndDelivering={this.grabDataEndDelivering}
-           />
-          
-        <Notes dataReceive={this.grabDataNotes} />
+          dataReceive={this.grabDataDetails}
+          start={this.props.editing ? this.props.editOrder.deliveringTime.start : ''}
+          end={this.props.editing ? this.props.editOrder.deliveringTime.end : ''}
+          shop={this.props.editing ? this.props.editOrder.shop : this.state.shop}
+          deliverAdress={this.props.editing ? {...this.props.editOrder.deliverAdress} : {...this.state.deliverAdress} }
+        />
+        <Notes
+          dataReceive={this.grabDataNotes}
+          noteText={this.props.editing ? this.props.editOrder.notes : ''}
+        />
         <Button
           style={style}
           variant="raised"
@@ -131,8 +167,8 @@ export default class CreateShoppingList extends Component {
         >
           Delete
         </Button>
-        <Button onClick={this.sendDataToServer}style={style} variant="raised" color="primary">
-          <Link to="/">Create</Link>
+        <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
+            <Link to="/">{this.props.editing ? 'Update' : 'Create'}</Link> 
         </Button>
         <Sure sendback={this.sendback} open={this.state.openSureModal}/>
       </div>

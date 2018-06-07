@@ -99,7 +99,7 @@ class NewPassword extends React.Component {
       password: this.state.password2,
       })
       .then( response => {
-        if (response.data = 'done') {
+        if (response.data === 'done') {
           this.setState({
             resaultMessage: 'Your Password has been changed successfully you can login now',
             counter: 5
