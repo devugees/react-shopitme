@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
 import defaultPic from '../../pictures/BoB.png'
-import { BrowserRouter as Router } from 'react-router-dom'
+// import { BrowserRouter as Router } from 'react-router-dom'
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
@@ -116,7 +116,7 @@ export default class UserDetails extends Component {
   render() {
     let isRegisterForm;
     let isChangeUser; 
-    let endpoint;
+    // let endpoint;
 
     // if there is a token (after login) render the Change SUer Details Form
     // else render Register Form
@@ -133,11 +133,11 @@ export default class UserDetails extends Component {
       userPicture = this.state.profileImgPath
     }
 
-    function updateImg(src){
+    /* function updateImg(src){
       this.setState({
         userPicture: src
       })
-    }
+    } */
 
     return (
       <div className="user-details">
