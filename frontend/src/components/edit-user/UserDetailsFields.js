@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {TextField, Grid }from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 // Define the Gender Options here!!
 const gender = [
@@ -52,7 +50,6 @@ export default class UserDetailsForm extends Component {
             required
             fullWidth
             value={userInfoLSParsed ? userInfoLSParsed.firstname : this.props.userdetails.firstname }
-            //value={this.props.userdetails ? this.props.userdetails.firstname : userInfoLSParsed.firstname}
           />
         </Grid>
         <Grid item xs={6}>
@@ -174,5 +171,5 @@ export default class UserDetailsForm extends Component {
         </Grid>
       </React.Fragment>
     );
-    }
+  }
 }
