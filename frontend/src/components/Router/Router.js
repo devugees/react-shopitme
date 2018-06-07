@@ -6,7 +6,7 @@ import CreateShoppingListMiddleware from '../middlewares/CreateShoppingListMiddl
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
 import MainDeliveryPage from '../master-components/MainDeliveryPage';
-import NewPassword from '../master-components/NewPassord'
+import NewPassword from '../master-components/NewPassword'
 import Navbar from '../nav-bar/Navbar';
 import Footer from '../Footer'
 import NotFound from '../not-found/notFound'
