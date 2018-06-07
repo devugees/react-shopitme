@@ -45,8 +45,8 @@ switch(props.orderHistory.status)
       deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
       break;
     default:
-      deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
-      break;
+      /* deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
+      break; */
   }
   return (
     <div>

@@ -3,18 +3,20 @@ import OrderDelivery from '../order-delivery-history';
 import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
 //import fake store
-import fakeStore from '../../fakeStore';
-import starRed from '../../pictures/BoB.png';
+/* import fakeStore from '../../fakeStore';
+ */import starRed from '../../pictures/BoB.png';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import purple from '@material-ui/core/colors/purple';
 
 export default class OrderDeliveryHistory extends Component {
 
-  state = {...fakeStore}
- 
- /*  state={
-    data:'',
+/* state = {...fakeStore}
+ */ 
+  state={
+    orderHistory:'',
     isLoading:true
-  } */ 
-
+  } 
+ 
 
   componentDidMount(){
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -26,20 +28,24 @@ export default class OrderDeliveryHistory extends Component {
       return response.json();
     })
     .then(data => {
-      console.log(data);
-    /*  this.setState({
-       data:data,
+   this.setState({
+    orderHistory:data,
        isLoading:false
-     }) */
+     })
     });
   } 
   
     render() {
+      if(this.state.isLoading) {
+        return ( 
+             <CircularProgress style={{ color: purple[500]}} thickness={7} />
+    )
+      }
       return (
         <div className="createShoppingList main">
           <Image imgSrc={starRed}/>
           <RatingStars rating='4'/>
-          <OrderDelivery orderHistory={this.state.orderHistory} deliverHistory={this.state.deliverHistory}/>
+          <OrderDelivery orderHistory={this.state.orderHistory} DeliverHistory={this.state.DeliverHistory} />
         </div>
       )
     }

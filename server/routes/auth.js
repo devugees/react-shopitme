@@ -205,18 +205,16 @@ router.get('/users',(req, res, next)=>{
     }
 });
 })
-router.get('/users/:userId',(req, res, next)=>{
-  User.findById(req.params.userId).exec((err, data) => {
+router.get('/users/:userId',(req, res)=> {
+  Data.find({orderer: req.params.userId }, ((err, data) => {
     if (err) {
       res.status(500).send({ message: "Could not retrieve user with id " });
-    } else {
-     console.log(data);
-     
-      res.send(data);
-    }
-  });
+    } 
+        res.send(data)
+      }));
 
-})
+  })
+
 
 
 module.exports = router;
