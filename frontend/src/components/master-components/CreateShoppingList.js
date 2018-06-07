@@ -180,7 +180,7 @@ export default class CreateShoppingList extends Component {
           color="secondary"
           onClick={this.openCloseModal}
         >
-          Delete
+        {this.props.editing ? 'Delete' : 'Cancel'}
         </Button>
         <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
           {this.props.editing ? 'Update' : 'Create'}
