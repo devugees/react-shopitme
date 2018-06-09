@@ -1,7 +1,9 @@
 import React from 'react';
 
 let fakeStore = {
-  listId: 3313,
+  listId: 3314,
+  createdate: '2018-04-31T11:00',
+  ordername: 'fake order',
   fakeDeliverAdresses:[{
     // first
       orderer:{
@@ -28,6 +30,7 @@ let fakeStore = {
       start: '2018-04-31T12:00',
       end:'2018-04-31T15:00'
     },
+    createdate: '2018-04-31T11:00',
     items:
     [{
       status:'box',
@@ -234,10 +237,11 @@ let fakeStore = {
   orderHistory:
     [{
       orderID: 15675,
+      ordername:'order dodo',
       status:'Pending',
       shop: 'KaufLand',
       deliverBy: '',
-      created: '23.03.2018',
+      createdate: '23.03.2018',
       accepted:'',
       notes: 'Bring me all in a box please. Thank you',
       delivered:{
@@ -273,16 +277,17 @@ let fakeStore = {
       },
       {
       orderID: 13466,  
+      ordername:'order two',
       status:'In Progress',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
-      created: '21.03.2018',
+      createdate: '21.03.2018',
       accepted:'21.03.2018',
       delivered:{
         date:'',
         time:''
       },
-       items:
+      items:
         [{
           status:'box',
           todo:"2x Corn Bread"
@@ -300,10 +305,11 @@ let fakeStore = {
     },
     {
       orderID: 11787,
+      ordername:'order super',
       status:'Delivered',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
-      created: '17.02.2018',
+      createdate: '17.02.2018',
       accepted:'18.02.2018',
       delivered:{
         date:'18.02.2018',
@@ -327,10 +333,11 @@ let fakeStore = {
     },
     {
       orderID: 9907,
+      ordername:'order haaaaaa',
       status:'Delivered',
       shop: 'Rewe',
       deliverBy: 'Alice Doe',
-      created: '11.02.2018',
+      createdate: '11.02.2018',
       accepted:'11.02.2018',
       delivered:{
         date:'11.02.2018',
@@ -355,16 +362,17 @@ let fakeStore = {
     deliverHistory:
     [{
       orderID: 15675,
+      ordername:'Beautiful kartina',
       status:'In Progress',
       shop: 'Rewe',
       deliverTo: 'Katrina Mueller',
-      created: '23.03.2018',
+      createdate: '23.03.2018',
       accepted:'24.03.2018',
       delivered:{
         date:'',
         time: ''
       },
-       items:
+      items:
         [{
           status:'box',
           todo:"5 little breads"
@@ -378,20 +386,22 @@ let fakeStore = {
           status:'box',
           todo:"2x Orange Juice low sugar"
         }
-        ]
+        ],
+      notes:'Here you Katrina write notes',
       },
       {
       orderID: 13466,
+      ordername:'Fat Brandon',
       status:'In Progress',
       shop: 'Rewe',
       deliverTo: 'Brandon Lee',
-      created: '21.03.2018',
+      createdate: '21.03.2018',
       accepted:'21.03.2018',
       delivered:{
         date:'',
         time:''
       },
-       items:
+      items:
         [{
           status:'box',
           todo:"2x Corn Bread"
@@ -405,14 +415,16 @@ let fakeStore = {
           status:'box',
           todo:"2x Orange Juice low sugar"
         }
-        ]
+        ],
+      notes:'Here Brandon can write notes',
     },
     {
       orderID: 11787,
+      ordername:'Agent Order',
       status:'Delivered',
       shop: 'Rewe',
       deliverTo: 'Agent Cooper',
-      created: '17.02.2018',
+      createdate: '17.02.2018',
       accepted:'18.02.2018',
       delivered:{
         date:'18.02.2018',
@@ -432,14 +444,16 @@ let fakeStore = {
           status:'box',
           todo:"2x Orange Juice low sugar"
         }
-        ]
+        ],
+      notes:'Here Agent Cooper can write notes',
     },
     {
       orderID: 9907,
+      ordername:'Agent list',
       status:'Delivered',
       shop: 'Rewe',
       deliverTo: 'Agent Smith',
-      created: '11.02.2018',
+      createdate: '11.02.2018',
       accepted:'11.02.2018',
       delivered:{
         date:'11.02.2018',
@@ -459,7 +473,8 @@ let fakeStore = {
           status:'box',
           todo:"2x Orange Juice low sugar"
         }
-        ]
+        ],
+      notes:'Here Agent Smith can write notes',
     }],
   notes:'Here you can write notes',
   deliverAdress:{

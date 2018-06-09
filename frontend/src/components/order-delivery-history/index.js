@@ -7,6 +7,7 @@ import DeliverHistory from './deliverHistory';
 import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHistory';
 import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory';
 import CreateShoppingList from '../master-components/CreateShoppingList';
+import AcceptedDelivery from '../master-components/AcceptedDelivery';
 // import the store
 import {Store} from '../../fakeStore';
 
@@ -16,7 +17,8 @@ state = {
   view: true,
   singleOrder: false,
   singleDeliver: false,
-  EditOrder: false
+  EditOrder: false,
+  inProgressDeliver: false
 }
 
 orderMoreInfo = index => {
@@ -27,6 +29,7 @@ orderMoreInfo = index => {
       singleDeliver: false,
       singleOrder: false,
       EditOrder: true,
+      inProgressDeliver: false,
       view: 'canceled',
       order: selectedOrder
     })
@@ -35,6 +38,7 @@ orderMoreInfo = index => {
       singleDeliver: false,
       singleOrder: true,
       EditOrder: false,
+      inProgressDeliver: false,
       view: 'canceled',
       order: selectedOrder
     })
@@ -44,14 +48,25 @@ orderMoreInfo = index => {
 deliverMoreInfo = index => {
   const deliver = [...this.props.deliverHistory];
   const selectedDeliver= deliver[index];
-  console.log(selectedDeliver)
-  this.setState({
-    singleDeliver: true,
-    singleOrder: false,
-    EditOrder: false,
-    view: 'canceled',
-    order: selectedDeliver
-  })
+  if(selectedDeliver.status === 'In Progress') {
+    this.setState({
+      singleDeliver: true,
+      singleOrder: false,
+      EditOrder: false,
+      inProgressDeliver: true,
+      view: 'canceled',
+      order: selectedDeliver
+    })
+  } else {
+    this.setState({
+      singleDeliver: true,
+      singleOrder: false,
+      EditOrder: false,
+      inProgressDeliver: false,
+      view: 'canceled',
+      order: selectedDeliver
+    })
+  }
 }
 
 changeToOrder = () =>{
@@ -60,6 +75,7 @@ changeToOrder = () =>{
     singleOrder: false,
     singleDeliver: false,
     EditOrder: false,
+    inProgressDeliver: false,
     order:null
   })
 }
@@ -70,6 +86,7 @@ changeToDeliver = () =>{
     singleDeliver: false,
     singleOrder: false,
     EditOrder: false,
+    inProgressDeliver: false,
     order:null
   })
 }
@@ -117,6 +134,18 @@ changeToDeliver = () =>{
               updateOrderData={data.updateOrderData}
               editing={true}
               editOrder={this.state.order}/>
+          )}
+        </Store.Consumer>
+      )
+    }
+    if(this.state.inProgressDeliver){
+      displaySingleHistory = (
+        <Store.Consumer>
+          {data =>(
+            <AcceptedDelivery
+              updateOrderData={data.updateOrderData}
+              inProgress={true}
+              progressOrder={this.state.order}/>
           )}
         </Store.Consumer>
       )
