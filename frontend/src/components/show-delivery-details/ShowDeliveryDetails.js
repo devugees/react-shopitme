@@ -3,7 +3,6 @@ import {Typography, Paper} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = {
   deliver:{
     width:'48%',
@@ -19,7 +18,7 @@ const styles = {
   }
 };
 
-const ShowDeliveryDetails = (props) => {
+const ShowDeliveryDetails = props => {
 const { classes } = props;
   return (
     <div className="show-delivery-details">
@@ -38,7 +37,6 @@ const { classes } = props;
     </div>
   );
 }
-
 
 ShowDeliveryDetails.propTypes = {
   classes: PropTypes.object.isRequired,

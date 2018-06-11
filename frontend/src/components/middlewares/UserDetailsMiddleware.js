@@ -3,9 +3,13 @@ import UserDetails from '../master-components/UserDetails';
 import {Store} from '../../fakeStore';
 
 const UserDetailsMiddleware = () => {
-    return (
+  return (
     <Store.Consumer>
-    {data =>(<UserDetails updateUserData={data.updateUserData} updateUserPicture={data.updateUserPicture} />)}
+      {data =>(
+        <UserDetails
+          updateUserData={data.updateUserData}
+          updateUserPicture={data.updateUserPicture}
+        />)}
     </Store.Consumer>
     )
 }
