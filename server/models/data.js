@@ -30,10 +30,17 @@ const OrdersSchema = mongoose.Schema({
     createdate:{
       type:String
     },
-      orderer : {
-         type: Schema.Types.ObjectId,
-          ref: 'User'
-         }
+    status: {
+      type:String
+    },
+    orderer : {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    shopper : {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
   })
 
 OrdersSchema.post('save', (err, doc, next) => {

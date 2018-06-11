@@ -4,10 +4,39 @@ import {Button} from '@material-ui/core'
 import TodoList from '../todo-list/TodoList';
 import ShoppingListTitle from '../shopping-list-title/ShoppingListTitle';
 import ShowDeliveryDetails from '../show-delivery-details/ShowDeliveryDetails';
+import ConfirmationMessage from '../confirmation-message';
 import Notes from '../Additional-Notes/Notes';
 import Map from '../map/Map';
+import { authCrudAPI } from '../../helpers/helpers';
 
 export default class AcceptSingleDelivery extends Component {
+  state = {
+    openConfirmationMessage: false,
+    dataToConfirmationMessage:'',
+    order: {
+      orderID : this.props.orderID
+    }
+  }
+
+  AcceptDeliveryHandelr = () => {
+    authCrudAPI('PUT','/user/AcceptShoppingList', this.state.order)
+      .then(data => {
+        if(!data.error){
+          this.openConfirmationMessage(data.message)
+        } else {
+          this.openConfirmationMessage(data.error)
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+  openConfirmationMessage = dataToConfirmationMessage => {
+    this.setState({openConfirmationMessage:true, dataToConfirmationMessage})
+  }
+
+  closeConfirmationMessage  = () => {
+    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.history.back())
+  }
 
   render() {
     const style = {
@@ -23,9 +52,14 @@ export default class AcceptSingleDelivery extends Component {
         <Notes notes={this.props.notes}/>
         <Map markers={[this.props.orderer.coords]}/>
         <Button onClick={this.props.goback} style={style} variant="raised" color="secondary">Cancel</Button>
-      <Button style={style} variant="raised" color="primary">
-        <Link to="/accepteddelivery">Accept</Link>
-      </Button>
+        <Button style={style} onClick={this.AcceptDeliveryHandelr} variant="raised" color="primary">
+        Accept
+        </Button>
+        <ConfirmationMessage
+            openConfirmationMessage={this.state.openConfirmationMessage}
+            dataToConfirmationMessage={this.state.dataToConfirmationMessage}
+            closeConfirmationMessage={this.closeConfirmationMessage}
+          />
       </div>
     )
   }

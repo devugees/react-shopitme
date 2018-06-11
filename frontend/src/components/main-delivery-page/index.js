@@ -77,11 +77,17 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   render(){
+    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
         <MapComponent deliveryList={true} markers={this.state.coords}/>
+        
         {this.state.orders.map((order, index) => {
+          if (userInfoLS._id === order.orderer._id &&  this.props.hideMyOrders || order.status === "In Progress") {
+            return
+          }
           return(
             <DeliveryList
               key={index}
@@ -95,7 +101,7 @@ export default class ShoppingDeliveryLists extends Component {
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} />
+        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} orderID={this.state.order._id}/>
         )
     }
 
