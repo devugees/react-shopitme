@@ -52,7 +52,7 @@ class Router extends Component {
       
         this.landingPageWrapper = (props) => {
             return (
-              <Landing
+              <Landing 
                 onClick={this.openLogin}
                 {...props}
               />
