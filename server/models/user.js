@@ -69,8 +69,16 @@ const UserSchema = mongoose.Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  profileImgPath : {
+    type: String
+  },
+  deliveryHistory: {
+    type: Array
+  },
+  orderHistory: {
+    type: Array
   }
-  
 });
 
 UserSchema.post('save', (err, doc, next) => {

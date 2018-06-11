@@ -5,7 +5,10 @@ import OrderHistory from './orderHistory';
 import DeliverHistory from './deliverHistory';
 // import next component fo single view
 import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHistory';
-import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory'
+import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory';
+import CreateShoppingList from '../master-components/CreateShoppingList';
+// import the store
+import {Store} from '../../fakeStore';
 
 export default class OrderDeliveryHistory extends Component {
 
@@ -13,17 +16,29 @@ state = {
   view: true,
   singleOrder: false,
   singleDeliver: false,
+  EditOrder: false
 }
 
 orderMoreInfo = index => {
   const order = [...this.props.orderHistory];
   const selectedOrder= order[index];
-  this.setState({
-    singleDeliver: false,
-    singleOrder: true,
-    view: 'canceled',
-    order: selectedOrder
-  })
+  if(selectedOrder.status === 'Pending') {
+    this.setState({
+      singleDeliver: false,
+      singleOrder: false,
+      EditOrder: true,
+      view: 'canceled',
+      order: selectedOrder
+    })
+  } else {
+    this.setState({
+      singleDeliver: false,
+      singleOrder: true,
+      EditOrder: false,
+      view: 'canceled',
+      order: selectedOrder
+    })
+  }
 }
 
 deliverMoreInfo = index => {
@@ -33,6 +48,7 @@ deliverMoreInfo = index => {
   this.setState({
     singleDeliver: true,
     singleOrder: false,
+    EditOrder: false,
     view: 'canceled',
     order: selectedDeliver
   })
@@ -43,6 +59,7 @@ changeToOrder = () =>{
     view: true,
     singleOrder: false,
     singleDeliver: false,
+    EditOrder: false,
     order:null
   })
 }
@@ -52,6 +69,7 @@ changeToDeliver = () =>{
     view: false,
     singleDeliver: false,
     singleOrder: false,
+    EditOrder: false,
     order:null
   })
 }
@@ -90,6 +108,18 @@ changeToDeliver = () =>{
     }
     if(this.state.singleDeliver){
       displaySingleHistory = (<SingleDeliverHistory deliver={this.state.order}/>)
+    }
+    if(this.state.EditOrder){
+      displaySingleHistory = (
+        <Store.Consumer>
+          {data =>(
+            <CreateShoppingList
+              updateOrderData={data.updateOrderData}
+              editing={true}
+              editOrder={this.state.order}/>
+          )}
+        </Store.Consumer>
+      )
     }
 
     let orderColorButtonSelector;
