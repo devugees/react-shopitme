@@ -235,7 +235,7 @@ router.get('/users', (req, res, next) => {
     }
   });
 })
-router.get('/users/:userId', (req, res) => {
+router.get('/order/:userId', (req, res) => {
   Data.find({
     orderer: req.params.userId
   }, ((err, data) => {
@@ -249,4 +249,45 @@ router.get('/users/:userId', (req, res) => {
 
 })
 
+router.get('/deliver/:userId', (req, res) => {
+  Data.find({
+    shopper: req.params.userId
+  }, ((err, data) => {
+    if (err) {
+      res
+        .status(500)
+        .send({message: "Could not retrieve user with id "});
+    }
+    res.send(data)
+  }));
+
+})
+
+/* router.get('/order/:userId', (req, res) => {
+  User.find({
+    _id: req.params.userId
+  }, ((err, user) => {
+    if (err) {
+      res
+        .status(500)
+        .send({message: "Could not retrieve user with id "});
+    }
+    if (user) {
+      console.log(user);
+      if (user.orderHistory) {
+        Data.find({
+          orderer: req.params.userid
+        }, ((err, data) => {
+          if (err) {
+            res
+              .status(500)
+              .send({message: "Could not retrieve user with id "})
+          }
+          res.send(data)
+        }))
+      }
+
+    }
+  }))
+}) */
 module.exports = router;

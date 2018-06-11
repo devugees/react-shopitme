@@ -3,7 +3,8 @@ import OrderDelivery from '../order-delivery-history';
 import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
 //import fake store
-import fakeStore from '../../fakeStore';
+/* import fakeStore from '../../fakeStore';
+ */
 import starRed from '../../pictures/BoB.png';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import purple from '@material-ui/core/colors/purple';
@@ -16,6 +17,7 @@ export default class OrderDeliveryHistory extends Component {
 
   state = {
     orderHistory: '',
+    deliverHistory: '',
     isLoading: true
   }
 
@@ -24,11 +26,13 @@ export default class OrderDeliveryHistory extends Component {
 
     const userId = userInfo._id
 
-    fetch('http://localhost:4000/users/' + userId).then(response => {
-      return response.json();
-    }).then(data => {
-      this.setState({orderHistory: data, isLoading: false})
-    });
+    Promise.all([
+      fetch('http://localhost:4000/order/' + userId),
+      fetch('http://localhost:4000/deliver/' + userId)
+    ]).then(([res1, res2]) => Promise.all([
+      res1.json(),
+      res2.json()
+    ])).then(([order, deliver]) => this.setState({orderHistory: order, deliverHistory: deliver, isLoading: false}))
   }
 
   render() {
