@@ -63,3 +63,5 @@ export function authCrudFileAPI(endPoint, file) {
       referrer: 'no-referrer',
   }).then(res => res.json())   
 }
+
+export const getFullYear = () =>  new Date().getFullYear();
