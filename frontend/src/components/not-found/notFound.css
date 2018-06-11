@@ -1,6 +1,7 @@
 @media only screen and (min-width: 800px) {
   .notFound {
-      font-size:7rem;
+      font-size:2rem;
+      width: 20rem;
   }
 }
 
