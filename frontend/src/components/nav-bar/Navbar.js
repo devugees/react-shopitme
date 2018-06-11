@@ -113,10 +113,7 @@ export default class NavBar extends React.Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
-        },);
-      },
-      error => {
-        this.setState({ error });
+        })
       }
     );    
   }

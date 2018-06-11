@@ -36,6 +36,12 @@ Object.keys(ifaces).forEach(ifname => {
   });
 });
 
+// Checking auth 
+router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  res.json({message:'OK'})
+ }
+)
+
 /* POST register user */
 router.post('/register', (req, res)  => {
   const user = {...req.body};
@@ -129,7 +135,7 @@ router.post('/forgot', (req, res, next)=> {
   });
 });
 
-// check validation of the link
+// check validation of the EMAIL Token link
 router.get('/checktoken/:token', function(req,res) {
   User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, 
 function(err, user) {

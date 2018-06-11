@@ -87,11 +87,6 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
   });
 });
 
-router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-  res.json({message:'OK'})
- }
-)
-
 router.put('/changeuserdetails', (req, res) => {
   let newUser = { ...req.body }
   delete newUser.accountPage
