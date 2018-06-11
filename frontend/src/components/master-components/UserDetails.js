@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ImageCropper from '../avatar/ImageCropper';
 import Image from '../avatar/image';
-import defaultPic from '../../pictures/BoB.png'
-import { BrowserRouter as Router } from 'react-router-dom'
+import defaultPic from '../../pictures/BoB.png';
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
@@ -23,7 +22,6 @@ export default class UserDetails extends Component {
 
   componentDidMount(){
     let geoPos = localStorage.getItem('geoPos')
-
     if(geoPos === "undefined"){ 
       return;
     } else {
@@ -104,7 +102,7 @@ export default class UserDetails extends Component {
      });              
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
-  };
+  }
 
   editpicHandler = () => {
     this.setState({
@@ -112,12 +110,9 @@ export default class UserDetails extends Component {
    }) 
   }
 
-
   render() {
     let isRegisterForm;
-    let isChangeUser; 
-    let endpoint;
-
+    let isChangeUser;
     // if there is a token (after login) render the Change SUer Details Form
     // else render Register Form
     if(localStorage.getItem("token")) {
@@ -133,18 +128,21 @@ export default class UserDetails extends Component {
       userPicture = this.state.profileImgPath
     }
 
-    function updateImg(src){
-      this.setState({
-        userPicture: src
-      })
-    }
-
     return (
       <div className="user-details">
-         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
+        { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
         {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
-        <EditUser isRegisterForm={isRegisterForm} isChangeUser={isChangeUser} userdetails={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} error={this.state.error} response={this.state.response} passwordMatchError={this.state.passwordMatchError} />
+        <EditUser
+          isRegisterForm={isRegisterForm}
+          isChangeUser={isChangeUser}
+          userdetails={this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          error={this.state.error}
+          response={this.state.response}
+          passwordMatchError={this.state.passwordMatchError}
+        />
       </div>
     )
   }

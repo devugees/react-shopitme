@@ -10,13 +10,9 @@ import NewPassword from '../master-components/NewPassword'
 import Navbar from '../nav-bar/Navbar';
 import Footer from '../Footer'
 import NotFound from '../not-found/notFound';
-// get main for testing
-import Main from  '../Main';
 import {Store} from '../../fakeStore';
 import PrivateRoute from '../privateRoute';
 import { authCrudAPI } from '../../helpers/helpers'
-
-
 
 export default class Router extends Component {
   constructor(props) {
@@ -75,7 +71,6 @@ export default class Router extends Component {
           </Store.Consumer>
           <Switch>
             <Route exact path='/' component={this.landingPageWrapper} />
-            <PrivateRoute exact path='/main' component={Main} authed={this.state.isAuthenticated} />
             <Route exact path='/userdetails' component={UserDetailsMiddleware}  />
             <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage} authed={this.state.isAuthenticated} />
             <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery} authed={this.state.isAuthenticated} />

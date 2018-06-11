@@ -29,18 +29,13 @@ const styles = {
   }
 };
 
-
 export default class NavBar extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      login: false,
-      openLogin: false,
-      openForgotpass :false,
-      error: null
-    }
+  state = {
+    login: false,
+    openLogin: false,
+    openForgotpass :false,
+    error: null
   }
-
 
   LoginClickHandler = (e,params) => {
     e.preventDefault();
@@ -87,7 +82,6 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: true,
       openForgotpass :false
-
     })
   }
 
@@ -143,19 +137,18 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-  return (
-    <div className="navbar">
-      <div>
-      <AppBar position="static" >
-        <Toolbar>
-          <Grid item xs={2} sm={2} >     
-            <div >
-              <Link to="/">ShopItMe</Link>
-            </div>
-          </Grid>
-
-          {this.state.login ?
-              ( <React.Fragment >
+    return (
+      <div className="navbar">
+        <div>
+        <AppBar position="static" >
+          <Toolbar>
+            <Grid item xs={2} sm={2} >     
+              <div >
+                <Link to="/">ShopItMe</Link>
+              </div>
+            </Grid>
+            {this.state.login ?
+              (<React.Fragment >
                   <Grid item xs={4} sm={4} >
                     <div></div>
                   </Grid>
@@ -165,8 +158,8 @@ export default class NavBar extends React.Component {
                     <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
-                </React.Fragment>
-               ):
+              </React.Fragment>
+              ):
               (<React.Fragment>
                 <Grid item xs={7} sm={7} >
                   <div>
@@ -174,23 +167,31 @@ export default class NavBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit"
-                          onClick={(e) => this.setState({
+                  <Button
+                    color="inherit"
+                    onClick={(e) => this.setState({
                             openLogin: true,
-                            openForgotpass :false})}>Login</Button>
+                            openForgotpass :false})}
+                  >
+                    Login
+                  </Button>
                 </Grid> 
-              </React.Fragment>) }
-        </Toolbar>
-      </AppBar>
-      <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
-        openForgotpassword={this.popupForgot}
-        loginclick={this.LoginClickHandler}
-        error={this.state.error}
-      /> 
-      <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.openForgotpass}
-        openLog={this.popupLogin}
-      />
+              </React.Fragment>)
+            }
+          </Toolbar>
+        </AppBar>
+        <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
+          openForgotpassword={this.popupForgot}
+          loginclick={this.LoginClickHandler}
+          error={this.state.error}
+        /> 
+        <ResetPassword
+          ref={(ref) => this.resetpass = ref}
+          openForgotpass={this.state.openForgotpass} 
+          openLog={this.popupLogin}
+        />
+      </div>
     </div>
-  </div>
-  );
-} }
+    );
+  } 
+}

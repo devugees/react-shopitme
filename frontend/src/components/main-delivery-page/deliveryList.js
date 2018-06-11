@@ -35,7 +35,6 @@ const styles = theme => ({
 
 const deliveryList = props => {
 const { classes } = props;
-
   return (
     <div>
       <Paper className={props.highlight ? classes.highlight : classes.paper} elevation={4}>
@@ -45,7 +44,15 @@ const { classes } = props;
           <p className={classes.p}>for {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
         </div>
         <div className={classes.buttonDiv}>
-          <Button className={classes.button} variant="fab" color="primary" aria-label="add" onClick={props.deliverMoreInfo}><i className="material-icons">forward</i></Button>          
+          <Button
+            className={classes.button}
+            variant="fab"
+            color="primary"
+            aria-label="add"
+            onClick={props.deliverMoreInfo}
+          >
+            <i className="material-icons">forward</i>
+          </Button>          
         </div>
       </Paper>
     </div>

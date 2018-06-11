@@ -4,24 +4,24 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    box:{
-      background: '#fff',
-      margin: '1rem auto',
-      padding: '.5rem 0',
-    },
-    boxDone:{
-      background: '#54b9b6',
-      margin: '1rem auto',
-      padding: '.5rem 0',
-    },
-    boxNotfound:{
-      background: '#b33838',
-      margin: '1rem auto',
-      padding: '.5rem 0',
-    }
+  box:{
+    background: '#fff',
+    margin: '1rem auto',
+    padding: '.5rem 0',
+  },
+  boxDone:{
+    background: '#54b9b6',
+    margin: '1rem auto',
+    padding: '.5rem 0',
+  },
+  boxNotfound:{
+    background: '#b33838',
+    margin: '1rem auto',
+    padding: '.5rem 0',
+  }
 };
 
-const todoBoxShooper = (props) => {
+const todoBoxShooper = props => {
   const { classes } = props;
   let tick = 'complete';
   let back = 'hide';
