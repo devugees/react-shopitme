@@ -48,7 +48,8 @@ router.get('/maindeliverylist/:userId', (req, res, next) => {
 
 });
 
-router.post('/createshoppinglist', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
+ (req, res, next) => {
   //console.log('req from createshoppinglist',req.user)
 
   const order = {
@@ -88,23 +89,16 @@ router.post('/createshoppinglist', passport.authenticate('jwt', {session: false}
           orderHistory: {
             orderId: order._id
           }
-        }
-      }, (error, done) => {
-        if (done) {
-          res.json({'message': 'The shopping list is created.'});
-        } else if (error) {
-          res.send({"error": "error saving order"})
-        }
-      })
+        }}, (error, done) => {
+          if (done) {
+            res.json({'message': `${order.ordername} has been created`});
+          } else if (error) {
+            res.send({"error": "error saving order"})
+          }
+        })
     }
   });
 });
-
-router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-
-  res.json({message: 'OK'})
-
-})
 
 router.put('/changeuserdetails', (req, res) => {
   let newUser = {

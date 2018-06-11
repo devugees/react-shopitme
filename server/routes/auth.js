@@ -14,6 +14,12 @@ const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({extended: false}));
 
+// Checking auth 
+router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  res.json({message:'OK'})
+ }
+)
+
 /* POST register user */
 router.post('/register', (req, res) => {
   const user = {
@@ -117,21 +123,15 @@ router.post('/forgot', (req, res, next) => {
   });
 });
 
-// check validation of the link
-router.get('/checktoken/:token', function (req, res) {
-  User
-    .findOne({
-      resetPasswordToken: req.params.token,
-      resetPasswordExpires: {
-        $gt: Date.now()
-      }
-    }, function (err, user) {
-      if (!user) {
-        return res.send('true');
-      } else {
-        return res.send('false');
-      }
-    })
+// check validation of the EMAIL Token link
+router.get('/checktoken/:token', function(req,res) {
+  User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, 
+function(err, user) {
+  if(!user) {
+    return res.send('true');
+  } else {
+    return res.send('false');
+  }
 })
 
 // Reset Password
