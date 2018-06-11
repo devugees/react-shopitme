@@ -8,7 +8,7 @@ import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
 import MainDeliveryPage from '../master-components/MainDeliveryPage';
 import NewPassword from '../master-components/NewPassword'
 import Navbar from '../nav-bar/Navbar';
-import Footer from '../Footer'
+import Footer from '../footer/Footer'
 import NotFound from '../not-found/notFound';
 import {Store} from '../../fakeStore';
 import PrivateRoute from '../privateRoute';
