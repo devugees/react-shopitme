@@ -2,6 +2,8 @@
 ## The amazing shopping lists in your area
 This is the final project from **FbW4**
 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/devugees/react-shopitme.svg?columns=all)](https://waffle.io/devugees/react-shopitme)
+
 ## Installation
 #### 1. Clone and Install
 1. `git clone https://github.com/devugees/react-shopitme`
