@@ -8,13 +8,3 @@
 p {
   text-align: center !important;
 }
-
-@keyframes cssAnimation {
-    0%   {opacity: 1;}
-    100%   {opacity: 0.1;}
-} 
-
-.hideMe {
-    animation: cssAnimation 5s forwards;
-    padding-bottom:1rem;
-}
