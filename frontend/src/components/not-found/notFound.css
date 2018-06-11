@@ -1,10 +1,20 @@
 @media only screen and (min-width: 600px) {
-    .notFound {
-        font-size:4rem;
-    }
+  .notFound {
+      font-size:7rem;
+  }
 }
 
 p {
   text-align: center !important;
+}
 
-  }
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
+} 
+
+.hideMe {
+    animation: cssAnimation 5s forwards;
+    padding-bottom:1rem;
+    font-family: Gloria Hallelujah, cursive;
+}
