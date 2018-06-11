@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // User Schema
-const HistorySchema = mongoose.Schema({
+const OrdersSchema = mongoose.Schema({
  items: {
      type:Array,
      required: true 
@@ -36,7 +36,7 @@ const HistorySchema = mongoose.Schema({
          }
   })
 
-HistorySchema.post('save', (err, doc, next) => {
+OrdersSchema.post('save', (err, doc, next) => {
   console.log(err)
   if (err.code === 11000) {
     next({"error": "the items already excest."});
@@ -45,4 +45,4 @@ HistorySchema.post('save', (err, doc, next) => {
   }
 });
 
-const Data = module.exports = mongoose.model('History', HistorySchema);
+const Data = module.exports = mongoose.model('Orders', OrdersSchema);

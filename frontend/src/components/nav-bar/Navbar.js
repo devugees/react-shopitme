@@ -43,7 +43,6 @@ export default class NavBar extends React.Component {
 
 
   LoginClickHandler = (e,params) => {
-    //{email:'123@123.com', pass:123}
     e.preventDefault();
     crudAPI('post', '/login', params)
       .then(data => {
@@ -120,21 +119,23 @@ export default class NavBar extends React.Component {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
-        });
+        },);
       },
       error => {
         this.setState({ error });
       }
-     
-    );
-        
+    );    
   }
 
   componentDidUpdate(){
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
+      const coords = {latitude:52.5237823, longitude:13.486222}
+      localStorage.setItem('geoPos', JSON.stringify(coords))
+    }
+    else {
       localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    }    
+    }  
   }
 
   componentWillUnmount() {

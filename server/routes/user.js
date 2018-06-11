@@ -60,7 +60,7 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
     orderer : req.user._id
         
   })
-  newOrder.save((error) =>{
+  newOrder.save((error, order) =>{
     if(error){
       if (error.message) { // some info is required but not sent
         res.json({'error': error.message});
@@ -71,8 +71,20 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
       }
       
     } 
-    else {
-      res.json({'success': 'The order is done'});
+    if(order) {
+      User.update({_id: order.orderer}, 
+        { $push: { 
+          orderHistory: {
+            orderId: order._id,
+            status: "Pending"
+          }
+        }}, (error, done) => {
+          if (done) {
+            res.json({'message': `${order.ordername} has been created`});
+          } else if (error) {
+            res.send({"error": "error saving order"})
+          }
+        })
     }
   });
 });
