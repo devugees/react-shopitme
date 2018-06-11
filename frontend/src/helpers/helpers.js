@@ -18,8 +18,12 @@ export const crudAPI = async (method, endPoint, data) => {
 }
 
 export function authCrudAPI(method, endPoint, data) {
-    // eslint-disable-next-line
     const token = localStorage.getItem('token');
+    // to avoid the 401 error if no token
+    if(!token){
+      const myPromise = new Promise(resolve => { resolve('Unauthorized') } )
+      return myPromise
+    }
 
     return fetch(endPoint, {
         body: JSON.stringify(data),
@@ -42,6 +46,7 @@ export function authCrudAPI(method, endPoint, data) {
           return response.text()
         }
       })
+    .catch(err => console.log('You are not auth.',err))
 }
 
 export function authCrudFileAPI(endPoint, file) {
@@ -60,3 +65,5 @@ export function authCrudFileAPI(endPoint, file) {
         referrer: 'no-referrer',
     }).then(res => res.json())   
 }
+
+export const getFullYear = () =>  new Date().getFullYear();

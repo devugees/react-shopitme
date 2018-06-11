@@ -40,8 +40,6 @@ router.get('/maindeliverylist/:userId', (req, res, next) => {
 
 });
 
-
-
 router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
   //console.log('req from createshoppinglist',req.user)
