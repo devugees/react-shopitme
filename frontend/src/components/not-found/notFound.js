@@ -2,6 +2,7 @@ import React from 'react';
 import {Paper, Typography, Button} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './notFound.css';
+import notfound from "../../pictures/notfound.png";
 
 const styles = {
     box:{
@@ -20,7 +21,7 @@ const notFound = props => {
       <Paper className="main" style={styles.box} elevation={4}>
         <Typography>
           <div className="hideMe" style={styles.not404}>
-            <i style={{color:"white"}} class="fab fa-snapchat-ghost notFound"></i>
+            <img src={notfound} style={{width:"7rem"}} alt="notfound"/>
             <h1 className="notFound"> 404 </h1>
             <h1 className="notFound">Page Not Found :<span>&#x28;</span> </h1>
           </div>
