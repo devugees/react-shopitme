@@ -26,8 +26,8 @@ const { classes } = props;
       <Paper elevation={4}>
         <Typography className={classes.deliver}>
           Deliver Adress:<br/>
-          {props.deliverAdress.location.street} {props.deliverAdress.location.number},<br/>
-          {props.deliverAdress.location.postalCode} {props.deliverAdress.location.city}.
+          {props.deliverAdress.street} {props.deliverAdress.number},<br/>
+          {props.deliverAdress.postalCode} {props.deliverAdress.city}.
         </Typography>
         <Typography className={classes.delivering}>
           Delivering between:<br/>
