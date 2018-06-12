@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-//var bcrypt = require('bcryptjs');
-
 // User Schema
 const UserSchema = mongoose.Schema({
-  
   userId:{
     type:Number
   },
@@ -91,4 +88,3 @@ UserSchema.post('save', (err, doc, next) => {
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
-

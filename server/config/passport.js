@@ -8,8 +8,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy   = passportJWT.Strategy;
 
   passport.use(new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password'
+      usernameField: 'email',
+      passwordField: 'password'
     },(email, password, cb) => {
       // Match Username
       User.findOne({ email: email }, (err, user) => {
@@ -19,13 +19,12 @@ const JWTStrategy   = passportJWT.Strategy;
         }
         // Match Password
         bcrypt.compare(password, user.password, (err, isMatch) => {
-
-            if (err) throw err;
-            if (isMatch) {
-            return cb(null, user, { message: 'Logged In Successfully'});
-            } else {
-            return cb(null, false, { "error": "Wrong User Or Password" });
-            }
+          if (err) throw err;
+          if (isMatch) {
+          return cb(null, user, { message: 'Logged In Successfully'});
+          } else {
+          return cb(null, false, { "error": "Wrong User Or Password" });
+          }
         }); // End Brcypt
       })
       .catch(err => {
@@ -44,18 +43,17 @@ const JWTStrategy   = passportJWT.Strategy;
     });
   });
 
-passport.use(new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey   : 'secret'
-    },
-    (jwtPayload, cb) => {
-        //find the user in db if needed
-        return User.findById(jwtPayload._id)
-            .then(user => {
-                return cb(null, user);
-            })
-            .catch(err => {
-                return cb(err);
-            });
+  passport.use(new JWTStrategy({
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey   : 'secret'
+    }, (jwtPayload, cb) => {
+      //find the user in db if needed
+      return User.findById(jwtPayload._id)
+        .then(user => {
+          return cb(null, user);
+        })
+        .catch(err => {
+          return cb(err);
+        });
     }
 ));

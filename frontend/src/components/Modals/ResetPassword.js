@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
-import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
@@ -40,7 +39,7 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
+class ResetPassword extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -55,7 +54,7 @@ class SimpleModal extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
-  };
+  }
 
   emailHandler = (e) => {
     this.setState({
@@ -133,10 +132,8 @@ class SimpleModal extends React.Component {
   }
 }
 
-SimpleModal.propTypes = {
+ResetPassword.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const ResetPassword = withStyles(styles)(SimpleModal);
-export default ResetPassword ;
+export default withStyles(styles)(ResetPassword);
