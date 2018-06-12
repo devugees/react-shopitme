@@ -4,16 +4,23 @@ import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
 //import fake store
 import fakeStore from '../../fakeStore';
-import starRed from '../../pictures/BoB.png';
+import defaultPic from '../../pictures/BoB.png';
 
 export default class OrderDeliveryHistory extends Component {
 
   state = {...fakeStore}
   
+
+  
     render() {
+      let userPicture = defaultPic;
+      if (this.state.userInfo.profileImgPath) {
+        userPicture = this.state.userInfo.profileImgPath
+      }
+      console.log(this.state.userInfo.profileImgPath);
       return (
         <div className="createShoppingList main">
-          <Image imgSrc={starRed}/>
+          <Image imgSrc={userPicture}/>
           <RatingStars rating='4'/>
           <OrderDelivery
             orderHistory={this.state.orderHistory}
