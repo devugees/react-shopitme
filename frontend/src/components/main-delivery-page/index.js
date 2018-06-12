@@ -84,7 +84,7 @@ export default class ShoppingDeliveryLists extends Component {
         <MapComponent deliveryList={true} markers={this.state.coords}/>
         
         {this.state.orders.map((order, index) => {
-          if (userInfoLS._id === order.orderer._id &&  this.props.MainDeliveryPagemode || order.status === "In Progress" && this.props.MainDeliveryPagemode ) {
+          if ((userInfoLS._id === order.orderer._id &&  this.props.MainDeliveryPagemode) || (order.status === "In Progress" && this.props.MainDeliveryPagemode) ) {
             return
           }
           return(

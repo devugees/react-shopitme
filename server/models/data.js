@@ -3,22 +3,26 @@ const Schema = mongoose.Schema;
 // User Schema
 const OrdersSchema = mongoose.Schema({
   items: {
-     type:Array,
-     required: true 
+    type: Array,
+    required: true
   },
   shop: {
-    type:String,
-    required: false 
+    type: String,
+    required: false
   },
   deliveringTime: {
     start: {
-      type:String,
-      required:false
+      type: String,
+      required: false
     },
     end: {
-      type:String,
-      required:false
+      type: String,
+      required: false
     }
+  },
+  notes: {
+    type: String,
+    required: false
   },
     ordername:{
       type:String

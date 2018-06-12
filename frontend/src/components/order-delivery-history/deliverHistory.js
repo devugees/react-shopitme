@@ -38,15 +38,16 @@ const deliverHistory = props => {
   let deliverDate;
   switch(props.deliverHistory.status)
     {
+      default:
       case ('Pending'):
         deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
         break;
       case ('In Progress'):
         deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
         break;
-      default:
+     /*  default:
         deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
-        break;
+        break; */
     }
   return (
     <div>
