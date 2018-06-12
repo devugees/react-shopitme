@@ -44,8 +44,6 @@ export default class Map extends Component {
   }*/
 
   render() {
-    console.log(this.state)
-    //label=
     let lat = this.state.coords.latitude;
     let lng = this.state.coords.longitude;
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>

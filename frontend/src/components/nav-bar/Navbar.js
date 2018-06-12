@@ -37,7 +37,11 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: false,
       openForgotpass :false,
-      error: null
+      error: null,
+      coords: {
+        latitude: '',
+        longitude: ''
+      }
     }
   }
 
@@ -125,14 +129,16 @@ export default class NavBar extends React.Component {
   }
 
   componentDidUpdate(){
+    if (this.state.coords.latitude.length > 2){
+      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
+    } 
     const geoPos = localStorage.getItem('geoPos')
+    console.log('componentDidUpdate navbar',geoPos)
     if(!geoPos){
+      console.log('no coords, setting new ones')
       const coords = {latitude:52.5237823, longitude:13.486222}
       localStorage.setItem('geoPos', JSON.stringify(coords))
     }
-    else {
-      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    }  
   }
 
   componentWillUnmount() {
