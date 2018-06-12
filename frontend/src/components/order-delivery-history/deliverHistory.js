@@ -28,48 +28,53 @@ const styles = theme => ({
   }
 });
 
-const deliverHistory = (props) => {
-const { classes } = props; 
-let shopper = (<p className={classes.p}>To: - </p>)
-if(props.deliverHistory.deliverTo){
-  shopper = (<p className={classes.p}>To: {props.deliverHistory.deliverTo}</p>)
-}
-
-let deliverDate;
-switch(props.deliverHistory.status)
-  {
-    case ('Pending'):
-      deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
-      break;
-    case ('In Progress'):
-      deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
-      break;
-    default:
-      deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
-      break;
+const deliverHistory = props => {
+  const { classes } = props; 
+  let shopper = (<p className={classes.p}>To: - </p>)
+  if(props.deliverHistory.deliverTo){
+    shopper = (<p className={classes.p}>To: {props.deliverHistory.deliverTo}</p>)
   }
+
+  let deliverDate;
+  switch(props.deliverHistory.status)
+    {
+      case ('Pending'):
+        deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
+        break;
+      case ('In Progress'):
+        deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
+        break;
+      default:
+        deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
+        break;
+    }
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
         <div className={classes.textDiv}>
-          {/*<p>orderID: {props.deliverHistory.orderID}</p>*/}
           <p className={classes.p}>{props.deliverHistory.status}</p>
           <p className={classes.p}>{props.deliverHistory.shop}</p>
           {shopper}
-          {/*<p>created: {props.deliverHistory.created}</p>*/}
           {deliverDate}
-          {/*<p>delivered time: {props.deliverHistory.delivered.time}</p>*/}
         </div>
         <div className={classes.buttonDiv}>
-          <Button className={classes.button} variant="fab" color="primary" aria-label="add" onClick={props.deliverMoreInfo}><i class="material-icons">forward</i></Button>          
+          <Button
+            className={classes.button}
+            variant="fab"
+            color="primary"
+            aria-label="add"
+            onClick={props.deliverMoreInfo}
+          >
+            <i class="material-icons">forward</i>
+          </Button>          
         </div>
       </Paper>
     </div>
-  );
+  )
 }
 
 deliverHistory.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(deliverHistory);

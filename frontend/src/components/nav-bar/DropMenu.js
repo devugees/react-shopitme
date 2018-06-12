@@ -15,27 +15,20 @@ const styles = {
 }
 
 export default class DropMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
     anchorEl: null,
-    };
   }
-
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
-  };
+  }
 
   handleClose = () => {
     this.setState({ anchorEl: null });
-    //this.props.history.push('/main')
+  }
 
-  };
-
-  render(props) {
+  render() {
     const { anchorEl } = this.state;
-
     return (
       <React.Fragment>
         <Button style={styles.button}
@@ -43,8 +36,7 @@ export default class DropMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-        <Avatars userName={this.props.userName}/>
-    
+          <Avatars userName={this.props.userName}/>
         </Button>
         <Menu style={styles.menuItem}
           id="fade-menu"
@@ -53,12 +45,17 @@ export default class DropMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
-          <MenuItem onClick={this.handleClose}><Link to="/orderdeliveryhistory">History</Link></MenuItem>
-          <MenuItem onClick={this.handleClose}><Link to="/userdetails">Your Profile</Link></MenuItem>
-          <MenuItem onClick={this.props.logOut}><Link to="/">Logout</Link></MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/orderdeliveryhistory">History</Link>
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/userdetails">Your Profile</Link>
+          </MenuItem>
+          <MenuItem onClick={this.props.logOut}>
+            <Link to="/">Logout</Link>
+          </MenuItem>
         </Menu>
       </React.Fragment>
     );
   }
 }
-
