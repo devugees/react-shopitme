@@ -140,7 +140,6 @@ export default class UserDetailsForm extends Component {
             id="gender"
             select
             label="Gender"
-            value={this.props.userdetails.gender}
             value={userInfoLSParsed ? userInfoLSParsed.gender : this.props.userdetails.gender }
             SelectProps={{
                 native: true,

@@ -58,7 +58,7 @@ export default class UserDetails extends Component {
       return;
     } else {
       const userInfoLSParsed = JSON.parse(userInfoLS);
-      if(name === 'city' || 'street' || 'number' || 'postcode'){
+      if(name === 'city' || name === 'street' || name === 'number' || name === 'postcode'){
         userInfoLSParsed.location[name] = event.target.value 
       }else {
         userInfoLSParsed[name] = event.target.value
