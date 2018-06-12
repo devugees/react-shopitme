@@ -11,7 +11,7 @@ const styles = {
   }
 };
 
-const todoBoxOrdered = (props) => {
+const todoBoxOrdered = props => {
   const { classes } = props;
   let tick = 'hide';
   let edit = 'complete';
@@ -29,7 +29,7 @@ const todoBoxOrdered = (props) => {
         <InputLabel htmlFor="name-input">Edit Shopping List</InputLabel>
         <Input autoFocus className="todo-list-input" id="name-input" onChange={props.editText} value={props.todoState} />
       </FormControl>
-      )
+    )
   }
 
   return (

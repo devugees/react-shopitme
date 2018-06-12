@@ -28,26 +28,26 @@ const styles = theme => ({
   }
 });
 
-const orderHistory = (props) => {
-const { classes } = props; 
-let shopper = (<p className={classes.p}>By: - </p>)
-if(props.orderHistory.deliverBy){
-  shopper = (<p className={classes.p}>By: {props.orderHistory.deliverBy}</p>)
-}
-
-let deliverDate;
-switch(props.orderHistory.status)
-  {
-    case ('Pending'):
-      deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
-      break;
-    case ('In Progress'):
-      deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
-      break;
-    default:
-      deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
-      break;
+const orderHistory = props => {
+  const { classes } = props; 
+  let shopper = (<p className={classes.p}>By: - </p>)
+  if(props.orderHistory.deliverBy){
+    shopper = (<p className={classes.p}>By: {props.orderHistory.deliverBy}</p>)
   }
+
+  let deliverDate;
+  switch(props.orderHistory.status)
+    {
+      case ('Pending'):
+        deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
+        break;
+      case ('In Progress'):
+        deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
+        break;
+      default:
+        deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
+        break;
+    }
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>

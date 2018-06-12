@@ -13,14 +13,14 @@ const styles = {
     paddingTop: "0"
  }
 
- const image =(props)=> {
-    return (
-      <div>
-        <div  onClick={props.editpicHandler}>
-          <img style={styles} src={props.imgSrc} alt=""/>
-        </div>
+const image = props => {
+  return (
+    <div>
+      <div  onClick={props.editpicHandler}>
+        <img style={styles} src={props.imgSrc} alt=""/>
       </div>
-    )
-};
+    </div>
+  )
+}
 
 export default image;
