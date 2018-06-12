@@ -92,6 +92,12 @@ export default class NavBar extends React.Component {
     })
   }
 
+  popUpLoginClose = (currentStatus) => {
+    this.setState({
+      openLogin: currentStatus
+    });
+  }
+
   popupForgot = () => {
     this.setState({
       login: false,
@@ -188,6 +194,7 @@ export default class NavBar extends React.Component {
           openForgotpassword={this.popupForgot}
           loginclick={this.LoginClickHandler}
           error={this.state.error}
+          dataReceive={this.popUpLoginClose}
         /> 
         <ResetPassword
           ref={(ref) => this.resetpass = ref}
