@@ -35,63 +35,62 @@ class NewPassword extends React.Component {
     password1: '',
     password2: '',
     showPassword: false,
-    resaultMessage: '',
+    resultMessage: '',
     inputActive:true,
     buttonActive:true,
-  };
+  }
 
   handleChange = (prop, secondparam) => event => {
-    let resaultMessage = '';
+    let resultMessage = '';
     if(event.target.value !== secondparam) {
-      resaultMessage = 'The password didn\'t match in both fields please ckeck it';
+      resultMessage = 'The password didn\'t match in both fields please ckeck it';
       this.setState({
         [prop]: event.target.value,
-        resaultMessage: resaultMessage,
+        resultMessage: resultMessage,
         buttonActive: true
       })
     } else if(event.target.value.length < 1) {
-      resaultMessage = 'The fields shoudn\'t be empty, wriete a password Please!';
+      resultMessage = 'The fields shoudn\'t be empty, wriete a password Please!';
       this.setState({
         [prop]: event.target.value,
-        resaultMessage: resaultMessage,
+        resultMessage: resultMessage,
         buttonActive: true
       })
     } else {
       this.setState({ 
         [prop]: event.target.value,
-        resaultMessage: '',
+        resultMessage: '',
         buttonActive: false
-      });
+      })
     }
-  };
+  }
 
   handleMouseDownPassword = event => {
     event.preventDefault();
-  };
+  }
 
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
-  };
+  }
 
   componentDidMount() {
     let token = window.location.href.slice(-40);
-    axios.get(`http://localhost:4000/checktoken/${token}`,{ token: token})
+    axios.get(`http://localhost:4000/checktoken/${token}`, { token: token})
     .then( response => {
       this.setState({
         inputActive: response.data,
         buttonActive: true
       })
     })
-    .catch(function (error) {
+    .catch(error => {
       console.log(error);
     });
- 
   }
 
   resetHandler = () => {
     if(this.state.password1 !== this.state.password2) {
       this.setState({
-        resaultMessage: 'The password didn\'t match in both fields please ckeck it'
+        resultMessage: 'The password didn\'t match in both fields please ckeck it'
       })
     } else {
       let token = window.location.href.slice(-40);
@@ -101,12 +100,12 @@ class NewPassword extends React.Component {
       .then( response => {
         if (response.data === 'done') {
           this.setState({
-            resaultMessage: 'Your Password has been changed successfully you can login now',
+            resultMessage: 'Your Password has been changed successfully you can login now',
             counter: 5
           })
         }
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error);
       });
     }
@@ -171,13 +170,13 @@ class NewPassword extends React.Component {
             }
           />
         </FormControl>
-        <p>{this.state.resaultMessage}</p>
+        <p>{this.state.resultMessage}</p>
         <Button variant="raised" color="primary" onClick={this.resetHandler} className={classes.button} disabled={this.state.buttonActive}>
           Reset Password
         </Button>
         {this.state.counter ? `you will be redirected in ${this.state.counter} Sec` : ''}
       </div>
-    );
+    )
   }
 }
 

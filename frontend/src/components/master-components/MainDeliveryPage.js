@@ -13,25 +13,21 @@ export default class MainDeliveryPage extends Component {
 
   componentDidMount(){
     fetch('/user/maindeliverylist')
-    .then( response =>{
-      return response.json();
-    })
-    .then(data => {
-     this.setState({
-       data:data,
-       isLoading:false
-     })
-    });
+      .then( response =>{
+        return response.json();
+      })
+      .then(data => {
+         this.setState({
+           data:data,
+           isLoading:false
+         })
+      });
   }
 
   render(){
     if(this.state.isLoading) {
-      return ( 
-           <CircularProgress style={{ color: purple[500]}} thickness={7} />
-  )
+      return ( <CircularProgress style={{ color: purple[500]}} thickness={7} /> )
     }
-      return (
-       <DeliveryList store={this.state.data}/>
-      )
+    return ( <DeliveryList store={this.state.data}/>)
   }
 }

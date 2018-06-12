@@ -3,10 +3,7 @@ import '../css/Footer.css';
 
 const time =new Date().getFullYear()
 
-
-class Footer extends Component {
-
-  
+export default class Footer extends Component {
   render() {
     return (
       <div className="footer">
@@ -15,5 +12,3 @@ class Footer extends Component {
     );
   }
 }
-
-export default Footer;

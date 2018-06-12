@@ -11,8 +11,36 @@ const async = require('async');
 const crypto = require('crypto');
 const mailnotifier = require('./mailnotifier');
 const bodyParser = require('body-parser');
+const os = require('os');
+const ifaces = os.networkInterfaces();
 
 router.use(bodyParser.urlencoded({ extended: false }));
+
+// Add the current IP to the Index of the server
+let serverIPAdress = 'module OS is not working'
+Object.keys(ifaces).forEach(ifname => {
+  let alias = 0;
+  ifaces[ifname].forEach(iface => {
+    if ('IPv4' !== iface.family || iface.internal !== false) {
+      // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+      return;
+    }
+    if (alias >= 1) {
+      // this single interface has multiple ipv4 addresses
+      console.log(ifname + ':' + alias, iface.address);
+    } else {
+      // this interface has only one ipv4 adress
+      serverIPAdress = iface.address
+    }
+    ++alias;
+  });
+});
+
+// Checking auth 
+router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  res.json({message:'OK'})
+ }
+)
 
 /* POST register user */
 router.post('/register', (req, res)  => {
@@ -42,22 +70,20 @@ router.post('/register', (req, res)  => {
       password: user.password
     });
 
-    bcrypt.genSalt(10, function(error, salt){
-      bcrypt.hash(newUser.password, salt, function(error, hash){
+    bcrypt.genSalt(10, (error, salt) =>{
+      bcrypt.hash(newUser.password, salt, (error, hash) =>{
         if(error){
           res.json({'error': 'Error Password'});
         }
         newUser.password = hash;
-        newUser.save(function(error){
+        newUser.save(error => {
           if(error){
             if (error.message) { // some info is required but not sent
               res.json({'error': error.message});
             } 
-
             if (error.err) { // some info already exist in DB and needs to be unique
               res.json({'error': error.err});
             }
-            
           } else {
             res.json({'success': 'You are registered and can now login'});
           }
@@ -81,10 +107,8 @@ router.post('/forgot', (req, res, next)=> {
         if (!user) {
           return res.send('No account with that email address exists.');
         }
-
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
         user.save(err => {
           done(err, token, user);
         });
@@ -96,7 +120,7 @@ router.post('/forgot', (req, res, next)=> {
       You are receiving this message because you (or someone else) have requested reset password of your account.
       
       if you want to continue the process, please click on the following link or past it in your browser :
-      http://localhost:3000/reset/${token}
+      ${serverIPAdress}/reset/${token}
       Note: "this link is valid just for one hour".
       
       We which you a nice day.
@@ -111,7 +135,7 @@ router.post('/forgot', (req, res, next)=> {
   });
 });
 
-// check validation of the link
+// check validation of the EMAIL Token link
 router.get('/checktoken/:token', function(req,res) {
   User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, 
 function(err, user) {

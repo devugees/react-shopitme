@@ -25,11 +25,11 @@ export default class CreateShoppingList extends Component {
     super()
     let importData;
     if(localStorage.getItem('userInfo')){
-        const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-        importData ={...userInfoLS}
-      } else {
-        importData ={...fakeStore.userInfo}
-      }
+      const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+      importData ={...userInfoLS}
+    } else {
+      importData ={...fakeStore.userInfo}
+    }
 
     this.state = {
       userInfo: importData,
@@ -66,10 +66,10 @@ export default class CreateShoppingList extends Component {
     this.setState({openSureModal: false})
   }
 
-  grabDataShoppingListTitle = (orderName,createdate) => {
+  grabDataShoppingListTitle = (orderName, createdate) => {
     this.setState({
       order:{...this.state.order,
-       orderName,createdate}
+      orderName,createdate}
     });
   }
 
@@ -79,7 +79,7 @@ export default class CreateShoppingList extends Component {
     });
   }
 
-  grabDataDetails = (details,shop) => {
+  grabDataDetails = (details, shop) => {
     this.setState({
       order:{ ...this.state.order,
         shop,
@@ -187,10 +187,10 @@ export default class CreateShoppingList extends Component {
         </Button>
         <Sure sendback={this.sendback} open={this.state.openSureModal}/>
         <ConfirmationMessage
-            openConfirmationMessage={this.state.openConfirmationMessage}
-            dataToConfirmationMessage={this.state.dataToConfirmationMessage}
-            closeConfirmationMessage={this.closeConfirmationMessage}
-          />
+          openConfirmationMessage={this.state.openConfirmationMessage}
+          dataToConfirmationMessage={this.state.dataToConfirmationMessage}
+          closeConfirmationMessage={this.closeConfirmationMessage}
+        />
       </div>
     )
   }
