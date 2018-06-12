@@ -18,6 +18,8 @@ const OrdersSchema = mongoose.Schema({
     end: {
       type:String,
       required:false
+    }
+  },
     ordername:{
       type:String
     },
@@ -36,9 +38,7 @@ const OrdersSchema = mongoose.Schema({
       ref: 'User'
     }
   })
-    }
-  },
-
+ 
 OrdersSchema.post('save', (err, doc, next) => {
   if (err.code === 11000) {
     next({"error": "the items already excest."});
