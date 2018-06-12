@@ -18,20 +18,33 @@ export default class UserDetails extends Component {
     passwordMatchError: true,
     userPicture: defaultPic,
     gender: 'Female'
-  };
+  }
 
   componentDidMount(){
-    let geoPos = localStorage.getItem('geoPos')
+    const geoPos = localStorage.getItem('geoPos')
+    const userInfoLS = localStorage.getItem('userInfo')
     if(geoPos === "undefined"){ 
       return;
     } else {
-      geoPos = JSON.parse(geoPos);
+      const geoPosParsed = JSON.parse(geoPos);
       this.setState({
         coords: {
-          lat: geoPos.latitude,
-          lng: geoPos.longitude
+          lat: geoPosParsed.latitude,
+          lng: geoPosParsed.longitude
         }
       }); 
+    }
+    if(userInfoLS === null){
+      return;
+    } else {
+      const userInfoLSParsed = JSON.parse(userInfoLS);
+      this.setState({
+        ...userInfoLSParsed,
+        city: userInfoLSParsed.location.city, 
+        street: userInfoLSParsed.location.street,
+        number: userInfoLSParsed.location.number,
+        postcode: userInfoLSParsed.location.postcode,
+      });
     }
   }
 
@@ -39,6 +52,19 @@ export default class UserDetails extends Component {
     this.setState({
       [name]: event.target.value,
     });
+    // to update the issue with the text field in userDetailsFields
+    const userInfoLS = localStorage.getItem('userInfo')
+    if(userInfoLS === null){
+      return;
+    } else {
+      const userInfoLSParsed = JSON.parse(userInfoLS);
+      if(name === 'city' || name === 'street' || name === 'number' || name === 'postcode'){
+        userInfoLSParsed.location[name] = event.target.value 
+      }else {
+        userInfoLSParsed[name] = event.target.value
+      }
+      localStorage.setItem('userInfo', JSON.stringify(userInfoLSParsed)) 
+    }
 
     if (name === "confirmpassword") {
       const password = this.state.password;
@@ -106,8 +132,8 @@ export default class UserDetails extends Component {
 
   editpicHandler = () => {
     this.setState({
-    imageEdit:true
-   }) 
+      imageEdit:true
+    }) 
   }
 
   render() {
@@ -126,6 +152,10 @@ export default class UserDetails extends Component {
     let userPicture = defaultPic;
     if(this.state.profileImgPath) {
       userPicture = this.state.profileImgPath
+    }
+    if(localStorage.getItem('userInfo')){
+      const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+      userPicture = userInfoLS.profileImgPath
     }
 
     return (
