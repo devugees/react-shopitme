@@ -9,7 +9,7 @@ import Map from '../map/Map';
 //import fake store
 import fakeStore from '../../fakeStore';
 
-export default class AcceptSingleDelivery extends Component {
+export default class AcceptedDelivery extends Component {
 
 state = {...fakeStore}
 
@@ -18,33 +18,34 @@ state = {...fakeStore}
       margin: '1rem 0.5rem 0 0.5rem',
     }
     return (
-      <div className="accept-single-delivery main">
-        <ShoppingListTitle
-          shopperPerson={true}
-          ordererName={this.state.orderer.firstname}
-          ordererAccountPage={this.state.orderer.accountPage}
-          listName="Shopping List"
-          listId={this.state.listId}
-          shopperName={this.state.shopper.firstname}
-          shopperAccountPage={this.state.shopper.accountPage}
-        />
-        <ShowDeliveryDetails
-          deliveringTime={this.state.deliveringTime}
-          deliverAdress={this.state.orderer.deliverAdress}
-        />
-        <TodoList
-          items={this.state.items}
-          shopperPerson={true}
-        />
-        <Notes notes={this.state.notes}/>
-        <Map markers={[this.state.orderer.coords]}/>
-        <Button style={style} variant="raised" color="secondary">
-          <Link to="">Report Issue</Link>
-        </Button>
-        <Button style={style} variant="raised" color="primary">
-          <Link to="/">Delivered</Link>
-        </Button>
-      </div>
+        <div className="accept-single-delivery main">
+          <ShoppingListTitle
+              shopperPerson={true}
+              ordererName={this.state.orderer.firstname}
+              ordererAccountPage={this.state.orderer.accountPage}
+              listName={this.props.progressOrder.ordername}
+              listId={this.props.progressOrder.orderID}
+              createdate={this.state.created}
+              shopperName={this.state.shopper.firstname}
+              shopperAccountPage={this.state.shopper.accountPage}
+            />
+          <ShowDeliveryDetails
+              deliveringTime={this.state.deliveringTime}
+              deliverAdress={this.state.orderer.deliverAdress}
+            />
+          <TodoList
+              items={this.props.progressOrder.items}
+              shopperPerson={true}
+            />
+          <Notes notes={this.props.progressOrder.notes}/>
+          <Map markers={[this.state.orderer.coords]}/>
+          <Button style={style} variant="raised" color="secondary">
+            <Link to="">Report Issue</Link>
+          </Button>
+          <Button style={style} variant="raised" color="primary">
+            <Link to="/">Delivered</Link>
+          </Button>
+        </div>
     )
   }
 };

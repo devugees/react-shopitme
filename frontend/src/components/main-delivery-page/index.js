@@ -100,7 +100,9 @@ export default class ShoppingDeliveryLists extends Component {
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
+
         <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} orderID={this.state.order._id}/>
+
         )
     }
 
