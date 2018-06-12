@@ -10,7 +10,21 @@ const genders = [
   ];
 
 export default class UserDetailsForm extends Component {
+
+  state = {}
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  }
+  
   render() {
+    let userInfoLSParsed;
+    const userInfoLS = localStorage.getItem('userInfo')
+    if(userInfoLS){
+      userInfoLSParsed = JSON.parse(userInfoLS);
+    };
     return (
       <React.Fragment>
         <Grid item xs={6}>
@@ -22,7 +36,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.firstname}
+            value={userInfoLSParsed ? userInfoLSParsed.firstname : this.props.userdetails.firstname }
           />
         </Grid>
         <Grid item xs={6}>
@@ -34,7 +48,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.lastname}
+            value={userInfoLSParsed ? userInfoLSParsed.lastname : this.props.userdetails.lastname }
           />
         </Grid>
         <Grid item xs={8}>
@@ -46,7 +60,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.street}
+            value={userInfoLSParsed ? userInfoLSParsed.location.street : this.props.userdetails.street }
           />
         </Grid>
         <Grid item xs={4}>
@@ -58,7 +72,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.number}
+            value={userInfoLSParsed ? userInfoLSParsed.location.number : this.props.userdetails.number }
           />
         </Grid>
         <Grid item xs={4}>
@@ -70,7 +84,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.postcode}
+            value={userInfoLSParsed ? userInfoLSParsed.location.postcode : this.props.userdetails.postcode }
           />
         </Grid>
         <Grid item xs={8}>
@@ -82,7 +96,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.city}
+            value={userInfoLSParsed ? userInfoLSParsed.location.city : this.props.userdetails.city }
           />
         </Grid>
         {/* <Grid item xs={12}>
@@ -106,7 +120,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.email}
+            value={userInfoLSParsed ? userInfoLSParsed.email : this.props.userdetails.email }
           />
         </Grid>
         <Grid item xs={12}>
@@ -118,7 +132,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={this.props.userdetails.mobile}
+            value={userInfoLSParsed ? userInfoLSParsed.mobile : this.props.userdetails.mobile }
           />
         </Grid>
         <Grid item xs={12}>
@@ -127,7 +141,7 @@ export default class UserDetailsForm extends Component {
             select
             label="Gender"
             value={this.props.userdetails.gender}
-            onChange={this.props.handleChange('gender')}
+            value={userInfoLSParsed ? userInfoLSParsed.gender : this.props.userdetails.gender }
             SelectProps={{
                 native: true,
                 }}
