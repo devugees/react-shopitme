@@ -53,10 +53,13 @@ const styles = theme => ({
 
 class Login extends React.Component {
 
-  state = {
+  constructor(props) {
+    super();
+    this.state = {
     open: false,
     password: '',
     showPassword: false,
+    }
   }
 
   UNSAFE_componentWillReceiveProps(e){
@@ -64,7 +67,7 @@ class Login extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false }),() => {this.props.dataReceive(this.state.open)};
   }
 
   handleForget = (props, e) => {
