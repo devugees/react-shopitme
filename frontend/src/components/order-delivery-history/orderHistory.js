@@ -52,11 +52,11 @@ const orderHistory = (props) => {
         <p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>
       )
       break;
-     /*  default:
+     default:
       deliverDate = (
         <p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>
       )
-      break;*/
+      break;
   }
   return (
     <div>

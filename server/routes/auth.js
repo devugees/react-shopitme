@@ -235,6 +235,7 @@ router.get('/users', (req, res, next) => {
     }
   });
 })
+// api req for user order history
 router.get('/order/:userId', (req, res) => {
   Data.find({
     orderer: req.params.userId
@@ -248,7 +249,7 @@ router.get('/order/:userId', (req, res) => {
   }));
 
 })
-
+// api req for user delivery history
 router.get('/deliver/:userId', (req, res) => {
   Data.find({
     shopper: req.params.userId
