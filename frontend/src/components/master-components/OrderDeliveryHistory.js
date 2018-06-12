@@ -2,23 +2,18 @@ import React, {Component} from 'react';
 import OrderDelivery from '../order-delivery-history';
 import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
-//import fake store
-/* import fakeStore from '../../fakeStore';
- */
-import starRed from '../../pictures/BoB.png';
+import fakeStore from '../../fakeStore';
+import defaultPic from '../../pictures/BoB.png';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import purple from '@material-ui/core/colors/purple';
 
 export default class OrderDeliveryHistory extends Component {
 
-  /*  state = {
-    ...fakeStore
-  } */
-
   state = {
     orderHistory: '',
     deliverHistory: '',
-    isLoading: true
+    isLoading: true,
+    ...fakeStore
   }
 
   componentDidMount() {
@@ -41,14 +36,19 @@ export default class OrderDeliveryHistory extends Component {
   }
 
   render() {
+    let userPicture = defaultPic;
+      if (this.state.userInfo.profileImgPath) {
+        userPicture = this.state.userInfo.profileImgPath
+      }
+
     if (this.state.isLoading) {
       return (<CircularProgress style={{
         color: purple[500]
       }} thickness={7}/>)
-    }
+
     return (
       <div className="createShoppingList main">
-        <Image imgSrc={starRed}/>
+        <Image imgSrc={userPicture}/>
         <RatingStars rating='4'/>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
@@ -56,4 +56,5 @@ export default class OrderDeliveryHistory extends Component {
       </div>
     )
   }
-};
+}
+}
