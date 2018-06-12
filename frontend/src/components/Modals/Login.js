@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {IconButton, Input, InputLabel, InputAdornment, FormControl, Modal, Button} from '@material-ui/core';
-import Visibility from './svg/visibility.svg';
-import VisibilityOff from './svg/visibilityOff.svg';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import AddIcon from '@material-ui/icons/Add';
 import Facebook from './svg/facebook.svg';
 import Google from './svg/google.svg';
 
@@ -25,8 +26,9 @@ const styles = theme => ({
   cancel: {
     position: 'absolute',
     top: '8px',
-    left: '16px',
-    fontSize: '18px'
+    left: '8px',
+    fontSize: '18px',
+    transform: 'rotate(45deg)'
   },
   margin: {
     margin: theme.spacing.unit,
@@ -40,6 +42,9 @@ const styles = theme => ({
   },
   iconwww: {
     width: '24%',
+    display:'flex',
+    alignItems:'center',
+    padding: '0px 5px'
   },
   error: {
     color: 'crimson',
@@ -104,11 +109,11 @@ class Login extends React.Component {
                         }}>
             <Button variant="raised" color="primary" className={classes.loginButtons}>
               <img src={Facebook} className={classes.iconwww} alt="facebook"/>
-              Login with Facebook 
+              <span> using Facebook</span> 
             </Button>
             <Button variant="raised" color="secondary" className={classes.loginButtons}>
               <img src={Google} className={classes.iconwww} alt="google"/>
-              Login with Google
+              <span> using Google</span>
             </Button>
             <hr />
             <div>
@@ -146,7 +151,7 @@ class Login extends React.Component {
                           onClick={this.handleClickShowPassword}
                           onMouseDown={this.handleMouseDownPassword}
                         >
-                          {this.state.showPassword ? <img src={VisibilityOff} alt="VisibilityOff"/> : <img src={Visibility} alt="Visibility"/>}
+                          {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
                     }
@@ -168,8 +173,8 @@ class Login extends React.Component {
               <Button variant="flat">
                 <a className={classes.linkColor} href='/userdetails'>Don't Have an account? Register Now</a>
               </Button>
-            <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
-            X
+            <Button variant="fab" mini color="secondary" className={classes.cancel} onClick={this.handleClose}>
+            <AddIcon />
             </Button>
           </div>
         </Modal>

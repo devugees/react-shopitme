@@ -12,7 +12,7 @@ import {authCrudAPI} from '../../helpers/helpers'
 
 const date = new Date();
 const day = date.getDate();
-const month = date.getMonth();
+const month = date.getMonth()+1;
 const year = date.getFullYear();
 const timeHours = date.getHours();
 let timeMin = date.getMinutes();
@@ -25,6 +25,8 @@ const zeroMin = (timeMin > 9)
 const zeroDay = (day > 9)
   ? (day)
   : ('0' + day);
+
+const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
 
 export default class CreateShoppingList extends Component {
   constructor(props) {
@@ -50,11 +52,12 @@ export default class CreateShoppingList extends Component {
         items: fakeStore.items,
         shop: '',
         notes: '',
-        createdate: '',
-        orderName: 'Order',
-        orderer: {
-          location: {
-            street: importData.location.street,
+        createdate: createdate,
+        ordername: 'Order Name',
+        orderID: 'xxx',
+        orderer:{
+          location:{
+            street:importData.location.street,
             number: importData.location.number,
             postcode: importData.location.postcode,
             city: importData.location.city
@@ -64,6 +67,19 @@ export default class CreateShoppingList extends Component {
     }
   }
 
+  UNSAFE_componentWillMount(props, state) {
+    if(this.props.editOrder) {
+      let order = {...this.state.order}
+      order.ordername = this.props.editOrder.ordername
+      order.orderID = this.props.editOrder.orderID
+      order.createdate = this.props.editOrder.createdate
+      console.log(order)
+      this.setState({
+        order
+      })
+    }
+  }
+  
   openCloseModal = () => {
     this.setState(prevState => {
       return {
@@ -76,10 +92,10 @@ export default class CreateShoppingList extends Component {
     this.setState({openSureModal: false})
   }
 
-  grabDataShoppingListTitle = (orderName, createdate) => {
+  grabDataShoppingListTitle = (ordername) => {
     this.setState({
       order:{...this.state.order,
-      orderName,createdate}
+       ordername}
     });
   }
 
@@ -178,14 +194,11 @@ export default class CreateShoppingList extends Component {
       <div className="createShoppingList main">
         <ShoppingListTitle
           dataReceive={this.grabDataShoppingListTitle}
-          listName={this.state.listName}
-          listId={this.props.editing
-          ? this.props.editOrder.orderID
-          : this.state.listId}
+          listName={this.state.order.ordername}
+          listId={this.state.order.orderID}
+          createdate={this.state.order.createdate}
           checkingPerson={false}
-          creatingDate={this.props.editing
-          ? this.props.editOrder.created
-          : `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`}/>
+        />
         <TodoList
           dataReceive={this.grabDataDoList}
           orderPerson={true}
