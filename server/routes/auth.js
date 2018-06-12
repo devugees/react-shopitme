@@ -18,25 +18,27 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 // Add the current IP to the Index of the server
 let serverIPAdress = 'module OS is not working'
-Object.keys(ifaces).forEach(ifname => {
-  let alias = 0;
-  ifaces[ifname].forEach(iface => {
-    if ('IPv4' !== iface.family || iface.internal !== false) {
-      // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-      return;
-    }
-    if (alias >= 1) {
-      // this single interface has multiple ipv4 addresses
-      console.log(ifname + ':' + alias, iface.address);
-    } else {
-      // this interface has only one ipv4 adress
-      serverIPAdress = iface.address
-    }
-    ++alias;
+Object
+  .keys(ifaces)
+  .forEach(ifname => {
+    let alias = 0;
+    ifaces[ifname].forEach(iface => {
+      if ('IPv4' !== iface.family || iface.internal !== false) {
+        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+        return;
+      }
+      if (alias >= 1) {
+        // this single interface has multiple ipv4 addresses
+        console.log(ifname + ':' + alias, iface.address);
+      } else {
+        // this interface has only one ipv4 adress
+        serverIPAdress = iface.address
+      }
+      ++alias;
+    });
   });
-});
 
-// Checking auth 
+// Checking auth
 router.post('/checkingToken', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({message: 'OK'})
 })
@@ -71,17 +73,17 @@ router.post('/register', (req, res) => {
       password: user.password
     });
 
-    bcrypt.genSalt(10, (error, salt) =>{
-      bcrypt.hash(newUser.password, salt, (error, hash) =>{
-        if(error){
+    bcrypt.genSalt(10, (error, salt) => {
+      bcrypt.hash(newUser.password, salt, (error, hash) => {
+        if (error) {
           res.json({'error': 'Error Password'});
         }
         newUser.password = hash;
         newUser.save(error => {
-          if(error){
+          if (error) {
             if (error.message) { // some info is required but not sent
               res.json({'error': error.message});
-            } 
+            }
             if (error.err) { // some info already exist in DB and needs to be unique
               res.json({'error': error.err});
             }
@@ -89,7 +91,8 @@ router.post('/register', (req, res) => {
             res.json({'success': 'You are registered and can now login'});
           }
         });
-    });
+      });
+    })
   }
 });
 
