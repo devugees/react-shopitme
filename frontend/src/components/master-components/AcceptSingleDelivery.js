@@ -7,7 +7,7 @@ import ShowDeliveryDetails from '../show-delivery-details/ShowDeliveryDetails';
 import ConfirmationMessage from '../confirmation-message';
 import Notes from '../Additional-Notes/Notes';
 import { authCrudAPI } from '../../helpers/helpers';
-import Map from '../map/Map';
+import GoogleMap from '../map/Map';
 
 export default class AcceptSingleDelivery extends Component {
   state = {
