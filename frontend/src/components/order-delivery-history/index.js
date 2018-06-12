@@ -13,13 +13,13 @@ import {Store} from '../../fakeStore';
 
 export default class OrderDeliveryHistory extends Component {
 
-state = {
-  view: true,
-  singleOrder: false,
-  singleDeliver: false,
-  EditOrder: false,
-  inProgressDeliver: false
-}
+  state = {
+    view: true,
+    singleOrder: false,
+    singleDeliver: false,
+    EditOrder: false,
+    inProgressDeliver: false
+  }
 
   orderMoreInfo = index => {
     const order = [...this.props.orderHistory];
@@ -46,15 +46,25 @@ state = {
   deliverMoreInfo = index => {
     const deliver = [...this.props.deliverHistory];
     const selectedDeliver= deliver[index];
-    console.log(selectedDeliver)
-    this.setState({
-      singleDeliver: true,
-      singleOrder: false,
-      EditOrder: true,
-      inProgressDeliver: false,
-      view: 'canceled',
-      order: selectedDeliver
-    })
+    if(selectedDeliver.status === 'In Progress') {
+      this.setState({
+        singleDeliver: true,
+        singleOrder: false,
+        EditOrder: false,
+        inProgressDeliver: true,
+        view: 'canceled',
+        order: selectedDeliver
+      })
+    } else {
+      this.setState({
+        singleDeliver: true,
+        singleOrder: false,
+        EditOrder: false,
+        inProgressDeliver: false,
+        view: 'canceled',
+        order: selectedDeliver
+      })
+    }
   }
 
   changeToOrder = () =>{
@@ -64,56 +74,20 @@ state = {
       singleDeliver: false,
       EditOrder: false,
       inProgressDeliver: false,
-      view: 'canceled',
-      order: selectedOrder
+      order:null
     })
   }
 
-deliverMoreInfo = index => {
-  const deliver = [...this.props.deliverHistory];
-  const selectedDeliver= deliver[index];
-  if(selectedDeliver.status === 'In Progress') {
+  changeToDeliver = () =>{
     this.setState({
-      singleDeliver: true,
-      singleOrder: false,
-      EditOrder: false,
-      inProgressDeliver: true,
-      view: 'canceled',
-      order: selectedDeliver
-    })
-  } else {
-    this.setState({
-      singleDeliver: true,
+      view: false,
+      singleDeliver: false,
       singleOrder: false,
       EditOrder: false,
       inProgressDeliver: false,
-      view: 'canceled',
-      order: selectedDeliver
+      order:null
     })
   }
-}
-
-changeToOrder = () =>{
-  this.setState({
-    view: true,
-    singleOrder: false,
-    singleDeliver: false,
-    EditOrder: false,
-    inProgressDeliver: false,
-    order:null
-  })
-}
-
-changeToDeliver = () =>{
-  this.setState({
-    view: false,
-    singleDeliver: false,
-    singleOrder: false,
-    EditOrder: false,
-    inProgressDeliver: false,
-    order:null
-  })
-}
 
   render() {
     const styles ={
