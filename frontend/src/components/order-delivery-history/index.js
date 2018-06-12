@@ -21,29 +21,53 @@ state = {
   inProgressDeliver: false
 }
 
-orderMoreInfo = index => {
-  const order = [...this.props.orderHistory];
-  const selectedOrder= order[index];
-  if(selectedOrder.status === 'Pending') {
+  orderMoreInfo = index => {
+    const order = [...this.props.orderHistory];
+    const selectedOrder= order[index];
+    if(selectedOrder.status === 'Pending') {
+      this.setState({
+        singleDeliver: false,
+        singleOrder: false,
+        EditOrder: true,
+        view: 'canceled',
+        order: selectedOrder
+      })
+    } else {
+      this.setState({
+        singleDeliver: false,
+        singleOrder: true,
+        EditOrder: false,
+        view: 'canceled',
+        order: selectedOrder
+      })
+    }
+  }
+
+  deliverMoreInfo = index => {
+    const deliver = [...this.props.deliverHistory];
+    const selectedDeliver= deliver[index];
+    console.log(selectedDeliver)
     this.setState({
-      singleDeliver: false,
+      singleDeliver: true,
       singleOrder: false,
       EditOrder: true,
       inProgressDeliver: false,
       view: 'canceled',
-      order: selectedOrder
+      order: selectedDeliver
     })
-  } else {
+  }
+
+  changeToOrder = () =>{
     this.setState({
+      view: true,
+      singleOrder: false,
       singleDeliver: false,
-      singleOrder: true,
       EditOrder: false,
       inProgressDeliver: false,
       view: 'canceled',
       order: selectedOrder
     })
   }
-}
 
 deliverMoreInfo = index => {
   const deliver = [...this.props.deliverHistory];

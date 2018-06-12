@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {Typography, Modal, Button} from '@material-ui/core';
-import './Modals.css';
 
 const styles = theme => ({
   modalStyle: {
@@ -25,7 +24,7 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
+class Sure extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,20 +32,18 @@ class SimpleModal extends React.Component {
       password: '',
       showPassword: false,
     };
-    
   }
 
   handleClose = () => {
     this.setState({ open: false },this.props.sendback());
-  };
-
+  }
 
   static getDerivedStateFromProps(props, state){
    if(props.open){
      return { open: true};
    }
    return null
- }
+  }
 
   render() {
     const { classes } = this.props;
@@ -79,10 +76,8 @@ class SimpleModal extends React.Component {
   }
 }
 
-SimpleModal.propTypes = {
+Sure.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const Sure = withStyles(styles)(SimpleModal);
-export default Sure ;
+export default withStyles(styles)(Sure);

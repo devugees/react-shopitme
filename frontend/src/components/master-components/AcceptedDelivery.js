@@ -13,12 +13,10 @@ export default class AcceptedDelivery extends Component {
 
 state = {...fakeStore}
 
-
   render() {
     const style = {
       margin: '1rem 0.5rem 0 0.5rem',
     }
-    
     return (
         <div className="accept-single-delivery main">
           <ShoppingListTitle
@@ -35,7 +33,10 @@ state = {...fakeStore}
               deliveringTime={this.state.deliveringTime}
               deliverAdress={this.state.orderer.deliverAdress}
             />
-          <TodoList items={this.props.progressOrder.items} shopperPerson={true}/>
+          <TodoList
+              items={this.props.progressOrder.items}
+              shopperPerson={true}
+            />
           <Notes notes={this.props.progressOrder.notes}/>
           <Map markers={[this.state.orderer.coords]}/>
           <Button style={style} variant="raised" color="secondary">

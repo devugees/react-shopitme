@@ -13,7 +13,7 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
-    // becareful with the store without orderer, delet it from DB
+    // becareful with the store without orderer, delete it from DB
     this.props.store.map(data => {
       return(
         this.setState( prevState => {return {
@@ -31,7 +31,6 @@ export default class ShoppingDeliveryLists extends Component {
       loadSingleView: true,
       order: selectedDeliver
     })
-    
   }
 
   resertToFalse = arrayToReset => {
@@ -73,7 +72,7 @@ export default class ShoppingDeliveryLists extends Component {
 
     this.resertToFalse(markerToHighlight)
     this.resertToFalse(orderToHightLight)
-    this.setState({loadSingleView: false})
+    this.setState({ loadSingleView: false })
   }
 
   render(){
@@ -95,7 +94,16 @@ export default class ShoppingDeliveryLists extends Component {
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} ordername={this.state.order.ordername} createdate={this.state.order.createdate}/>
+        <AcceptSingleDelivery 
+          goback={()=>{this.goback()}}
+          deliverAdress={this.state.order.orderer}
+          orderer={this.state.order.orderer}
+          deliveringTime={this.state.order.deliveringTime}
+          items={this.state.order.items}
+          notes={this.state.order.notes}
+          ordername={this.state.order.ordername}
+          createdate={this.state.order.createdate}
+        />
         )
     }
 
@@ -103,7 +111,6 @@ export default class ShoppingDeliveryLists extends Component {
       <React.Fragment>
         {whatToRender}
       </React.Fragment>
-      )
+    )
   }
-
 }

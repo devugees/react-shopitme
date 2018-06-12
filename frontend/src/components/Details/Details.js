@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Grid, Input, InputLabel, FormControl } from '@material-ui/core';
-import './Details.css';
 import fakeStore from '../../fakeStore';
 
 const date = new Date();
@@ -81,6 +80,11 @@ export default class Details extends Component {
   }
     
   render() {
+    const styles = {
+      details:{
+        paddingTop: '1rem'
+      }
+    }
     let whatToRender = (
       <p>
       {this.state.street}.{this.state.number}<br/>
@@ -103,7 +107,7 @@ export default class Details extends Component {
     }
   
     return (
-    <div className="details">
+    <div style={styles.details}>
       <Paper>
         <Grid container spacing={24}>
           <Grid  item xs={12}>

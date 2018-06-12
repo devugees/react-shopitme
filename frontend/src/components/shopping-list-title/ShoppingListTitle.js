@@ -28,14 +28,11 @@ export default class ShoppingListTitle extends Component {
     }
   }
 
-
-  
   editingButton = () => {
     if (listName === ''){
       this.setState({listName : 'Order'})
     }
     this.setState(prevState => { return {editing: !prevState.editing}});
-
   }
 
   editText = event => {
@@ -92,7 +89,6 @@ export default class ShoppingListTitle extends Component {
     }
 
     return (
-
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
@@ -100,6 +96,6 @@ export default class ShoppingListTitle extends Component {
           <p>Shopper: {shopper}</p>
         </Paper>
       </div>
-      )
+    )
   }
 };

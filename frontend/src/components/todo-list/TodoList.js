@@ -93,28 +93,61 @@ export default class TodoList extends Component {
   }
 
   render() {
-  let changingTodo;
-  let whatToShow;
-  if(!this.state.items) {
-    console.log('empty')
-  } else {
-    if(this.state.shopperPerson || this.state.checkingPerson){
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxShopper index={index} shooper={this.state.shopperPerson} todo={item.todo} key={index} changeMe={item.status} productFound={()=>{this.productFound(index)}} productNotFound={()=>{this.productNotFound(index)}} backToDo={()=>{this.backToDo(index)}}/>))
+    let changingTodo;
+    let whatToShow;
+    if(!this.state.items) {
+      console.log('empty')
+    } else {
+      if(this.state.shopperPerson || this.state.checkingPerson){
+        changingTodo = (this.state.items.map((item, index) => (
+          <TodoBoxShopper
+            index={index}
+            shooper={this.state.shopperPerson}
+            todo={item.todo}
+            key={index}
+            changeMe={item.status}
+            productFound={()=>{this.productFound(index)}}
+            productNotFound={()=>{this.productNotFound(index)}}
+            backToDo={()=>{this.backToDo(index)}}
+          />
+          )
+        ))
+      }
     }
-  }
     if(this.state.orderPerson){
       const editTodoLng = this.state.editTodo.length
       whatToShow = (
         <React.Fragment>
           <FormControl className="todo-list-form">
             <InputLabel htmlFor="name-input">Add Item</InputLabel>
-            <Input className="todo-list-input" id="name-input" onChange={this.changeText} value={this.state.todo}/>
+            <Input
+              className="todo-list-input"
+              id="name-input"
+              onChange={this.changeText}
+              value={this.state.todo}/>
           </FormControl>
-          <Button className="todo-list-button" variant="raised" disabled={this.state.disabled} onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
+          <Button
+            className="todo-list-button"
+            variant="raised"
+            disabled={this.state.disabled}
+            onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
           </Button>
-        </React.Fragment>)
-
-      changingTodo = (this.state.items.map((item, index) => <TodoBoxOrdered index={index} todo={item.todo} key={index} changeMe={item.status} editToDo={editTodoLng > 0 ? null : ()=>{this.editToDo(index)}} finishEditToDo={()=>{this.finishEditToDo(index)}} removeToDo={()=>{this.removeToDo(index)}} editText={this.editText} todoState={this.state.editTodo} checking={this.state.checkingPerson}/>))
+        </React.Fragment>
+      )
+      changingTodo = (this.state.items.map((item, index) => (
+        <TodoBoxOrdered
+          index={index}
+          todo={item.todo}
+          key={index}
+          changeMe={item.status}
+          editToDo={editTodoLng > 0 ? null : ()=>{this.editToDo(index)}}
+          finishEditToDo={()=>{this.finishEditToDo(index)}}
+          removeToDo={()=>{this.removeToDo(index)}}
+          editText={this.editText}
+          todoState={this.state.editTodo}
+          checking={this.state.checkingPerson}
+        />
+      )))
     }
     return (
       <div className="todo-list">

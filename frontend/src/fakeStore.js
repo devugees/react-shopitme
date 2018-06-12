@@ -234,6 +234,8 @@ let fakeStore = {
     status:'box',
     todo:"Test Item, you can EDIT or DELETE it"
   }],
+  notes:'Here you can write notes',
+  // END prefixed data for the user
   orderHistory:
     [{
       orderID: 15675,
@@ -476,14 +478,12 @@ let fakeStore = {
         ],
       notes:'Here Agent Smith can write notes',
     }],
-  notes:'Here you can write notes',
   deliverAdress:{
     street: 'New Straße',
     number: '1',
     postcode: '13075',
     city: 'Berlin'
   },
-
 }
 
 export default fakeStore
@@ -492,5 +492,5 @@ export const Store = React.createContext({
   store: fakeStore,
   updateUserData: data => {fakeStore.userInfo = data; console.log(fakeStore)},
   updateOrderData: data => {fakeStore.orderInfo = data; console.log(fakeStore)},
-  updateUserPicture: data => {fakeStore.userInfo.profileImgPath = data}
+  updateUserPicture: data => {fakeStore.userInfo.profileImgPath = data; console.log(fakeStore)}
 });

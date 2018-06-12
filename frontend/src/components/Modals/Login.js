@@ -9,8 +9,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Facebook from './svg/facebook.svg';
 import Google from './svg/google.svg';
 
-import './Modals.css';
-
 const styles = theme => ({
   modalStyle: {
     top: '50%',
@@ -64,7 +62,7 @@ class Login extends React.Component {
     open: false,
     password: '',
     showPassword: false,
-  };
+  }
 
   UNSAFE_componentWillReceiveProps(e){
     this.setState({ open: e.openLogin});
@@ -72,7 +70,7 @@ class Login extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
-  };
+  }
 
   handleForget = (props, e) => {
     this.setState({ open: false });
@@ -81,15 +79,15 @@ class Login extends React.Component {
   // input handels
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
-  };
+  }
 
   handleMouseDownPassword = event => {
     event.preventDefault();
-  };
+  }
 
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
-  };
+  }
   
 
   render() {
