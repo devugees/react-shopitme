@@ -15,7 +15,7 @@ const styles = {
   }, 
   chip:{ 
     margin: '0 0 0 1rem', 
-    color:'red' 
+    backgroundColor:'transparent' 
   } 
 }
 
@@ -38,7 +38,7 @@ export default class DropMenu extends React.Component {
       <React.Fragment>
         <Chip 
           avatar={<Avatar>MB</Avatar>} 
-          label={this.props.userName} 
+          label={this.props.userName.toUpperCase()} 
           onClick={this.handleClick} 
           aria-owns={anchorEl ? 'fade-menu' : null} 
           aria-haspopup="true" 
