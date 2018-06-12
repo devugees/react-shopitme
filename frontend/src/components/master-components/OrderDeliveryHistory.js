@@ -32,7 +32,12 @@ export default class OrderDeliveryHistory extends Component {
     ]).then(([res1, res2]) => Promise.all([
       res1.json(),
       res2.json()
-    ])).then(([order, deliver]) => this.setState({orderHistory: order, deliverHistory: deliver, isLoading: false}))
+    ])).then(([order, deliver]) => { 
+    console.log('order',order)
+    console.log('deliver',deliver)
+    this.setState({orderHistory: order, deliverHistory: deliver, isLoading: false})
+    })
+    
   }
 
   render() {
@@ -47,7 +52,7 @@ export default class OrderDeliveryHistory extends Component {
         <RatingStars rating='4'/>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
-          DeliverHistory={this.state.DeliverHistory}/>
+          DeliverHistory={this.state.deliverHistory}/>
       </div>
     )
   }

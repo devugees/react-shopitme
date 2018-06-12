@@ -116,14 +116,12 @@ export default class OrderDeliveryHistory extends Component {
         whatToRender = (
           <div className="order-delivery-history">
             {this
-              .props
-              .deliverHistory
-              .map((deliverHistory, index) => <DeliverHistory
-                key={index}
-                deliverHistory={deliverHistory}
-                deliverMoreInfo={() => {
-                this.deliverMoreInfo(index)
-              }}/>)}
+            .props
+            .DeliverHistory
+            .map((deliverHistory, index) => <DeliverHistory
+            key={index}
+            deliverHistory={deliverHistory} 
+            deliverMoreInfo={() => { this.deliverMoreInfo(index) }}/>)}
           </div>
         )
         break;

@@ -42,6 +42,7 @@ const orderHistory = (props) => {
 
   let deliverDate;
   switch (props.orderHistory.status) {
+    default:
     case('Pending'):
       deliverDate = (
         <p className={classes.p}>Published: {props.orderHistory.createdate}</p>
@@ -52,11 +53,11 @@ const orderHistory = (props) => {
         <p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>
       )
       break;
-    default:
+    /* default:
       deliverDate = (
         <p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>
       )
-      break;
+      break; */
   }
 
   return (
