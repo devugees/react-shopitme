@@ -26,7 +26,7 @@ const styles = {
     fontSize:'1.8rem',
     verticalAlign:"middle",
     margin:".3rem"
-  }
+  },
 };
 
 export default class NavBar extends React.Component {
@@ -143,24 +143,24 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    return (
-      <div className="navbar">
-        <div>
-        <AppBar position="static" >
-          <Toolbar>
-            <Grid item xs={2} sm={2} >     
-              <div >
-                <Link to="/">ShopItMe</Link>
-              </div>
-            </Grid>
-            {this.state.login ?
-              (<React.Fragment >
-                  <Grid item xs={4} sm={4} >
+  return (
+    <div className="navbar">
+      <div>
+      <AppBar position="static" >
+        <Toolbar>
+          <Grid item xs={2} sm={2} >     
+            <div >
+              <Link to="/">ShopItMe</Link>
+            </div>
+          </Grid>
+          {this.state.login ?
+              ( <React.Fragment >
+                  <Grid item xs={4} >
                     <div></div>
                   </Grid>
-                  <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} className="material-icons">notifications</i>
-                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
+                  <Grid item sm={6} >
+                    <i style={styles.notifications} className="material-icons">notifications</i>
+                    <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
