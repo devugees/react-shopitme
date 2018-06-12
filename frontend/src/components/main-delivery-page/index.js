@@ -13,7 +13,7 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
-    // becareful with the store without orderer, delet it from DB
+    // becareful with the store without orderer, delete it from DB
     this.props.store.map(data => {
       return(
         this.setState( prevState => {return {
@@ -31,7 +31,6 @@ export default class ShoppingDeliveryLists extends Component {
       loadSingleView: true,
       order: selectedDeliver
     })
-    
   }
 
   resertToFalse = arrayToReset => {
@@ -73,7 +72,7 @@ export default class ShoppingDeliveryLists extends Component {
 
     this.resertToFalse(markerToHighlight)
     this.resertToFalse(orderToHightLight)
-    this.setState({loadSingleView: false})
+    this.setState({ loadSingleView: false })
   }
 
   render(){
@@ -109,7 +108,6 @@ export default class ShoppingDeliveryLists extends Component {
       <React.Fragment>
         {whatToRender}
       </React.Fragment>
-      )
+    )
   }
-
 }

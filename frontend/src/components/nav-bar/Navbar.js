@@ -26,9 +26,8 @@ const styles = {
     fontSize:'1.8rem',
     verticalAlign:"middle",
     margin:".3rem"
-  }
+  },
 };
-
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -37,10 +36,13 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: false,
       openForgotpass :false,
-      error: null
+      error: null,
+      coords: {
+        latitude: '',
+        longitude: ''
+      }
     }
   }
-
 
   LoginClickHandler = (e,params) => {
     e.preventDefault();
@@ -87,7 +89,6 @@ export default class NavBar extends React.Component {
       login: false,
       openLogin: true,
       openForgotpass :false
-
     })
   }
 
@@ -125,14 +126,14 @@ export default class NavBar extends React.Component {
   }
 
   componentDidUpdate(){
+    if (this.state.coords.latitude.length > 2){
+      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
+    } 
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
       const coords = {latitude:52.5237823, longitude:13.486222}
       localStorage.setItem('geoPos', JSON.stringify(coords))
     }
-    else {
-      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    }  
   }
 
   componentWillUnmount() {
@@ -150,20 +151,19 @@ export default class NavBar extends React.Component {
               <Link to="/">ShopItMe</Link>
             </div>
           </Grid>
-
           {this.state.login ?
               ( <React.Fragment >
-                  <Grid item xs={4} sm={4} >
+                  <Grid item xs={4} >
                     <div></div>
                   </Grid>
-                  <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} className="material-icons">notifications</i>
-                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
+                  <Grid item sm={6} >
+                    <i style={styles.notifications} className="material-icons">notifications</i>
+                    <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
                   
                   </Grid>
-                </React.Fragment>
-               ):
+              </React.Fragment>
+              ):
               (<React.Fragment>
                 <Grid item xs={7} sm={7} >
                   <div>
@@ -171,23 +171,31 @@ export default class NavBar extends React.Component {
                   </div>
                 </Grid> 
                 <Grid item xs={3} sm={3} >
-                  <Button color="inherit"
-                          onClick={(e) => this.setState({
+                  <Button
+                    color="inherit"
+                    onClick={(e) => this.setState({
                             openLogin: true,
-                            openForgotpass :false})}>Login</Button>
+                            openForgotpass :false})}
+                  >
+                    Login
+                  </Button>
                 </Grid> 
-              </React.Fragment>) }
-        </Toolbar>
-      </AppBar>
-      <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
-        openForgotpassword={this.popupForgot}
-        loginclick={this.LoginClickHandler}
-        error={this.state.error}
-      /> 
-      <ResetPassword ref={(ref) => this.resetpass = ref} openForgotpass={this.state.openForgotpass}
-        openLog={this.popupLogin}
-      />
+              </React.Fragment>)
+            }
+          </Toolbar>
+        </AppBar>
+        <Login ref={(ref) => this.login = ref} openLogin={this.state.openLogin}
+          openForgotpassword={this.popupForgot}
+          loginclick={this.LoginClickHandler}
+          error={this.state.error}
+        /> 
+        <ResetPassword
+          ref={(ref) => this.resetpass = ref}
+          openForgotpass={this.state.openForgotpass} 
+          openLog={this.popupLogin}
+        />
+      </div>
     </div>
-  </div>
-  );
-} }
+    );
+  } 
+}
