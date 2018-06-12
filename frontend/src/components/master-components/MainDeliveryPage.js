@@ -31,7 +31,7 @@ export default class MainDeliveryPage extends Component {
   )
     }
       return (
-       <DeliveryList store={this.state.data} hideMyOrders={true}/>
+       <DeliveryList store={this.state.data} MainDeliveryPagemode={true}/>
       )
   }
 }

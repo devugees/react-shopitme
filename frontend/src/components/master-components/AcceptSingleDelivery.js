@@ -18,7 +18,7 @@ export default class AcceptSingleDelivery extends Component {
     }
   }
 
-  AcceptDeliveryHandelr = () => {
+  AcceptDeliveryHandler = () => {
     authCrudAPI('PUT','/user/AcceptShoppingList', this.state.order)
       .then(data => {
         if(!data.error){
@@ -52,7 +52,7 @@ export default class AcceptSingleDelivery extends Component {
         <Notes notes={this.props.notes}/>
         <Map markers={[this.props.orderer.coords]}/>
         <Button onClick={this.props.goback} style={style} variant="raised" color="secondary">Cancel</Button>
-        <Button style={style} onClick={this.AcceptDeliveryHandelr} variant="raised" color="primary">
+        <Button style={style} onClick={this.AcceptDeliveryHandler} variant="raised" color="primary">
         Accept
         </Button>
         <ConfirmationMessage

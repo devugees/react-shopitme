@@ -90,9 +90,7 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
 
 router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-   console.log('heyyyyyyy')
   Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id}, (err, order) => {
-    console.log('lololololo',order)
       if(err){
         if (err.message) { // some info is required but not sent
           res.json({'err': err.message});
