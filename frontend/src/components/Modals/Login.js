@@ -67,7 +67,7 @@ class Login extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false }),() => {this.props.dataReceive(this.state.open)};
+    this.setState({ open: false } ,() => {this.props.dataReceive(false)});
   }
 
   handleForget = (props, e) => {
