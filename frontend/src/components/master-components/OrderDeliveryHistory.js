@@ -45,6 +45,7 @@ export default class OrderDeliveryHistory extends Component {
       return (<CircularProgress style={{
         color: purple[500]
       }} thickness={7}/>)
+    }
 
     return (
       <div className="createShoppingList main">
@@ -56,5 +57,4 @@ export default class OrderDeliveryHistory extends Component {
       </div>
     )
   }
-}
 }
