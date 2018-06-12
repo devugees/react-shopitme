@@ -5,13 +5,12 @@ import {Paper, Grid} from '@material-ui/core';
 export default class RatingStars extends React.Component {
   constructor(props) {
     super();
-
     this.state = {
       rating: props.rating
     };
   }
-
-  onStarClick(nextValue, prevValue, name) {
+ 
+  onStarClick = (nextValue, prevValue, name) => {
     this.setState({rating: nextValue});
   }
 

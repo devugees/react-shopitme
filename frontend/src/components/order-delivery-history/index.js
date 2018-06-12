@@ -21,27 +21,57 @@ export default class OrderDeliveryHistory extends Component {
 
   orderMoreInfo = index => {
     const order = [...this.props.orderHistory];
-    const selectedOrder = order[index];
-    if (selectedOrder.status === 'Pending') {
-      this.setState({singleDeliver: false, singleOrder: false, EditOrder: true, view: 'canceled', order: selectedOrder})
+    const selectedOrder= order[index];
+    if(selectedOrder.status === 'Pending') {
+      this.setState({
+        singleDeliver: false,
+        singleOrder: false,
+        EditOrder: true,
+        view: 'canceled',
+        order: selectedOrder
+      })
     } else {
-      this.setState({singleDeliver: false, singleOrder: true, EditOrder: false, view: 'canceled', order: selectedOrder})
+      this.setState({
+        singleDeliver: false,
+        singleOrder: true,
+        EditOrder: false,
+        view: 'canceled',
+        order: selectedOrder
+      })
     }
   }
 
   deliverMoreInfo = index => {
     const deliver = [...this.props.deliverHistory];
-    const selectedDeliver = deliver[index];
+    const selectedDeliver= deliver[index];
     console.log(selectedDeliver)
-    this.setState({singleDeliver: true, singleOrder: false, EditOrder: false, view: 'canceled', order: selectedDeliver})
+    this.setState({
+      singleDeliver: true,
+      singleOrder: false,
+      EditOrder: false,
+      view: 'canceled',
+      order: selectedDeliver
+    })
   }
 
-  changeToOrder = () => {
-    this.setState({view: true, singleOrder: false, singleDeliver: false, EditOrder: false, order: null})
+  changeToOrder = () =>{
+    this.setState({
+      view: true,
+      singleOrder: false,
+      singleDeliver: false,
+      EditOrder: false,
+      order:null
+    })
   }
 
-  changeToDeliver = () => {
-    this.setState({view: false, singleDeliver: false, singleOrder: false, EditOrder: false, order: null})
+  changeToDeliver = () =>{
+    this.setState({
+      view: false,
+      singleDeliver: false,
+      singleOrder: false,
+      EditOrder: false,
+      order:null
+    })
   }
 
   render() {

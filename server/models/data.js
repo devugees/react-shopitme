@@ -40,7 +40,6 @@ const OrdersSchema = mongoose.Schema({
 })
 
 OrdersSchema.post('save', (err, doc, next) => {
-  console.log(err)
   if (err.code === 11000) {
     next({"error": "the items already excest."});
   } else {

@@ -58,6 +58,20 @@ const orderHistory = (props) => {
       )
       break;
   }
+
+  let deliverDate;
+  switch(props.orderHistory.status)
+    {
+      case ('Pending'):
+        deliverDate = (<p className={classes.p}>Published: {props.orderHistory.created}</p>)
+        break;
+      case ('In Progress'):
+        deliverDate = (<p className={classes.p}>Accepted: {props.orderHistory.accepted}</p>)
+        break;
+      default:
+        deliverDate = (<p className={classes.p}>Delivered: {props.orderHistory.delivered.date}</p>)
+        break;
+    }
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
