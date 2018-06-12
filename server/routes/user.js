@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
+//const Accept = require('../models/accept');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
@@ -84,6 +85,23 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
           }
         })
     }
+  });
+});
+
+router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}),
+ (req, res, next) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id}, (err, order) => {
+      if(err){
+        if (err.message) { // some info is required but not sent
+          res.json({'err': err.message});
+        } 
+        if (err.err) { // some info already exist in DB and needs to be unique
+          res.json({'err': err.err});
+        }
+      } 
+      if(order) {
+        res.json({'message': `${order.ordername} has been accepted`});
+      }
   });
 });
 
