@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
@@ -12,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { crudAPI } from '../../helpers/helpers'
+import { crudAPI } from '../../helpers/helpers';
 
 const styles = theme => ({
   root: {
@@ -37,7 +36,7 @@ class NewPassword extends React.Component {
     password2: '',
     showPassword: false,
     resultMessage: '',
-    inputActive:false,
+    inputActive:true,
     buttonActive:true,
   }
 
@@ -78,11 +77,11 @@ class NewPassword extends React.Component {
     let token = window.location.href.slice(-40);
     fetch(`http://localhost:4000/checktoken/${token}`)
     .then( response => {
-      console.log(response);
-      /* this.setState({
-        inputActive: response.ok,
+
+      this.setState({
+        inputActive: !response.ok,
         buttonActive: true
-      }) */
+      })
     })
     .catch(error => {
       console.log(error);
@@ -94,12 +93,13 @@ class NewPassword extends React.Component {
       this.setState({
         resultMessage: 'The password didn\'t match in both fields please ckeck it'
       })
-    } else {
+    }
+     else {
       let token = window.location.href.slice(-40);
-      crudAPI('POST','http://localhost:4000/forgot',{ password: this.state.password2 })
+    
+      crudAPI('POST',`http://localhost:4000/reset/${token}`,{  password: this.state.password2 })
       .then( response => {
-        console.log(response);
-        if (response.message === 'done') {
+       if (response.message === 'done') {
           this.setState({
             resultMessage: 'Your Password has been changed successfully you can login now',
             counter: 5

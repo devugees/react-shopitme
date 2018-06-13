@@ -150,9 +150,9 @@ router.get('/checktoken/:token', function (req, res) {
       }
     }, function (err, user) {
       if (!user) {
-        return res.send({message:'true'});
+        return res.send('true');
       } else {
-        return res.send({message:'false'});
+        return res.send('false');
       }
     })
 })
@@ -200,7 +200,7 @@ router.post('/reset/:token', (req, res) => {
       ShopItME Team © 2018.
         `;
       mailnotifier(user.email, `Password Changed Notification`, mailtext);
-      return res.send({ message:'done'})
+      return res.send({message:'done'})
     }
   ], err => {
     res.redirect('/');

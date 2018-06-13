@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import { Input, InputLabel, FormControl, Modal, Button } from '@material-ui/core';
 import { crudAPI } from '../../helpers/helpers'
