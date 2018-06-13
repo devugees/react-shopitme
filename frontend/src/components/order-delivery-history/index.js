@@ -117,7 +117,7 @@ export default class OrderDeliveryHistory extends Component {
           <div className="order-delivery-history">
             {this
             .props
-            .DeliverHistory
+            .deliverHistory
             .map((deliverHistory, index) => <DeliverHistory
             key={index}
             deliverHistory={deliverHistory} 

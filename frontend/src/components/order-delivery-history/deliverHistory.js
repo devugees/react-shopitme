@@ -44,7 +44,7 @@ const deliverHistory = props => {
       case ('In Progress'):
         deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
         break;
-     /*  default:
+       /* case ('Delivered'):
         deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
         break; */
     }
