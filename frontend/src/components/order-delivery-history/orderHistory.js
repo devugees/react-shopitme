@@ -15,8 +15,7 @@ const styles = theme => ({
   },
   button: {
     margin: '0',
-    position: 'relative',
-    top: '-14px'
+    position: 'relative'
   },
   buttonDiv: {
     width: '18%',
