@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { Paper, TextField, Grid, Input, InputLabel, FormControl } from '@material-ui/core';
 import fakeStore from '../../fakeStore';
+import { year, timeHours, timeMin, zeroMonth, zeroDay } from '../../helpers/helpers';
 
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth()+1;
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9) ? (month) : ('0' + month);
-const zeroDay = (day > 9) ? (day) : ('0' + day);
 
 export default class Details extends Component {
 

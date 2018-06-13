@@ -8,25 +8,8 @@ import Sure from '../Modals/Sure';
 import ConfirmationMessage from '../confirmation-message';
 //import fake store
 import fakeStore from '../../fakeStore';
-import {authCrudAPI} from '../../helpers/helpers'
+import {authCrudAPI, createdate } from '../../helpers/helpers';
 
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth()+1;
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9)
-  ? (month)
-  : ('0' + month);
-const zeroMin = (timeMin > 9)
-  ? (timeMin)
-  : ('0' + timeMin);
-const zeroDay = (day > 9)
-  ? (day)
-  : ('0' + day);
-
-const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
 
 export default class CreateShoppingList extends Component {
   constructor(props) {
