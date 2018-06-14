@@ -34,7 +34,7 @@ export default class SingleOrderHistory extends Component {
         case (this.props.order.status = 'Delivered'):
           orderStatus = (
             <React.Fragment>
-              <p>Delivered: {this.props.order.delivered.date} at {this.props.order.delivered.time}</p>
+              <p>Delivered: {this.props.order.delivered} at {this.props.order.delivered}</p>
               <p>by <Link to="#">{this.props.order.deliverBy}</Link></p>
             </React.Fragment>
             )

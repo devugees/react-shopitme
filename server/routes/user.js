@@ -116,9 +116,7 @@ router.put('/updateshoppinglist/:id', passport.authenticate('jwt', { session: fa
     status: "Pending"
   }
 
-  
-
-    Data.findByIdAndUpdate(id, newOrder, {
+  Data.findByIdAndUpdate(id, newOrder, {
     new: true
   }, (error, order) => { // if user is updated send back a success message
     if (error) {
@@ -133,7 +131,7 @@ router.delete('/deleteshoppinglist/:id', (req, res, next) => {
   const id = req.params.id;
   Data.findByIdAndRemove(id, (err, data) => {
     if(err) {
-      throw err
+      res.json({error: "Error deleting order."})
     } else {
       res.send({message: "Order successfully deleted."})
     }
