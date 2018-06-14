@@ -11,6 +11,9 @@ const styles = {
     position:"absolute",
     top:"2.3rem",
     color:'black'
+  },
+  link:{
+    outline: 0
   }
 }
 
@@ -29,6 +32,7 @@ export default class DropMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
+  
     return (
       <React.Fragment>
         <Button style={styles.button}
@@ -45,15 +49,21 @@ export default class DropMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
+        <Link to="/orderdeliveryhistory" style={styles.link}>
           <MenuItem onClick={this.handleClose}>
-            <Link to="/orderdeliveryhistory">History</Link>
+          History
           </MenuItem>
+          </Link>
+          <Link to="/userdetails">
           <MenuItem onClick={this.handleClose}>
-            <Link to="/userdetails">Your Profile</Link>
+            Your Profile
           </MenuItem>
+          </Link>
+          <Link to="/">
           <MenuItem onClick={this.props.logOut}>
-            <Link to="/">Logout</Link>
+           Logout
           </MenuItem>
+          </Link>
         </Menu>
       </React.Fragment>
     );
