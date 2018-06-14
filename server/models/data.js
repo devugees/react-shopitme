@@ -24,24 +24,24 @@ const OrdersSchema = mongoose.Schema({
     type: String,
     required: false
   },
-    ordername:{
-      type:String
-    },
-    createdate:{
-      type:String
-    },
-    status: {
-      type:String
-    },
-    orderer : {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    shopper : {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  })
+  ordername:{
+    type:String
+  },
+  createdate:{
+    type:String
+  },
+  status: {
+    type:String
+  },
+  orderer : {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  shopper : {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
  
 OrdersSchema.post('save', (err, doc, next) => {
   if (err.code === 11000) {

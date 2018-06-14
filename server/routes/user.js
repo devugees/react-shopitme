@@ -65,7 +65,7 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
       end: order.deliveringTime.end
     },
     notes: order.notes,
-    ordername: order.orderName,
+    ordername: order.ordername,
     createdate: order.createdate,
     orderer: req.user._id,
     status: "Pending"

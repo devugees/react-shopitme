@@ -37,7 +37,12 @@ export default class Details extends Component {
         number: this.state.number,
         postcode: this.state.postcode,
         city: this.state.city
-      }
+      },
+    /*  deliveringTime: {
+        start:`${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`,
+        end: `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`
+      } */
+
     })
   }
 
@@ -63,12 +68,16 @@ export default class Details extends Component {
   }
 
   handlerChangeStartTime = event => {
-    this.setState({deliveringTime: { start:event.target.value}});
+    let deliveringTime = this.state.deliveringTime
+    deliveringTime.start = event.target.value
+    this.setState({deliveringTime});
     this.props.grabDataStartDelivering(event.target.value)
   }
 
   handlerChangeEndTime = event => {
-    this.setState({deliveringTime:{end:event.target.value} });
+    let deliveringTime = this.state.deliveringTime
+    deliveringTime.end = event.target.value
+    this.setState({deliveringTime});
     this.props.grabDataEndDelivering(event.target.value)
   }
     
@@ -108,7 +117,7 @@ export default class Details extends Component {
              <TextField
               type="datetime-local"
               onChange={this.handlerChangeStartTime}
-              defaultValue={this.state.deliveringTime.start || `${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`}
+              value={this.state.deliveringTime.start}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -119,7 +128,7 @@ export default class Details extends Component {
             <TextField
               onChange={this.handlerChangeEndTime}
               type="datetime-local"
-              defaultValue={this.state.deliveringTime.end || `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`}
+              value={this.state.deliveringTime.end}
               InputLabelProps={{
                 shrink: true,
             }}

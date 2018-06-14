@@ -194,10 +194,10 @@ export default class CreateShoppingList extends Component {
           dataReceive={this.grabDataDetails}
           start={this.props.editing
           ? this.props.editOrder.deliveringTime.start
-          : ''}
+          : this.state.order.deliveringTime.start}
           end={this.props.editing
           ? this.props.editOrder.deliveringTime.end
-          : ''}
+          : this.state.order.deliveringTime.end}
           shop={this.props.editing
           ? this.props.editOrder.shop
           : this.state.shop}
