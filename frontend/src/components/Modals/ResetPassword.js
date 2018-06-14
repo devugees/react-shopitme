@@ -33,7 +33,7 @@ const styles = theme => ({
     margin: '10px'
   },
   error: {
-    color: 'crimson',
+    color: '#54b9b6',
     margin: '1rem auto',
     textAlign:'center'
   }
