@@ -20,6 +20,20 @@ const OrdersSchema = mongoose.Schema({
       required: false
     }
   },
+  deliverAdress:{
+    street:{
+      type:String
+    },
+    number:{
+      type:String
+    },
+    postcode:{
+      type:String
+    },
+    city:{
+      type:String
+    }
+  },
   notes: {
     type: String,
     required: false

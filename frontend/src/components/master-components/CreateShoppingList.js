@@ -8,7 +8,7 @@ import Sure from '../Modals/Sure';
 import ConfirmationMessage from '../confirmation-message';
 //import fake store
 import fakeStore from '../../fakeStore';
-import {authCrudAPI, createdate } from '../../helpers/helpers';
+import {authCrudAPI, createdate, year, timeHours, timeMin, zeroMonth, zeroDay } from '../../helpers/helpers';
 
 
 export default class CreateShoppingList extends Component {
@@ -22,6 +22,9 @@ export default class CreateShoppingList extends Component {
       importData ={...fakeStore.userInfo}
     }
 
+    console.log(fakeStore)
+
+
     this.state = {
       userInfo: importData,
       openSureModal:false,
@@ -29,8 +32,8 @@ export default class CreateShoppingList extends Component {
       dataToConfirmationMessage:'',
       order: {
         deliveringTime: {
-          start: '',
-          end: ''
+          start: `${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`,
+          end: `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`
         },
         items: fakeStore.items,
         shop: '',
@@ -38,13 +41,11 @@ export default class CreateShoppingList extends Component {
         createdate: createdate,
         ordername: 'Order Name',
         orderID: 'xxx',
-        orderer:{
-          location:{
-            street:importData.location.street,
-            number: importData.location.number,
-            postcode: importData.location.postcode,
-            city: importData.location.city
-          }
+        deliverAdress:{
+          street:importData.location.street,
+          number: importData.location.number,
+          postcode: importData.location.postcode,
+          city: importData.location.city
         }
       }
     }
@@ -56,6 +57,11 @@ export default class CreateShoppingList extends Component {
       order.ordername = this.props.editOrder.ordername
       order.orderID = this.props.editOrder.orderID
       order.createdate = this.props.editOrder.createdate
+      order.deliveringTime = this.props.editOrder.deliveringTime
+      order.deliverAdress = this.props.editOrder.deliverAdress
+      order.items = this.props.editOrder.items
+      order.shop = this.props.editOrder.shop
+      order.notes = this.props.editOrder.notes
       console.log(order)
       this.setState({
         order
@@ -96,13 +102,11 @@ export default class CreateShoppingList extends Component {
       order: {
         ...this.state.order,
         shop,
-        orderer: {
-          location: {
-            street: details.street,
-            number: details.number,
-            postcode: details.postcode,
-            city: details.city
-          }
+        deliverAdress:{
+          street: details.street,
+          number: details.number,
+          postcode: details.postcode,
+          city: details.city
         }
       }
     })
@@ -181,38 +185,25 @@ export default class CreateShoppingList extends Component {
           listId={this.state.order.orderID}
           createdate={this.state.order.createdate}
           checkingPerson={false}
-        />
+          />
         <TodoList
           dataReceive={this.grabDataDoList}
           orderPerson={true}
-          items={this.props.editing
-          ? this.props.editOrder.items
-          : this.state.order.items}/>
+          items={this.state.order.items}
+          />
         <Details
           grabDataStartDelivering={this.grabDataStartDelivering}
           grabDataEndDelivering={this.grabDataEndDelivering}
           dataReceive={this.grabDataDetails}
-          start={this.props.editing
-          ? this.props.editOrder.deliveringTime.start
-          : this.state.order.deliveringTime.start}
-          end={this.props.editing
-          ? this.props.editOrder.deliveringTime.end
-          : this.state.order.deliveringTime.end}
-          shop={this.props.editing
-          ? this.props.editOrder.shop
-          : this.state.shop}
-          deliverAdress={this.props.editing
-          ? {
-            ...this.props.editOrder.deliverAdress
-          }
-          : {
-            ...this.state.deliverAdress
-          }}/>
+          start={this.state.order.deliveringTime.start}
+          end={this.state.order.deliveringTime.end}
+          shop={this.state.order.shop}
+          deliverAdress={this.state.order.deliverAdress}
+          />
         <Notes
           dataReceive={this.grabDataNotes}
-          noteText={this.props.editing
-          ? this.props.editOrder.notes
-          : ''}/>
+          noteBody={this.state.order.notes}
+          />
         <Button
           style={style}
           variant="raised"
