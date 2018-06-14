@@ -53,7 +53,7 @@ export default class OrderDeliveryHistory extends Component {
         <RatingStars rating='4'/>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
-          DeliverHistory={this.state.deliverHistory}/>
+          deliverHistory={this.state.deliverHistory}/>
       </div>
     )
   }

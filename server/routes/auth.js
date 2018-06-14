@@ -110,7 +110,7 @@ router.post('/forgot', (req, res, next) => {
         email: req.body.email
       }, (err, user) => {
         if (!user) {
-          return res.send('No account with that email address exists.');
+          return res.json('No account with that email address exists.');
         }
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
@@ -125,14 +125,14 @@ router.post('/forgot', (req, res, next) => {
       You are receiving this message because you (or someone else) have requested reset password of your account.
       
       if you want to continue the process, please click on the following link or past it in your browser :
-      ${serverIPAdress}/reset/${token}
+      http://localhost:3000/reset/${token}
       Note: "this link is valid just for one hour".
       
       We which you a nice day.
       ShopItME Team © 2018.
         `;
       mailnotifier(user.email, `Password Reset`, mailtext);
-      return res.send('Please check your email, we have sent the reset form')
+      return res.json('Please check your email, we have sent the reset form')
     }
   ], err => {
     if (err) 
@@ -143,8 +143,7 @@ router.post('/forgot', (req, res, next) => {
 
 // check validation of the EMAIL Token link
 router.get('/checktoken/:token', function (req, res) {
-  User
-    .findOne({
+  User.findOne({
       resetPasswordToken: req.params.token,
       resetPasswordExpires: {
         $gt: Date.now()
@@ -169,7 +168,7 @@ router.post('/reset/:token', (req, res) => {
         }
       }, (err, user) => {
         if (!user) {
-          return res.send('Password reset link is invalid or has expired.');
+          return res.send({message:'Password reset link is invalid or has expired.'});
         }
 
         user.password = req.body.password;
@@ -201,7 +200,7 @@ router.post('/reset/:token', (req, res) => {
       ShopItME Team © 2018.
         `;
       mailnotifier(user.email, `Password Changed Notification`, mailtext);
-      return res.send('done')
+      return res.send({message:'done'})
     }
   ], err => {
     res.redirect('/');
