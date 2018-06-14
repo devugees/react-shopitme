@@ -28,6 +28,14 @@ export default class ShoppingListTitle extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let listName = props.listName
+    let listId = props.listId
+    let createdate = props.createdate
+    let checkingPerson = props.checkingPerson
+    return {listName ,listId ,createdate ,checkingPerson}
+  }
+
   editingButton = () => {
     if (listName === ''){
       this.setState({listName : 'Order'})

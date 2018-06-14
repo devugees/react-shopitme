@@ -49,6 +49,21 @@ router.get('/maindeliverylist/:userId', (req, res, next) => {
 
 });
 
+router.get('/generateorderid', (req ,res ,next) => {
+  Data
+    .find()
+    .exec((err, data) => {
+      if (err) {
+        res
+          .status(500)
+          .send({message: "Could not create id "});
+      } else {
+        console.log(data.length+1);
+        return res.send({orderID: data.length+1})
+      }
+    });
+})
+
 router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
   //console.log('req from createshoppinglist',req.user)
@@ -72,6 +87,7 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
     },
     notes: order.notes,
     ordername: order.ordername,
+    orderID: order.orderID,
     createdate: order.createdate,
     orderer: req.user._id,
     status: "Pending"
