@@ -76,10 +76,10 @@ class NewPassword extends React.Component {
   componentDidMount() {
     let token = window.location.href.slice(-40);
     fetch(`http://localhost:4000/checktoken/${token}`)
-    .then( response => {
-
+    .then( response => response.json())
+    .then( data => {
       this.setState({
-        inputActive: !response.ok,
+        inputActive: data,
         buttonActive: true
       })
     })
