@@ -108,6 +108,7 @@ export default class OrderDeliveryHistory extends Component {
                 orderHistory={orderHistory}
                 orderMoreInfo={() => {
                 this.orderMoreInfo(index)
+
               }}/>)}
           </div>
         )
@@ -154,7 +155,9 @@ export default class OrderDeliveryHistory extends Component {
             <AcceptedDelivery
               updateOrderData={data.updateOrderData}
               inProgress={true}
-              progressOrder={this.state.order}/>
+              progressOrder={this.state.order}
+              orderID = {this.state.order}
+              />
           )}
         </Store.Consumer>
       )

@@ -94,6 +94,7 @@ export default class Details extends Component {
     }
     let whatToRender = (
       <p>
+        <p className="deliveryAdress">Delivery Address</p>
       {this.state.deliverAdress.street}.{this.state.deliverAdress.number}<br/>
       {this.state.deliverAdress.postcode} {this.state.deliverAdress.city} 
       <span onClick={this.editing}>✎</span> 
@@ -101,9 +102,12 @@ export default class Details extends Component {
       )
     if(this.state.editing){
       whatToRender = (  
-       <p>
+        
+       <p >
+         <p className="deliveryAdress">Delivery Address</p>
           <FormControl className="todo-list-form">
-          <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
+            
+            <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
             <Input  className="location-input2"  onChange={this.editLocation('number')} placeholder={this.state.deliverAdress.number} />
             <Input  className="location-input3"  onChange={this.editLocation('postcode')} placeholder={this.state.deliverAdress.postcode} />
             <Input  className="location-input4"  onChange={this.editLocation('city')} placeholder={this.state.deliverAdress.city}/>

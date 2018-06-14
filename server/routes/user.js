@@ -67,10 +67,8 @@ router.get('/generateorderid', (req ,res ,next) => {
 router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
   //console.log('req from createshoppinglist',req.user)
-
-  const order = {
-    ...req.body
-  };
+  console.log('User', req.user, 'Body', req.body);
+  const order = { ...req.body };
 
   const newOrder = new Data({
     items: order.items,
@@ -91,8 +89,8 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
     createdate: order.createdate,
     orderer: req.user._id,
     status: "Pending"
-
   })
+
   newOrder.save((error, order) => {
     if (error) {
       if (error.message) { // some info is required but not sent
@@ -121,7 +119,46 @@ router.post('/createshoppinglist', passport.authenticate('jwt', { session: false
         })
     }
   });
-});
+}); // end Create Shopping List
+
+router.put('/updateshoppinglist/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+  const id = req.params.id;
+  const order = {...req.body}
+  const newOrder = {
+    items: order.items,
+    shop: order.shop,
+    deliveringTime: {
+      start: order.deliveringTime.start,
+      end: order.deliveringTime.end
+    },
+    notes: order.notes,
+    ordername: order.orderName,
+    createdate: order.createdate,
+    orderer: req.user._id,
+    status: "Pending"
+  }
+
+  Data.findByIdAndUpdate(id, newOrder, {
+    new: true
+  }, (error, order) => { // if user is updated send back a success message
+    if (error) {
+     res.json({error: "Error saving Order Data."})
+    } else {
+    res.send({message: "Order successfully updated.", body: order})
+    }
+  }) 
+}); // End Update Shopping List
+
+router.delete('/deleteshoppinglist/:id', (req, res, next) => {
+  const id = req.params.id;
+  Data.findByIdAndRemove(id, (err, data) => {
+    if(err) {
+      res.json({error: "Error deleting order."})
+    } else {
+      res.send({message: "Order successfully deleted."})
+    }
+  })
+})
 
 router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
@@ -139,6 +176,26 @@ router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}
       }
   });
 });
+
+
+
+router.put('/DeliveredShoppingList', passport.authenticate('jwt', { session: false}),
+ (req, res, next) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'Delivered', shopper: req.user._id}, (err, order) => {
+      if(err){
+        if (err.message) { // some info is required but not sent
+          res.json({'err': err.message});
+        } 
+        if (err.err) { // some info already exist in DB and needs to be unique
+          res.json({'err': err.err});
+        }
+      } 
+      if(order) {
+        res.json({'message': `${order.ordername} has been delivered`});
+      }
+  });
+});
+
 
 router.put('/changeuserdetails', (req, res) => {
   let newUser = {

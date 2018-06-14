@@ -83,12 +83,28 @@ export default class CreateShoppingList extends Component {
     }
   }
   
-  openCloseModal = () => {
-    this.setState(prevState => {
-      return {
-        openSureModal: !prevState.openSureModal
-      }
-    });
+  cancelDeleteHandler = () => {
+    console.log(this.props.editing)
+    if(this.props.editing) {
+      const id = this.props.editOrder._id;
+      authCrudAPI('DELETE', '/user/deleteshoppinglist/' + id)
+      .then(data => {
+        if(!data.error){
+          // if OK let a confirmation message popup
+          this.openConfirmationMessage(data.message)
+          // If successfull send data to the Store
+          // this.props.updateOrderData(this.state.order);
+        } else {
+          this.openConfirmationMessage(data.error)
+        }
+      })
+    } else {
+      this.setState(prevState => {
+        return {
+          openSureModal: !prevState.openSureModal
+        }
+      });
+    } 
   }
 
   sendback = () => {
@@ -160,23 +176,41 @@ export default class CreateShoppingList extends Component {
   }
 
   sendDataToServer = () => {
-    this
-      .props
-      .updateOrderData(this.state.order);
-    //Updating user Adress, waiting for the sabine fix with empty pass
-    /*const userInfo = {...this.state.userInfo}
-    userInfo.location = this.state.order.orderer.location
-    authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
-      .then(data => console.log(data))*/
-    authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+    // if this props is editing - select corresponding API Call
+    if(this.props.editing) {
+      // 1. Collect the Data of the Order and send it to the Store
+      // this.props.updateOrderData(this.state.order);
+      // 2. Send the Data to the Database
+      const id = this.props.editOrder._id;
+      const newOrder = this.state.order;
+      authCrudAPI('PUT', '/user/updateshoppinglist/' + id, newOrder)
       .then(data => {
         if(!data.error){
-          this.openConfirmationMessage(data.message)
+          // if OK let a confirmation message popup
+          this.openConfirmationMessage(data.message);
+          // If successfull send data to the Store
+          //this.props.updateOrderData(this.state.order);
         } else {
           this.openConfirmationMessage(data.error)
         }
       })
+    } else {
+    
+      // 1. Send the Data to the Database
+      // this.props.updateOrderData(this.state.order);
+
+      authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+        .then(data => {
+          if(!data.error){
+            // if OK let a confirmation message popup
+            this.openConfirmationMessage(data.message)
+            // If successfull send data to the Store
+          } else {
+            this.openConfirmationMessage(data.error)
+          }
+        })
       .catch(error => console.log(error));
+    } 
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
@@ -191,6 +225,7 @@ export default class CreateShoppingList extends Component {
     const style = {
       margin: '1rem 0.5rem 0 0.5rem'
     }
+
     return (
       <div className="createShoppingList main">
         <ShoppingListTitle
@@ -222,10 +257,11 @@ export default class CreateShoppingList extends Component {
           style={style}
           variant="raised"
           color="secondary"
-          onClick={this.openCloseModal}
+          onClick={this.cancelDeleteHandler}
         >
         {this.props.editing ? 'Delete' : 'Cancel'}
         </Button>
+
         <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
           {this.props.editing ? 'Update' : 'Create'}
         </Button>
