@@ -65,8 +65,6 @@ export default class OrderDeliveryHistory extends Component {
         order: selectedDeliver
       })
     }
-        console.log("selectedDeliver",selectedDeliver._id);
-
   }
 
   changeToOrder = () =>{
