@@ -10,3 +10,7 @@ ul li a {
 ul li a:hover {
   color: var(--secondary-bg);
 }
+
+.avatarImg img {
+  padding-top: 0;
+}

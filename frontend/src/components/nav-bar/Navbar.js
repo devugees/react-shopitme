@@ -24,9 +24,8 @@ const styles = {
   },
   notifications: {
     fontSize:'1.8rem',
-    verticalAlign:"middle",
     margin:".3rem"
-  },
+  }
 };
 
 export default class NavBar extends React.Component {
@@ -141,6 +140,7 @@ export default class NavBar extends React.Component {
   }
 
   render() {
+    console.log(this.state)
   return (
     <div className="navbar">
       <div>
@@ -159,8 +159,12 @@ export default class NavBar extends React.Component {
                   <Grid item sm={6} >
                     <i style={styles.notifications} className="material-icons">notifications</i>
                     <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
-                  
+                    <DropMenu
+                      style={styles.dropmenu}
+                      logOut={this.LogoutClickHandler}
+                      userName={this.state.data.firstname}
+                      userPict={this.state.data.profileImgPath}
+                    />
                   </Grid>
               </React.Fragment>
               ):
