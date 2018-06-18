@@ -47,6 +47,12 @@ const OrdersSchema = mongoose.Schema({
   createdate:{
     type:String
   },
+  accepted:{
+    type:String
+  },
+  delivered:{
+    type:String
+  },
   status: {
     type:String
   },

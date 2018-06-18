@@ -162,7 +162,7 @@ router.delete('/deleteshoppinglist/:id', (req, res, next) => {
 
 router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-  Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id}, (err, order) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id, accepted:req.body.accepted}, (err, order) => {
       if(err){
         if (err.message) { // some info is required but not sent
           res.json({'err': err.message});
@@ -181,7 +181,7 @@ router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}
 
 router.put('/DeliveredShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-  Data.findByIdAndUpdate(req.body.orderID,{status: 'Delivered', shopper: req.user._id}, (err, order) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'Delivered', shopper: req.user._id, delivered: req.body.delivered}, (err, order) => {
       if(err){
         if (err.message) { // some info is required but not sent
           res.json({'err': err.message});

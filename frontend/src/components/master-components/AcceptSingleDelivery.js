@@ -8,13 +8,15 @@ import ConfirmationMessage from '../confirmation-message';
 import Notes from '../Additional-Notes/Notes';
 import { authCrudAPI } from '../../helpers/helpers';
 import GoogleMap from '../map/Map';
+import { createdate } from '../../helpers/helpers'
 
 export default class AcceptSingleDelivery extends Component {
   state = {
     openConfirmationMessage: false,
     dataToConfirmationMessage:'',
     order: {
-      orderID : this.props.orderID
+      orderID : this.props.orderID,
+      accepted: createdate
     }
   }
 
