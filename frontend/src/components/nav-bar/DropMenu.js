@@ -38,7 +38,7 @@ export default class DropMenu extends React.Component {
         <Chip
           className="avatarchip" 
           avatar={this.props.userPict ?
-            <Avatar className="avatarImg" style={styles.avatar} src={`/${this.props.userPict}`}/>
+            <Avatar className="avatarImg" style={styles.avatar} src={this.props.userPict}/>
             :
             <Avatar className="avatarImg" style={styles.avatar} src={avatar}/>
           } 
