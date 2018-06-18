@@ -38,9 +38,9 @@ const { classes } = props;
     <div>
       <Paper className={props.highlight ? classes.highlight : classes.paper} elevation={4}>
         <div className={classes.textDiv} onClick={props.highlightMarker}>
-          <p className={classes.p}>#{props.order.orderer.listId}</p>
-          <p className={classes.p}>from {props.order.deliveringTime.start} till {props.order.deliveringTime.end}</p>
-          <p className={classes.p}>for {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
+          <p className={classes.p}>{props.order.ordername} <b>#</b> {props.order.orderID}</p>
+          <p className={classes.p}><b>From: </b> {props.order.deliveringTime.start.replace('T', ' ')} <b>Till: </b> {props.order.deliveringTime.end.replace('T', ' ')}</p>
+          <p className={classes.p}> <b>For: </b> {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
         </div>
         <div className={classes.buttonDiv}>
           <Button
