@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem, Fade, Button, Chip, Avatar } from '@material-ui/core'; 
-import Avatars from './Avatars';
+import avatar from '../../pictures/BoB.png';
 import './Navbar.css';
 
 const styles = {
@@ -37,7 +37,11 @@ export default class DropMenu extends React.Component {
       <React.Fragment>
         <Chip
           className="avatarchip" 
-          avatar={<Avatar className="avatarImg" style={styles.avatar} src={`/${this.props.userPict}`} />} 
+          avatar={this.props.userPict ?
+            <Avatar className="avatarImg" style={styles.avatar} src={`/${this.props.userPict}`}/>
+            :
+            <Avatar className="avatarImg" style={styles.avatar} src={avatar}/>
+          } 
           label={this.props.userName.toUpperCase()} 
           onClick={this.handleClick} 
           style={styles.chip} 
