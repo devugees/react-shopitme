@@ -31,8 +31,6 @@ export default class ImageCropper extends Component {
       let userInfoLS = JSON.parse(localStorage.getItem('userInfo'));
       userInfoLS.profileImgPath = url;
       localStorage.setItem('userInfo', JSON.stringify(userInfoLS));
-    
-      console.log()
       this.setState({
           imgSrc: url
       })
