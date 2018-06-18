@@ -140,6 +140,7 @@ export default class UserDetailsForm extends Component {
             id="gender"
             select
             label="Gender"
+            onChange={this.props.handleChange('gender')}
             value={userInfoLSParsed ? userInfoLSParsed.gender : this.props.userdetails.gender }
             SelectProps={{
                 native: true,

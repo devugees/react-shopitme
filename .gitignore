@@ -57,6 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# img uploads
+/uploads
 
 
 
@@ -65,3 +67,5 @@ frontend/src/dataBase\.js
 package-lock\.json
 
 *.json~Updated upstream
+
+frontend/yarn\.lock

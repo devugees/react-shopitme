@@ -3,39 +3,63 @@ const Schema = mongoose.Schema;
 // User Schema
 const OrdersSchema = mongoose.Schema({
   items: {
-     type:Array,
-     required: true 
+    type: Array,
+    required: true
   },
   shop: {
-    type:String,
-    required: false 
+    type: String,
+    required: false
   },
   deliveringTime: {
     start: {
-      type:String,
-      required:false
+      type: String,
+      required: false
     },
     end: {
-      type:String,
-      required:false
+      type: String,
+      required: false
     }
   },
-  notes:{
-    type:String,
-    required:false
+  deliverAdress:{
+    street:{
+      type:String
+    },
+    number:{
+      type:String
+    },
+    postcode:{
+      type:String
+    },
+    city:{
+      type:String
+    }
+  },
+  notes: {
+    type: String,
+    required: false
   },
   ordername:{
+    type:String
+  },
+  orderID:{
     type:String
   },
   createdate:{
     type:String
   },
+  status: {
+    type:String
+  },
   orderer : {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  shopper : {
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
 })
-
+ 
 OrdersSchema.post('save', (err, doc, next) => {
   if (err.code === 11000) {
     next({"error": "the items already excest."});

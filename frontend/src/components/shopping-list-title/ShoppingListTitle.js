@@ -2,26 +2,15 @@ import React, { Component } from 'react';
 import { Input, InputLabel, Paper, FormControl } from '@material-ui/core';
 
 let listName;
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth();
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9) ? (month) : ('0' + month);
-const zeroMin = (timeMin > 9) ? (timeMin) : ('0' + timeMin);
-const zeroDay = (day > 9) ? (day) : ('0' + day);
 
-const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
 
 export default class ShoppingListTitle extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      listName: 'Order',
+      listName: props.listName,
       listId: props.listId,
-      creatingDate: props.creatingDate,
       editing: false,
       isShopperAvailable: false,
       orderPerson:props.orderPerson,
@@ -35,8 +24,16 @@ export default class ShoppingListTitle extends Component {
         name: props.shopperName,
         accountPage: props.shopperAccountPage
       },
-      createdate
+      createdate: props.createdate
     }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    let listName = props.listName
+    let listId = props.listId
+    let createdate = props.createdate
+    let checkingPerson = props.checkingPerson
+    return {listName ,listId ,createdate ,checkingPerson}
   }
 
   editingButton = () => {
@@ -48,7 +45,7 @@ export default class ShoppingListTitle extends Component {
 
   editText = event => {
     listName = event.target.value;
-    this.setState({ listName } ,() => {this.props.dataReceive(this.state.listName, this.state.createdate)});
+    this.setState({ listName } ,() => {this.props.dataReceive(this.state.listName)});
   }
 
   newShopper = () => {
@@ -86,10 +83,13 @@ export default class ShoppingListTitle extends Component {
         )
     }
     let shopper = 'Pending...';
+    let viewerPerson = 'Shopper';
 
     if(this.state.checkingPerson || this.state.shopperPerson){
+      shopper = this.state.orderer.name
+      viewerPerson = 'Orderer'
       whatToRender = (
-      <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
+      <h1>{this.state.listName}: #{this.state.listId}</h1> 
       )
       if(this.state.shopper.name !== undefined){
       this.setState({
@@ -103,8 +103,8 @@ export default class ShoppingListTitle extends Component {
       <div className="shopping-list-title" >
         <Paper style={style}>
           {whatToRender}
-          <p>Created: {this.state.creatingDate}</p>
-          <p>Shopper: {shopper}</p>
+          <p>Created: {this.state.createdate}</p>
+          <p>{viewerPerson}: {shopper}</p>
         </Paper>
       </div>
     )

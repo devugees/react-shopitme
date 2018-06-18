@@ -24,17 +24,23 @@ const styles = {
   },
   notifications: {
     fontSize:'1.8rem',
-    verticalAlign:"middle",
     margin:".3rem"
   }
 };
 
 export default class NavBar extends React.Component {
-  state = {
-    login: false,
-    openLogin: false,
-    openForgotpass :false,
-    error: null
+  constructor(props) {
+    super();
+    this.state = {
+      login: false,
+      openLogin: false,
+      openForgotpass :false,
+      error: null,
+      coords: {
+        latitude: '',
+        longitude: ''
+      }
+    }
   }
 
   LoginClickHandler = (e,params) => {
@@ -85,6 +91,12 @@ export default class NavBar extends React.Component {
     })
   }
 
+  popUpLoginClose = (currentStatus) => {
+    this.setState({
+      openLogin: currentStatus
+    });
+  }
+
   popupForgot = () => {
     this.setState({
       login: false,
@@ -119,14 +131,14 @@ export default class NavBar extends React.Component {
   }
 
   componentDidUpdate(){
+    if (this.state.coords.latitude.length > 2){
+      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
+    } 
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
       const coords = {latitude:52.5237823, longitude:13.486222}
       localStorage.setItem('geoPos', JSON.stringify(coords))
     }
-    else {
-      localStorage.setItem('geoPos', JSON.stringify(this.state.coords))
-    }  
   }
 
   componentWillUnmount() {
@@ -134,26 +146,30 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    return (
-      <div className="navbar">
-        <div>
-        <AppBar position="static" >
-          <Toolbar>
-            <Grid item xs={2} sm={2} >     
-              <div >
-                <Link to="/">ShopItMe</Link>
-              </div>
-            </Grid>
-            {this.state.login ?
-              (<React.Fragment >
-                  <Grid item xs={4} sm={4} >
+  return (
+    <div className="navbar">
+      <div>
+      <AppBar position="static" >
+        <Toolbar>
+          <Grid item xs={2} sm={2} >     
+            <div >
+              <Link to="/">Jibli</Link>
+            </div>
+          </Grid>
+          {this.state.login ?
+              ( <React.Fragment >
+                  <Grid item xs={4} >
                     <div></div>
                   </Grid>
-                  <Grid  item xs={6} sm={6} >
-                    <i  style={styles.notifications} className="material-icons">notifications</i>
-                    <i  style={styles.notifications} className="material-icons">chat_bubble_outline</i>
-                    <DropMenu logOut={this.LogoutClickHandler} userName={this.state.data.firstname}/>
-                  
+                  <Grid item sm={6} >
+                    <i style={styles.notifications} className="material-icons">notifications</i>
+                    <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
+                    <DropMenu
+                      style={styles.dropmenu}
+                      logOut={this.LogoutClickHandler}
+                      userName={this.state.data.firstname}
+                      userPict={this.state.data.profileImgPath}
+                    />
                   </Grid>
               </React.Fragment>
               ):
@@ -181,6 +197,7 @@ export default class NavBar extends React.Component {
           openForgotpassword={this.popupForgot}
           loginclick={this.LoginClickHandler}
           error={this.state.error}
+          dataReceive={this.popUpLoginClose}
         /> 
         <ResetPassword
           ref={(ref) => this.resetpass = ref}
