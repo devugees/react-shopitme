@@ -27,9 +27,7 @@ export default class OrderDeliveryHistory extends Component {
     ]).then(([res1, res2]) => Promise.all([
       res1.json(),
       res2.json()
-    ])).then(([order, deliver]) => { 
-    console.log('order',order)
-    console.log('deliver',deliver)
+    ])).then(([order, deliver]) => {
     this.setState({orderHistory: order, deliverHistory: deliver, isLoading: false})
     })
     

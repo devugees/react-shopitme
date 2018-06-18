@@ -66,7 +66,6 @@ class ResetPassword extends React.Component {
     
     crudAPI('POST','http://localhost:4000/forgot',{ email: this.state.email })
     .then( response => {
-      console.log(response);
       this.setState({
         result: response
       })
