@@ -5,7 +5,9 @@ import { year } from "../../helpers/helpers.js"
 
 const Footer = () => (
       <div className="footer">
-      <p><Link to="/about">About Us</Link> | <Link to="/">Contact </Link> &copy; {year} Jibli</p>
+      <p>
+        <Link to="/about">About Us</Link> | <Link to="/">Contact </Link> 
+        &copy; {year} <Link to="/"> Jibli.de</Link></p>
       </div>
     );
 

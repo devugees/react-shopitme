@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import { crudAPI } from '../../helpers/helpers';
 import './aboutUs.css';
 
