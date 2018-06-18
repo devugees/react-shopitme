@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem, Fade, Button, Chip, Avatar } from '@material-ui/core'; 
+import { Menu, MenuItem, Fade, Chip, Avatar } from '@material-ui/core'; 
 import avatar from '../../pictures/BoB.png';
 import './Navbar.css';
 
