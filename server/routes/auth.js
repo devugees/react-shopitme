@@ -129,7 +129,7 @@ router.post('/forgot', (req, res, next) => {
       Note: "this link is valid just for one hour".
       
       We which you a nice day.
-      ShopItME Team © 2018.
+      Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Reset`, mailtext);
       return res.json('Please check your email, we have sent the reset form')
@@ -197,7 +197,7 @@ router.post('/reset/:token', (req, res) => {
       This is a confirmation that the password for your account has just been changed
       
       We which you a nice day.
-      ShopItME Team © 2018.
+      Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Changed Notification`, mailtext);
       return res.send({message:'done'})
