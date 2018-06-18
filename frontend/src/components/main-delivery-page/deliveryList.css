@@ -1,0 +1,6 @@
+@media only screen and (min-width: 800px) {
+  div > button {
+    margin-top: 0 !important;
+  }
+}
+

@@ -8,7 +8,9 @@ import Sure from '../Modals/Sure';
 import ConfirmationMessage from '../confirmation-message';
 //import fake store
 import fakeStore from '../../fakeStore';
-import {authCrudAPI} from '../../helpers/helpers'
+import {authCrudAPI} from '../../helpers/helpers';
+import { Redirect } from 'react-router';
+
 
 const date = new Date();
 const day = date.getDate();
@@ -159,6 +161,7 @@ export default class CreateShoppingList extends Component {
   }
 
   sendDataToServer = () => {
+    <Redirect to="/orderdeliveryhistory"/>
     this
       .props
       .updateOrderData(this.state.order);
@@ -170,12 +173,15 @@ export default class CreateShoppingList extends Component {
     authCrudAPI('POST','/user/createshoppinglist', this.state.order)
       .then(data => {
         if(!data.error){
+
           this.openConfirmationMessage(data.message)
         } else {
           this.openConfirmationMessage(data.error)
         }
       })
       .catch(error => console.log(error));
+      
+
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
