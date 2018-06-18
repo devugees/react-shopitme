@@ -25,13 +25,18 @@ const { classes } = props;
       <Paper elevation={4}>
         <Typography className={classes.deliver}>
           Deliver Adress:<br/>
+          <br/>
           {props.deliverAdress.street} {props.deliverAdress.number},<br/>
-          {props.deliverAdress.postalCode} {props.deliverAdress.city}.
+          {props.deliverAdress.postcode} {props.deliverAdress.city}.
         </Typography>
         <Typography className={classes.delivering}>
           Delivering between:<br/>
           <br/>
-          {props.deliveringTime.start} until {props.deliveringTime.end}
+          {props.deliveringTime.start.replace('T', ' ')} <b>and</b> {props.deliveringTime.end.replace('T', ' ')}
+        </Typography>
+        <br/>
+        <Typography>
+          Shop: {props.shop}
         </Typography>
       </Paper>
     </div>

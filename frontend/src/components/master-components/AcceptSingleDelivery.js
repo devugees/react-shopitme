@@ -48,7 +48,7 @@ export default class AcceptSingleDelivery extends Component {
           checkingPerson={true}
           ordererName={this.props.orderer.firstname}
           ordererAccountPage={this.props.orderer.accountPage}
-          listName="Shopping List"
+          listName={this.props.listName}
           listId={this.props.listId}
           ordername={this.props.ordername}
           createdate={this.props.createdate}
@@ -56,6 +56,7 @@ export default class AcceptSingleDelivery extends Component {
         <ShowDeliveryDetails
           deliveringTime={this.props.deliveringTime}
           deliverAdress={this.props.deliverAdress}
+          shop={this.props.shop}
         />
         <TodoList
           items={this.props.items}
