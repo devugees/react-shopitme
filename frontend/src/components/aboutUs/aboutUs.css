@@ -1,0 +1,39 @@
+body{
+  background-color: var(--primary-bg);
+}
+
+h3{
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.container{
+  color: var(--primary);
+  background-color: var(--secondary-bg);
+  margin: .5rem 0 .5rem 0;
+}
+
+.image-container{
+  display: inline-block;
+  position: relative;
+  top: 1rem;
+  width:30vw;
+  height:30vw;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.contact-container{
+  margin: auto;
+  font-size: 4em;
+  padding-bottom: 1rem;
+}
+
+.contact-container a {
+  color: var(--primary);
+  margin: 0 .5rem;
+}
+
+.contact-container a:hover {
+  color: var(--secondary);
+}
