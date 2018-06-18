@@ -40,7 +40,7 @@ export default class CreateShoppingList extends Component {
         notes: '',
         createdate: createdate,
         ordername: 'Order Name',
-        orderID: 'xxx',
+        orderID: '',
         deliverAdress:{
           street:importData.location.street,
           number: importData.location.number,
@@ -51,9 +51,9 @@ export default class CreateShoppingList extends Component {
     }
   }
 
-  UNSAFE_componentWillMount(props, state) {
+  componentDidMount(props, state) {
+    let order = {...this.state.order}
     if(this.props.editOrder) {
-      let order = {...this.state.order}
       order.ordername = this.props.editOrder.ordername
       order.orderID = this.props.editOrder.orderID
       order.createdate = this.props.editOrder.createdate
@@ -66,6 +66,20 @@ export default class CreateShoppingList extends Component {
       this.setState({
         order
       })
+    } else {
+      fetch(`http://localhost:4000/user/generateorderID`)
+        .then( response =>response.json())
+        .then( data => 
+          this.setState(prevState => ({
+            order: {
+                ...prevState.order,
+                orderID: data.orderID
+            }
+          }))
+        )
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
   

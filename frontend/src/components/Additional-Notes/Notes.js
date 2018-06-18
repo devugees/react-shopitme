@@ -19,6 +19,11 @@ export default class TextFields extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let inputValue = props.noteBody
+    return {inputValue}
+  }
+
   onChangeHandler = (event) => {
     const inputValue = event.target.value
     this.setState({ inputValue })
@@ -26,7 +31,7 @@ export default class TextFields extends Component {
   }
   render() {
     let whatToRender = (
-      <textarea onChange={this.onChangeHandler} defaultValue={this.state.inputValue} style={styles.textarea} rows="8"></textarea>
+      <textarea onChange={this.onChangeHandler} value={this.state.inputValue} style={styles.textarea} rows="8"></textarea>
     );
     if (this.props.notes) {
       whatToRender = (

@@ -41,6 +41,16 @@ export default class Details extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let deliveringTime = {
+      start: props.start,
+      end: props.end
+    }
+    let shop = props.shop
+    let deliverAdress = props.deliverAdress
+    return {shop ,deliveringTime ,deliverAdress}
+  }
+
   editing = () =>{
       this.setState(prevState => { return {editing: !prevState.editing}})
   }
@@ -136,7 +146,7 @@ export default class Details extends Component {
           <Grid  item xs={12}>
               <FormControl>
                  <InputLabel htmlFor="name-input">Store:</InputLabel>
-                 <Input id="name-input" onChange={this.editLocation('shop')} defaultValue={this.state.shop}/>
+                 <Input id="name-input" onChange={this.editLocation('shop')} value={this.state.shop}/>
               </FormControl>
           </Grid>
           <Grid  item xs={12}>
