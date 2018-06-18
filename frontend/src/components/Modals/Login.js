@@ -36,12 +36,12 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit,
   },
+  loginButtons: {
+    width: '95%',
+    margin: '10px'
+  },
   textField: {
     flexBasis: 200,
-  },
-  loginButtons: {
-    width: '75%',
-    margin: '10px'
   },
   iconwww: {
     width: '24%',
