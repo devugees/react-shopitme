@@ -153,7 +153,7 @@ export default class NavBar extends React.Component {
         <Toolbar>
           <Grid item xs={2} sm={2} >     
             <div >
-              <Link to="/">ShopItMe</Link>
+              <Link to="/">Jibli</Link>
             </div>
           </Grid>
           {this.state.login ?
