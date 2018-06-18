@@ -39,15 +39,15 @@ export default class aboutUs extends Component {
             <h3>{developer.bio}</h3>
             <div className='contact-container'>
               {developer.html_url ?
-                <a href={developer.html_url} target="_blank">
+                <a href={developer.html_url} target="_blank" title={`GitHub of ${developer.name}`}>
                   <i className='fab fa-github-square'></i>
                 </a>: null}
               {developer.email ?
-                <a href={`mailto:${developer.email}`}>
+                <a href={`mailto:${developer.email}`} title={`Send an email to ${developer.name}`}>
                   <i className='fas fa-envelope-open'></i>
                 </a>:null}
               {developer.blog ?
-                <a href={developer.blog} target="_blank">
+                <a href={developer.blog} target="_blank" title={`The webpage of ${developer.name}`}>
                   <i className='fas fa-address-card'></i>
                 </a>: null}
             </div>
