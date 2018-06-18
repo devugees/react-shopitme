@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import OrderDelivery from '../order-delivery-history';
 import Image from '../avatar/image';
 import RatingStars from '../RatingStars';
-import fakeStore from '../../fakeStore';
+// import fakeStore from '../../fakeStore';
 import defaultPic from '../../pictures/BoB.png';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import purple from '@material-ui/core/colors/purple';

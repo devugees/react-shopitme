@@ -2,6 +2,8 @@ import React from 'react';
 import {Paper, Button} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import './deliveryList.css';
+
 
 const styles = theme => ({
   p:{
@@ -15,7 +17,8 @@ const styles = theme => ({
   },
   button:{
     margin: '0',
-    position:'relative'
+    position:'relative',
+    marginTop: "-77px"
   },
   buttonDiv:{
     width:'18%',

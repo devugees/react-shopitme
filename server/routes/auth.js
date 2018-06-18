@@ -125,11 +125,11 @@ router.post('/forgot', (req, res, next) => {
       You are receiving this message because you (or someone else) have requested reset password of your account.
       
       if you want to continue the process, please click on the following link or past it in your browser :
-      http://localhost:3000/reset/${token}
+      http://${serverIPAdress}:3000/reset/${token}
       Note: "this link is valid just for one hour".
       
       We which you a nice day.
-      ShopItME Team © 2018.
+      Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Reset`, mailtext);
       return res.json('Please check your email, we have sent the reset form')
@@ -197,7 +197,7 @@ router.post('/reset/:token', (req, res) => {
       This is a confirmation that the password for your account has just been changed
       
       We which you a nice day.
-      ShopItME Team © 2018.
+      Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Changed Notification`, mailtext);
       return res.send({message:'done'})
