@@ -8,27 +8,8 @@ import Sure from '../Modals/Sure';
 import ConfirmationMessage from '../confirmation-message';
 //import fake store
 import fakeStore from '../../fakeStore';
-import {authCrudAPI} from '../../helpers/helpers';
-import { Redirect } from 'react-router';
+import {authCrudAPI, createdate, year, timeHours, timeMin, zeroMonth, zeroDay } from '../../helpers/helpers';
 
-
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth()+1;
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9)
-  ? (month)
-  : ('0' + month);
-const zeroMin = (timeMin > 9)
-  ? (timeMin)
-  : ('0' + timeMin);
-const zeroDay = (day > 9)
-  ? (day)
-  : ('0' + day);
-
-const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`
 
 export default class CreateShoppingList extends Component {
   constructor(props) {
@@ -41,6 +22,9 @@ export default class CreateShoppingList extends Component {
       importData ={...fakeStore.userInfo}
     }
 
+    console.log(fakeStore)
+
+
     this.state = {
       userInfo: importData,
       openSureModal:false,
@@ -48,46 +32,79 @@ export default class CreateShoppingList extends Component {
       dataToConfirmationMessage:'',
       order: {
         deliveringTime: {
-          start: '',
-          end: ''
+          start: `${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`,
+          end: `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`
         },
         items: fakeStore.items,
         shop: '',
         notes: '',
         createdate: createdate,
         ordername: 'Order Name',
-        orderID: 'xxx',
-        orderer:{
-          location:{
-            street:importData.location.street,
-            number: importData.location.number,
-            postcode: importData.location.postcode,
-            city: importData.location.city
-          }
+        orderID: '',
+        deliverAdress:{
+          street:importData.location.street,
+          number: importData.location.number,
+          postcode: importData.location.postcode,
+          city: importData.location.city
         }
       }
     }
   }
 
-  UNSAFE_componentWillMount(props, state) {
+  componentDidMount(props, state) {
+    let order = {...this.state.order}
     if(this.props.editOrder) {
-      let order = {...this.state.order}
       order.ordername = this.props.editOrder.ordername
       order.orderID = this.props.editOrder.orderID
       order.createdate = this.props.editOrder.createdate
+      order.deliveringTime = this.props.editOrder.deliveringTime
+      order.deliverAdress = this.props.editOrder.deliverAdress
+      order.items = this.props.editOrder.items
+      order.shop = this.props.editOrder.shop
+      order.notes = this.props.editOrder.notes
       console.log(order)
       this.setState({
         order
       })
+    } else {
+      fetch(`http://localhost:4000/user/generateorderID`)
+        .then( response =>response.json())
+        .then( data => 
+          this.setState(prevState => ({
+            order: {
+                ...prevState.order,
+                orderID: data.orderID
+            }
+          }))
+        )
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
   
-  openCloseModal = () => {
-    this.setState(prevState => {
-      return {
-        openSureModal: !prevState.openSureModal
-      }
-    });
+  cancelDeleteHandler = () => {
+    console.log(this.props.editing)
+    if(this.props.editing) {
+      const id = this.props.editOrder._id;
+      authCrudAPI('DELETE', '/user/deleteshoppinglist/' + id)
+      .then(data => {
+        if(!data.error){
+          // if OK let a confirmation message popup
+          this.openConfirmationMessage(data.message)
+          // If successfull send data to the Store
+          // this.props.updateOrderData(this.state.order);
+        } else {
+          this.openConfirmationMessage(data.error)
+        }
+      })
+    } else {
+      this.setState(prevState => {
+        return {
+          openSureModal: !prevState.openSureModal
+        }
+      });
+    } 
   }
 
   sendback = () => {
@@ -115,13 +132,11 @@ export default class CreateShoppingList extends Component {
       order: {
         ...this.state.order,
         shop,
-        orderer: {
-          location: {
-            street: details.street,
-            number: details.number,
-            postcode: details.postcode,
-            city: details.city
-          }
+        deliverAdress:{
+          street: details.street,
+          number: details.number,
+          postcode: details.postcode,
+          city: details.city
         }
       }
     })
@@ -161,27 +176,41 @@ export default class CreateShoppingList extends Component {
   }
 
   sendDataToServer = () => {
-    <Redirect to="/orderdeliveryhistory"/>
-    this
-      .props
-      .updateOrderData(this.state.order);
-    //Updating user Adress, waiting for the sabine fix with empty pass
-    /*const userInfo = {...this.state.userInfo}
-    userInfo.location = this.state.order.orderer.location
-    authCrudAPI('PUT','/user/changeuserdetails', userInfo.location)
-      .then(data => console.log(data))*/
-    authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+    // if this props is editing - select corresponding API Call
+    if(this.props.editing) {
+      // 1. Collect the Data of the Order and send it to the Store
+      // this.props.updateOrderData(this.state.order);
+      // 2. Send the Data to the Database
+      const id = this.props.editOrder._id;
+      const newOrder = this.state.order;
+      authCrudAPI('PUT', '/user/updateshoppinglist/' + id, newOrder)
       .then(data => {
         if(!data.error){
-
-          this.openConfirmationMessage(data.message)
+          // if OK let a confirmation message popup
+          this.openConfirmationMessage(data.message);
+          // If successfull send data to the Store
+          //this.props.updateOrderData(this.state.order);
         } else {
           this.openConfirmationMessage(data.error)
         }
       })
-      .catch(error => console.log(error));
-      
+    } else {
+    
+      // 1. Send the Data to the Database
+      // this.props.updateOrderData(this.state.order);
 
+      authCrudAPI('POST','/user/createshoppinglist', this.state.order)
+        .then(data => {
+          if(!data.error){
+            // if OK let a confirmation message popup
+            this.openConfirmationMessage(data.message)
+            // If successfull send data to the Store
+          } else {
+            this.openConfirmationMessage(data.error)
+          }
+        })
+      .catch(error => console.log(error));
+    } 
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
@@ -196,6 +225,7 @@ export default class CreateShoppingList extends Component {
     const style = {
       margin: '1rem 0.5rem 0 0.5rem'
     }
+
     return (
       <div className="createShoppingList main">
         <ShoppingListTitle
@@ -204,46 +234,34 @@ export default class CreateShoppingList extends Component {
           listId={this.state.order.orderID}
           createdate={this.state.order.createdate}
           checkingPerson={false}
-        />
+          />
         <TodoList
           dataReceive={this.grabDataDoList}
           orderPerson={true}
-          items={this.props.editing
-          ? this.props.editOrder.items
-          : this.state.order.items}/>
+          items={this.state.order.items}
+          />
         <Details
           grabDataStartDelivering={this.grabDataStartDelivering}
           grabDataEndDelivering={this.grabDataEndDelivering}
           dataReceive={this.grabDataDetails}
-          start={this.props.editing
-          ? this.props.editOrder.deliveringTime.start
-          : ''}
-          end={this.props.editing
-          ? this.props.editOrder.deliveringTime.end
-          : ''}
-          shop={this.props.editing
-          ? this.props.editOrder.shop
-          : this.state.shop}
-          deliverAdress={this.props.editing
-          ? {
-            ...this.props.editOrder.deliverAdress
-          }
-          : {
-            ...this.state.deliverAdress
-          }}/>
+          start={this.state.order.deliveringTime.start}
+          end={this.state.order.deliveringTime.end}
+          shop={this.state.order.shop}
+          deliverAdress={this.state.order.deliverAdress}
+          />
         <Notes
           dataReceive={this.grabDataNotes}
-          noteText={this.props.editing
-          ? this.props.editOrder.notes
-          : ''}/>
+          noteBody={this.state.order.notes}
+          />
         <Button
           style={style}
           variant="raised"
           color="secondary"
-          onClick={this.openCloseModal}
+          onClick={this.cancelDeleteHandler}
         >
         {this.props.editing ? 'Delete' : 'Cancel'}
         </Button>
+
         <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
           {this.props.editing ? 'Update' : 'Create'}
         </Button>

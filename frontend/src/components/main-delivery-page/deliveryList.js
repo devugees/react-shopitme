@@ -17,8 +17,12 @@ const styles = theme => ({
   },
   button:{
     margin: '0',
+<<<<<<< HEAD
     position:'relative',
     marginTop: "-77px"
+=======
+    position:'relative'
+>>>>>>> develop
   },
   buttonDiv:{
     width:'18%',

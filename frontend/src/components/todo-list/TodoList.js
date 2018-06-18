@@ -22,6 +22,12 @@ export default class TodoList extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let items = props.items
+    let orderPerson = props.orderPerson
+    return {items ,orderPerson}
+    }
+
   changeText = event => {
     const disabled = event.target.value.length === 0;
     this.setState({

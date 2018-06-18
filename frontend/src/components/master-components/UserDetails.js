@@ -29,8 +29,8 @@ export default class UserDetails extends Component {
       const geoPosParsed = JSON.parse(geoPos);
       this.setState({
         coords: {
-          lat: geoPosParsed.latitude,
-          lng: geoPosParsed.longitude
+          latitude: geoPosParsed.latitude,
+          longitude: geoPosParsed.longitude
         }
       }); 
     }

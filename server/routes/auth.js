@@ -64,8 +64,8 @@ router.post('/register', (req, res) => {
         city: user.location.city
       },
       coords: {
-        lat: user.coords.lat,
-        lng: user.coords.lng
+        latitude: user.coords.latitude,
+        longitude: user.coords.longitude
       },
       email: user.email,
       mobile: user.mobile,

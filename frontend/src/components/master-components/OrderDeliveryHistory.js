@@ -13,12 +13,12 @@ export default class OrderDeliveryHistory extends Component {
     orderHistory: '',
     deliverHistory: '',
     isLoading: true,
-    ...fakeStore
+    userInfo: null
   }
 
   componentDidMount() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
+    this.setState({userInfo: userInfo});
     const userId = userInfo._id
 
     Promise.all([
@@ -37,15 +37,15 @@ export default class OrderDeliveryHistory extends Component {
 
   render() {
     let userPicture = defaultPic;
-      if (this.state.userInfo.profileImgPath) {
+      if (this.state.userInfo && this.state.userInfo.profileImgPath) {
         userPicture = this.state.userInfo.profileImgPath
       }
 
-    if (this.state.isLoading) {
-      return (<CircularProgress style={{
-        color: purple[500]
-      }} thickness={7}/>)
-    }
+      if (this.state.isLoading) {
+        return (<CircularProgress style={{
+          color: purple[500]
+        }} thickness={7}/>)
+      }
 
     return (
       <div className="createShoppingList main">
@@ -53,7 +53,7 @@ export default class OrderDeliveryHistory extends Component {
         <RatingStars rating='4'/>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
-          DeliverHistory={this.state.deliverHistory}/>
+          deliverHistory={this.state.deliverHistory}/>
       </div>
     )
   }

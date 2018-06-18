@@ -23,8 +23,16 @@ export default class ImageCropper extends Component {
     authCrudFileAPI(endpoint, fd)
     .then(res => {
       const url = 'http://localhost:4000/' + res.src;
-      console.log('new Url', url)
-      this.props.updateUserPicture(url)
+
+      // send the new Image to the Fake Store
+      this.props.updateUserPicture(url);
+      
+      // send the new Image to the Local Storage
+      let userInfoLS = JSON.parse(localStorage.getItem('userInfo'));
+      userInfoLS.profileImgPath = url;
+      localStorage.setItem('userInfo', JSON.stringify(userInfoLS));
+    
+      console.log()
       this.setState({
           imgSrc: url
       })
