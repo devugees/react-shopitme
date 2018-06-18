@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import { Paper, TextField, Grid, Input, InputLabel, FormControl } from '@material-ui/core';
 import fakeStore from '../../fakeStore';
 
-const date = new Date();
-const day = date.getDate();
-const month = date.getMonth()+1;
-const year = date.getFullYear();
-const timeHours = date.getHours();
-let timeMin = date.getMinutes();
-const zeroMonth = (month > 9) ? (month) : ('0' + month);
-const zeroDay = (day > 9) ? (day) : ('0' + day);
 
 export default class Details extends Component {
 
@@ -23,7 +15,13 @@ export default class Details extends Component {
           start: props.start,
           end: props.end
         },
-        shop: props.shop 
+        shop: props.shop,
+        deliverAdress:{
+          street:props.deliverAdress.street,
+          number: props.deliverAdress.number,
+          postcode: props.deliverAdress.postcode,
+          city: props.deliverAdress.city
+        }
       }
     } else {
       this.state ={
@@ -32,20 +30,15 @@ export default class Details extends Component {
         start: props.start,
         end: props.end
       },
-      shop: props.shop
+      shop: props.shop,
+      deliverAdress:{
+        street:props.deliverAdress.street,
+        number: props.deliverAdress.number,
+        postcode: props.deliverAdress.postcode,
+        city: props.deliverAdress.city
+      }
       }
     }
-  }
-
-  componentDidMount(){
-    this.setState({
-      newDeliverAdress:{
-        street: this.state.street,
-        number: this.state.number,
-        postcode: this.state.postcode,
-        city: this.state.city
-      }
-    })
   }
 
   editing = () =>{
@@ -54,28 +47,32 @@ export default class Details extends Component {
 
   finishEditing = () => {
     this.setState({
-      newDeliverAdress:{
+      deliverAdress:{
         street: this.state.street,
         number: this.state.number,
         postcode: this.state.postcode,
         city: this.state.city
       }
-    },()=>this.props.dataReceive(this.state.newDeliverAdress,this.state.shop, this.state.orderer))
+    },()=>this.props.dataReceive(this.state.deliverAdress,this.state.shop, this.state.orderer))
     this.setState(prevState => { return {editing: !prevState.editing}})
   }
     
   editLocation = name => event => {
     this.setState({[name]: event.target.value},
-    ()=>this.props.dataReceive(this.state.newDeliverAdress, this.state.shop, this.state.orderer));
+    ()=>this.props.dataReceive(this.state.deliverAdress, this.state.shop, this.state.orderer));
   }
 
   handlerChangeStartTime = event => {
-    this.setState({deliveringTime: { start:event.target.value}});
+    let deliveringTime = this.state.deliveringTime
+    deliveringTime.start = event.target.value
+    this.setState({deliveringTime});
     this.props.grabDataStartDelivering(event.target.value)
   }
 
   handlerChangeEndTime = event => {
-    this.setState({deliveringTime:{end:event.target.value} });
+    let deliveringTime = this.state.deliveringTime
+    deliveringTime.end = event.target.value
+    this.setState({deliveringTime});
     this.props.grabDataEndDelivering(event.target.value)
   }
     
@@ -87,19 +84,23 @@ export default class Details extends Component {
     }
     let whatToRender = (
       <p>
-      {this.state.street}.{this.state.number}<br/>
-      {this.state.postcode} {this.state.city} 
+        <p className="deliveryAdress">Delivery Address</p>
+      {this.state.deliverAdress.street}.{this.state.deliverAdress.number}<br/>
+      {this.state.deliverAdress.postcode} {this.state.deliverAdress.city} 
       <span onClick={this.editing}>✎</span> 
       </p>          
       )
     if(this.state.editing){
       whatToRender = (  
-       <p>
+        
+       <p >
+         <p className="deliveryAdress">Delivery Address</p>
           <FormControl className="todo-list-form">
-          <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.newDeliverAdress.street} />
-            <Input  className="location-input2"  onChange={this.editLocation('number')} placeholder={this.state.newDeliverAdress.number} />
-            <Input  className="location-input3"  onChange={this.editLocation('postcode')} placeholder={this.state.newDeliverAdress.postcode} />
-            <Input  className="location-input4"  onChange={this.editLocation('city')} placeholder={this.state.newDeliverAdress.city}/>
+            
+            <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
+            <Input  className="location-input2"  onChange={this.editLocation('number')} placeholder={this.state.deliverAdress.number} />
+            <Input  className="location-input3"  onChange={this.editLocation('postcode')} placeholder={this.state.deliverAdress.postcode} />
+            <Input  className="location-input4"  onChange={this.editLocation('city')} placeholder={this.state.deliverAdress.city}/>
           </FormControl>
           <span onClick={this.finishEditing}>✔</span>
         </p>
@@ -115,7 +116,7 @@ export default class Details extends Component {
              <TextField
               type="datetime-local"
               onChange={this.handlerChangeStartTime}
-              defaultValue={this.state.deliveringTime.start || `${year}-${zeroMonth}-${zeroDay}T${timeHours}:${timeMin}`}
+              value={this.state.deliveringTime.start}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -126,7 +127,7 @@ export default class Details extends Component {
             <TextField
               onChange={this.handlerChangeEndTime}
               type="datetime-local"
-              defaultValue={this.state.deliveringTime.end || `${year}-${zeroMonth}-${zeroDay}T${timeHours + 3}:${timeMin}`}
+              value={this.state.deliveringTime.end}
               InputLabelProps={{
                 shrink: true,
             }}

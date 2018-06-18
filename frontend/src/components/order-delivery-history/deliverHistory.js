@@ -15,8 +15,7 @@ const styles = theme => ({
   },
   button:{
     margin: '0',
-    position:'relative',
-    top: '-14px',
+    position:'relative'
   },
   buttonDiv:{
     width:'18%',
@@ -38,15 +37,16 @@ const deliverHistory = props => {
   let deliverDate;
   switch(props.deliverHistory.status)
     {
+      default:
       case ('Pending'):
         deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
         break;
       case ('In Progress'):
         deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
         break;
-      default:
+       /* case ('Delivered'):
         deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
-        break;
+        break; */
     }
   return (
     <div>

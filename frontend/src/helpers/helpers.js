@@ -64,4 +64,13 @@ export function authCrudFileAPI(endPoint, file) {
   }).then(res => res.json())   
 }
 
-export const getFullYear = () =>  new Date().getFullYear();
+export const date = new Date();
+export const day = date.getDate();
+export const month = date.getMonth()+1;
+export const year = date.getFullYear();
+export const timeHours = date.getHours();
+export let timeMin = date.getMinutes();
+export const zeroMonth = (month > 9)? (month): ('0' + month);
+export const zeroMin = (timeMin > 9)? (timeMin): ('0' + timeMin);
+export const zeroDay = (day > 9)? (day): ('0' + day);
+export const createdate = `${zeroDay}/${zeroMonth}/${year} ${timeHours}:${zeroMin}`

@@ -13,21 +13,26 @@ export default class RatingStars extends React.Component {
   onStarClick = (nextValue, prevValue, name) => {
     this.setState({rating: nextValue});
   }
- 
+
   render() {
-    const { rating } = this.state;
-    return (                
-      <div style={{margin:"1.6rem"}}>
+    const {rating} = this.state;
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
+    return (
+      <div style={{
+        margin: "1.6rem"
+      }}>
         <Grid item xs={6} sm={6}>
           <Paper>
-            <h1>Alice Doe</h1>
+            <h1>{userInfo.firstname} {userInfo.lastname}</h1>
             <h2>{rating}/5</h2>
-            <StarRatingComponent 
-              name="rate1" 
+            <StarRatingComponent
+              name="rate1"
               starCount={5}
               value={rating}
-              onStarClick={this.onStarClick}
-            />
+              onStarClick={this
+              .onStarClick
+              .bind(this)}/>
           </Paper>
         </Grid>
       </div>

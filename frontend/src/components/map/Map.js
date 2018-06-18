@@ -28,16 +28,17 @@ export default class Map extends Component {
       <GoogleMap
         defaultZoom={14}
         defaultCenter={{
-          lat:(this.props.deliveryList ? lat : this.props.markers[0].lat),
-          lng:(this.props.deliveryList ? lng : this.props.markers[0].lng)
+          lat:(this.props.deliveryList ? lat : this.props.markers[0].latitude),
+          lng:(this.props.deliveryList ? lng : this.props.markers[0].longitude)
         }}>
         <Marker position={{ lat: lat, lng: lng }}/>
+
         {this.props.markers.map((marker, index)=> {
           return(
             <Marker
               icon={marker.highlight ? whereToGoMarker : positionMarker} 
               key={index}
-              position={{ lat: marker.lat, lng: marker.lng}}
+              position={{ lat: marker.latitude, lng: marker.longitude}}
             />
           )
         })}
