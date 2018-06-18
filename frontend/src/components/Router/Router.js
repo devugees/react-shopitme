@@ -6,7 +6,8 @@ import CreateShoppingListMiddleware from '../middlewares/CreateShoppingListMiddl
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
 import OrderDeliveryHistory from '../master-components/OrderDeliveryHistory';
 import MainDeliveryPage from '../master-components/MainDeliveryPage';
-import NewPassword from '../master-components/NewPassword'
+import NewPassword from '../master-components/NewPassword';
+import AboutUs from '../aboutUs';
 import Navbar from '../nav-bar/Navbar';
 import Footer from '../footer/Footer'
 import NotFound from '../not-found/notFound';
@@ -72,6 +73,7 @@ export default class Router extends Component {
           <Switch>
             <Route exact path='/' component={this.landingPageWrapper} />
             <Route exact path='/userdetails' component={UserDetailsMiddleware}  />
+            <Route exact path='/about' component={AboutUs}  />
             <PrivateRoute exact path='/maindeliverypage' component={MainDeliveryPage} authed={this.state.isAuthenticated} />
             <PrivateRoute exact path='/accepteddelivery' component={AcceptedDelivery} authed={this.state.isAuthenticated} />
             <PrivateRoute exact path='/orderdeliveryhistory' component={OrderDeliveryHistory} authed={this.state.isAuthenticated} />
