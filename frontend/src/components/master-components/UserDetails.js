@@ -16,7 +16,6 @@ export default class UserDetails extends Component {
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true,
-    userPicture: defaultPic,
     gender: 'Female'
   }
 
@@ -159,7 +158,9 @@ export default class UserDetails extends Component {
     }
     if(localStorage.getItem('userInfo')){
       const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-      userPicture = userInfoLS.profileImgPath
+      if(userInfoLS.profileImgPath){
+        userPicture = userInfoLS.profileImgPath
+      }
     }
 
     return (
