@@ -125,7 +125,7 @@ router.post('/forgot', (req, res, next) => {
       You are receiving this message because you (or someone else) have requested reset password of your account.
       
       if you want to continue the process, please click on the following link or past it in your browser :
-      http://localhost:3000/reset/${token}
+      http://${serverIPAdress}:3000/reset/${token}
       Note: "this link is valid just for one hour".
       
       We which you a nice day.
