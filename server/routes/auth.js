@@ -128,7 +128,7 @@ router.post('/forgot', (req, res, next) => {
       http://${serverIPAdress}:3000/reset/${token}
       Note: "this link is valid just for one hour".
       
-      We which you a nice day.
+      We wish you a nice day.
       Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Reset`, mailtext);
@@ -196,7 +196,7 @@ router.post('/reset/:token', (req, res) => {
  
       This is a confirmation that the password for your account has just been changed
       
-      We which you a nice day.
+      We wish you a nice day.
       Jibli Team © 2018.
         `;
       mailnotifier(user.email, `Password Changed Notification`, mailtext);

@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv')
 
 module.exports = function sendMail(recipientAddress, subject, body) {
   var smtpConfig = {
@@ -6,8 +7,8 @@ module.exports = function sendMail(recipientAddress, subject, body) {
   port: 465,
   secure: true,
   auth: {
-    user: 'devugees.shop@gmail.com',
-    pass: 'www123com'
+    user: process.env.E_MAIL,
+    pass: process.env.PASSWORD
   }
 };
 
