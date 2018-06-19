@@ -35,7 +35,7 @@ export default class EditUser extends React.Component {
             </Grid>
             {/* Render Form Part 1 with User Details */}
             {/* <Grid item container xs={12} className="formBgr" spacing={16}> */}
-            <UserDetailsFields handleChange={this.props.handleChange} userdetails={this.props.userdetails} />
+            <UserDetailsFields handleChange={this.props.handleChange} />
             {/* </Grid> */}
             {/* Submit Button for Change User/Account Details */}
             {/* <Grid item xs={12}>
