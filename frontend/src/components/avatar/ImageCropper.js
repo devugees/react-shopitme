@@ -38,6 +38,7 @@ export default class ImageCropper extends Component {
   }
 
   render() {
+    /* const maxsize= 4000 * 5000 *5 */
     const style = {
       width: '137px',
       height: '137px',
@@ -49,9 +50,11 @@ export default class ImageCropper extends Component {
       borderRadius: '50%',
       marginTop: '20px',
     }
+    
     return (
       <div style={style}>
         <AvatarImageCropper
+          maxsize={4000 * 5000 *5}
           apply={this.apply}
           rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%'}}
         />

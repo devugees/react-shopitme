@@ -5,7 +5,7 @@ const User = require('../models/user');
 const Data = require('../models/data');
 //const Accept = require('../models/accept');
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
+// const upload = multer({dest: 'uploads/'}, limits);
 const passport = require('passport');
 
 /* GET users listing. */
@@ -252,6 +252,14 @@ router.put('/changeuserdetails', (req, res) => {
     })
   }
 })
+
+
+const limits = {
+  limits: {
+    fileSize: 1000000
+}
+}
+const upload = multer({dest: 'uploads/'}, limits);
 
 router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
   const id = req.params.id;
