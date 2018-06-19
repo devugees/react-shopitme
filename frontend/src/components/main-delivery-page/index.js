@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import DeliveryList from './deliveryList'
 import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
-const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-      
+
+let userInfoLS = JSON.parse(localStorage.getItem('userInfo'))      
 export default class ShoppingDeliveryLists extends Component {
 
   state = {
@@ -14,8 +14,11 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
-    // becareful with the store without orderer, delete it from DB
+    userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+    // be careful with the store without orderer, delete it from DB
+    console.log('Store????',this.props.store,userInfoLS)
     this.props.store.map(data => {
+
       if(data.orderer._id !== userInfoLS._id ) {
         return(
           this.setState( prevState => {return {
