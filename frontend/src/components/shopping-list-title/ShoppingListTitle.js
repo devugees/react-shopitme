@@ -82,12 +82,12 @@ export default class ShoppingListTitle extends Component {
         </h1>
         )
     }
-    let shopper = 'Pending...';
-    let viewerPerson = 'Shopper';
+    let currentPerson = 'Pending...';
+    let personTitle = 'Shopper';
 
     if(this.state.checkingPerson || this.state.shopperPerson){
-      shopper = this.state.orderer.name
-      viewerPerson = 'Orderer'
+      currentPerson = this.state.orderer.name
+      personTitle = 'Orderer'
       whatToRender = (
       <h1>{this.state.listName}: #{this.state.listId}</h1> 
       )
@@ -95,7 +95,7 @@ export default class ShoppingListTitle extends Component {
       this.setState({
         isShopperAvailable: true,
       })
-      shopper = (<a href={this.state.shopper.accountPage}>{this.state.shopper.name}</a>)
+      currentPerson = this.state.orderer.name
       }
     }
 
@@ -104,7 +104,7 @@ export default class ShoppingListTitle extends Component {
         <Paper style={style}>
           {whatToRender}
           <p>Created: {this.state.createdate}</p>
-          <p>{viewerPerson}: {shopper}</p>
+          <p>{personTitle}: {currentPerson}</p>
         </Paper>
       </div>
     )
