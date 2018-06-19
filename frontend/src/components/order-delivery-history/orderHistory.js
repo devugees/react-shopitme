@@ -35,9 +35,9 @@ const orderHistory = (props) => {
     <p className={classes.p}>By: -
     </p>
   )
-  if (props.orderHistory.deliverBy) {
+  if (props.orderHistory.shopper) {
     shopper = (
-      <p className={classes.p}>By: {props.orderHistory.deliverBy}</p>
+      <p className={classes.p}>By: {props.orderHistory.shopper.firstname}</p>
     )
   }
 
@@ -67,7 +67,7 @@ const orderHistory = (props) => {
         <div className={classes.textDiv}>
           {/*<p>orderID: {props.orderHistory.orderID}</p>*/}
           <p className={classes.p}>{props.orderHistory.status}</p>
-          <p className={classes.p}>{props.orderHistory.shop}</p>
+          <p className={classes.p}>{props.orderHistory.ordername}</p>
           {shopper}
           {/*<p>created: {props.orderHistory.created}</p>*/}
           {deliverDate}

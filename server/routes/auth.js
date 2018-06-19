@@ -264,7 +264,7 @@ router.get('/order/:userId', (req, res) => {
         .send({message: "Could not retrieve user with id "});
     }
     res.send(data)
-  }));
+  })).populate('shopper');
 
 })
 // api req for user delivery history
@@ -278,7 +278,7 @@ router.get('/deliver/:userId', (req, res) => {
         .send({message: "Could not retrieve user with id "});
     }
     res.send(data)
-  }));
+  })).populate('orderer');
 
 })
 

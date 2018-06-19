@@ -26,8 +26,8 @@ export default class SingleDeliverHistory extends Component {
           case (this.props.deliver.status = 'Delivered'):
             deliverStatus = (
               <React.Fragment>
-                <p>delivered on {this.props.deliver.delivered} {this.props.deliver.delivered} </p>
-                <p>To <Link to="#">{this.props.deliver.deliverTo}</Link></p>
+                <p>delivered on {this.props.deliver.delivered}</p>
+                <p>To {this.props.deliver.orderer.firstname}</p>
               </React.Fragment>
               )
             break;
