@@ -16,7 +16,6 @@ export default class ShoppingDeliveryLists extends Component {
   componentDidMount(){
     userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
     // be careful with the store without orderer, delete it from DB
-    console.log('Store????',this.props.store,userInfoLS)
     this.props.store.map(data => {
 
       if(data.orderer._id !== userInfoLS._id ) {
