@@ -1,4 +1,6 @@
 import React from 'react';
+import Clear from '@material-ui/icons/Clear';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -66,7 +68,6 @@ class ResetPassword extends React.Component {
     
     crudAPI('POST','http://localhost:4000/forgot',{ email: this.state.email })
     .then( response => {
-      console.log(response);
       this.setState({
         result: response
       })
@@ -79,6 +80,11 @@ class ResetPassword extends React.Component {
   handlelogin = (props, e) => {
     this.setState({ open: false });
     this.props.openLog(true)
+  }
+
+  handleCloseForgot = (props, e) => {
+    this.setState({ open: false });
+    this.props.popUpForgotClose(false)
   }
 
   render(props) {
@@ -116,14 +122,14 @@ class ResetPassword extends React.Component {
             <Button variant="raised" onClick={this.resetHandler.bind(this)} color="default" className={classes.loginButtons}>
                 Reset password 
             </Button>
-            <Button variant="flat" onClick={this.props.openLog}>
-                go back to Login!
-            </Button>
-            <Button variant="flat" onClick={this.props.regClick}>
-                Don't have an Account? Register now
-            </Button>
-            <Button variant="fab" color="secondary" className={classes.cancel} onClick={this.handleClose}>
-            X
+            <div className='linkColor' onClick={this.props.openLog}>
+              go back to Login!
+            </div>
+            <div>
+              <Link className='linkColor' onClick={this.handleCloseForgot} to="/userdetails">Don't Have an account? Register Now</Link>
+            </div>
+            <Button mini variant="fab" color="inherit" className={classes.cancel} onClick={this.handleClose}>
+            <Clear />
             </Button>
           </div>
         </Modal>
