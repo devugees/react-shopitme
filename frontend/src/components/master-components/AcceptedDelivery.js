@@ -8,6 +8,7 @@ import Notes from '../Additional-Notes/Notes';
 import Map from '../map/Map';
 import { authCrudAPI } from '../../helpers/helpers';
 import ConfirmationMessage from '../confirmation-message';
+import { createdate } from '../../helpers/helpers'
 
 //import fake store
 import fakeStore from '../../fakeStore';
@@ -18,7 +19,9 @@ state = {...fakeStore,
   openConfirmationMessage: false,
   dataToConfirmationMessage:'',
   order: {
-      orderID : this.props.orderID
+      orderID : this.props.orderID,
+      delivered: createdate
+
     }
 }
 
@@ -51,17 +54,18 @@ state = {...fakeStore,
         <div className="accept-single-delivery main">
           <ShoppingListTitle
               shopperPerson={true}
-              ordererName={this.state.orderer.firstname}
-              ordererAccountPage={this.state.orderer.accountPage}
+              ordererName={this.props.progressOrder.orderer.firstname}
+              ordererAccountPage={this.props.progressOrder.orderer.accountPage}
               listName={this.props.progressOrder.ordername}
               listId={this.props.progressOrder.orderID}
-              createdate={this.state.created}
+              createdate={this.props.progressOrder.createdate}
               shopperName={this.state.shopper.firstname}
               shopperAccountPage={this.state.shopper.accountPage}
             />
           <ShowDeliveryDetails
-              deliveringTime={this.state.deliveringTime}
-              deliverAdress={this.state.orderer.deliverAdress}
+              deliveringTime={this.props.progressOrder.deliveringTime}
+              deliverAdress={this.props.progressOrder.deliverAdress}
+              shop={this.props.progressOrder.shop}
             />
           <TodoList
               items={this.props.progressOrder.items}
