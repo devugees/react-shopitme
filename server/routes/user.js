@@ -7,6 +7,9 @@ const Data = require('../models/data');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
+const fs = require('fs'); // to delete the previous user's pic
+var path = require('path');
+
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -255,6 +258,15 @@ router.put('/changeuserdetails', (req, res) => {
 
 router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
   const id = req.params.id;
+
+// Delete the previous profile pic 
+   User.findById(id, (err,user) => {
+      if(user){
+        const picPath = path.join(__dirname, '../..', user.profileImgPath);
+        fs.unlink(picPath)
+    }
+  })
+
   User.findByIdAndUpdate(id, {
     profileImgPath: req.file.path
   }, {
