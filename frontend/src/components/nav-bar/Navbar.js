@@ -106,6 +106,12 @@ export default class NavBar extends React.Component {
     })
   }
 
+  popUpForgotClose = currentStatus => {
+    this.setState({
+      openForgotpass: currentStatus
+    });
+  }
+
   componentDidMount() {
     const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
     if(userInfoLS){
@@ -203,6 +209,7 @@ export default class NavBar extends React.Component {
           ref={(ref) => this.resetpass = ref}
           openForgotpass={this.state.openForgotpass} 
           openLog={this.popupLogin}
+          popUpForgotClose={this.popUpForgotClose}
         />
       </div>
     </div>

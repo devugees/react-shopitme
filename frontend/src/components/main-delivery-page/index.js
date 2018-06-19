@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import DeliveryList from './deliveryList'
 import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
-
+const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+      
 export default class ShoppingDeliveryLists extends Component {
 
   state = {
@@ -15,12 +16,14 @@ export default class ShoppingDeliveryLists extends Component {
   componentDidMount(){
     // becareful with the store without orderer, delete it from DB
     this.props.store.map(data => {
-      return(
-        this.setState( prevState => {return {
-          coords: [...prevState.coords, data.orderer.coords],
-          orders: [...prevState.orders, data]
-        }})
-      )
+      if(data.orderer._id !== userInfoLS._id ) {
+        return(
+          this.setState( prevState => {return {
+            coords: [...prevState.coords, data.orderer.coords],
+            orders: [...prevState.orders, data]
+          }})
+        )
+      }
     })
   }
 
@@ -76,8 +79,7 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   render(){
-    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-
+    
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
