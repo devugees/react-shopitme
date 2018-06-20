@@ -5,7 +5,7 @@ import DropMenu from './DropMenu';
 import Login from '../Modals/Login';
 import ResetPassword from '../Modals/ResetPassword'
 import { Link } from 'react-router-dom';
-import { crudAPI } from '../../helpers/helpers'
+import { crudAPI, randomNum } from '../../helpers/helpers'
 
 const styles = {
   row: {
@@ -142,7 +142,7 @@ export default class NavBar extends React.Component {
     } 
     const geoPos = localStorage.getItem('geoPos')
     if(!geoPos){
-      const coords = {latitude:52.5237823, longitude:13.486222}
+      const coords = {latitude:randomNum(52.513000,52.533000), longitude:randomNum(13.47000,13.50000)}
       localStorage.setItem('geoPos', JSON.stringify(coords))
     }
   }

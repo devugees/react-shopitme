@@ -57,8 +57,9 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: false
   },
-  ratingstarts: {
+  ratingstars: {
     type:Number,
+    default:3,
     required:false
   },
   resetPasswordToken: {

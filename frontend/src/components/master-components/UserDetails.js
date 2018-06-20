@@ -163,7 +163,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
-        {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
+        {isChangeUser ? <RatingStars rating={this.state.ratingstars}/> : null}
         <EditUser
           isRegisterForm={isRegisterForm}
           isChangeUser={isChangeUser}
