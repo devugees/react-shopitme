@@ -219,7 +219,8 @@ export default class CreateShoppingList extends Component {
     this.setState({
       openConfirmationMessage:false,
       dataToConfirmationMessage:''},
-      window.location.replace('/orderdeliveryhistory'))
+      window.location.replace('/orderdeliveryhistory')
+    )
   }
 
   render() {

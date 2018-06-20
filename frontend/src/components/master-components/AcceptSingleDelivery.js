@@ -43,7 +43,8 @@ export default class AcceptSingleDelivery extends Component {
     this.setState({
       openConfirmationMessage:false,
       dataToConfirmationMessage:''},
-      window.location.replace('/orderdeliveryhistory?false'))
+      window.location.replace('/orderdeliveryhistory?false')
+    )
   }
 
   render() {
