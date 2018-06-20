@@ -22,9 +22,6 @@ export default class CreateShoppingList extends Component {
       importData ={...fakeStore.userInfo}
     }
 
-    console.log(fakeStore)
-
-
     this.state = {
       userInfo: importData,
       openSureModal:false,
@@ -253,18 +250,21 @@ export default class CreateShoppingList extends Component {
           dataReceive={this.grabDataNotes}
           noteBody={this.state.order.notes}
           />
+        <div className="buttons">
         <Button
           style={style}
-          variant="raised"
+          className="delete-btn"
+          variant="outlined"
           color="secondary"
           onClick={this.cancelDeleteHandler}
         >
         {this.props.editing ? 'Delete' : 'Cancel'}
         </Button>
 
-        <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
+        <Button onClick={this.sendDataToServer} style={style} variant="outlined" className="create-btn">
           {this.props.editing ? 'Update' : 'Create'}
         </Button>
+        </div>
         <Sure sendback={this.sendback} open={this.state.openSureModal}/>
         <ConfirmationMessage
           openConfirmationMessage={this.state.openConfirmationMessage}

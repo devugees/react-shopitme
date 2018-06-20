@@ -55,6 +55,7 @@ class Sure extends React.Component {
           aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
+          className="sure-modal"
         >
           <div className={classNames(classes.paper, classes.modalStyle)}>
             <Typography variant="title" id="modal-title">
@@ -63,10 +64,10 @@ class Sure extends React.Component {
             <Typography variant="subheading" id="simple-modal-description">
               The shopping list will be deleted
             </Typography>
-            <Button variant="raised" color="secondary" className={classNames(classes.margin,classes.button)} onClick={this.handleClose}>
+            <Button variant="outlined" className="delete-btn" onClick={this.handleClose}>
               Cancel
             </Button>
-            <Button variant="raised" color="primary" className={classes.button}>
+            <Button variant="outlined" className="create-btn">
               <Link to="/">Delete</Link>
             </Button>
           </div>

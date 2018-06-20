@@ -5,9 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   box:{
-    background: '#fff',
-    margin: '1rem auto',
-    padding: '.5rem 0',
+    
   }
 };
 
@@ -33,16 +31,20 @@ const todoBoxOrdered = props => {
   }
 
   return (
-    <div>
-      <Paper className={classes.box} elevation={4}>
-        <Typography className={wrap}>
+    <div className="todoitem">
+      {/* <Paper className={classes.box} elevation={2}> */}
+        <p className="todoiteminner">
+        {/* <Typography className={wrap}> */}
           {`#${props.index + 1}  `}
           {whatToShow}
+        {/* </Typography> */}
+        <div className="editbuttons">
           <span className={edit} onClick={props.editToDo}>✎</span>
           <span className={tick} onClick={props.finishEditToDo}>✔</span>
           <span className={cross} onClick={props.removeToDo}>✖</span>
-        </Typography>
-      </Paper>
+        </div>
+        </p>
+      {/* </Paper> */}
     </div>
   );
 }
