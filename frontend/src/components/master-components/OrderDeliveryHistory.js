@@ -48,7 +48,7 @@ export default class OrderDeliveryHistory extends Component {
     return (
       <div className="createShoppingList main">
         <Image imgSrc={userPicture}/>
-        <RatingStars rating={this.state.userInfo.ratingstars}/>
+        <RatingStars userInfo={this.state.userInfo} rating={this.state.userInfo.ratingstars}/>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
           deliverHistory={this.state.deliverHistory}/>
