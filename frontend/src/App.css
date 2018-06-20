@@ -134,9 +134,16 @@ button[class^="MuiButtonBase"] {
   color: var(--ternary);
 }
 
+.deliveryAddress, .deliveryTimes {
+  padding: 1rem 1rem 1rem 1rem;
+  border: 1px solid var(--form-bg);
+  border-radius: .2rem;
+  margin: 1rem auto 0;
+  max-width: 320px;
+}
+
 .deliveryAddress {
   text-align: left !important;
-  margin-top: 2rem;
   line-height: 1.5rem;
   position: relative;
 }
@@ -214,8 +221,8 @@ button[class^="MuiButtonBase"] {
   margin: 0 0 1rem 0;
 }
 
-.detailsfield:last-child {
-  margin: 0;
+.detailsfield input {
+  width: 50%;
 }
 
 .detailsfield div {
@@ -266,21 +273,14 @@ button[class^="MuiButtonBase"] {
     } 
 
 
-    .deliveryAddress, .deliveryTimes {
-      padding: 0 1rem 1rem 1rem;
-      border: 1px solid var(--form-bg);
-      border-radius: .2rem;
-    }
-
     .deliveryTimes {
-      flex-grow: 4;
       margin: 1rem 0 0 0;
-      
+      width: 320px;
     }
 
     .deliveryAddress{
-      flex-grow: 3;
       margin: 1rem 1rem 0 0;
+      width: 320px;
     }
 
     .todo-input-gr {
@@ -294,12 +294,7 @@ button[class^="MuiButtonBase"] {
       width: 90%;
     }
 
-    .time-date {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
+    
     .todoiteminner {
       /* background-color: #dfe6e9; */
       border: 1px solid var(--form-bg);
@@ -319,3 +314,12 @@ button[class^="MuiButtonBase"] {
     }
 
 }
+
+@media only screen 
+  and (min-width: 800px)  { 
+    .time-date {
+      display: flex;
+       flex-direction: row;
+       justify-content: space-between; 
+     }
+  }
