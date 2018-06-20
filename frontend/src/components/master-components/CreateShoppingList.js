@@ -213,7 +213,7 @@ export default class CreateShoppingList extends Component {
   }
 
   closeConfirmationMessage  = () => {
-    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.history.back())
+    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.location.replace('/orderdeliveryhistory'))
   }
 
   render() {
