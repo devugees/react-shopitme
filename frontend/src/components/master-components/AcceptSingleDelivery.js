@@ -33,11 +33,17 @@ export default class AcceptSingleDelivery extends Component {
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
-    this.setState({openConfirmationMessage:true, dataToConfirmationMessage})
+    this.setState({
+      openConfirmationMessage:true,
+      dataToConfirmationMessage
+    })
   }
 
   closeConfirmationMessage  = () => {
-    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.location.replace('/orderdeliveryhistory?false'))
+    this.setState({
+      openConfirmationMessage:false,
+      dataToConfirmationMessage:''},
+      window.location.replace('/orderdeliveryhistory?false'))
   }
 
   render() {
