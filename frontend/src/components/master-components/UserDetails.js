@@ -176,6 +176,7 @@ export default class UserDetails extends Component {
           response={this.state.response}
           passwordMatchError={this.state.passwordMatchError}
         />
+        </div>
       </div>
     )
   }
