@@ -55,7 +55,6 @@ body {
 }
 
 img {
-  padding-top: var(--padding-top);
   width: 100%;
   height: auto;
 }

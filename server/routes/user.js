@@ -286,6 +286,28 @@ router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
     }
   })
 })
+router.get('/profile/:userId', (req, res) => {
+  if (!req.params) {
+    return res.send('Field can not be empty');
+  }
+  User.findById(req.params.userId, (err, data) => {
+    if (err) {
+      res.send({ error: 'some error occurred while retrieving the user' });
+    } else {
+      data.location = null;
+      data.coords = null;
+      data.orderHistory ? data.orderHistory = data.orderHistory.length : data.orderHistory = null
+      data.deliverHistory ? data.deliverHistory = data.deliverHistory.length : data.deliverHistory = null
+      data.email = null;
+      data.mobile = null;
+      data.password = null;
+      data._id = null
+      data.__v = null
+      res.send(data);
+    }
+  });
+});
+
 
 module.exports = router;
 

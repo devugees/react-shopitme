@@ -63,7 +63,7 @@ export default class CreateShoppingList extends Component {
         order
       })
     } else {
-      fetch(`http://localhost:4000/user/generateorderID`)
+      fetch(`/user/generateorderID`)
         .then( response =>response.json())
         .then( data => 
           this.setState(prevState => ({

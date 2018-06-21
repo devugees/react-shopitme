@@ -24,7 +24,7 @@ const { classes } = props;
     <div className="show-delivery-details">
       <Paper elevation={4}>
         <Typography className={classes.deliver}>
-          Deliver Adress:<br/>
+          Deliver Address:<br/>
           <br/>
           {props.deliverAdress.street} {props.deliverAdress.number},<br/>
           {props.deliverAdress.postcode} {props.deliverAdress.city}.

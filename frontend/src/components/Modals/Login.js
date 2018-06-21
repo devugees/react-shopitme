@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import {IconButton, Input, InputLabel, InputAdornment, FormControl, Modal, Button} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import AddIcon from '@material-ui/icons/Add';
 // import Facebook from './svg/facebook.svg';
 // import Google from './svg/google.svg';
 import './modals.css';
