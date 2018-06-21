@@ -15,17 +15,17 @@ This is the final project from **FbW4**
 1. copy the `.env.example` to `.env`
 1. copy the `frontend/.env.example` to `frontend/.env`
 
-`.env`
+`.env`  
+create a mongodb on [MLAB](https://mlab.com/) or use a local one  
+create a google email and use it for the mailnotifire  
 ```
 DB_URI=MONGOURL
-MAIL_API_KEY=MAILGUNAPIKEY
-DOMAIN=MAILGUNDOMAIN
+E_MAIL=GOOGLE_E-MAIL
+PASSWORD=GOOGLE_PASSWORD
 ```
-create an account in [Mailgun](https://www.mailgun.com/)
-create an account for google and set up and google maps api key
-create a mongodb on [MLAB](https://mlab.com/) or use a local one
 
-`frontend/.env`
+`frontend/.env`  
+set up google maps api key  
 ```
 REACT_APP_MY_KEY=GOOGLEMAPSAPIKEY
 ```

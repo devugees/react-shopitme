@@ -7,6 +7,8 @@ const Data = require('../models/data');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
+const fs = require('fs'); // to delete the previous user's pic
+const path = require('path');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -162,7 +164,7 @@ router.delete('/deleteshoppinglist/:id', (req, res, next) => {
 
 router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-  Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id}, (err, order) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'In Progress', shopper: req.user._id, accepted:req.body.accepted}, (err, order) => {
       if(err){
         if (err.message) { // some info is required but not sent
           res.json({'err': err.message});
@@ -181,7 +183,7 @@ router.put('/AcceptShoppingList', passport.authenticate('jwt', { session: false}
 
 router.put('/DeliveredShoppingList', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-  Data.findByIdAndUpdate(req.body.orderID,{status: 'Delivered', shopper: req.user._id}, (err, order) => {
+  Data.findByIdAndUpdate(req.body.orderID,{status: 'Delivered', shopper: req.user._id, delivered: req.body.delivered}, (err, order) => {
       if(err){
         if (err.message) { // some info is required but not sent
           res.json({'err': err.message});
@@ -255,19 +257,35 @@ router.put('/changeuserdetails', (req, res) => {
 
 router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
   const id = req.params.id;
-  User.findByIdAndUpdate(id, {
+
+  const updateUserPic = () => User.findByIdAndUpdate(id, {
     profileImgPath: req.file.path
-  }, {
-    new: true
-  }, (error, user) => {
-    if (user) {
-      res.json({src: user.profileImgPath})
+      }, {
+        new: true
+      }, (error, user) => {
+        if (user) {
+          // console.log('the user pic is updated')
+        res.json({src: user.profileImgPath})
+        }
+        if (error) {
+          throw error
+          res.json({error: error})
+          }
+    })
+
+  User.findById(id, (err,user) => {
+// Delete the previous profile pic 
+    if(user.profileImgPath){
+      const picPath = path.join(__dirname, '../..', user.profileImgPath);
+      fs.unlink(picPath, (err) =>{
+         updateUserPic(); 
+      })
     }
-    if (error) {
-      throw error
-      res.json({error: error})
+    else if (!user.profileImgPath) {
+      updateUserPic();
     }
   })
 })
 
 module.exports = router;
+

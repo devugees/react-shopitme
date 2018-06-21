@@ -3,6 +3,7 @@ import DeliveryList from './deliveryList'
 import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
 
+let userInfoLS = JSON.parse(localStorage.getItem('userInfo'))      
 export default class ShoppingDeliveryLists extends Component {
 
   state = {
@@ -13,14 +14,18 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
-    // becareful with the store without orderer, delete it from DB
+    userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+    // be careful with the store without orderer, delete it from DB
     this.props.store.map(data => {
-      return(
-        this.setState( prevState => {return {
-          coords: [...prevState.coords, data.orderer.coords],
-          orders: [...prevState.orders, data]
-        }})
-      )
+
+      if(data.orderer._id !== userInfoLS._id ) {
+        return(
+          this.setState( prevState => {return {
+            coords: [...prevState.coords, data.orderer.coords],
+            orders: [...prevState.orders, data]
+          }})
+        )
+      }
     })
   }
 
@@ -76,15 +81,14 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   render(){
-    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-
+    
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
         <MapComponent deliveryList={true} markers={this.state.coords}/>
         
         {this.state.orders.map((order, index) => {
-          if ((userInfoLS._id === order.orderer._id &&  this.props.MainDeliveryPagemode) || (order.status === "In Progress" && this.props.MainDeliveryPagemode) ) {
+          if ((userInfoLS._id === order.orderer._id &&  this.props.MainDeliveryPagemode) || (order.status === "In Progress" && this.props.MainDeliveryPagemode) || (order.status === "Delivered" && this.props.MainDeliveryPagemode) ) {
             return(null)
           }
           return(

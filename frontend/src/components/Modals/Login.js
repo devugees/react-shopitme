@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import Clear from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/core/styles';
 import {IconButton, Input, InputLabel, InputAdornment, FormControl, Modal, Button} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AddIcon from '@material-ui/icons/Add';
-import Facebook from './svg/facebook.svg';
-import Google from './svg/google.svg';
+// import Facebook from './svg/facebook.svg';
+// import Google from './svg/google.svg';
+import './modals.css';
+
 
 const styles = theme => ({
   modalStyle: {
@@ -28,17 +32,16 @@ const styles = theme => ({
     top: '8px',
     left: '8px',
     fontSize: '18px',
-    transform: 'rotate(45deg)'
   },
   margin: {
     margin: theme.spacing.unit,
   },
+  loginButtons: {
+    width: '95%',
+    margin: '10px'
+  },
   textField: {
     flexBasis: 200,
-  },
-  loginButtons: {
-    width: '75%',
-    margin: '10px'
   },
   iconwww: {
     width: '24%',
@@ -51,9 +54,7 @@ const styles = theme => ({
     margin: '1rem auto',
     textAlign:'center'
   },
-  linkColor:{
-    color: 'black'
-  }
+
 });
 
 class Login extends React.Component {
@@ -106,18 +107,13 @@ class Login extends React.Component {
           <div className={classNames(classes.paper, classes.modalStyle)}>
              <form 
               noValidate
-              onSubmit={(e)=>{this.props.loginclick(e,{
-                          email:this.state.email,
-                          password:this.state.password})
-                        }}>
-            <Button variant="raised" color="primary" className={classes.loginButtons}>
-              <img src={Facebook} className={classes.iconwww} alt="facebook"/>
-              <span> using Facebook</span> 
-            </Button>
-            <Button variant="raised" color="secondary" className={classes.loginButtons}>
-              <img src={Google} className={classes.iconwww} alt="google"/>
-              <span> using Google</span>
-            </Button>
+              onSubmit={(e)=>{
+                this.props.loginclick(e,{
+                  email:this.state.email,
+                  password:this.state.password
+                })
+              }}>
+              <h1>Jibli - Login</h1>
             <hr />
             <div>
               <FormControl className={classNames(classes.margin, classes.loginButtons)}>
@@ -170,14 +166,14 @@ class Login extends React.Component {
                 Login 
               </Button>
               </form>
-              <Button variant="flat" onClick={this.handleForget}>
+              <div className='linkColor' onClick={this.handleForget}>
                 Forgot your password?
-              </Button>
-              <Button variant="flat">
-                <a className={classes.linkColor} href='/userdetails'>Don't Have an account? Register Now</a>
-              </Button>
-            <Button variant="fab" mini color="secondary" className={classes.cancel} onClick={this.handleClose}>
-            <AddIcon />
+              </div>
+              <div>
+                <Link className='linkColor' onClick={this.handleClose} to="/userdetails">Don't Have an account? Register Now</Link>
+              </div>
+            <Button variant="fab" mini color="inherit" className={classes.cancel} onClick={this.handleClose}>
+            <Clear />
             </Button>
           </div>
         </Modal>
