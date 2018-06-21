@@ -36,7 +36,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.firstname : this.props.userdetails.firstname }
+            value={userInfoLSParsed ? userInfoLSParsed.firstname : null }
           />
         </Grid>
         <Grid item xs={6}>
@@ -48,7 +48,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.lastname : this.props.userdetails.lastname }
+            value={userInfoLSParsed ? userInfoLSParsed.lastname : null }
           />
         </Grid>
         <Grid item xs={8}>
@@ -60,7 +60,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.location.street : this.props.userdetails.street }
+            value={userInfoLSParsed ? userInfoLSParsed.location.street : null }
           />
         </Grid>
         <Grid item xs={4}>
@@ -72,7 +72,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.location.number : this.props.userdetails.number }
+            value={userInfoLSParsed ? userInfoLSParsed.location.number : null }
           />
         </Grid>
         <Grid item xs={4}>
@@ -84,7 +84,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.location.postcode : this.props.userdetails.postcode }
+            value={userInfoLSParsed ? userInfoLSParsed.location.postcode : null }
           />
         </Grid>
         <Grid item xs={8}>
@@ -96,7 +96,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.location.city : this.props.userdetails.city }
+            value={userInfoLSParsed ? userInfoLSParsed.location.city : null }
           />
         </Grid>
         {/* <Grid item xs={12}>
@@ -120,7 +120,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.email : this.props.userdetails.email }
+            value={userInfoLSParsed ? userInfoLSParsed.email : null}
           />
         </Grid>
         <Grid item xs={12}>
@@ -132,7 +132,7 @@ export default class UserDetailsForm extends Component {
             margin="normal"
             required
             fullWidth
-            value={userInfoLSParsed ? userInfoLSParsed.mobile : this.props.userdetails.mobile }
+            value={userInfoLSParsed ? userInfoLSParsed.mobile : null }
           />
         </Grid>
         <Grid item xs={12}>
@@ -141,7 +141,7 @@ export default class UserDetailsForm extends Component {
             select
             label="Gender"
             onChange={this.props.handleChange('gender')}
-            value={userInfoLSParsed ? userInfoLSParsed.gender : this.props.userdetails.gender }
+            value={userInfoLSParsed ? userInfoLSParsed.gender : null }
             SelectProps={{
                 native: true,
                 }}

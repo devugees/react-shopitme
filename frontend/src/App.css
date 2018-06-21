@@ -42,12 +42,11 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  /* text-align: center; */
   background-color: var(--form-bg);
 }
 
 
-.main {
+.main, .user-details {
   width: calc(100vw - 1rem);
   margin: .5rem;
   min-height: calc(100vh - 112px - 2.35rem);
@@ -70,7 +69,16 @@ h1 {
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   padding: 1rem 0;
-  color: var(--primary)
+  color: var(--primary);
+  text-align: left;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  color: var(--five);
+  text-align: left;
+  margin: 1rem 0 0 0;
 }
 
 a {
@@ -220,11 +228,6 @@ button[class^="MuiButtonBase"] {
   justify-content: space-between;
   margin: 0 0 1rem 0;
 }
-
-.detailsfield input {
-  width: 50%;
-}
-
 .detailsfield div {
   align-self: flex-end;
 }
@@ -243,6 +246,17 @@ button[class^="MuiButtonBase"] {
   color: var(--ternary);
   margin: 1rem 0 0 1rem;
 } 
+
+.ratingImage {
+  background-color: var(--primary-bg);
+  padding: 1rem;
+  border-bottom: 5px solid var(--form-background);
+  position: relative !important;
+}
+
+.ratingStars {
+  text-align: left;
+}
 
 
 @media only screen 

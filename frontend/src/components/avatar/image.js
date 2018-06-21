@@ -1,23 +1,27 @@
-import React from 'react'
+import React from 'react';
+import './image.css';
 
 const styles = {
-    width: '137px',
-    height: '137px',
-    position: "absolute",
-    top: "56px",
-    right: "1rem",
-    margin: 'auto',
-    border: '1px solid #ccc',
-    borderRadius: '50%',
-    marginTop: '20px',
-    paddingTop: "0"
- }
+  position: "absolute",
+  top: "0",
+  right: "1rem",
+  margin: 'auto',
+}
+
+const imgstyles = {
+  width: '120px',
+  height: '120px',
+  border: '1px solid #ccc',
+  borderRadius: '50%',
+  padding: "0",
+  marginTop: "1rem",
+}
 
 const image = props => {
   return (
     <div>
-      <div  onClick={props.editpicHandler}>
-        <img style={styles} src={props.imgSrc} alt=""/>
+      <div style={styles} onClick={props.editpicHandler}>
+        <img  style={imgstyles} src={props.imgSrc} alt=""/>
       </div>
     </div>
   )

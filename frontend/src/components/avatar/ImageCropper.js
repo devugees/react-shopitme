@@ -31,8 +31,6 @@ export default class ImageCropper extends Component {
       let userInfoLS = JSON.parse(localStorage.getItem('userInfo'));
       userInfoLS.profileImgPath = url;
       localStorage.setItem('userInfo', JSON.stringify(userInfoLS));
-    
-      console.log()
       this.setState({
           imgSrc: url
       })
@@ -41,15 +39,15 @@ export default class ImageCropper extends Component {
 
   render() {
     const style = {
-      width: '137px',
-      height: '137px',
+      width: '120px',
+      height: '120px',
       position: "absolute",
-      top: "56px",
+      top: "0",
       right: "1rem",
       margin: 'auto',
       border: '1px solid #ccc',
       borderRadius: '50%',
-      marginTop: '20px',
+      marginTop: '1rem',
     }
     return (
       <div style={style}>

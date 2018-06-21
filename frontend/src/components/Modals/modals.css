@@ -1,0 +1,9 @@
+h1 {
+  color: var(--primary);
+  text-align: center;
+}
+
+.linkColor{
+  color: var(--primary);
+  padding: 1rem 0;
+}

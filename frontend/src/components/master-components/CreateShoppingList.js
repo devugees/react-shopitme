@@ -59,7 +59,6 @@ export default class CreateShoppingList extends Component {
       order.items = this.props.editOrder.items
       order.shop = this.props.editOrder.shop
       order.notes = this.props.editOrder.notes
-      console.log(order)
       this.setState({
         order
       })
@@ -81,7 +80,6 @@ export default class CreateShoppingList extends Component {
   }
   
   cancelDeleteHandler = () => {
-    console.log(this.props.editing)
     if(this.props.editing) {
       const id = this.props.editOrder._id;
       authCrudAPI('DELETE', '/user/deleteshoppinglist/' + id)

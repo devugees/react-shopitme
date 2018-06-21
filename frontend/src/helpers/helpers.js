@@ -64,6 +64,10 @@ export function authCrudFileAPI(endPoint, file) {
   }).then(res => res.json())   
 }
 
+export const randomNum = (min = 0, max = 99000) => {
+  return Math.random() * (max - min) + min;
+};
+
 export const date = new Date();
 export const day = date.getDate();
 export const month = date.getMonth()+1;

@@ -28,14 +28,14 @@ export default class EditUser extends React.Component {
             {/* If Register Form Render Heading Register else Render Change User Details */}
             <Grid item xs={12}>
               {(isRegisterForm) ?
-                <Typography variant="display1">Register</Typography> : <Typography variant="display1">Change Account Detail</Typography>}
+                <h2>Register</h2> : <h2>Change Account Details</h2>}
             </Grid>
             <Grid item xs={12}>
               {(isRegisterForm) ? <Typography variant="title">Your Details</Typography> : null}
             </Grid>
             {/* Render Form Part 1 with User Details */}
             {/* <Grid item container xs={12} className="formBgr" spacing={16}> */}
-            <UserDetailsFields handleChange={this.props.handleChange} userdetails={this.props.userdetails} />
+            <UserDetailsFields handleChange={this.props.handleChange} />
             {/* </Grid> */}
             {/* Submit Button for Change User/Account Details */}
             {/* <Grid item xs={12}>
@@ -45,7 +45,7 @@ export default class EditUser extends React.Component {
             </Grid> */}
             {/* If Change User Details Form Render Change User Details Heading */}
             <Grid item xs={12}>
-              {(!isRegisterForm) ? <Typography variant="display1" className="margin">Change Password</Typography> : <Typography variant="title" className="margin">Your Password</Typography>}
+              {(!isRegisterForm) ? <h2>Change Password</h2> : <h2>Your Password</h2>}
             </Grid>
             {/* If Change User Details Form Render Additional Textfield Old Password */}
             <Grid item container xs={12} className="formBgr" spacing={16}>
@@ -60,8 +60,8 @@ export default class EditUser extends React.Component {
               (isRegisterForm && !this.props.userdetails.passwordMatchError) || 
               (isChangeUser && !this.props.userdetails.password && !this.props.userdetails.confirmpassword) ||
               (isChangeUser && !this.props.userdetails.passwordMatchError) ) ? 
-              <Button variant="raised" size="large" type="submit">Submit</Button> : 
-              <Button label="Submit" disabled size="large">Submit</Button>
+              <Button variant="outlined" size="large" type="submit" className="editUserButton">Submit</Button> : 
+              <Button label="Submit" disabled size="large" className="editUserButton">Submit</Button>
             }
             </Grid>
           </Grid>

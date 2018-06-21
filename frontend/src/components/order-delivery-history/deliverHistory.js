@@ -2,6 +2,8 @@ import React from 'react';
 import {Paper, Button} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import './index.css';
+
 
 const styles = theme => ({
   p:{
@@ -15,7 +17,8 @@ const styles = theme => ({
   },
   button:{
     margin: '0',
-    position:'relative'
+    position:'relative',
+    marginTop: "-31px",
   },
   buttonDiv:{
     width:'18%',
@@ -30,8 +33,8 @@ const styles = theme => ({
 const deliverHistory = props => {
   const { classes } = props; 
   let shopper = (<p className={classes.p}>To: - </p>)
-  if(props.deliverHistory.deliverTo){
-    shopper = (<p className={classes.p}>To: {props.deliverHistory.deliverTo}</p>)
+  if(props.deliverHistory.orderer){
+    shopper = (<p className={classes.p}>To: {props.deliverHistory.orderer.firstname}</p>)
   }
 
   let deliverDate;
@@ -44,16 +47,16 @@ const deliverHistory = props => {
       case ('In Progress'):
         deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
         break;
-       /* case ('Delivered'):
-        deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered.date}</p>)
-        break; */
+       case ('Delivered'):
+        deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered}</p>)
+        break;
     }
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
         <div className={classes.textDiv}>
           <p className={classes.p}>{props.deliverHistory.status}</p>
-          <p className={classes.p}>{props.deliverHistory.shop}</p>
+          <p className={classes.p}>{props.deliverHistory.ordername}</p>
           {shopper}
           {deliverDate}
         </div>

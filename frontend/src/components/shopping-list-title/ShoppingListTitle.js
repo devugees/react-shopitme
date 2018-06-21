@@ -81,25 +81,29 @@ export default class ShoppingListTitle extends Component {
         </h1>
         )
     }
-    let shopper = 'Pending...';
+    let currentPerson = 'Pending...';
+    let personTitle = 'Shopper';
 
     if(this.state.checkingPerson || this.state.shopperPerson){
+      currentPerson = this.state.orderer.name
+      personTitle = 'Orderer'
       whatToRender = (
-      <h1><a href={this.state.orderer.accountPage}>{this.state.orderer.name}'s </a><br/>{this.state.listName}: #{this.state.listId}</h1> 
+      <h1>{this.state.listName}: #{this.state.listId}</h1> 
       )
       if(this.state.shopper.name !== undefined){
       this.setState({
         isShopperAvailable: true,
       })
-      shopper = (<a href={this.state.shopper.accountPage}>{this.state.shopper.name}</a>)
+      currentPerson = this.state.orderer.name
       }
     }
 
     return (
       <div className="shopping-list-title" >
           {whatToRender}
-          <p><span>Created:</span> {this.state.createdate}</p>
-          <p><span>Shopper:</span> {shopper}</p>
+          <p>Created: {this.state.createdate}</p>
+          <p>{personTitle}: {currentPerson}</p>
+        
       </div>
     )
   }

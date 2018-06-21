@@ -2,6 +2,8 @@ import React from 'react';
 import {Paper, Button} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import './deliveryList.css';
+
 
 const styles = theme => ({
   p:{
@@ -13,13 +15,14 @@ const styles = theme => ({
     margin: '1rem 0',
     padding: '5px'
   },
-  button:{
-    margin: '0',
-    position:'relative'
-  },
   buttonDiv:{
     width:'18%',
     display: 'inline-block',
+    position: 'relative'
+  },
+  button:{
+    margin: '0',
+    transform: 'translateY(-50%)',
   },
   textDiv:{
     width:'70%',
@@ -38,9 +41,10 @@ const { classes } = props;
     <div>
       <Paper className={props.highlight ? classes.highlight : classes.paper} elevation={4}>
         <div className={classes.textDiv} onClick={props.highlightMarker}>
-          <p className={classes.p}>#{props.order.orderer.listId}</p>
-          <p className={classes.p}>from {props.order.deliveringTime.start} till {props.order.deliveringTime.end}</p>
-          <p className={classes.p}>for {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
+          <p className={classes.p}>{props.order.ordername} <b>#</b> {props.order.orderID}</p>
+          <p className={classes.p}><b>From: </b> {props.order.deliveringTime.start.replace('T', ' ')}</p>
+          <p className={classes.p}><b>Till: </b> {props.order.deliveringTime.end.replace('T', ' ')}</p>
+          <p className={classes.p}> <b>For: </b> {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
         </div>
         <div className={classes.buttonDiv}>
           <Button

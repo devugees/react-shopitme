@@ -16,7 +16,6 @@ export default class UserDetails extends Component {
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true,
-    userPicture: defaultPic,
     gender: 'Female'
   }
 
@@ -49,16 +48,12 @@ export default class UserDetails extends Component {
   }
 
   handleChange = name => event => {
-    console.log(name, event.target.value)
     this.setState({
       [name]: event.target.value,
     });
     // to update the issue with the text field in userDetailsFields
     if (name === "confirmpassword") {
-      console.log("hi from confirmpassword")
       const password = this.state.password;
-      console.log(password);
-      console.log(event.target.value)
       if( password === event.target.value) {
         this.setState({passwordMatchError: false})
       } else {
@@ -159,14 +154,18 @@ export default class UserDetails extends Component {
     }
     if(localStorage.getItem('userInfo')){
       const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-      userPicture = userInfoLS.profileImgPath
+      if(userInfoLS.profileImgPath){
+        userPicture = userInfoLS.profileImgPath
+      }
     }
 
     return (
       <div className="user-details">
+        <div className="ratingImage">
+        {isChangeUser ? <RatingStars rating={this.state.ratingstars}/> : null}
         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
-        {isChangeUser ? <RatingStars rating={this.state.rating}/> : null}
+        </div>
         <EditUser
           isRegisterForm={isRegisterForm}
           isChangeUser={isChangeUser}

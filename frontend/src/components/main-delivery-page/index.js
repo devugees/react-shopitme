@@ -3,6 +3,7 @@ import DeliveryList from './deliveryList'
 import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery'
 
+let userInfoLS = JSON.parse(localStorage.getItem('userInfo'))      
 export default class ShoppingDeliveryLists extends Component {
 
   state = {
@@ -13,14 +14,18 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   componentDidMount(){
-    // becareful with the store without orderer, delete it from DB
+    userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+    // be careful with the store without orderer, delete it from DB
     this.props.store.map(data => {
-      return(
-        this.setState( prevState => {return {
-          coords: [...prevState.coords, data.orderer.coords],
-          orders: [...prevState.orders, data]
-        }})
-      )
+
+      if(data.orderer._id !== userInfoLS._id ) {
+        return(
+          this.setState( prevState => {return {
+            coords: [...prevState.coords, data.orderer.coords],
+            orders: [...prevState.orders, data]
+          }})
+        )
+      }
     })
   }
 
@@ -76,8 +81,7 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   render(){
-    const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
-
+    
     let whatToRender = (
       <React.Fragment>
         <h1>Shopping Lists in your Area</h1>
@@ -85,7 +89,7 @@ export default class ShoppingDeliveryLists extends Component {
         
         {this.state.orders.map((order, index) => {
           if ((userInfoLS._id === order.orderer._id &&  this.props.MainDeliveryPagemode) || (order.status === "In Progress" && this.props.MainDeliveryPagemode) ) {
-            return
+            return(null)
           }
           return(
             <DeliveryList
@@ -100,8 +104,7 @@ export default class ShoppingDeliveryLists extends Component {
       </React.Fragment>)
     if(this.state.loadSingleView) {
       whatToRender = (
-
-        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.orderer} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} orderID={this.state.order._id}/>
+        <AcceptSingleDelivery goback={()=>{this.goback()}} deliverAdress={this.state.order.deliverAdress} listId={this.state.order.orderID} listName={this.state.order.ordername} createdate={this.state.order.createdate} shop={this.state.order.shop} orderer={this.state.order.orderer} deliveringTime={this.state.order.deliveringTime} items={this.state.order.items} notes={this.state.order.notes} orderID={this.state.order._id}/>
 
         )
     }
