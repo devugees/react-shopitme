@@ -1,5 +1,5 @@
 
-@import url('http://fonts.googleapis.com/css?family=Roboto:400,300,700,900,500,100'); 
+@import url('http://fonts.googleapis.com/css?family=Roboto:400,300,700,900,800,500,100'); 
 
 
 :root {
@@ -46,7 +46,7 @@ body {
 }
 
 
-.main, .user-details {
+.main, .user-details, .main-delivery {
   width: calc(100vw - 1rem);
   margin: .5rem;
   min-height: calc(100vh - 112px - 2.35rem);
@@ -71,6 +71,7 @@ h1 {
   padding: 1rem 0;
   color: var(--primary);
   text-align: left;
+  font-weight: 800;
 }
 
 h2 {
@@ -79,6 +80,15 @@ h2 {
   color: var(--five);
   text-align: left;
   margin: 1rem 0 0 0;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  color: var(--five);
+  text-align: left;
+  margin: 1rem 0 .5rem 0;
+  font-weight: 800;
 }
 
 a {
@@ -256,6 +266,20 @@ button[class^="MuiButtonBase"] {
 
 .ratingStars {
   text-align: left;
+}
+
+.main-delivery h1 {
+  background-color: var(--primary-bg);
+  border-radius: .2rem;
+  padding: 1rem;
+  margin: 1rem 0 .5rem 0;
+}
+
+.map {
+  margin: 0;
+  background-color: var(--primary-bg);
+  border-radius: .2rem;
+  padding: .5rem;
 }
 
 

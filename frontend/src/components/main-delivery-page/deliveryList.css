@@ -4,3 +4,14 @@
   }
 }
 
+.paper {
+  margin: .5rem 0;
+  padding: 0 .5rem
+}
+
+.highlight {
+  background-color:#54b9b6;
+  margin: .5rem 0;
+  padding: 0 .5rem;
+}
+
