@@ -49,9 +49,11 @@ export default class ImageCropper extends Component {
       borderRadius: '50%',
       marginTop: '20px',
     }
+    const maxsize= 5120 * 5120 *5
     return (
       <div style={style}>
         <AvatarImageCropper
+          maxsize={maxsize}
           apply={this.apply}
           rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%'}}
         />
