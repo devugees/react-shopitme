@@ -75,7 +75,7 @@ class NewPassword extends React.Component {
 
   componentDidMount() {
     let token = window.location.href.slice(-40);
-    fetch(`http://localhost:4000/checktoken/${token}`)
+    fetch(`/checktoken/${token}`)
     .then( response => response.json())
     .then( data => {
       this.setState({
@@ -97,7 +97,7 @@ class NewPassword extends React.Component {
      else {
       let token = window.location.href.slice(-40);
     
-      crudAPI('POST',`http://localhost:4000/reset/${token}`,{  password: this.state.password2 })
+      crudAPI('POST',`/reset/${token}`,{  password: this.state.password2 })
       .then( response => {
        if (response.message === 'done') {
           this.setState({

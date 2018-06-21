@@ -44,7 +44,7 @@ const { classes } = props;
           <p className={classes.p}>{props.order.ordername} <b>#</b> {props.order.orderID}</p>
           <p className={classes.p}><b>From: </b> {props.order.deliveringTime.start.replace('T', ' ')}</p>
           <p className={classes.p}><b>Till: </b> {props.order.deliveringTime.end.replace('T', ' ')}</p>
-          <p className={classes.p}> <b>For: </b> {props.order.orderer.firstname} {props.order.orderer.lastname}</p>
+          <p className={classes.p}> <b>For: </b> <a onClick={props.openOrdererProf}>{props.order.orderer.firstname} {props.order.orderer.lastname}</a></p>
         </div>
         <div className={classes.buttonDiv}>
           <Button
