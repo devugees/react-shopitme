@@ -112,7 +112,7 @@ export default class UserDetails extends Component {
       crudAPI("POST", "/register", userDetails)
       .then(body => {
         if(body.error) {
-          this.setState({response: body.error},this.openConfirmationMessage(body.error))
+          this.setState({response: body.error})
         } else {
           this.setState({response: body.success},this.openConfirmationMessage(body.success))
         }
