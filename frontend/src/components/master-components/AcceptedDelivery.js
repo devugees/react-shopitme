@@ -58,7 +58,7 @@ state = {...fakeStore,
     }
     return (
 
-        <div className="accept-single-delivery main">
+        <div className="accept-single-delivery">
           <ShoppingListTitle
               shopperPerson={true}
               ordererName={this.props.progressOrder.orderer.firstname}
@@ -80,12 +80,14 @@ state = {...fakeStore,
             />
           <Notes notes={this.props.progressOrder.notes}/>
           <Map markers={[this.state.orderer.coords]}/>
+          <div class="buttons">
           <Button style={style} variant="raised" color="secondary">
             <Link to="">Report Issue</Link>
           </Button>
           <Button onClick={this.DeliveredDeliveryHandler} style={style} variant="raised" color="primary">
             Delivered
           </Button>
+          </div>
            <ConfirmationMessage
             openConfirmationMessage={this.state.openConfirmationMessage}
             dataToConfirmationMessage={this.state.dataToConfirmationMessage}

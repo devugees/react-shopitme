@@ -18,12 +18,8 @@ export default class RatingStars extends React.Component {
   render() {
     const { rating, userInfo } = this.state;
     return (
-      <div style={{
-        margin: "1.6rem"
-      }}>
-        <Grid item xs={6} sm={6}>
-          <Paper>
-            <h1>{userInfo.firstname} {userInfo.lastname}</h1>
+      <div className="ratingStars">
+            <h2>{userInfo.firstname} {userInfo.lastname}</h2>
             <h2>{rating}/5</h2>
             <StarRatingComponent
               name="rate1"
@@ -32,8 +28,6 @@ export default class RatingStars extends React.Component {
               onStarClick={this
               .onStarClick
               .bind(this)}/>
-          </Paper>
-        </Grid>
       </div>
     );
   }

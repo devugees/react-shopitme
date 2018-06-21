@@ -64,11 +64,10 @@ export default class ShoppingListTitle extends Component {
 
   render() {
     const style = {
-      padding: '0.1rem 0'
     }
 
     let whatToRender = (
-      <h1>{this.state.listName}: #{this.state.listId} <span onClick={this.editingButton}>✎</span></h1> 
+      <h1>{this.state.listName} #{this.state.listId} <span onClick={this.editingButton}>✎</span></h1> 
       )
 
     if(this.state.editing){
@@ -78,7 +77,7 @@ export default class ShoppingListTitle extends Component {
             <InputLabel htmlFor="name-input">New List Name</InputLabel>
             <Input autoFocus className="todo-list-input" id="name-input" onChange={this.editText} value={this.state.listName} />
           </FormControl>
-          <span onClick={this.editingButton}>✔</span>
+          <span className="edit" onClick={this.editingButton}>✔</span>
         </h1>
         )
     }
@@ -101,11 +100,10 @@ export default class ShoppingListTitle extends Component {
 
     return (
       <div className="shopping-list-title" >
-        <Paper style={style}>
           {whatToRender}
           <p>Created: {this.state.createdate}</p>
           <p>{personTitle}: {currentPerson}</p>
-        </Paper>
+        
       </div>
     )
   }

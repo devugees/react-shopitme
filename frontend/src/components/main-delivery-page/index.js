@@ -95,7 +95,7 @@ export default class ShoppingDeliveryLists extends Component {
   render(){
     
     let whatToRender = (
-      <React.Fragment>
+      <div className="main-delivery">
         <h1>Shopping Lists in your Area</h1>
         <MapComponent deliveryList={true} markers={this.state.coords}/>
         <ViewUserProfile
@@ -117,7 +117,7 @@ export default class ShoppingDeliveryLists extends Component {
             />
           )
         })}
-      </React.Fragment>)
+      </div>)
     if(this.state.loadSingleView) {
       whatToRender = (
         <AcceptSingleDelivery

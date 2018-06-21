@@ -123,6 +123,8 @@ export default class TodoList extends Component {
       const editTodoLng = this.state.editTodo.length
       whatToShow = (
         <React.Fragment>
+          
+          <div className="todo-input-gr">
           <FormControl className="todo-list-form">
             <InputLabel htmlFor="name-input">Add Item</InputLabel>
             <Input
@@ -137,6 +139,7 @@ export default class TodoList extends Component {
             disabled={this.state.disabled}
             onClick={this.sendToDo}>{this.state.disabled ? 'Write' : 'Add'}
           </Button>
+        </div>
         </React.Fragment>
       )
       changingTodo = (this.state.items.map((item, index) => (
@@ -155,10 +158,15 @@ export default class TodoList extends Component {
       )))
     }
     return (
+
       <div className="todo-list">
+      <h2 className="items">Your Shopping List:</h2>
         {whatToShow}
+      <div className="the-list">
         {changingTodo}
+        </div>
       </div>
+
     )
   }
 };

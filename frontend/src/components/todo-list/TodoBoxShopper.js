@@ -8,16 +8,22 @@ const styles = {
     background: '#fff',
     margin: '1rem auto',
     padding: '.5rem 0',
+    margin: '1.5rem 1rem .5rem 1rem',
+    textAlign:' left',
   },
   boxDone:{
     background: '#54b9b6',
     margin: '1rem auto',
     padding: '.5rem 0',
+    margin: '1.5rem 1rem .5rem 1rem',
+    textAlign:' left',
   },
   boxNotfound:{
     background: '#b33838',
     margin: '1rem auto',
     padding: '.5rem 0',
+    margin: '1.5rem 1rem .5rem 1rem',
+    textAlign:' left',
   }
 };
 
@@ -47,22 +53,22 @@ const todoBoxShooper = props => {
   if(shopper){
     shopperUI = (
       <React.Fragment>
-        <span role="img" aria-label="tick" className={tick} onClick={props.productFound}>✔</span>
-        <span role="img" aria-label="goBack" className={back} onClick={props.backToDo}>🔙</span>
-        <span role="img" aria-label="cross" className={cross} onClick={props.productNotFound}>✖</span>
+        <div className='editbuttons'>
+          <span role="img" aria-label="tick" className={tick} onClick={props.productFound}>✔</span>
+          <span role="img" aria-label="goBack" className={back} onClick={props.backToDo}>🔙</span>
+          <span role="img" aria-label="cross" className={cross} onClick={props.productNotFound}>✖</span>
+        </div>
       </React.Fragment>
     )
   }
 
   return (
-    <div>
-      <Paper className={boxColor} elevation={4}>
-        <Typography>
+    <div className={boxColor}>
+    <p className="todoiteminner">
           {`#${props.index + 1}  `}
           {props.todo}
           {shopperUI}
-        </Typography>
-      </Paper>
+          </p>
     </div>
   );
 }

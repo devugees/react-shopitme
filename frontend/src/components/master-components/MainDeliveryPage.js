@@ -26,7 +26,7 @@ export default class MainDeliveryPage extends Component {
 
   render(){
     if(this.state.isLoading) {
-      return ( <CircularProgress style={{ color: purple[500]}} thickness={7} /> )
+      return ( <CircularProgress style={{ margin: "0 auto", color: purple[500]}} thickness={7} /> )
     }
       return (
        <DeliveryList store={this.state.data} MainDeliveryPagemode={true}/>

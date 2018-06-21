@@ -39,15 +39,15 @@ export default class ImageCropper extends Component {
 
   render() {
     const style = {
-      width: '137px',
-      height: '137px',
+      width: '120px',
+      height: '120px',
       position: "absolute",
-      top: "56px",
+      top: "0",
       right: "1rem",
       margin: 'auto',
       border: '1px solid #ccc',
       borderRadius: '50%',
-      marginTop: '20px',
+      marginTop: '1rem',
     }
     const maxsize= 5120 * 5120 *5
     return (

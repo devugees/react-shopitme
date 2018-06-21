@@ -201,16 +201,18 @@ export default class OrderDeliveryHistory extends Component {
 
     return (
       <React.Fragment>
-        <Button
-          style={styles.button}
-          color={orderColorButtonSelector}
-          variant="raised"
-          onClick={this.changeToOrder}>Order History</Button>
-        <Button
-          style={styles.button}
-          color={deliverColorButtonSelector}
-          variant="raised"
-          onClick={this.changeToDeliver}>Deliver History</Button>
+        <div className="buttons">
+          <Button
+            style={styles.button}
+            color={orderColorButtonSelector}
+            variant="raised"
+            onClick={this.changeToOrder}>Order History</Button>
+          <Button
+            style={styles.button}
+            color={deliverColorButtonSelector}
+            variant="raised"
+            onClick={this.changeToDeliver}>Deliver History</Button>
+        </div>
         {whatToRender}
         {displaySingleHistory}
         <ViewUserProfile 

@@ -88,72 +88,70 @@ export default class Details extends Component {
     
   render() {
     const styles = {
-      details:{
-        paddingTop: '1rem'
-      }
     }
+
     let whatToRender = (
-      <p>
-        <p className="deliveryAdress">Delivery Address</p>
+      <p className="deliveryAddress">
+      <span className="editaddress" onClick={this.editing}>✎</span> 
+      <span className="address">Delivery Address</span>
       {this.state.deliverAdress.street}.{this.state.deliverAdress.number}<br/>
       {this.state.deliverAdress.postcode} {this.state.deliverAdress.city} 
-      <span onClick={this.editing}>✎</span> 
+      
       </p>          
       )
     if(this.state.editing){
-      whatToRender = (  
-        
-       <p >
-         <p className="deliveryAdress">Delivery Address</p>
+      whatToRender = (
+       <p className="deliveryAddress">
+         <span className="address">Delivery Address</span>
+         <span className="editaddress" onClick={this.finishEditing}>✔</span>
           <FormControl className="todo-list-form">
-            
             <Input autoFocus className="location-input" onChange={this.editLocation('street')} placeholder={this.state.deliverAdress.street} />
             <Input  className="location-input2"  onChange={this.editLocation('number')} placeholder={this.state.deliverAdress.number} />
             <Input  className="location-input3"  onChange={this.editLocation('postcode')} placeholder={this.state.deliverAdress.postcode} />
             <Input  className="location-input4"  onChange={this.editLocation('city')} placeholder={this.state.deliverAdress.city}/>
           </FormControl>
-          <span onClick={this.finishEditing}>✔</span>
+          
         </p>
       )
     }
   
     return (
-    <div style={styles.details}>
-      <Paper>
-        <Grid container spacing={24}>
-          <Grid  item xs={12}>
-            From:
-             <TextField
-              type="datetime-local"
-              onChange={this.handlerChangeStartTime}
-              value={this.state.deliveringTime.start}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Grid>
-          <Grid  item xs={12}>
-            To: 
-            <TextField
-              onChange={this.handlerChangeEndTime}
-              type="datetime-local"
-              value={this.state.deliveringTime.end}
-              InputLabelProps={{
-                shrink: true,
-            }}
-          />
-          </Grid>
-          <Grid  item xs={12}>
+    <div style={styles.details} className="details">
+        <div className="detailsfield-store">
               <FormControl>
-                 <InputLabel htmlFor="name-input">Store:</InputLabel>
+                 <InputLabel htmlFor="name-input">Pickup Store / Supermarket:</InputLabel>
                  <Input id="name-input" onChange={this.editLocation('shop')} value={this.state.shop}/>
               </FormControl>
-          </Grid>
-          <Grid  item xs={12}>
-          {whatToRender}         
-          </Grid>
-        </Grid>
-      </Paper>
+              </div>
+        <div className="time-date">
+          {whatToRender}    
+        <div className="deliveryTimes">
+          <p className="address">Delivery Times</p>     
+          <div className="detailsfield">
+          
+          <span>From:</span>
+           <TextField
+            type="datetime-local"
+            onChange={this.handlerChangeStartTime}
+            value={this.state.deliveringTime.start}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+      </div>
+      <div className="detailsfield">
+        <span>To:</span> 
+          <TextField
+            onChange={this.handlerChangeEndTime}
+            type="datetime-local"
+            value={this.state.deliveringTime.end}
+            InputLabelProps={{
+              shrink: true,
+          }}
+        />
+         </div>
+        </div>
+        </div>
     </div>
     );
   }
