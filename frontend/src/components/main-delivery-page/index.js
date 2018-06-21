@@ -80,7 +80,7 @@ export default class ShoppingDeliveryLists extends Component {
 
   openOrdererProf = userID => {
     searchUser(userID)
-    setTimeout(this.openProfile, 125)
+    setTimeout(this.openProfile, 250)
   }
 
   goback = () => {

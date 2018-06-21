@@ -94,7 +94,7 @@ export default class OrderDeliveryHistory extends Component {
 
   openUserProf = userID => {
     searchUser(userID)
-    setTimeout(this.openProfile, 125)
+    setTimeout(this.openProfile, 250)
   }
 
   openProfile = () => {
