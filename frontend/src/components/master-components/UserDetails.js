@@ -138,6 +138,7 @@ export default class UserDetails extends Component {
   render() {
     let isRegisterForm;
     let isChangeUser;
+    let userInfoLS
     // if there is a token (after login) render the Change SUer Details Form
     // else render Register Form
     if(localStorage.getItem("token")) {
@@ -153,7 +154,7 @@ export default class UserDetails extends Component {
       userPicture = this.state.profileImgPath
     }
     if(localStorage.getItem('userInfo')){
-      const userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
+      userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
       if(userInfoLS.profileImgPath){
         userPicture = userInfoLS.profileImgPath
       }
@@ -163,7 +164,7 @@ export default class UserDetails extends Component {
       <div className="user-details">
         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
-        {isChangeUser ? <RatingStars rating={this.state.ratingstars}/> : null}
+        {isChangeUser ? <RatingStars userInfo={userInfoLS} rating={this.state.ratingstars}/> : null}
         <EditUser
           isRegisterForm={isRegisterForm}
           isChangeUser={isChangeUser}
