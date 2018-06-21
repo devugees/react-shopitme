@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DeliveryList from './deliveryList'
 import MapComponent from '../map/Map';
 import AcceptSingleDelivery from '../master-components/AcceptSingleDelivery';
-import { crudAPI } from '../../helpers/helpers'
+import { searchUser } from '../../helpers/helpers'
 import ViewUserProfile from '../view-user-profile'
 
 let userInfoLS = JSON.parse(localStorage.getItem('userInfo'))      
@@ -19,16 +19,13 @@ export default class ShoppingDeliveryLists extends Component {
   componentDidMount(){
     userInfoLS = JSON.parse(localStorage.getItem('userInfo'))
     // be careful with the store without orderer, delete it from DB
-    this.props.store.map(data => {
-      if(data.orderer._id !== userInfoLS._id ) {
-        return(
-          this.setState( prevState => {return {
-            coords: [...prevState.coords, data.orderer.coords],
-            orders: [...prevState.orders, data]
-          }})
-        )
-      }
-    })
+    this.props.store.map(data => {return(
+      data.orderer._id !== userInfoLS._id ? 
+      (this.setState( prevState => {return {
+        coords: [...prevState.coords, data.orderer.coords],
+        orders: [...prevState.orders, data]
+      }})): null
+    )})
   }
 
   deliverMoreInfo = index => {
@@ -82,16 +79,8 @@ export default class ShoppingDeliveryLists extends Component {
   }
 
   openOrdererProf = userID => {
-    crudAPI('GET', `http://localhost:4000/user/profile/${userID}`)
-    .then(data => {
-      Object.keys(data).map(key => {return(
-        data[key] === null ? delete data[key] : data[key]
-        )})
-        data.orderHistory = data.orderHistory[0] === undefined ? 0 : data.orderHistory[0]
-        data.deliveryHistory = data.deliveryHistory[0] === undefined ? 0 : data.deliveryHistory[0]
-        localStorage.setItem('profileData', JSON.stringify(data));
-    })
-    .then(setTimeout(this.openProfile, 125))
+    searchUser(userID)
+    setTimeout(this.openProfile, 125)
   }
 
   goback = () => {
@@ -124,7 +113,7 @@ export default class ShoppingDeliveryLists extends Component {
               deliverMoreInfo={()=> {this.deliverMoreInfo(index)}}
               highlightMarker={()=> {this.highlightMarker(index)}}
               highlight={order.highlight}
-              openOrdererProf={this.openOrdererProf}
+              openOrdererProf={()=>this.openOrdererProf(order.orderer._id)}
             />
           )
         })}

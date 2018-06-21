@@ -34,7 +34,7 @@ const deliverHistory = props => {
   const { classes } = props; 
   let shopper = (<p className={classes.p}>To: - </p>)
   if(props.deliverHistory.orderer){
-    shopper = (<p className={classes.p}>To: {props.deliverHistory.orderer.firstname}</p>)
+    shopper = (<p className={classes.p}>To: <a onClick={props.openUserProf}>{props.deliverHistory.orderer.firstname}</a></p>)
   }
 
   let deliverDate;
