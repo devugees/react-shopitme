@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Button} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import './index.css';
 
 const styles = theme => ({
@@ -29,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-const orderHistory = (props) => {
+const orderHistory = props => {
   const {classes} = props;
   let shopper = (
     <p className={classes.p}>By: -
@@ -37,7 +37,7 @@ const orderHistory = (props) => {
   )
   if (props.orderHistory.shopper) {
     shopper = (
-      <p className={classes.p}>By: {props.orderHistory.shopper.firstname}</p>
+      <p className={classes.p}>By: <a onClick={props.openUserProf}> {props.orderHistory.shopper.firstname}</a></p>
     )
   }
 
