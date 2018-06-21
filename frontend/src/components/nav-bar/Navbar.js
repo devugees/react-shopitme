@@ -75,6 +75,7 @@ export default class NavBar extends React.Component {
     localStorage.removeItem('geoPos');
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('profileData');
     this.setState({
       login: false,
       openLogin: false,

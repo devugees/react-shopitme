@@ -19,7 +19,7 @@ export default class Router extends Component {
   constructor(props) {
     super();
       this.state = {
-        isAuthenticated: false,
+        isAuthenticated: true,
         }
       this.handleLoginSuccess = () => {
         this.setState({
@@ -52,6 +52,9 @@ export default class Router extends Component {
       if ( data === 'Unauthorized') {
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
+        this.setState({
+          isAuthenticated:false
+        })
       } else {
         this.setState({
           isAuthenticated:true

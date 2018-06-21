@@ -7,6 +7,8 @@ const Data = require('../models/data');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
+const fs = require('fs'); // to delete the previous user's pic
+const path = require('path');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -255,19 +257,57 @@ router.put('/changeuserdetails', (req, res) => {
 
 router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
   const id = req.params.id;
-  User.findByIdAndUpdate(id, {
+
+  const updateUserPic = () => User.findByIdAndUpdate(id, {
     profileImgPath: req.file.path
-  }, {
-    new: true
-  }, (error, user) => {
-    if (user) {
-      res.json({src: user.profileImgPath})
+      }, {
+        new: true
+      }, (error, user) => {
+        if (user) {
+          // console.log('the user pic is updated')
+        res.json({src: user.profileImgPath})
+        }
+        if (error) {
+          throw error
+          res.json({error: error})
+          }
+    })
+
+  User.findById(id, (err,user) => {
+// Delete the previous profile pic 
+    if(user.profileImgPath){
+      const picPath = path.join(__dirname, '../..', user.profileImgPath);
+      fs.unlink(picPath, (err) =>{
+         updateUserPic(); 
+      })
     }
-    if (error) {
-      throw error
-      res.json({error: error})
+    else if (!user.profileImgPath) {
+      updateUserPic();
     }
   })
 })
+router.get('/profile/:userId', (req, res) => {
+  if (!req.params) {
+    return res.send('Field can not be empty');
+  }
+  User.findById(req.params.userId, (err, data) => {
+    if (err) {
+      res.send({ error: 'some error occurred while retrieving the user' });
+    } else {
+      data.location = null;
+      data.coords = null;
+      data.orderHistory ? data.orderHistory = data.orderHistory.length : data.orderHistory = null
+      data.deliverHistory ? data.deliverHistory = data.deliverHistory.length : data.deliverHistory = null
+      data.email = null;
+      data.mobile = null;
+      data.password = null;
+      data._id = null
+      data.__v = null
+      res.send(data);
+    }
+  });
+});
+
 
 module.exports = router;
+
