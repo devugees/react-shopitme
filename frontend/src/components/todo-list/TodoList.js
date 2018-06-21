@@ -70,7 +70,6 @@ export default class TodoList extends Component {
   productNotFound = index => {
     const items = [...this.state.items];
     items[index].status = 'notFound';
-    console.log(`Not found: ${items[index].todo}`);
     this.setState({ items });
   }
 

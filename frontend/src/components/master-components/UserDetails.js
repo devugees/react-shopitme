@@ -5,6 +5,7 @@ import defaultPic from '../../pictures/BoB.png';
 import RatingStars from '../RatingStars';
 import EditUser from '../edit-user/EditUser';
 import fakeStore from '../../fakeStore';
+import ConfirmationMessage from '../confirmation-message';
 import { crudAPI, authCrudAPI } from './../../helpers/helpers';
 
 export default class UserDetails extends Component {
@@ -16,7 +17,9 @@ export default class UserDetails extends Component {
     postcode: fakeStore.userInfo && fakeStore.userInfo.location.postcode,
     imageEdit:false,
     passwordMatchError: true,
-    gender: 'Female'
+    gender: 'Female',
+    openConfirmationMessage: false,
+    dataToConfirmationMessage:''
   }
 
   componentDidMount(){
@@ -111,22 +114,37 @@ export default class UserDetails extends Component {
         if(body.error) {
           this.setState({response: body.error})
         } else {
-          this.setState({response: body.success},window.history.back())
+          this.setState({response: body.success},this.openConfirmationMessage(body.success))
         }
       })
     } else if (formtype === "changeuserdetails") {
       if (!userDetails.password) { delete userDetails["password"]}
        authCrudAPI("PUT", "/user/changeuserdetails", userDetails)
       .then(body => { 
-        if(body.error){this.setState({response: body.error})
+        if(body.error){this.setState({response: body.error},this.openConfirmationMessage(body.error))
       }
       else {
-        this.setState({response: body.message});
         this.props.updateUserData(body.user)
+        this.setState({response: body.message},this.openConfirmationMessage(body.message))
       }
      });              
     } else { console.log("form type must be specified")}
     event.currentTarget.reset();
+  }
+
+  openConfirmationMessage = dataToConfirmationMessage => {
+    this.setState({
+      openConfirmationMessage:true,
+      dataToConfirmationMessage
+    })
+  }
+
+  closeConfirmationMessage  = () => {
+    this.setState({
+      openConfirmationMessage:false,
+      dataToConfirmationMessage:''},
+      (!localStorage.getItem("token") ? window.location.replace('/') : null)
+    )  
   }
 
   editpicHandler = () => {
@@ -178,7 +196,11 @@ export default class UserDetails extends Component {
           response={this.state.response}
           passwordMatchError={this.state.passwordMatchError}
         />
-        
+        <ConfirmationMessage
+          openConfirmationMessage={this.state.openConfirmationMessage}
+          dataToConfirmationMessage={this.state.dataToConfirmationMessage}
+          closeConfirmationMessage={this.closeConfirmationMessage}
+        />
       </div>
     )
   }

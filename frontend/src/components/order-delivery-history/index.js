@@ -23,6 +23,14 @@ export default class OrderDeliveryHistory extends Component {
     inProgressDeliver: false,
     openProfile:false
   }
+  
+  componentDidMount(){
+    if(window.location.search.substr(1) === 'false' ) {
+      this.setState({
+        view: false
+      })
+    } 
+  }
 
   orderMoreInfo = index => {
     const order = [...this.props.orderHistory];
