@@ -45,6 +45,9 @@ body {
   background-color: var(--form-bg);
 }
 
+b {
+  color: var(--five);
+}
 
 .main, .user-details, .main-delivery {
   width: calc(100vw - 1rem);
@@ -86,7 +89,7 @@ h3 {
   font-size: 1.2rem;
   color: var(--five);
   text-align: left;
-  margin: 1rem 0 .5rem 0;
+  margin: .5rem 0 .5rem 0;
   font-weight: 800;
 }
 
@@ -112,15 +115,17 @@ button[class^="MuiButtonBase"] {
   background-color: var(--primary-bg);
   border-bottom: 5px solid var(--form-bg);
   padding: 1rem;
-  margin: 1rem 0 0 0;
+  margin: 0;
 }
 
-.details {
-  margin-top: 5px;
+.todo-list, .notes {
+  border-bottom: 5px solid var(--form-bg);
 }
+
 
 .shopping-list-title {
   padding: 1rem;
+  margin-top: 1rem;
 }
 
 .shopping-list-title > p {
@@ -199,6 +204,10 @@ button[class^="MuiButtonBase"] {
   width: calc(100% - .5rem);
 }
 
+.notes-area {
+  padding: 1rem 0;
+}
+
 .buttons {
   padding-top: 0;
   text-align: center;
@@ -256,7 +265,7 @@ button[class^="MuiButtonBase"] {
   margin: 1rem 0 0 1rem;
 } 
 
-.ratingImage {
+.accountInfo {
   background-color: var(--primary-bg);
   padding: 1rem;
   border-bottom: 5px solid var(--form-background);
@@ -279,6 +288,33 @@ button[class^="MuiButtonBase"] {
   background-color: var(--primary-bg);
   border-radius: .2rem;
   padding: .5rem;
+}
+
+.shopper {
+  background-color: var(--form-bg);
+  padding: .5rem 1rem;
+}
+
+.deliveryDetails {
+  padding: 1rem 0;
+}
+
+.paper {
+  margin: .5rem 0;
+  padding: .5rem .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-delivery-history .paper {
+  margin: .5rem 0;
+  padding: 1rem .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 

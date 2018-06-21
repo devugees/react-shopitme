@@ -222,7 +222,7 @@ export default class CreateShoppingList extends Component {
     }
 
     return (
-      <div className="createShoppingList main">
+      <div className={this.props.editing ? "createShoppingList": "createShoppingList main"}>
         <ShoppingListTitle
           dataReceive={this.grabDataShoppingListTitle}
           listName={this.state.order.ordername}

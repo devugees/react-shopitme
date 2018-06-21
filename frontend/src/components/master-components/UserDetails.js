@@ -162,10 +162,12 @@ export default class UserDetails extends Component {
 
     return (
       <div className="user-details">
-        <div className="ratingImage">
+        <div className="accountInfo">
         {isChangeUser ? <RatingStars userInfo={userInfoLS} rating={this.state.ratingstars}/> : null}
         { isChangeUser ? <Image imgSrc={userPicture} editpicHandler={this.editpicHandler} /> : null}
         {this.state.imageEdit ? <ImageCropper updateUserPicture={this.props.updateUserPicture} />: null}
+       
+        </div>
         <EditUser
           isRegisterForm={isRegisterForm}
           isChangeUser={isChangeUser}
@@ -176,7 +178,7 @@ export default class UserDetails extends Component {
           response={this.state.response}
           passwordMatchError={this.state.passwordMatchError}
         />
-        </div>
+        
       </div>
     )
   }

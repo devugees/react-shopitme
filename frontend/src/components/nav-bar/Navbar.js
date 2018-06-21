@@ -165,10 +165,10 @@ export default class NavBar extends React.Component {
           </Grid>
           {this.state.login ?
               ( <React.Fragment >
-                  <Grid item xs={4} sm={7}>
+                  <Grid item xs={3} sm={7}>
                     <div></div>
                   </Grid>
-                  <Grid item xs={6} sm={4}>
+                  <Grid item xs={7} sm={4}>
                     <i style={styles.notifications} className="material-icons">notifications</i>
                     <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu

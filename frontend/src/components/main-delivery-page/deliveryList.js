@@ -11,22 +11,12 @@ const styles = theme => ({
     padding: '0 7px 0 0',
     margin: '5px 0'
   },
-  paper:{
-    margin: '.5rem 0',
-    padding: '0 .5rem', 
-  },
-  highlight:{
-    backgroundColor:'#54b9b6',
-    margin: '.5rem 0',
-    padding: '0 .5rem'
-  },
   buttonDiv:{
     width:'18%',
-    display: 'inline-block',
-    position: 'relative'
   },
   button:{
     margin: '0',
+    padding: '0',
     transform: 'translateY(-50%)',
   },
   textDiv:{
@@ -48,13 +38,11 @@ const { classes } = props;
         </div>
         <div className={classes.buttonDiv}>
           <Button
-            className={classes.button}
-            variant="fab"
-            color="primary"
-            aria-label="add"
+            className="button"
             onClick={props.deliverMoreInfo}
+            variant="fab"
           >
-            <i className="material-icons">forward</i>
+            <i className="material-icons">keyboard_arrow_right</i>
           </Button>          
         </div>
       </Paper>

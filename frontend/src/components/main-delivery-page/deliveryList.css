@@ -1,18 +1,19 @@
 @media only screen and (min-width: 800px) {
   div > button {
-    margin-top: 0 !important;
+/*     margin-top: 0 !important; */
   }
 }
 
-.paper {
-  margin: .5rem 0;
-  padding: 0 .5rem
-}
+
 
 .highlight {
-  background-color:#54b9b6;
+  background-color: var(--secondary-bg) !important;
   margin: .5rem 0;
   padding: 0 .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 p a{
@@ -25,4 +26,5 @@ p a{
 p a:hover{
   color: var(--secondary);
 }
+
 

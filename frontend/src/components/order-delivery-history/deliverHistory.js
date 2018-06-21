@@ -11,18 +11,11 @@ const styles = theme => ({
     padding: '0 7px 0 0',
     margin: '5px 0'
   },
-  paper:{
-    margin: '1rem 0',
-    padding: '5px'
-  },
   button:{
     margin: '0',
-    position:'relative',
-    marginTop: "-31px",
   },
   buttonDiv:{
     width:'18%',
-    display: 'inline-block',
   },
   textDiv:{
     width:'70%',
@@ -32,9 +25,9 @@ const styles = theme => ({
 
 const deliverHistory = props => {
   const { classes } = props; 
-  let shopper = (<p className={classes.p}>To: - </p>)
+  let shopper = (<p className={classes.p}><b>To:</b> - </p>)
   if(props.deliverHistory.orderer){
-    shopper = (<p className={classes.p}>To: <a onClick={props.openUserProf}>{props.deliverHistory.orderer.firstname}</a></p>)
+    shopper = (<p className={classes.p}><b>To: </b><a onClick={props.openUserProf}>{props.deliverHistory.orderer.firstname}</a></p>)
   }
 
   let deliverDate;
@@ -42,21 +35,21 @@ const deliverHistory = props => {
     {
       default:
       case ('Pending'):
-        deliverDate = (<p className={classes.p}>Published: {props.deliverHistory.created}</p>)
+        deliverDate = (<p className={classes.p}><b>Published:</b> {props.deliverHistory.created}</p>)
         break;
       case ('In Progress'):
-        deliverDate = (<p className={classes.p}>Accepted: {props.deliverHistory.accepted}</p>)
+        deliverDate = (<p className={classes.p}><b>Accepted:</b> {props.deliverHistory.accepted}</p>)
         break;
        case ('Delivered'):
-        deliverDate = (<p className={classes.p}>Delivered: {props.deliverHistory.delivered}</p>)
+        deliverDate = (<p className={classes.p}><b>Delivered:</b> {props.deliverHistory.delivered}</p>)
         break;
     }
   return (
     <div>
-      <Paper className={classes.paper} elevation={4}>
+      <Paper className="paper" elevation={4}>
         <div className={classes.textDiv}>
           <p className={classes.p}>{props.deliverHistory.status}</p>
-          <p className={classes.p}>{props.deliverHistory.ordername}</p>
+          <h3>{props.deliverHistory.ordername}</h3>
           {shopper}
           {deliverDate}
         </div>
@@ -64,11 +57,10 @@ const deliverHistory = props => {
           <Button
             className={classes.button}
             variant="fab"
-            color="primary"
             aria-label="add"
             onClick={props.deliverMoreInfo}
           >
-            <i class="material-icons">forward</i>
+            <i class="material-icons">keyboard_arrow_right</i>
           </Button>          
         </div>
       </Paper>
