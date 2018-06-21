@@ -101,6 +101,7 @@ export default class TodoList extends Component {
     let changingTodo;
     let whatToShow;
     if(!this.state.items) {
+      console.log('empty')
     } else {
       if(this.state.shopperPerson || this.state.checkingPerson){
         changingTodo = (this.state.items.map((item, index) => (
