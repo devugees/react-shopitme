@@ -16,6 +16,10 @@ const styles = {
   chip:{
     backgroundColor:'transparent',
   },
+  link: {
+    outline: 0,
+    
+  }
 }
 
 export default class DropMenu extends React.Component {
@@ -53,15 +57,30 @@ export default class DropMenu extends React.Component {
           onClose={this.handleClose}
           transition={Fade}
         >
-          <MenuItem onClick={this.handleClose}>
-            <Link to="/orderdeliveryhistory">History</Link>
-          </MenuItem>
-          <MenuItem onClick={this.handleClose}>
-            <Link to="/userdetails">Your Profile</Link>
-          </MenuItem>
-          <MenuItem onClick={this.props.logOut}>
-            <Link to="/">Logout</Link>
-          </MenuItem>
+          <Link to="/orderdeliveryhistory" style={styles.link}>
+            <MenuItem
+              onClick={this.handleClose} 
+              onMouseEnter={(e) => e.target.style.color = 'lightblue'}
+              onMouseLeave={(e) => e.target.style.color = 'black'}>
+              History
+            </MenuItem>
+          </Link>
+          <Link to="/userdetails">
+            <MenuItem
+              onClick={this.handleClose}
+              onMouseEnter={(e) => e.target.style.color = 'lightblue'}
+              onMouseLeave={(e) => e.target.style.color = 'black'}>
+              Your Profile
+            </MenuItem>
+          </Link>
+          <Link to="/">
+            <MenuItem
+              onClick={this.props.logOut}
+              onMouseEnter={(e) => e.target.style.color = 'lightblue'}
+              onMouseLeave={(e) => e.target.style.color = 'black'}>
+              Logout
+            </MenuItem>
+          </Link>
         </Menu>
       </React.Fragment>
     );
