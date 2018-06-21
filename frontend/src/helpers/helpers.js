@@ -69,7 +69,7 @@ export const randomNum = (min = 0, max = 99000) => {
 };
 
 export const searchUser = userId => {
-  crudAPI('GET', `http://localhost:4000/user/profile/${userId}`)
+  crudAPI('GET', `/user/profile/${userId}`)
     .then(data => {
       Object.keys(data).map(key => {return(
         data[key] === null ? delete data[key] : data[key]

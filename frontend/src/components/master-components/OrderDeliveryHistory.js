@@ -22,8 +22,8 @@ export default class OrderDeliveryHistory extends Component {
     const userId = userInfo._id
 
     Promise.all([
-      fetch('http://localhost:4000/order/' + userId),
-      fetch('http://localhost:4000/deliver/' + userId)
+      fetch('/order/' + userId),
+      fetch('/deliver/' + userId)
     ]).then(([res1, res2]) => Promise.all([
       res1.json(),
       res2.json()
