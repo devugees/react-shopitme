@@ -282,31 +282,4 @@ router.get('/deliver/:userId', (req, res) => {
 
 })
 
-/* router.get('/order/:userId', (req, res) => {
-  User.find({
-    _id: req.params.userId
-  }, ((err, user) => {
-    if (err) {
-      res
-        .status(500)
-        .send({message: "Could not retrieve user with id "});
-    }
-    if (user) {
-      console.log(user);
-      if (user.orderHistory) {
-        Data.find({
-          orderer: req.params.userid
-        }, ((err, data) => {
-          if (err) {
-            res
-              .status(500)
-              .send({message: "Could not retrieve user with id "})
-          }
-          res.send(data)
-        }))
-      }
-
-    }
-  }))
-}) */
 module.exports = router;
