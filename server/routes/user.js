@@ -7,6 +7,8 @@ const Data = require('../models/data');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const passport = require('passport');
+const fs = require('fs'); // to delete the previous user's pic
+const path = require('path');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -255,17 +257,32 @@ router.put('/changeuserdetails', (req, res) => {
 
 router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
   const id = req.params.id;
-  User.findByIdAndUpdate(id, {
+
+  const updateUserPic = () => User.findByIdAndUpdate(id, {
     profileImgPath: req.file.path
-  }, {
-    new: true
-  }, (error, user) => {
-    if (user) {
-      res.json({src: user.profileImgPath})
+      }, {
+        new: true
+      }, (error, user) => {
+        if (user) {
+          // console.log('the user pic is updated')
+        res.json({src: user.profileImgPath})
+        }
+        if (error) {
+          throw error
+          res.json({error: error})
+          }
+    })
+
+  User.findById(id, (err,user) => {
+// Delete the previous profile pic 
+    if(user.profileImgPath){
+      const picPath = path.join(__dirname, '../..', user.profileImgPath);
+      fs.unlink(picPath, (err) =>{
+         updateUserPic(); 
+      })
     }
-    if (error) {
-      throw error
-      res.json({error: error})
+    else if (!user.profileImgPath) {
+      updateUserPic();
     }
   })
 })
@@ -293,3 +310,4 @@ router.get('/profile/:userId', (req, res) => {
 
 
 module.exports = router;
+
