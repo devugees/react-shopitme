@@ -21,24 +21,21 @@ const styles = {
 const ShowDeliveryDetails = props => {
 const { classes } = props;
   return (
-    <div className="show-delivery-details">
-      <Paper elevation={4}>
-        <Typography className={classes.deliver}>
-          Deliver Adress:<br/>
-          <br/>
+    <div className="details">
+        <div className="deliveryDetails">
+        <span className="address">Pickup Shop:</span> {props.shop}
+        </div>
+        <div class="time-date">
+        <div className="deliveryDetails">
+          <span className="address">Deliver Address:</span>
           {props.deliverAdress.street} {props.deliverAdress.number},<br/>
           {props.deliverAdress.postcode} {props.deliverAdress.city}.
-        </Typography>
-        <Typography className={classes.delivering}>
-          Delivering between:<br/>
-          <br/>
+        </div>
+        <div className="deliveryDetails">
+        <span className="address">Delivering between:</span>
           {props.deliveringTime.start.replace('T', ' ')} <b>and</b> {props.deliveringTime.end.replace('T', ' ')}
-        </Typography>
-        <br/>
-        <Typography>
-          Shop: {props.shop}
-        </Typography>
-      </Paper>
+        </div>
+        </div>
     </div>
   );
 }

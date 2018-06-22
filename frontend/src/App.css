@@ -1,17 +1,24 @@
 
-@font-face { 
-    font-family: "charmelade"; 
-    src: url("/fonts/charmelade.otf"); 
-  }
+@import url('http://fonts.googleapis.com/css?family=Roboto:400,300,700,900,800,500,100'); 
+
 
 :root {
-  /* BG Colors */
+  /* BG Colors using this pallette https://flatuicolors.com/palette/us */
   --primary-bg: #fff;
-  --secondary-bg: #54b9b6;
+  --secondary-bg: #00cec9;
+  --form-bg: #dfe6e9; /* light grey, city lights */
   --ternary-bg: #282627;
+
   /* Text Colors */
   --primary: #262627;
   --secondary: #181818;
+  --ternary: #909090;
+  --five: #505050;
+  /* Button Colors */
+  --blue-button: #0984e3;
+  --red-button: #d63031;
+  --violet-button: #6c5ce7;
+  --green-button: #00b894;
   /* Text Sizes*/
   --text: 1rem;
   /* Link color */
@@ -25,6 +32,8 @@
   --padding-top: 1rem;
   /* Special */
   --form-background: #e6e6e6;
+  /* Main FOnt */
+  --font: 'Roboto', sans-serif;
 }
 
 
@@ -32,17 +41,20 @@
 /* Basic Setup*/
 
 body {
-  //font-family: 'Roboto', sans-serif;
-  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--form-bg);
 }
 
+b {
+  color: var(--five);
+}
 
-.main {
-  width: calc(100vw - 2rem);
-  margin: 1rem 0;
+.main, .user-details, .main-delivery {
+  width: calc(100vw - 1rem);
+  margin: .5rem;
   min-height: calc(100vh - 112px - 2.35rem);
-  padding: var(--text-padding);
-  background-color: var(--primary-bg);
+  /* padding: var(--text-padding); */
+  /* background-color: var(--primary-bg); */
 }
 
 img {
@@ -51,13 +63,34 @@ img {
 }
 
 p {
-  text-align: justify;
-  padding: var(--text-padding);
+  text-align: left;
   font-size: var(--text);
 }
 
 h1 {
+  //font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  color: var(--primary);
+  text-align: left;
+  font-weight: 800;
+}
 
+h2 {
+  //font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  color: var(--five);
+  text-align: left;
+  margin: 1rem 0 0 0;
+}
+
+h3 {
+  //font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  color: var(--five);
+  text-align: left;
+  margin: .5rem 0 .5rem 0;
+  font-weight: 800;
 }
 
 a {
@@ -75,4 +108,291 @@ a:hover{
 
 button[class^="MuiButtonBase"] {
     padding:'0'
+  }
+
+.shopping-list-title, .details {
+  text-align: left;
+  background-color: var(--primary-bg);
+  border-bottom: 5px solid var(--form-bg);
+  padding: 1rem;
+  margin: 0;
+}
+
+.todo-list, .notes {
+  border-bottom: 5px solid var(--form-bg);
+}
+
+
+.shopping-list-title {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.shopping-list-title > p {
+  text-align: left !important;
+  padding: 0;
+  margin: .5rem 0;
+}
+
+.shopping-list-title > h1 {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shopping-list-title > h1 span {
+  width: 1rem !important;
+  align-items: flex-end;
+  padding: .5rem;
+  border: 1px solid var(--green-button);
+  color: black;
+  font-size: 1rem;
+}
+
+.shopping-list-title span, .fromto {
+  font-weight: 700;
+  color: var(--ternary);
+}
+
+.deliveryAddress, .deliveryTimes {
+  padding: 1rem 1rem 1rem 1rem;
+  border: 1px solid var(--form-bg);
+  border-radius: .2rem;
+  margin: 1rem auto 0;
+  max-width: 320px;
+}
+
+.deliveryAddress {
+  text-align: left !important;
+  line-height: 1.5rem;
+  position: relative;
+}
+
+.address {
+  text-align: left !important;
+  display: block;
+  font-weight: bold;
+  margin: 0  0 .5rem 0;
+  color: var(--ternary);
+}
+
+.editaddress {
+  display: block;
+  padding: .5rem;
+  border: 1px solid var(--green-button);
+  width: 1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.notes, .buttons {
+  background-color: var(--primary-bg);
+  padding: 1rem;
+}
+
+.notes h4 {
+  padding: 0;
+  margin: 0;
+  color: var(--ternary);
+}
+
+.notes textarea {
+  margin: .5rem 0;
+  width: calc(100% - .5rem);
+}
+
+.notes-area {
+  padding: 1rem 0;
+}
+
+.buttons {
+  padding-top: 0;
+  text-align: center;
+}
+
+.create-btn {
+  color: var(--green-button) !important;
+  border-color: var(--green-button) !important;
+}
+
+.create-btn a {
+  color: var(--green-button) !important;
+}
+
+.delete-btn {
+  color: var(--red-button) !important;
+  border-color: var(--red-button) !important;
+}
+
+.delete-btn a {
+  color: var(--red-button) !important;
+}
+
+.sure-modal {
+  color: var(--red-button) !important;
+  border-color: var(--red-button) !important;
+}
+
+.sure-modal button {
+  margin: 1rem;
+}
+
+.detailsfield {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 1rem 0;
+}
+.detailsfield div {
+  align-self: flex-end;
+}
+
+.detailsfield span {
+  font-weight: bold;
+  color: var(--ternary);
+}
+
+.detailsfield-store div {
+  width: 100%;
+  margin-top: 0;
+}
+
+.items {
+  color: var(--ternary);
+  margin: 1rem 0 0 1rem;
+} 
+
+.accountInfo {
+  background-color: var(--primary-bg);
+  padding: 1rem;
+  border-bottom: 5px solid var(--form-background);
+  position: relative !important;
+}
+
+.ratingStars {
+  text-align: left;
+}
+
+.main-delivery h1 {
+  background-color: var(--primary-bg);
+  border-radius: .2rem;
+  padding: 1rem;
+  margin: 1rem 0 .5rem 0;
+}
+
+.map {
+  margin: 0;
+  background-color: var(--primary-bg);
+  border-radius: .2rem;
+  padding: .5rem;
+}
+
+.shopper {
+  background-color: var(--form-bg);
+  padding: .5rem 1rem;
+}
+
+.deliveryDetails {
+  padding: 1rem 0;
+}
+
+.paper {
+  margin: .5rem 0;
+  padding: .5rem .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-delivery-history .paper {
+  margin: .5rem 0;
+  padding: 1rem .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media only screen 
+  and (min-width: 550px)  {
+    .main {
+      width: calc(70vw - 2rem);
+      margin: 1rem auto 2rem;
+      padding: .5rem 0;
+      background-color: var(--primary-bg);
+    }
+
+    .shopping-list-title {
+      margin: 0 .5em;
+      border: 0;
+    }
+
+    .shopping-list-title h1 {
+      font-size: 2rem;
+    }
+
+    .todo-list, .add-item, .details {
+      border-top: 5px solid var(--form-bg);
+    }
+
+    .items {
+      color: var(--ternary);
+      margin: 1rem 0 0 1rem;
+    } 
+
+
+    .deliveryTimes {
+      margin: 1rem 0 0 0;
+      width: 320px;
+    }
+
+    .deliveryAddress{
+      margin: 1rem 1rem 0 0;
+      width: 320px;
+    }
+
+    .todo-input-gr {
+      margin: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--form-bg);
+      border-radius: .2rem;
+    }
+
+    .todo-list-input {
+      width: 90%;
+    }
+
+    
+    .todoiteminner {
+      /* background-color: #dfe6e9; */
+      border: 1px solid var(--form-bg);
+      border-radius: .2rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--five);
+      padding: 0 0 0 .5rem;
+    }
+
+    .editbuttons {
+      font-size: 1rem;
+    }
+
+    .address {
+      margin-top: 1rem;
+    }
+
+}
+
+@media only screen 
+  and (min-width: 800px)  { 
+    .time-date {
+      display: flex;
+       flex-direction: row;
+       justify-content: space-between; 
+     }
   }

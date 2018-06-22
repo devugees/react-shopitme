@@ -2,38 +2,59 @@ body{
   background-color: var(--primary-bg);
 }
 
-h3{
-  width: 90vw;
-  margin: 0 auto;
+.shopname-container{
+  padding: 0 0 0 1rem;
 }
 
 .container{
   color: var(--primary);
   background-color: var(--secondary-bg);
-  margin: .5rem 0 .5rem 0;
+  width: calc(100vw - 1rem);
+  margin: .5rem;
+}
+
+.name-container h1{
+  text-align: center;
+  background-color: var(--secondary-bg);
+  border-bottom: 1px solid var(--form-bg);
+}
+
+.bio-container h3{
+  text-align: center;
+  background-color: var(--secondary-bg);
+  border-top: 1px solid var(--form-bg);
+}
+
+.image-links-container{
+  position: relative;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .image-container{
   display: inline-block;
-  position: relative;
-  top: 1rem;
   width:30vw;
   height:30vw;
   border-radius: 50%;
   overflow: hidden;
 }
 
-.contact-container{
-  margin: auto;
-  font-size: 4em;
-  padding-bottom: 1rem;
+.links-container{
+  display: inline-block;
+  width: calc(70vw - 1rem);
+  margin: 0 auto;
+  padding-left: .5rem;
+  font-size: 3.5em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.contact-container a {
+.links-container a {
   color: var(--primary);
   margin: 0 .5rem;
 }
 
-.contact-container a:hover {
+.links-container a:hover {
   color: var(--secondary);
 }
+

@@ -1,14 +1,8 @@
-.todo-input {
-  padding: 0.1rem 0.3rem;
-  display: block;
-  margin: 15px 0;
-}
+
 
 .complete,
 .cross,
 .back {
-  margin: 0rem 0.5rem;
-  float: right;
   cursor: pointer;
 }
 
@@ -16,11 +10,88 @@
   display: none;
 }
 
+.todo-list, .add-item {
+  margin: 0;
+  background-color: var(--primary-bg);
+  padding: .5rem 0;
+}
+
 .todo-list-button {
-  width: 30%;
+  margin: .5rem;
+}
+
+.todo-input-gr {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-input-gr div {
+  margin-right: 0;
+}
+
+.todo-input-gr button {
+  align-self: flex-end;
 }
 
 .todo-list-input {
-  width: 100%;
   margin-right: 2.4rem;
 }
+
+
+
+.todo-input {
+  padding: 0.1rem 0.3rem;
+  display: block;
+  margin: 15px 0;
+}
+
+.todoitem {
+    margin: 1.5rem 1rem .5rem 1rem !important;
+    text-align: left !important;
+}
+
+.todoiteminner {
+  margin: 0;
+  padding: 0;
+  text-align: left !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.todoiteminner > p {
+  text-align: left !important;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.editbuttons {
+  width: 1rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.editbuttons span {
+  padding: .5rem;
+  width: 1rem;
+}
+
+.cross {
+  background-color: #dfe6e9;
+}
+
+.complete {
+  background-color: var(--secondary-bg);
+  flex-grow: 2;
+}
+
+.tick {
+  background-color: #fdcb6e;
+}
+
+
+

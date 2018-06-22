@@ -60,7 +60,6 @@ router.get('/generateorderid', (req ,res ,next) => {
           .status(500)
           .send({message: "Could not create id "});
       } else {
-        console.log(data.length+1);
         return res.send({orderID: data.length+1})
       }
     });
@@ -68,8 +67,7 @@ router.get('/generateorderid', (req ,res ,next) => {
 
 router.post('/createshoppinglist', passport.authenticate('jwt', { session: false}),
  (req, res, next) => {
-  //console.log('req from createshoppinglist',req.user)
-  console.log('User', req.user, 'Body', req.body);
+
   const order = { ...req.body };
 
   const newOrder = new Data({
@@ -264,7 +262,6 @@ router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
         new: true
       }, (error, user) => {
         if (user) {
-          // console.log('the user pic is updated')
         res.json({src: user.profileImgPath})
         }
         if (error) {
@@ -286,6 +283,28 @@ router.post('/profile/:id', upload.single('avatar'), (req, res, next) => {
     }
   })
 })
+router.get('/profile/:userId', (req, res) => {
+  if (!req.params) {
+    return res.send('Field can not be empty');
+  }
+  User.findById(req.params.userId, (err, data) => {
+    if (err) {
+      res.send({ error: 'some error occurred while retrieving the user' });
+    } else {
+      data.location = null;
+      data.coords = null;
+      data.orderHistory ? data.orderHistory = data.orderHistory.length : data.orderHistory = null
+      data.deliverHistory ? data.deliverHistory = data.deliverHistory.length : data.deliverHistory = null
+      data.email = null;
+      data.mobile = null;
+      data.password = null;
+      data._id = null
+      data.__v = null
+      res.send(data);
+    }
+  });
+});
+
 
 module.exports = router;
 

@@ -1,7 +1,6 @@
 .edit-user {
-    padding: var(--text-padding);
-    font-family: 'Roboto', sans-serif;
-    margin: 1rem;
+    background-color: var(--primary-bg);
+    padding: 1rem 1rem 1rem;
 }
 
 form > * {
@@ -9,13 +8,27 @@ form > * {
 }
 
 .formbgr {
-    background-color: var(--form-background);
+    background-color: var(--primary-bg);
     border-radius: 3px;
     margin-bottom: 1em;
 }
 
 .button-right {
-    margin: 1em 0 1em 0;
+    margin: 1em auto;
     padding-top: 1.5em;
     padding-bottom: 1.5em;
+} 
+
+.button-right div {
+    margin: 0 auto;
 }
+
+.formbgr > div > div, .formBgr > div > div {
+    padding-top: 0 !important;
+    margin-top: 0;
+}
+
+.editUserButton {
+    width: 100%;
+}
+

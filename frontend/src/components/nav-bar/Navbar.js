@@ -23,7 +23,7 @@ const styles = {
     height:'88px'
   },
   notifications: {
-    fontSize:'1.8rem',
+    fontSize:'26px',
     margin:".3rem"
   }
 };
@@ -75,6 +75,7 @@ export default class NavBar extends React.Component {
     localStorage.removeItem('geoPos');
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('profileData');
     this.setState({
       login: false,
       openLogin: false,
@@ -158,16 +159,16 @@ export default class NavBar extends React.Component {
       <AppBar position="static" >
         <Toolbar>
           <Grid item xs={2} sm={2} >     
-            <div >
+            <div className="logo">
               <Link to="/">Jibli</Link>
             </div>
           </Grid>
           {this.state.login ?
               ( <React.Fragment >
-                  <Grid item xs={4} >
+                  <Grid item xs={3} sm={7}>
                     <div></div>
                   </Grid>
-                  <Grid item sm={6} >
+                  <Grid item xs={7} sm={4}>
                     <i style={styles.notifications} className="material-icons">notifications</i>
                     <i style={styles.notifications} className="material-icons">chat_bubble_outline</i>
                     <DropMenu

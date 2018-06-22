@@ -63,7 +63,7 @@ export default class CreateShoppingList extends Component {
         order
       })
     } else {
-      fetch(`http://localhost:4000/user/generateorderID`)
+      fetch(`/user/generateorderID`)
         .then( response =>response.json())
         .then( data => 
           this.setState(prevState => ({
@@ -209,11 +209,18 @@ export default class CreateShoppingList extends Component {
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
-    this.setState({openConfirmationMessage:true, dataToConfirmationMessage})
+    this.setState({
+      openConfirmationMessage:true,
+      dataToConfirmationMessage
+    })
   }
 
   closeConfirmationMessage  = () => {
-    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.history.back())
+    this.setState({
+      openConfirmationMessage:false,
+      dataToConfirmationMessage:''},
+      window.location.replace('/orderdeliveryhistory')
+    )
   }
 
   render() {
@@ -222,7 +229,7 @@ export default class CreateShoppingList extends Component {
     }
 
     return (
-      <div className="createShoppingList main">
+      <div className={this.props.editing ? "createShoppingList": "createShoppingList main"}>
         <ShoppingListTitle
           dataReceive={this.grabDataShoppingListTitle}
           listName={this.state.order.ordername}
@@ -248,18 +255,21 @@ export default class CreateShoppingList extends Component {
           dataReceive={this.grabDataNotes}
           noteBody={this.state.order.notes}
           />
+        <div className="buttons">
         <Button
           style={style}
-          variant="raised"
+          className="delete-btn"
+          variant="outlined"
           color="secondary"
           onClick={this.cancelDeleteHandler}
         >
         {this.props.editing ? 'Delete' : 'Cancel'}
         </Button>
 
-        <Button onClick={this.sendDataToServer} style={style} variant="raised" color="primary">
+        <Button onClick={this.sendDataToServer} style={style} variant="outlined" className="create-btn">
           {this.props.editing ? 'Update' : 'Create'}
         </Button>
+        </div>
         <Sure sendback={this.sendback} open={this.state.openSureModal}/>
         <ConfirmationMessage
           openConfirmationMessage={this.state.openConfirmationMessage}

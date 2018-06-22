@@ -8,6 +8,8 @@ import SingleOrderHistory from '../single-order-deliver-history/SingleOrderHisto
 import SingleDeliverHistory from '../single-order-deliver-history/SingleDeliverHistory';
 import CreateShoppingList from '../master-components/CreateShoppingList';
 import AcceptedDelivery from '../master-components/AcceptedDelivery';
+import ViewUserProfile from '../view-user-profile';
+import { searchUser } from '../../helpers/helpers'
 // import the store
 import {Store} from '../../fakeStore';
 
@@ -18,7 +20,16 @@ export default class OrderDeliveryHistory extends Component {
     singleOrder: false,
     singleDeliver: false,
     EditOrder: false,
-    inProgressDeliver: false
+    inProgressDeliver: false,
+    openProfile:false
+  }
+  
+  componentDidMount(){
+    if(window.location.search.substr(1) === 'false' ) {
+      this.setState({
+        view: false
+      })
+    } 
   }
 
   orderMoreInfo = index => {
@@ -89,6 +100,19 @@ export default class OrderDeliveryHistory extends Component {
     })
   }
 
+  openUserProf = userID => {
+    searchUser(userID)
+    setTimeout(this.openProfile, 250)
+  }
+
+  openProfile = () => {
+    this.setState({openProfile:true})
+  }
+
+  closeProfile = () => {
+    this.setState({openProfile:false})
+  }
+
   render() {
     const styles = {
       button: {
@@ -106,6 +130,7 @@ export default class OrderDeliveryHistory extends Component {
               .map((orderHistory, index) => <OrderHistory
                 key={index}
                 orderHistory={orderHistory}
+                openUserProf={()=>this.openUserProf(orderHistory.shopper._id)}
                 orderMoreInfo={() => {
                 this.orderMoreInfo(index)
 
@@ -121,7 +146,8 @@ export default class OrderDeliveryHistory extends Component {
             .deliverHistory
             .map((deliverHistory, index) => <DeliverHistory
             key={index}
-            deliverHistory={deliverHistory} 
+            deliverHistory={deliverHistory}
+            openUserProf={()=>this.openUserProf(deliverHistory.orderer._id)}
             deliverMoreInfo={() => { this.deliverMoreInfo(index) }}/>)}
           </div>
         )
@@ -175,18 +201,24 @@ export default class OrderDeliveryHistory extends Component {
 
     return (
       <React.Fragment>
-        <Button
-          style={styles.button}
-          color={orderColorButtonSelector}
-          variant="raised"
-          onClick={this.changeToOrder}>Order History</Button>
-        <Button
-          style={styles.button}
-          color={deliverColorButtonSelector}
-          variant="raised"
-          onClick={this.changeToDeliver}>Deliver History</Button>
+        <div className="buttons">
+          <Button
+            style={styles.button}
+            color={orderColorButtonSelector}
+            variant="raised"
+            onClick={this.changeToOrder}>Order History</Button>
+          <Button
+            style={styles.button}
+            color={deliverColorButtonSelector}
+            variant="raised"
+            onClick={this.changeToDeliver}>Deliver History</Button>
+        </div>
         {whatToRender}
         {displaySingleHistory}
+        <ViewUserProfile 
+          open={this.state.openProfile}
+          closeProfile={this.closeProfile}
+        />
       </React.Fragment>
     )
   }

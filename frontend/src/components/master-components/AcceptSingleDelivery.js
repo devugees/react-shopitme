@@ -33,11 +33,18 @@ export default class AcceptSingleDelivery extends Component {
   }
 
   openConfirmationMessage = dataToConfirmationMessage => {
-    this.setState({openConfirmationMessage:true, dataToConfirmationMessage})
+    this.setState({
+      openConfirmationMessage:true,
+      dataToConfirmationMessage
+    })
   }
 
   closeConfirmationMessage  = () => {
-    this.setState({openConfirmationMessage:false, dataToConfirmationMessage:''},window.history.back())
+    this.setState({
+      openConfirmationMessage:false,
+      dataToConfirmationMessage:''},
+      window.location.replace('/orderdeliveryhistory?false')
+    )
   }
 
   render() {
@@ -66,10 +73,12 @@ export default class AcceptSingleDelivery extends Component {
         />
         <Notes notes={this.props.notes}/>
         <GoogleMap markers={[this.props.orderer.coords]}/>
-        <Button onClick={this.props.goback} style={style} variant="raised" color="secondary">Cancel</Button>
-        <Button style={style} onClick={this.AcceptDeliveryHandler} variant="raised" color="primary">
-        Accept
-        </Button>
+        <div class="buttons">
+          <Button onClick={this.props.goback} style={style} variant="raised" color="secondary">Cancel</Button>
+          <Button style={style} onClick={this.AcceptDeliveryHandler} variant="raised" color="primary">
+          Accept
+          </Button>
+        </div>
         <ConfirmationMessage
             openConfirmationMessage={this.state.openConfirmationMessage}
             dataToConfirmationMessage={this.state.dataToConfirmationMessage}

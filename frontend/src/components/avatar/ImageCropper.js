@@ -18,11 +18,11 @@ export default class ImageCropper extends Component {
     fd.append('avatar', file, file.name);
     
     const id = fakeStore.userInfo._id;
-    const endpoint = 'http://localhost:3000/user/profile/' + id;
+    const endpoint = '/user/profile/' + id;
 
     authCrudFileAPI(endpoint, fd)
     .then(res => {
-      const url = 'http://localhost:4000/' + res.src;
+      const url = '/' + res.src;
 
       // send the new Image to the Fake Store
       this.props.updateUserPicture(url);
@@ -39,19 +39,21 @@ export default class ImageCropper extends Component {
 
   render() {
     const style = {
-      width: '137px',
-      height: '137px',
+      width: '120px',
+      height: '120px',
       position: "absolute",
-      top: "56px",
+      top: "0",
       right: "1rem",
       margin: 'auto',
       border: '1px solid #ccc',
       borderRadius: '50%',
-      marginTop: '20px',
+      marginTop: '1rem',
     }
+    const maxsize= 5120 * 5120 *5
     return (
       <div style={style}>
         <AvatarImageCropper
+          maxsize={maxsize}
           apply={this.apply}
           rootStyle={{ background: `url(${this.state.imgSrc}) no-repeat center`, borderRadius: '50%'}}
         />

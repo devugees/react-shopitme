@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Button} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import './index.css';
 
 const styles = theme => ({
@@ -10,14 +10,9 @@ const styles = theme => ({
     padding: '0 7px 0 0',
     margin: '5px 0'
   },
-  paper: {
-    margin: '1rem 0',
-    padding: '5px'
-  },
-  button: {
+  button:{
     margin: '0',
-    position:'relative',
-    marginTop: "-31px",
+    padding: '0',
   },
   buttonDiv: {
     width: '18%',
@@ -29,7 +24,7 @@ const styles = theme => ({
   }
 });
 
-const orderHistory = (props) => {
+const orderHistory = props => {
   const {classes} = props;
   let shopper = (
     <p className={classes.p}>By: -
@@ -37,7 +32,7 @@ const orderHistory = (props) => {
   )
   if (props.orderHistory.shopper) {
     shopper = (
-      <p className={classes.p}>By: {props.orderHistory.shopper.firstname}</p>
+      <p className={classes.p}>By: <a onClick={props.openUserProf}> {props.orderHistory.shopper.firstname}</a></p>
     )
   }
 
@@ -63,7 +58,7 @@ const orderHistory = (props) => {
 
   return (
     <div>
-      <Paper className={classes.paper} elevation={4}>
+      <Paper className="paper" elevation={4}>
         <div className={classes.textDiv}>
           {/*<p>orderID: {props.orderHistory.orderID}</p>*/}
           <p className={classes.p}>{props.orderHistory.status}</p>
@@ -77,10 +72,9 @@ const orderHistory = (props) => {
           <Button
             className={classes.button}
             variant="fab"
-            color="primary"
             aria-label="add"
             onClick={props.orderMoreInfo}>
-            <i class="material-icons">forward</i>
+            <i class="material-icons">keyboard_arrow_right</i>
           </Button>
         </div>
       </Paper>

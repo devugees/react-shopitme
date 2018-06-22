@@ -1,6 +1,9 @@
+
+
 .navbar header {
   background-color: var(--secondary-bg);
   color: var(--primary);
+  padding: .5rem 0 .8rem;
 }
 
 ul li a {
@@ -13,4 +16,12 @@ ul li a:hover {
 
 .avatarImg img {
   padding-top: 0;
+  width: 26px;
+  height: 26px;
+}
+
+.logo {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
 }

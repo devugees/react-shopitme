@@ -22,8 +22,8 @@ export default class OrderDeliveryHistory extends Component {
     const userId = userInfo._id
 
     Promise.all([
-      fetch('http://localhost:4000/order/' + userId),
-      fetch('http://localhost:4000/deliver/' + userId)
+      fetch('/order/' + userId),
+      fetch('/deliver/' + userId)
     ]).then(([res1, res2]) => Promise.all([
       res1.json(),
       res2.json()
@@ -47,8 +47,10 @@ export default class OrderDeliveryHistory extends Component {
 
     return (
       <div className="createShoppingList main">
+      <div className="accountInfo">
+        <RatingStars userInfo={this.state.userInfo} rating={this.state.userInfo.ratingstars}/>
         <Image imgSrc={userPicture}/>
-        <RatingStars rating={this.state.userInfo.ratingstars}/>
+      </div>
         <OrderDelivery
           orderHistory={this.state.orderHistory}
           deliverHistory={this.state.deliverHistory}/>

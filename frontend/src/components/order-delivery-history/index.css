@@ -4,3 +4,13 @@
   }
 }
 
+p a{
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+p a:hover{
+  color: var(--secondary);
+}
