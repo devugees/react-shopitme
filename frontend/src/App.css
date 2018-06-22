@@ -68,7 +68,7 @@ p {
 }
 
 h1 {
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   padding: 1rem 0;
   color: var(--primary);
@@ -77,7 +77,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   color: var(--five);
   text-align: left;
@@ -85,7 +85,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Roboto', sans-serif;
+  //font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   color: var(--five);
   text-align: left;

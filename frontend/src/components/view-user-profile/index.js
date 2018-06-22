@@ -66,8 +66,11 @@ class viewUserProfile extends React.Component {
             </Toolbar>
           </AppBar>
           <div className='main'>
-          <Avatar imgSrc={pictToShow}/>
+          <div className='accountInfo'>
+            <Avatar imgSrc={pictToShow}/>
           <RatingStars userInfo={profileData} rating={profileData ? profileData.ratingstars : null}/>
+          </div>
+          
             <TextField
               id='firstname'
               label='Firstname'
